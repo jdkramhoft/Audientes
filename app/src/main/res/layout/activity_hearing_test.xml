@@ -39,10 +39,10 @@
 
     <Button
         android:id="@+id/heard_sound_btn"
-        android:layout_width="217dp"
-        android:layout_height="209dp"
+        android:layout_width="224dp"
+        android:layout_height="224dp"
         android:layout_marginBottom="169dp"
-        android:background="@drawable/btn_custom"
+        android:background="@drawable/press_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

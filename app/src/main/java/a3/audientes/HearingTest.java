@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.concurrent.TimeUnit;
 
 public class HearingTest extends AppCompatActivity implements View.OnClickListener {
 
     private Button mHeardSoundBtn, mRestartBtn, mCancelBtn;
+    //private ImageView circle1, circle2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,12 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         mCancelBtn = findViewById(R.id.cancel_btn);
         mCancelBtn.setOnClickListener(this);
 
+        //circle1 = findViewById(R.id.circle1);
+        //circle1.setVisibility(View.GONE);
+
+        //circle2 = findViewById(R.id.circle2);
+        //circle2.setVisibility(View.GONE);
+
 
         // TODO: play test sound after a few seconds
     }
@@ -35,7 +45,20 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == mHeardSoundBtn){
+
+            //Circles around button when it is pressed - Marina
+            /*
+            circle1.setVisibility(View.VISIBLE);
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            circle2.setVisibility(View.VISIBLE);
+            */
+
             // TODO: sound is heard, log data
+
 
 
             // TODO: if end of test, calculate audiogram and redirect user to audiogram activity
