@@ -11,24 +11,34 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+/**
+ * https://www.iconfinder.com/
+ */
+
 public class SliderAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
 
     private int[] slide_images = {
-            R.drawable.heard,
+            R.drawable.team,
             R.drawable.headphones,
-            R.drawable.heardnoise
+            R.drawable.fingertouch,
+            R.drawable.screenchart,
+            R.drawable.teamwork
     };
 
     private String[] slide_headings = {
-            "Welcome to Audientes",
-            "Wear Earbuds",
-            "Let's Begin"
+            "We are Audientes",
+            "Bluetooth device",
+            "You Are in Focus",
+            "Experts",
+            "Welcome to the Team"
     };
 
     private String[] slide_descs = {
+            "Our mission is....",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna",
             "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna",
             "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna",
             "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna"

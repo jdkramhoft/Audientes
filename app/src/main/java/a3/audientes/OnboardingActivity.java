@@ -21,7 +21,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
     private TextView[] mDots;
     private Button mNextBtn, mBackBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 3;
+    private final int NUM_OF_DOTS = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         mDots = new TextView[NUM_OF_DOTS];
         mDotLayout.removeAllViews();
 
-        for (int i = 0; i < mDots.length; i++){
+        for (int i = 0; i < NUM_OF_DOTS; i++){
             mDots[i] = new TextView(this);
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
