@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HearingTest"></activity>
+        <activity android:name=".HearingTestAudiogramActivity"></activity>
+        <activity android:name=".HearingTest" />
         <activity android:name=".OnboardingActivity" />
         <activity android:name=".BeginHearingTestActivity" />
         <activity android:name=".MenuActivity">
