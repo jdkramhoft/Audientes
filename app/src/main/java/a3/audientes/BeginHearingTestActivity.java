@@ -16,7 +16,6 @@ public class BeginHearingTestActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_begin_hearing_test);
 
-
         mBeginBtn = findViewById(R.id.begin_test_btn);
         mBeginBtn.setOnClickListener(this);
     }

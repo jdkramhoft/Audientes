@@ -39,8 +39,8 @@
 
     <Button
         android:id="@+id/begin_test_btn"
-        android:layout_width="178dp"
-        android:layout_height="165dp"
+        android:layout_width="225dp"
+        android:layout_height="213dp"
         android:layout_marginBottom="169dp"
         android:background="@drawable/btn_custom"
         app:layout_constraintBottom_toBottomOf="parent"

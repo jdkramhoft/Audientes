@@ -12,8 +12,6 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
 
     private Button mHeardSoundBtn, mRestartBtn, mCancelBtn;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +27,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         mCancelBtn.setOnClickListener(this);
 
 
-        // TODO: play test sound
+        // TODO: play test sound after a few seconds
     }
 
 
