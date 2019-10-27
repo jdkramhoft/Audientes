@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorTransparentWhite">#CCCCCC</color>
+    <color name="colorBlue">#311B92</color>
+    <color name="colorDeepPurple">#673AB7</color>
 </resources>

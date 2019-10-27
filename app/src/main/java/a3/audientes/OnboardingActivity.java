@@ -72,7 +72,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
             if (lastPage){
                 launchHearingTestScreen();
             }
-            else{
+            else {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
             }
         }
@@ -84,7 +84,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
     private void launchHearingTestScreen(){
         Utils.saveSharedSetting(OnboardingActivity.this, MenuActivity.PREF_USER_FIRST_TIME, "false");
 
-        Intent hearingTestIntent = new Intent(this, HearingTest.class);
+        Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
         hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(hearingTestIntent);
         finish();

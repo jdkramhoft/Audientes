@@ -4,45 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HearingTest">
+    tools:context=".BeginHearingTestActivity">
 
     <TextView
-        android:id="@+id/hearingtest_heading"
+        android:id="@+id/begin_hearingtest_heading"
         android:layout_width="wrap_content"
-        android:layout_height="41dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="275dp"
         android:gravity="center_horizontal"
         android:text="Hearing test"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/heard_sound_btn"
+        app:layout_constraintBottom_toTopOf="@+id/begin_test_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/hearingtest_desc"
+        android:id="@+id/begin_hearingtest_desc"
         android:layout_width="247dp"
         android:layout_height="89dp"
         android:layout_marginTop="36dp"
         android:gravity="center"
-        android:text="Press the button every time you hear a sound"
+        android:text="This will only take 3-5 min, to start the test, press the button"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hearingtest_heading" />
+        app:layout_constraintTop_toBottomOf="@+id/begin_hearingtest_heading" />
 
     <Button
-        android:id="@+id/heard_sound_btn"
+        android:id="@+id/begin_test_btn"
         android:layout_width="178dp"
         android:layout_height="165dp"
         android:layout_marginBottom="169dp"
-        android:background="@drawable/btn_custom"
+        android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hearingtest_heading" />
-
+        app:layout_constraintTop_toBottomOf="@+id/begin_hearingtest_heading" />
 </androidx.constraintlayout.widget.ConstraintLayout>
