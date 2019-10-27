@@ -3,10 +3,8 @@ package a3.audientes;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,24 +14,30 @@ import java.util.List;
 public class ConnectBluetooth extends Activity implements View.OnClickListener {
 
 
-    private List<Device> deviceList = new ArrayList<>();
-    private RecyclerView recyclerView;
+    private List<Device> deviceList;
     private DeviceAdapter mAdapter;
+
+
+    public ConnectBluetooth() {
+        deviceList = new ArrayList<>();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetoothconnect);
 
-        recyclerView = (RecyclerView) findViewById(R.id.devicerecycler);
-
+        RecyclerView recyclerView = findViewById(R.id.devicerecycler);
         mAdapter = new DeviceAdapter(deviceList);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
         prepareDevices();
+
 
     }
 
@@ -44,12 +48,18 @@ public class ConnectBluetooth extends Activity implements View.OnClickListener {
 
     public void prepareDevices(){
 
-        Device devide1 = new Device("F4:B5:36:CA:29:E8");
-        deviceList.add(devide1);
+        Device device = new Device("CA:29:E8:F4:B5:36");
+        deviceList.add(device);
 
-        Device device2 = new Device("CA:29:E8:F4:B5:36");
-        deviceList.add(device2);
+        device = new Device("F4:B5:36:CA:29:E8");
+        deviceList.add(device);
+
+        device = new Device("CA:29:E8:F4:B5:36");
+        deviceList.add(device);
         mAdapter.notifyDataSetChanged();
-        System.out.println(mAdapter.getItemCount());
-    }
+     }
+
+     public void setDeviceList(List<Device> devicelist){
+        this.deviceList = deviceList;
+     }
 }
