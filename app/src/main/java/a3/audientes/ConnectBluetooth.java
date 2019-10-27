@@ -17,6 +17,7 @@ public class ConnectBluetooth extends Activity implements View.OnClickListener {
     private List<Device> deviceList;
     private DeviceAdapter mAdapter;
 
+    //TODO Maybe Singleton?
 
     public ConnectBluetooth() {
         deviceList = new ArrayList<>();
@@ -30,7 +31,6 @@ public class ConnectBluetooth extends Activity implements View.OnClickListener {
         RecyclerView recyclerView = findViewById(R.id.devicerecycler);
         mAdapter = new DeviceAdapter(deviceList);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -38,16 +38,14 @@ public class ConnectBluetooth extends Activity implements View.OnClickListener {
 
         prepareDevices();
 
-
     }
 
     @Override
     public void onClick(View v) {
-
+        //TODO open popup with password to device
     }
 
     public void prepareDevices(){
-
         Device device = new Device("CA:29:E8:F4:B5:36");
         deviceList.add(device);
 
