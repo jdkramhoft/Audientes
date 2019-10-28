@@ -28,6 +28,7 @@
         <activity android:name=".HearingTest" />
         <activity android:name=".OnboardingActivity" />
         <activity android:name=".BeginHearingTestActivity" />
+        <activity android:name=".ConnectBluetooth" />
         <activity android:name=".MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +36,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
 
     </application>
 </manifest>
