@@ -15,6 +15,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
 
     private Button mHeardSoundBtn, mRestartBtn, mCancelBtn;
     //private ImageView circle1, circle2;
+    private int numOfTests = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +63,14 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
 
 
             // TODO: if end of test, calculate audiogram and redirect user to audiogram activity
-            if (false){
+            if (numOfTests == 2){
                 Intent i = new Intent(this, HearingTestAudiogramActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 finish();
             }
             else {
+                numOfTests = numOfTests + 1;
                 // TODO: else call next heard_sound method from interface
 
             }
