@@ -61,6 +61,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         // TODO: don't forget to uncomment before release!
         if (isUserFirstTime)
             startActivity(introIntent);
+
+
     }
 
     @Override
