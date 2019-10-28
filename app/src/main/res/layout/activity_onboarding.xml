@@ -19,7 +19,7 @@
         android:layout_marginBottom="45dp"
         android:background="@android:color/transparent"
         android:text="Skip"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/White"
         android:visibility="visible" />
 
     <Button
@@ -37,7 +37,8 @@
         android:layout_marginBottom="45dp"
         android:background="@android:color/transparent"
         android:text="next"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/White" />
+
 
 
     <androidx.viewpager.widget.ViewPager
@@ -46,7 +47,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="0dp"
-        android:background="@drawable/main_background">
+        android:background="@drawable/main_background"
+        android:layout_alignParentLeft="true">
 
     </androidx.viewpager.widget.ViewPager>
 
