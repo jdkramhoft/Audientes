@@ -59,6 +59,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             */
 
             // TODO: sound is heard, log data
+            numOfTests = numOfTests + 1;
 
 
 
@@ -70,7 +71,6 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
                 finish();
             }
             else {
-                numOfTests = numOfTests + 1;
                 // TODO: else call next heard_sound method from interface
 
             }

@@ -19,7 +19,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
     private LinearLayout mDotLayout;
     private SliderAdapter sliderAdapter;
     private TextView[] mDots;
-    private Button mNextBtn, mBackBtn;
+    private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
     private final int NUM_OF_DOTS = 5;
 
@@ -32,10 +32,10 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         mDotLayout = findViewById(R.id.dotsLayout);
 
         mNextBtn = findViewById(R.id.nextbtn);
-        mBackBtn = findViewById(R.id.backbtn);
+        mSkipBtn = findViewById(R.id.skipbtn);
 
         mNextBtn.setOnClickListener(this);
-        mBackBtn.setOnClickListener(this);
+        mSkipBtn.setOnClickListener(this);
 
         sliderAdapter = new SliderAdapter(this);
         mSlideViewPager.setAdapter(sliderAdapter);
@@ -76,8 +76,8 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
             }
         }
-        else if (v == mBackBtn){
-            mSlideViewPager.setCurrentItem(mCurrentPage - 1);
+        else if (v == mSkipBtn){
+            launchHearingTestScreen();
         }
     }
 
@@ -102,26 +102,26 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
 
-                mBackBtn.setEnabled(false);
-                mBackBtn.setText("");
-                mBackBtn.setVisibility(View.INVISIBLE);
+                mSkipBtn.setEnabled(true);
+                mSkipBtn.setText("Skip");
+                mSkipBtn.setVisibility(View.VISIBLE);
             }
             else if (lastPage){
                 mNextBtn.setEnabled(true);
-                mNextBtn.setText("Finish");
+                mNextBtn.setText("Start");
 
-                mBackBtn.setEnabled(true);
-                mBackBtn.setText("Back");
-                mBackBtn.setVisibility(View.VISIBLE);
+                mSkipBtn.setEnabled(true);
+                mSkipBtn.setText("Skip");
+                mSkipBtn.setVisibility(View.VISIBLE);
 
             }
             else {
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
 
-                mBackBtn.setEnabled(true);
-                mBackBtn.setText("Back");
-                mBackBtn.setVisibility(View.VISIBLE);
+                mSkipBtn.setEnabled(true);
+                mSkipBtn.setText("Skip");
+                mSkipBtn.setVisibility(View.VISIBLE);
             }
         }
 
