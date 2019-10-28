@@ -29,7 +29,6 @@
         <activity android:name=".OnboardingActivity" />
         <activity android:name=".BeginHearingTestActivity" />
         <activity android:name=".MainMenu">
-        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,7 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import utils.Utils;
+
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
+
+
+    public static final String PREF_USER_FIRST_TIME = "user_first_time";
+    private boolean isUserFirstTime;
 
     Button hearingProfile;
     Button settings;
@@ -45,6 +51,16 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         cinema = findViewById(R.id.cinema);
         cinema.setOnClickListener(this);
 
+
+
+        isUserFirstTime = Boolean.valueOf(Utils.readSharedSetting(MainMenu.this, PREF_USER_FIRST_TIME, "true"));
+        Intent introIntent = new Intent(MainMenu.this, OnboardingActivity.class);
+        introIntent.putExtra(PREF_USER_FIRST_TIME, isUserFirstTime);
+
+
+        // TODO: don't forget to uncomment before release!
+        if (isUserFirstTime)
+            startActivity(introIntent);
     }
 
     @Override

@@ -18,14 +18,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
 
-        isUserFirstTime = Boolean.valueOf(Utils.readSharedSetting(MenuActivity.this, PREF_USER_FIRST_TIME, "true"));
-        Intent introIntent = new Intent(MenuActivity.this, OnboardingActivity.class);
-        introIntent.putExtra(PREF_USER_FIRST_TIME, isUserFirstTime);
-
-
-        // TODO: don't forget to uncomment before release!
-        //if (isUserFirstTime)
-            startActivity(introIntent);
 
     }
 
