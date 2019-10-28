@@ -102,26 +102,32 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
 
+                /*
                 mSkipBtn.setEnabled(true);
                 mSkipBtn.setText("Skip");
                 mSkipBtn.setVisibility(View.VISIBLE);
+                 */
             }
             else if (lastPage){
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Start");
 
+                /*
                 mSkipBtn.setEnabled(true);
                 mSkipBtn.setText("Skip");
                 mSkipBtn.setVisibility(View.VISIBLE);
+                 */
 
             }
             else {
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
 
+                /*
                 mSkipBtn.setEnabled(true);
                 mSkipBtn.setText("Skip");
                 mSkipBtn.setVisibility(View.VISIBLE);
+                 */
             }
         }
 
