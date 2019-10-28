@@ -82,7 +82,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void launchHearingTestScreen(){
-        Utils.saveSharedSetting(OnboardingActivity.this, MenuActivity.PREF_USER_FIRST_TIME, "false");
+        Utils.saveSharedSetting(OnboardingActivity.this, MainMenu.PREF_USER_FIRST_TIME, "false");
 
         Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
         hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
