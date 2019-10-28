@@ -13,9 +13,13 @@
         <activity android:name=".HearingProfil" />
         <activity android:name=".EditProgram" />
         <activity android:name=".Programs" />
+        <activity android:name=".HearingTestAudiogramActivity"></activity>
+        <activity android:name=".HearingTest" />
+        <activity android:name=".OnboardingActivity" />
+        <activity android:name=".BeginHearingTestActivity" />
         <activity android:name=".MainMenu">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
