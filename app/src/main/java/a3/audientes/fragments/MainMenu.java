@@ -1,83 +1,98 @@
-package a3.audientes;
+package a3.audientes.fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
+import a3.audientes.R;
 import utils.Utils;
 
-public class MainMenu extends AppCompatActivity implements View.OnClickListener {
+public class MainMenu extends Fragment implements View.OnClickListener {
 
 
     public static final String PREF_USER_FIRST_TIME = "user_first_time";
     private boolean isUserFirstTime;
 
-    Button hearingProfile;
-    Button settings;
-    Button more;
-    Button normal;
-    Button noisy;
-    Button quiet;
-    Button cinema;
-
+    private Button hearingProfile,settings,more,normal,noisy,quiet,cinema;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        hearingProfile = findViewById(R.id.hearingProfile);
+        View rod = i.inflate(R.layout.activity_main_menu, container, false);
+
+        hearingProfile = rod.findViewById(R.id.hearingProfile);
         hearingProfile.setOnClickListener(this);
 
-        settings = findViewById(R.id.settings);
+        settings = rod.findViewById(R.id.settings);
         settings.setOnClickListener(this);
 
-        more = findViewById(R.id.more);
+        more = rod.findViewById(R.id.more);
         more.setOnClickListener(this);
 
-        normal = findViewById(R.id.normal);
+        normal = rod.findViewById(R.id.normal);
         normal.setOnClickListener(this);
 
-        noisy = findViewById(R.id.noisy);
+        noisy = rod.findViewById(R.id.noisy);
         noisy.setOnClickListener(this);
 
-        quiet = findViewById(R.id.quiet);
+        quiet = rod.findViewById(R.id.quiet);
         quiet.setOnClickListener(this);
 
-        cinema = findViewById(R.id.cinema);
+        cinema = rod.findViewById(R.id.cinema);
         cinema.setOnClickListener(this);
 
-
-
+        /*
         isUserFirstTime = Boolean.valueOf(Utils.readSharedSetting(MainMenu.this, PREF_USER_FIRST_TIME, "true"));
         Intent introIntent = new Intent(MainMenu.this, OnboardingActivity.class);
         introIntent.putExtra(PREF_USER_FIRST_TIME, isUserFirstTime);
+        */
 
-
-        // TODO: don't forget to uncomment before release!
-        //if (isUserFirstTime)
-            startActivity(introIntent);
+        return rod;
     }
 
     @Override
     public void onClick(View v) {
 
         if (v == hearingProfile) {
+            /*
             Intent intent = new Intent(this, HearingProfil.class);
             startActivity(intent);
-
+            */
+            if (getActivity()==null) return;
+            assert getFragmentManager() != null;
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentindhold, new HearingProfil() )
+                    .addToBackStack(null)
+                    .commit();
         } else if (v == settings) {
+            /*
             Intent intent = new Intent(this, Settings.class);
             startActivity(intent);
-
+            */
+            if (getActivity()==null) return;
+            assert getFragmentManager() != null;
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentindhold, new Settings() )
+                    .addToBackStack(null)
+                    .commit();
         } else if (v == more) {
+            /*
             Intent intent = new Intent(this, Programs.class);
             startActivity(intent);
-
+            */
+            if (getActivity()==null) return;
+            assert getFragmentManager() != null;
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentindhold, new Programs() )
+                    .addToBackStack(null)
+                    .commit();
         } else if (v == normal || v == noisy || v == quiet || v == cinema) {
             switch (v.getId()){
                 case R.id.normal:

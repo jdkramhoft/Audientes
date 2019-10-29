@@ -1,8 +1,12 @@
-package a3.audientes;
+package a3.audientes.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConnectBluetooth extends Activity implements View.OnClickListener {
+import a3.audientes.logic.Device;
+import a3.audientes.R;
+
+public class ConnectBluetooth extends Fragment implements View.OnClickListener {
 
 
     private List<Device> deviceList;
@@ -24,20 +31,20 @@ public class ConnectBluetooth extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.bluetoothconnect);
+    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        RecyclerView recyclerView = findViewById(R.id.devicerecycler);
+        View rod = i.inflate(R.layout.bluetoothconnect, container, false);
+
+        RecyclerView recyclerView = rod.findViewById(R.id.devicerecycler);
         mAdapter = new DeviceAdapter(deviceList);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
         prepareDevices();
-
+        return rod;
     }
 
     @Override

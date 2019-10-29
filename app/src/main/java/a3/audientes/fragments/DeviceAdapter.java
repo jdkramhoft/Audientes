@@ -1,13 +1,17 @@
-package a3.audientes;
+package a3.audientes.fragments;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import a3.audientes.logic.Device;
+import a3.audientes.R;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHolder> {
 

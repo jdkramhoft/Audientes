@@ -1,4 +1,4 @@
-package a3.audientes;
+package a3.audientes.logic;
 
 public class Device {
 
