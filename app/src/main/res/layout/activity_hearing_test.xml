@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background"
-    tools:context=".HearingTest">
+    android:background="@drawable/rectangle36"
+    tools:context=".fragments.HearingTest">
 
     <TextView
         android:id="@+id/hearingtest_heading"
@@ -15,7 +15,7 @@
         android:layout_marginBottom="275dp"
         android:gravity="center_horizontal"
         android:text="Hearing test"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/White"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/heard_sound_btn"
@@ -31,7 +31,7 @@
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="Press the button every time you hear a sound"
-        android:textColor="@color/colorTransparentWhite"
+        android:textColor="@color/TransparentWhite"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
         android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:text="restart"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/White"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -71,7 +71,7 @@
         android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:text="cancel"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/White"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

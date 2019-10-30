@@ -1,48 +1,55 @@
-package a3.audientes;
+package a3.audientes.fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import a3.audientes.R;
+import a3.audientes.SliderAdapter;
 import utils.Utils;
 
-public class OnboardingActivity extends AppCompatActivity implements View.OnClickListener {
+public class OnboardingActivity extends Fragment implements View.OnClickListener {
 
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
     private SliderAdapter sliderAdapter;
     private TextView[] mDots;
-    private Button mNextBtn, mBackBtn;
+    private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 5;
+    private final int NUM_OF_DOTS = 2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_onboarding);
+    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        mSlideViewPager = findViewById(R.id.slideViewPager);
-        mDotLayout = findViewById(R.id.dotsLayout);
+        View rod = i.inflate(R.layout.activity_onboarding, container, false);
 
-        mNextBtn = findViewById(R.id.nextbtn);
-        mBackBtn = findViewById(R.id.backbtn);
+
+        mSlideViewPager = rod.findViewById(R.id.slideViewPager);
+        mDotLayout = rod.findViewById(R.id.dotsLayout);
+
+        mNextBtn = rod.findViewById(R.id.nextbtn);
+        mSkipBtn = rod.findViewById(R.id.skipbtn);
 
         mNextBtn.setOnClickListener(this);
-        mBackBtn.setOnClickListener(this);
+        mSkipBtn.setOnClickListener(this);
 
-        sliderAdapter = new SliderAdapter(this);
+        sliderAdapter = new SliderAdapter(getContext());
         mSlideViewPager.setAdapter(sliderAdapter);
 
         addDotsIndicator(0);
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
+        return rod;
     }
 
 
@@ -51,16 +58,16 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         mDotLayout.removeAllViews();
 
         for (int i = 0; i < NUM_OF_DOTS; i++){
-            mDots[i] = new TextView(this);
+            mDots[i] = new TextView(getContext());
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.TransparentWhite));
 
             mDotLayout.addView(mDots[i]);
         }
 
         if (mDots.length > 0){
-            mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
+            mDots[position].setTextColor(getResources().getColor(R.color.White));
         }
     }
 
@@ -76,18 +83,27 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
             }
         }
-        else if (v == mBackBtn){
-            mSlideViewPager.setCurrentItem(mCurrentPage - 1);
+        else if (v == mSkipBtn){
+            launchHearingTestScreen();
         }
     }
 
     private void launchHearingTestScreen(){
+        /*
         Utils.saveSharedSetting(OnboardingActivity.this, MainMenu.PREF_USER_FIRST_TIME, "false");
 
         Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
         hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(hearingTestIntent);
         finish();
+        */
+        if (getActivity()==null) return;
+        assert getFragmentManager() != null;
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragmentindhold, new ConnectBluetooth() )
+                .addToBackStack(null)
+                .commit();
+
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
@@ -102,26 +118,32 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
 
-                mBackBtn.setEnabled(false);
-                mBackBtn.setText("");
-                mBackBtn.setVisibility(View.INVISIBLE);
+                /*
+                mSkipBtn.setEnabled(true);
+                mSkipBtn.setText("Skip");
+                mSkipBtn.setVisibility(View.VISIBLE);
+                 */
             }
             else if (lastPage){
                 mNextBtn.setEnabled(true);
-                mNextBtn.setText("Finish");
+                mNextBtn.setText("Start");
 
-                mBackBtn.setEnabled(true);
-                mBackBtn.setText("Back");
-                mBackBtn.setVisibility(View.VISIBLE);
+                /*
+                mSkipBtn.setEnabled(true);
+                mSkipBtn.setText("Skip");
+                mSkipBtn.setVisibility(View.VISIBLE);
+                 */
 
             }
             else {
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
 
-                mBackBtn.setEnabled(true);
-                mBackBtn.setText("Back");
-                mBackBtn.setVisibility(View.VISIBLE);
+                /*
+                mSkipBtn.setEnabled(true);
+                mSkipBtn.setText("Skip");
+                mSkipBtn.setVisibility(View.VISIBLE);
+                 */
             }
         }
 
