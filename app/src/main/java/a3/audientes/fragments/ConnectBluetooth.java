@@ -1,5 +1,6 @@
 package a3.audientes.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import a3.audientes.logic.Device;
 import a3.audientes.R;
@@ -24,7 +27,7 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
     private DeviceAdapter mAdapter;
 
     //TODO Maybe Singleton?
-    private final int NUM_OF_DEVICES = 7;
+    private final static int NUM_OF_DEVICES = 7;
     private final String[] TEMP_NAMES = {"HX-168", "JBL Everest 100", "LE_WH-1000XM3", "Logi MX Sound", "Logitech Z337", "Parrot MKi9200", "WH-1000XM3"};
 
     public ConnectBluetooth() {
@@ -39,13 +42,12 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
         RecyclerView recyclerView = rod.findViewById(R.id.devicerecycler);
         mAdapter = new DeviceAdapter(deviceList, this);
 
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        Context context = Objects.requireNonNull(getContext()); //Current implementation will not work with null host context
+        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        LayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
-
 
         prepareDevices(NUM_OF_DEVICES);
         return rod;
@@ -81,7 +83,7 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
         mAdapter.notifyDataSetChanged();
      }
 
-     public void setDeviceList(List<Device> devicelist){
+     public void setDeviceList(List<Device> deviceList){
         this.deviceList = deviceList;
      }
 }
