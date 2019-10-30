@@ -24,6 +24,8 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
     private DeviceAdapter mAdapter;
 
     //TODO Maybe Singleton?
+    private final int NUM_OF_DEVICES = 7;
+    private final String[] TEMP_NAMES = {"HX-168", "JBL Everest 100", "LE_WH-1000XM3", "Logi MX Sound", "Logitech Z337", "Parrot MKi9200", "WH-1000XM3"};
 
     public ConnectBluetooth() {
         deviceList = new ArrayList<>();
@@ -45,7 +47,7 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
 
 
 
-        prepareDevices();
+        prepareDevices(NUM_OF_DEVICES);
         return rod;
     }
 
@@ -71,15 +73,11 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
 
     }
 
-    public void prepareDevices(){
-        Device device = new Device("CA:29:E8:F4:B5:36");
-        deviceList.add(device);
+    public void prepareDevices(int n){
 
-        device = new Device("F4:B5:36:CA:29:E8");
-        deviceList.add(device);
-
-        device = new Device("CA:29:E8:F4:B5:36");
-        deviceList.add(device);
+        for (int i = 0; i < n; i++) {
+            deviceList.add(new Device(TEMP_NAMES[i]));
+        }
         mAdapter.notifyDataSetChanged();
      }
 

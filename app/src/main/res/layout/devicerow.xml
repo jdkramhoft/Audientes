@@ -8,16 +8,17 @@ android:clickable="true"
 android:focusable="true"
 android:orientation="vertical">
 
-<TextView
-    android:id="@+id/devicetitel"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:textAlignment="center"
-    android:textColor="@color/White"
-    android:textSize="30dp"
-    android:textStyle="bold"
-    />
+    <TextView
+        android:id="@+id/devicetitel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:textAlignment="center"
+        android:textColor="@color/White"
+        android:textSize="30dp"
+        android:textStyle="normal"
+        android:visibility="visible" />
 
 
 </RelativeLayout>
