@@ -26,7 +26,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 5;
+    private final int NUM_OF_DOTS = 2;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
