@@ -16,7 +16,7 @@ android:orientation="vertical">
         android:layout_alignParentTop="true"
         android:textAlignment="center"
         android:textColor="@color/White"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="normal"
         android:visibility="visible" />
 
