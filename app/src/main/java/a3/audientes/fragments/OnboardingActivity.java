@@ -100,7 +100,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentindhold, new BeginHearingTestActivity() )
+                .replace(R.id.fragmentindhold, new ConnectBluetooth() )
                 .addToBackStack(null)
                 .commit();
 

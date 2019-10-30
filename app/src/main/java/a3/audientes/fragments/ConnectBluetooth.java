@@ -36,12 +36,15 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
         View rod = i.inflate(R.layout.bluetoothconnect, container, false);
 
         RecyclerView recyclerView = rod.findViewById(R.id.devicerecycler);
-        mAdapter = new DeviceAdapter(deviceList);
+        mAdapter = new DeviceAdapter(deviceList, this);
+
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+
 
         prepareDevices();
         return rod;
@@ -49,7 +52,24 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        //TODO open popup with password to device
+        launchHearingTestScreen();
+    }
+    private void launchHearingTestScreen(){
+        /*
+        Utils.saveSharedSetting(OnboardingActivity.this, MainMenu.PREF_USER_FIRST_TIME, "false");
+
+        Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
+        hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(hearingTestIntent);
+        finish();
+        */
+        if (getActivity()==null) return;
+        assert getFragmentManager() != null;
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragmentindhold, new BeginHearingTestActivity() )
+                .addToBackStack(null)
+                .commit();
+
     }
 
     public void prepareDevices(){

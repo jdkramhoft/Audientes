@@ -47,7 +47,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="0dp"
-        android:background="@drawable/main_background"
+        android:background="@drawable/rectangle36"
         android:layout_alignParentLeft="true">
 
     </androidx.viewpager.widget.ViewPager>

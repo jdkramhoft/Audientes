@@ -48,12 +48,14 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         cinema = rod.findViewById(R.id.cinema);
         cinema.setOnClickListener(this);
 
+
+        isUserFirstTime = Boolean.valueOf(Utils.readSharedSetting(getActivity(), PREF_USER_FIRST_TIME, "true"));
         /*
-        isUserFirstTime = Boolean.valueOf(Utils.readSharedSetting(MainMenu.this, PREF_USER_FIRST_TIME, "true"));
         Intent introIntent = new Intent(MainMenu.this, OnboardingActivity.class);
         introIntent.putExtra(PREF_USER_FIRST_TIME, isUserFirstTime);
         */
-
+        if (isUserFirstTime)
+            launchHearingTestScreen();
         return rod;
     }
 
@@ -122,6 +124,26 @@ public class MainMenu extends Fragment implements View.OnClickListener {
             }
 
         }
+
+    }
+    private void launchHearingTestScreen(){
+        /*
+        Utils.saveSharedSetting(OnboardingActivity.this, MainMenu.PREF_USER_FIRST_TIME, "false");
+
+        Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
+        hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(hearingTestIntent);
+        finish();
+        */
+        if (getActivity()==null) return;
+        assert getFragmentManager() != null;
+
+        Utils.saveSharedSetting(getActivity(), MainMenu.PREF_USER_FIRST_TIME, "false");
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragmentindhold, new OnboardingActivity())
+                .addToBackStack(null)
+                .commit();
 
     }
 }
