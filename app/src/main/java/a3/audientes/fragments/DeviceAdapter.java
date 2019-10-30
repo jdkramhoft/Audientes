@@ -1,12 +1,13 @@
 package a3.audientes.fragments;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -14,50 +15,44 @@ import java.util.List;
 import a3.audientes.logic.Device;
 import a3.audientes.R;
 
-public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHolder>{
+public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHolder> {
 
-    private List<Device> deviceList;
-    public View.OnClickListener Onclick;
+    private final List<Device> deviceList;
+    private final OnClickListener onClick;
 
-       public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView title;
+        private TextView title;
 
-        public MyViewHolder(View view) {
+        public MyViewHolder(@NonNull View view) {
             super(view);
-
-            title = (TextView) view.findViewById(R.id.devicetitel);
-
+            title = view.findViewById(R.id.devicetitel);
         }
 
-
     }
 
-
-    public DeviceAdapter(List<Device> deviceList, View.OnClickListener onclick) {
+    public DeviceAdapter(@NonNull List<Device> deviceList, @Nullable View.OnClickListener onClick) {
         this.deviceList = deviceList;
-        this.Onclick = onclick;
+        this.onClick = onClick;
     }
 
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override @NonNull
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.devicerow, parent, false);
-        itemView.setOnClickListener(Onclick);
+        itemView.setOnClickListener(onClick);
         return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Device device = deviceList.get(position);
         holder.title.setText(device.getName());
-
     }
 
     @Override
     public int getItemCount() {
         return deviceList.size();
     }
-
 
 }

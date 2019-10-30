@@ -1,6 +1,5 @@
 package a3.audientes.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +65,7 @@ public class ConnectBluetooth extends Fragment implements View.OnClickListener {
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentindhold, new BeginHearingTestActivity() )
+                .replace(R.id.emptyFrame, new BeginHearingTestActivity() )
                 .addToBackStack(null)
                 .commit();
 

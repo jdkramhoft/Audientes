@@ -1,6 +1,5 @@
 package a3.audientes.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -38,7 +37,7 @@ public class HearingTestAudiogramActivity extends Fragment implements View.OnCli
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentindhold, new MainMenu() )
+                .replace(R.id.emptyFrame, new MainMenu() )
                 .addToBackStack(null)
                 .commit();
 

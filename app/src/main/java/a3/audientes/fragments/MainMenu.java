@@ -1,9 +1,8 @@
 package a3.audientes.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,10 +16,11 @@ import utils.Utils;
 public class MainMenu extends Fragment implements View.OnClickListener {
 
 
-    public static final String PREF_USER_FIRST_TIME = "user_first_time";
-    private boolean isUserFirstTime;
+    private static final String PREF_USER_FIRST_TIME = "user_first_time";
+    private static final String TRUE = "true";
+    private static final String FALSE = "false";
 
-    private Button hearingProfile,settings,more,normal,noisy,quiet,cinema;
+    private Button hearingProfile, settings, more, normal, noisy, quiet, cinema;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -48,14 +48,17 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         cinema = rod.findViewById(R.id.cinema);
         cinema.setOnClickListener(this);
 
-
-        isUserFirstTime = Boolean.valueOf(Utils.readSharedSetting(getActivity(), PREF_USER_FIRST_TIME, "true"));
+        //TODO: Check whether any audiogram is stored to determine if user requires setup.
+        FragmentActivity activity = getActivity();
+        if(activity != null){
+            String isUserFirstTime = Utils.readSharedSetting(activity, PREF_USER_FIRST_TIME, TRUE);
+            if (isUserFirstTime.equals(TRUE))
+                launchHearingTestScreen();
+        }
         /*
         Intent introIntent = new Intent(MainMenu.this, OnboardingActivity.class);
         introIntent.putExtra(PREF_USER_FIRST_TIME, isUserFirstTime);
         */
-        if (isUserFirstTime)
-            launchHearingTestScreen();
         return rod;
     }
 
@@ -64,13 +67,13 @@ public class MainMenu extends Fragment implements View.OnClickListener {
 
         if (v == hearingProfile) {
             /*
-            Intent intent = new Intent(this, HearingProfil.class);
+            Intent intent = new Intent(this, HearingProfile.class);
             startActivity(intent);
             */
             if (getActivity()==null) return;
             assert getFragmentManager() != null;
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentindhold, new HearingProfil() )
+                    .replace(R.id.emptyFrame, new HearingProfile() )
                     .addToBackStack(null)
                     .commit();
         } else if (v == settings) {
@@ -81,7 +84,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
             if (getActivity()==null) return;
             assert getFragmentManager() != null;
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentindhold, new Settings() )
+                    .replace(R.id.emptyFrame, new Settings() )
                     .addToBackStack(null)
                     .commit();
         } else if (v == more) {
@@ -92,7 +95,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
             if (getActivity()==null) return;
             assert getFragmentManager() != null;
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentindhold, new Programs() )
+                    .replace(R.id.emptyFrame, new Programs() )
                     .addToBackStack(null)
                     .commit();
         } else if (v == normal || v == noisy || v == quiet || v == cinema) {
@@ -138,10 +141,10 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
 
-        Utils.saveSharedSetting(getActivity(), MainMenu.PREF_USER_FIRST_TIME, "false");
+        Utils.saveSharedSetting(getActivity(), MainMenu.PREF_USER_FIRST_TIME, FALSE);
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentindhold, new OnboardingActivity())
+                .replace(R.id.emptyFrame, new OnboardingActivity())
                 .addToBackStack(null)
                 .commit();
 

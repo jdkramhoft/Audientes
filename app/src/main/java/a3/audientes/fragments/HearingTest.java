@@ -1,15 +1,12 @@
 package a3.audientes.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import a3.audientes.R;
 
@@ -78,7 +75,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
                 if (getActivity()==null) return;
                 assert getFragmentManager() != null;
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.fragmentindhold, new HearingTestAudiogramActivity() )
+                        .replace(R.id.emptyFrame, new HearingTestAudiogramActivity() )
                         .addToBackStack(null)
                         .commit();
             }

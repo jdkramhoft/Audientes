@@ -1,10 +1,8 @@
 package a3.audientes.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 
 import a3.audientes.R;
 import a3.audientes.SliderAdapter;
-import utils.Utils;
 
 public class OnboardingActivity extends Fragment implements View.OnClickListener {
 
@@ -100,7 +97,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentindhold, new ConnectBluetooth() )
+                .replace(R.id.emptyFrame, new ConnectBluetooth() )
                 .addToBackStack(null)
                 .commit();
 

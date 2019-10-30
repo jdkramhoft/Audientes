@@ -1,9 +1,7 @@
 package a3.audientes.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +34,7 @@ public class BeginHearingTestActivity extends Fragment implements View.OnClickLi
             if (getActivity()==null) return;
             assert getFragmentManager() != null;
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentindhold, new HearingTest() )
+                    .replace(R.id.emptyFrame, new HearingTest() )
                     .addToBackStack(null)
                     .commit();
         }
