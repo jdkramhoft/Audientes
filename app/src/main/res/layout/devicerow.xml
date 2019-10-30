@@ -12,6 +12,7 @@ android:orientation="vertical">
         android:id="@+id/devicetitel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
         android:textAlignment="center"
