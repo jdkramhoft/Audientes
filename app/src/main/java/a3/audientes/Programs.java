@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
+import a3.audientes.fragments.EditProgram;
+
 public class Programs extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton noisy_edit, normal_edit, cinema_edit, quiet_edit;
