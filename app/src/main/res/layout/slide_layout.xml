@@ -34,7 +34,7 @@
         android:layout_marginTop="23dp"
         android:gravity="center_horizontal"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laborer et dolore magna aliqua"
-        android:textColor="@color/white"
+        android:textColor="@color/lightPurple"
         android:textSize="18sp" />
 
 </RelativeLayout>
