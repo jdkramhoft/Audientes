@@ -58,13 +58,13 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
             mDots[i] = new TextView(getContext());
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.TransparentWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.white));
 
             mDotLayout.addView(mDots[i]);
         }
 
         if (mDots.length > 0){
-            mDots[position].setTextColor(getResources().getColor(R.color.White));
+            mDots[position].setTextColor(getResources().getColor(R.color.white));
         }
     }
 
