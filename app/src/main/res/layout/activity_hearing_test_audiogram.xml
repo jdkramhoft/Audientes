@@ -27,12 +27,12 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_white_button"
-        android:text="Done"
         android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
@@ -40,61 +40,64 @@
     <View
         android:id="@+id/view"
         android:layout_width="3dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
         android:background="#fff"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:gravity="end"
         android:paddingRight="10dp"
         android:text="Left ear"
-        android:textSize="24dp"
         android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginTop="32dp"
-        android:text="Right ear"
+        android:layout_marginTop="16dp"
         android:paddingLeft="10dp"
-        android:textSize="24dp"
+        android:text="Right ear"
         android:textColor="@color/white"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
 
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:text="@string/audioGram_left"
         android:gravity="end"
-        android:textSize="16dp"
         android:padding="10dp"
+        android:text="@string/audioGram_left"
         android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:text="@string/audioGram_right"
-        android:textSize="16dp"
         android:padding="10dp"
+        android:text="@string/audioGram_right"
         android:textColor="@color/white"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
@@ -102,20 +105,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textSize="24dp"
         android:text="Audiogram"
         android:textColor="@color/white"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="369dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/audiogram"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 

@@ -6,4 +6,5 @@
 
     <string name="audioGram_left">The air conduction results for the left ear are marked with a blue... "X"</string>
     <string name="audioGram_right">The air conduction results for the right ear are marked with a red...     "O"</string>
+    <string name="enabel_bluetooth">This app requires that bluetooth is enabled, to connect your device to the Audientes hearing aid</string>
 </resources>
