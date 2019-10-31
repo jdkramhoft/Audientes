@@ -9,7 +9,7 @@
 
     <gradient
         android:startColor="@color/pink"
-        android:centerColor="@color/lightPink"
+        android:centerColor="@color/lightDarkPink"
         android:endColor="@color/orange"
         android:angle="45"
         />

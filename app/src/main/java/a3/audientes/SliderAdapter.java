@@ -21,18 +21,21 @@ public class SliderAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
 
     private int[] slide_images = {
-            R.drawable.team,
-            R.drawable.headphones,
+            R.drawable.handshake,
+            R.drawable.screenchart,
+            R.drawable.fingertouch
     };
 
     private String[] slide_headings = {
             "Welcome to Audientes",
+            "Experts",
             "Let's get started",
 
     };
 
     private String[] slide_descs = {
-            "Our mission is....",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna",
             "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna"
     };
 

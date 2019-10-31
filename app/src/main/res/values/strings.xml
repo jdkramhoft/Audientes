@@ -3,5 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="audioGram_left">The air conduction results for the left ear are marked with a blue... "X"</string>
+    <string name="audioGram_right">The air conduction results for the right ear are marked with a red...     "O"</string>
     <string name="audientes">Audientes</string>
 </resources>
