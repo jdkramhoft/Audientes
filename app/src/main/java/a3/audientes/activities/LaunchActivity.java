@@ -22,15 +22,17 @@ public final class LaunchActivity extends AppCompatActivity {
         setContentView(R.layout.launch_activity);
 
         if (savedInstanceState == null) {
+            /*
             Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-            /*
+             */
+
+
             Fragment fragment = new SplashScreen();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.emptyFrame, fragment)
                     .commit();
-             */
         }
 
         //setTitle("LaunchActivity");
