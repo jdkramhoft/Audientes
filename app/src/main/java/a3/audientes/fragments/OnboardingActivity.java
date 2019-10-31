@@ -94,6 +94,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
         startActivity(hearingTestIntent);
         finish();
         */
+        //int id = ((View)getView().getParent()).getId();
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
