@@ -52,7 +52,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         FragmentActivity activity = getActivity();
         if(activity != null){
             String isUserFirstTime = Utils.readSharedSetting(activity, PREF_USER_FIRST_TIME, TRUE);
-            //if (isUserFirstTime.equals(TRUE))
+            if (isUserFirstTime.equals(TRUE))
                 launchHearingTestScreen();
         }
         /*
