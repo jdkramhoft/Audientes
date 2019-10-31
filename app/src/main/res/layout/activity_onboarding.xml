@@ -11,16 +11,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
         android:background="@android:color/transparent"
         android:text="Skip"
-        android:textColor="@color/White"
-        android:visibility="visible" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/nextbtn"
@@ -34,11 +31,10 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="45dp"
-        android:background="@android:color/transparent"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/three_round_one_sharp"
         android:text="next"
-        android:textColor="@color/White" />
-
+        android:textColor="@color/white" />
 
 
     <androidx.viewpager.widget.ViewPager
@@ -46,9 +42,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginBottom="0dp"
-        android:background="@drawable/rectangle36"
-        android:layout_alignParentLeft="true">
+        android:background="@drawable/rectangle36">
 
     </androidx.viewpager.widget.ViewPager>
 

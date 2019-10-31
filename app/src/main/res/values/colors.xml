@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="DarkBlue">#0B2F59</color>
-    <color name="DeepBlue">#164986</color>
-    <color name="LightBlue">#5280B7</color>
-    <color name="TransparentBlue">#A2BBDA</color>
-    <color name="White">#FFFFFF</color>
-    <color name="TransparentWhite">#DDDDDD</color>
-    <color name="Grey">#ABABAB</color>
-    <color name="Orange">#E8B553</color>
-    <color name="Yellow">#F0DE80</color>
-    <color name="Green">#ABD451</color>
-    <color name="Red">#E37B7B</color>
-    <color name="Black">#303030</color>
+
+    <!-- TODO: give usable color names-->
+
+    <!-- General -->
+    <color name="white">#FEFEFE</color>
+    <color name="lightPurple">#BEC3E9</color>
+    <color name="lightDarkerPurple">#959DD8</color>
+    <color name="deepOrange">#F38888</color>
+    <color name="lightGreen">#5DCB9A</color>
+    <color name="yellow">#FFD363</color>
+    <color name="blue">#65D1FF</color>
+    <color name="red">#FC391D</color>
+    <color name="transparentWhite">#CCCCCC</color>
+    <color name="transparent">#00000000 </color>
+
+    <!-- Volume icon -->
+    <color name="darkBlue">#3F435E</color>
+    <color name="darkerOrange">#FF7B62</color>
+    <color name="lightPink">#FF62AD</color>
+
+    <!-- Volume control -->
+    <color name="darkYellow">#FFC36A</color>
+    <color name="purple">#C42FD1</color>
+
+    <!-- Main event button -->
+    <color name="pink">#FF568B</color>
+    <color name="lightDarkPink">#FF7D7E</color>
+    <color name="orange">#FFA66F</color>
 </resources>
