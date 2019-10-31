@@ -98,6 +98,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
                     .replace(R.id.emptyFrame, new Programs() )
                     .addToBackStack(null)
                     .commit();
+
         } else if (v == normal || v == noisy || v == quiet || v == cinema) {
             switch (v.getId()){
                 case R.id.normal:

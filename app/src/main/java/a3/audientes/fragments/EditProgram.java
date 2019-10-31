@@ -16,6 +16,8 @@ public class EditProgram extends Fragment {
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
         View rod = i.inflate(R.layout.activity_edit_program, container, false);
+
+
         return rod;
     }
 }
