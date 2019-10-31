@@ -1,5 +1,6 @@
 package a3.audientes.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -21,6 +22,13 @@ public final class LaunchActivity extends AppCompatActivity {
         setContentView(R.layout.launch_activity);
 
         if (savedInstanceState == null) {
+            /*
+            Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+             */
+
+
             Fragment fragment = new SplashScreen();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.emptyFrame, fragment)
