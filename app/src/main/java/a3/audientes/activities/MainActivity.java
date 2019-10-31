@@ -5,11 +5,9 @@ import android.view.Window;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import a3.audientes.R;
 import a3.audientes.fragments.OnboardingActivity;
-import a3.audientes.fragments.SplashScreen;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
 
         if (savedInstanceState == null) {
             //Fragment fragment = new SplashScreen();
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
-        //setTitle("MainActivity");
+        //setTitle("Test");
     }
 
 }

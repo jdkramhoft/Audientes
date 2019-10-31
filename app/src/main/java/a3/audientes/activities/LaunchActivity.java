@@ -23,7 +23,7 @@ public final class LaunchActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             /*
-            Intent intent = new Intent(LaunchActivity.this, MainActivity.class);
+            Intent intent = new Intent(LaunchActivity.this, Test.class);
             startActivity(intent);
             finish();
              */

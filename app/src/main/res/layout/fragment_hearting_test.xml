@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HeartingTest"
+    android:background="@drawable/main_background">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <Button
+        android:id="@+id/take_new_test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_monkas_color"
+        android:gravity="center|center_vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        android:text="Take New Test"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/active_test_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="30dp"
+        android:text="Active Test"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <fragment
+        android:id="@+id/audiogram_id"
+        android:name="a3.audientes.fragments.Audiogram"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        />
+
+    <TextView
+        android:id="@+id/audiogram_desc_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="@color/lightPurple"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna" />
+
+
+</FrameLayout>
