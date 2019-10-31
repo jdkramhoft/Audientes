@@ -1,6 +1,7 @@
 package a3.audientes.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -11,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import a3.audientes.R;
+import a3.audientes.fragments.SelectModes;
 import a3.audientes.fragments.SplashScreen;
 
-public final class LaunchActivity extends AppCompatActivity {
+public final class LaunchActivity extends AppCompatActivity implements SelectModes.OnFragmentInteractionListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public final class LaunchActivity extends AppCompatActivity {
 
             Fragment fragment = new SplashScreen();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.emptyFrame, fragment)
+                    .add(R.id.emptyFrame, SelectModes.newInstance(null))
                     .commit();
         }
 
@@ -46,4 +48,8 @@ public final class LaunchActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
