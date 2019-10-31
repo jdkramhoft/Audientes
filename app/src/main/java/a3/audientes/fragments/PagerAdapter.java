@@ -1,9 +1,10 @@
 package a3.audientes.fragments;
 
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import a3.audientes.fragments.Tab1;
 
 /**
  * Created by Chirag on 30-Jul-17.
@@ -26,10 +27,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         {
 
             case 0:
-                Tab1 tab1 = new Tab1();
+                Tab1 tab1 = Tab1.newInstance("1", "1");
                 return tab1;
             case 1:
-                HeartingTest tab2 = new HeartingTest();
+                Tab2 tab2 = Tab2.newInstance("2", "2");
                 return  tab2;
 
             default:

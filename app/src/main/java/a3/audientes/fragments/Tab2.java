@@ -4,23 +4,27 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import a3.audientes.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HeartingTest.OnFragmentInteractionListener} interface
+ * {@link } interface
  * to handle interaction events.
- * Use the {@link HeartingTest#newInstance} factory method to
+ * Use the {@link a3.audientes.fragments.Tab2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HeartingTest extends Fragment {
+public class Tab2 extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,9 +34,11 @@ public class HeartingTest extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private Button take_new_test_btn;
+
     private OnFragmentInteractionListener mListener;
 
-    public HeartingTest() {
+    public Tab2() {
         // Required empty public constructor
     }
 
@@ -40,12 +46,16 @@ public class HeartingTest extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment HeartingTest.
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Tab1.
      */
     // TODO: Rename and change types and number of parameters
-    public static HeartingTest newInstance() {
-        HeartingTest fragment = new HeartingTest();
+    public static Tab2 newInstance(String param1, String param2) {
+        Tab2 fragment = new Tab2();
         Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,16 +70,32 @@ public class HeartingTest extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hearting_test, container, false);
+        View root = inflater.inflate(R.layout.fragment_tab2, container, false);
+        take_new_test_btn = root.findViewById(R.id.take_new_test_btn);
+        take_new_test_btn.setOnClickListener(this);
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        Fragment childFragment = new Audiogram();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.child_fragment_container, childFragment).commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.messageFromParentFragment(uri);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == take_new_test_btn){
+            System.out.println(mParam1 + mParam2);
         }
     }
 
@@ -102,6 +128,6 @@ public class HeartingTest extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void messageFromParentFragment(Uri uri);
     }
 }
