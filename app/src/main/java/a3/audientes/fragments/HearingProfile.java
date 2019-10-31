@@ -1,9 +1,7 @@
 package a3.audientes.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import a3.audientes.R;
-import a3.audientes.fragments.BeginHearingTestActivity;
 
-public class HearingProfil extends Fragment implements View.OnClickListener {
+public class HearingProfile extends Fragment implements View.OnClickListener {
 
     Button hearing_test, oldTest, thisHearing, maint_and_repair;
 
@@ -39,7 +36,7 @@ public class HearingProfil extends Fragment implements View.OnClickListener {
             if (getActivity()==null) return;
             assert getFragmentManager() != null;
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentindhold, new BeginHearingTestActivity() )
+                    .replace(R.id.emptyFrame, new BeginHearingTestActivity() )
                     .addToBackStack(null)
                     .commit();
         }

@@ -6,33 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MainMenu">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="494dp"
+        android:layout_height="775dp"
+        android:src="@drawable/baggrunden_app"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
     <Button
         android:id="@+id/hearingProfile"
         android:layout_width="358dp"
         android:layout_height="72dp"
         android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
         android:background="#FFFFFF"
         android:src="@drawable/soft_button"
         android:text="Hearing Profile"
-        app:layout_constraintBottom_toTopOf="@+id/settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/noisy"
+        app:layout_constraintBottom_toTopOf="@+id/noisy"
+        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.3"
         app:srcCompat="@drawable/baggrunden_app" />
 
     <Button
         android:id="@+id/more"
         android:layout_width="96dp"
         android:layout_height="95dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="116dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:singleLine="true"
         android:text="more"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.914"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,22 +57,55 @@
         android:text="Noisy"
         app:layout_constraintBottom_toBottomOf="@+id/quiet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintHorizontal_bias="0.101"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.529" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="494dp"
-        android:layout_height="775dp"
-        android:src="@drawable/baggrunden_app"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        android:id="@+id/hearingProfile1"
+        android:layout_width="824dp"
+        android:layout_height="672dp"
+        android:layout_marginTop="128dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045" />
+        app:srcCompat="@drawable/hvidhvid" />
+
+    <Button
+        android:id="@+id/cinema"
+        android:layout_width="164dp"
+        android:layout_height="156dp"
+        android:layout_marginBottom="5dp"
+        android:text="Cinema"
+        app:layout_constraintBottom_toTopOf="@+id/settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toEndOf="@+id/normal"
+        app:layout_constraintTop_toBottomOf="@+id/quiet"
+        app:layout_constraintVertical_bias="0.531" />
+
+    <Button
+        android:id="@+id/quiet"
+        android:layout_width="164dp"
+        android:layout_height="156dp"
+        android:layout_marginTop="224dp"
+        android:text="Quiet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toEndOf="@+id/noisy"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/normal"
+        android:layout_width="164dp"
+        android:layout_height="156dp"
+        android:text="Normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/settings"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noisy"
+        app:layout_constraintVertical_bias="0.106" />
 
     <Button
         android:id="@+id/settings"
@@ -72,56 +118,11 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/normal"
-        app:layout_constraintVertical_bias="0.269"
-        app:srcCompat="@drawable/baggrunden_app" />
-
-    <ImageView
-        android:id="@+id/hearingProfile1"
-        android:layout_width="824dp"
-        android:layout_height="672dp"
-        android:layout_marginTop="160dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/hvidhvid" />
-
-    <Button
-        android:id="@+id/cinema"
-        android:layout_width="164dp"
-        android:layout_height="156dp"
-        android:layout_marginTop="3dp"
-        android:text="Cinema"
-        app:layout_constraintBottom_toTopOf="@+id/settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.553"
-        app:layout_constraintStart_toEndOf="@+id/normal"
-        app:layout_constraintTop_toBottomOf="@+id/quiet"
-        app:layout_constraintVertical_bias="0.541" />
-
-    <Button
-        android:id="@+id/quiet"
-        android:layout_width="164dp"
-        android:layout_height="156dp"
-        android:layout_marginTop="264dp"
-        android:text="Quiet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.553"
-        app:layout_constraintStart_toEndOf="@+id/noisy"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/normal"
-        android:layout_width="164dp"
-        android:layout_height="156dp"
-        android:text="Normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/settings"
-        app:layout_constraintHorizontal_bias="0.122"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noisy"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintVertical_bias="0.0"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

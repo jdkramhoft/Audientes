@@ -1,10 +1,8 @@
 package a3.audientes.fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 
 import a3.audientes.R;
 import a3.audientes.SliderAdapter;
-import utils.Utils;
 
 public class OnboardingActivity extends Fragment implements View.OnClickListener {
 
@@ -26,7 +23,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 5;
+    private final int NUM_OF_DOTS = 2;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -61,13 +58,13 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
             mDots[i] = new TextView(getContext());
             mDots[i].setText(Html.fromHtml("&#8226;"));
             mDots[i].setTextSize(35);
-            mDots[i].setTextColor(getResources().getColor(R.color.TransparentWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.white));
 
             mDotLayout.addView(mDots[i]);
         }
 
         if (mDots.length > 0){
-            mDots[position].setTextColor(getResources().getColor(R.color.White));
+            mDots[position].setTextColor(getResources().getColor(R.color.white));
         }
     }
 
@@ -100,7 +97,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
-                .replace(R.id.fragmentindhold, new BeginHearingTestActivity() )
+                .replace(R.id.emptyFrame, new ConnectBluetooth() )
                 .addToBackStack(null)
                 .commit();
 
