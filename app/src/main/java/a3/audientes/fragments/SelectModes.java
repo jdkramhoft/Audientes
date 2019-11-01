@@ -2,6 +2,7 @@ package a3.audientes.fragments;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -75,15 +76,37 @@ public class SelectModes extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_select_modes, container, false);
+
+        List<Program> allPrograms = new ArrayList<>(default_programs);
+        if(user_programs != null) allPrograms.addAll(user_programs);
+
         TableLayout layout = root.findViewById(R.id.table);
-        TableRow row = new TableRow(getActivity());
-        for(Program p : default_programs){
-            Button b = new Button(getActivity());
-            b.setText("Hello!");
+        TableRow row = null;
+        for (int i = 0; i < allPrograms.size(); i++) {
+            if(i % 2 == 0){
+                if(row != null) layout.addView(row);
+                row = new TableRow(getActivity());
+            }
+            Program p = allPrograms.get(i);
+            Button b = createButton(p); //TODO: Factory? Or builder pattern?
             row.addView(b);
+            if(i == allPrograms.size() -1) layout.addView(row);
         }
-        layout.addView(row);
+
         return root;
+    }
+
+    private Button createButton(Program p) {
+        Button b = new Button(getActivity());
+        int height = (int) getResources().getDimension(R.dimen.programHeight);
+        int width = (int) getResources().getDimension(R.dimen.programWidth);
+        b.setHeight(height);
+        b.setWidth(width);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) { //TODO: Get rid of if, and simply update min API
+            b.setBackground(getResources().getDrawable(R.drawable.two_round_two_sharp));
+        }
+        b.setText(String.valueOf(p.getVolume()));
+        return b;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

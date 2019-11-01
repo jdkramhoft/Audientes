@@ -9,34 +9,18 @@
         android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </TableLayout>
 
     <Button
         android:id="@+id/addProgramBtn"
         android:layout_width="@dimen/programWidth"
         android:layout_height="@dimen/programHeight"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="@dimen/programMarginStart"
+        android:layout_marginEnd="@dimen/programMarginEnd"
+        android:layout_marginLeft="@dimen/programMarginStart"
+        android:layout_marginRight="@dimen/programMarginEnd"
+        android:layout_marginTop="@dimen/programMarginTop"
+        android:layout_marginBottom="@dimen/programMarginBottom"
         android:background="@drawable/three_round_one_sharp"
         android:text="@string/addProgramText"
         android:textColor="@color/white" />

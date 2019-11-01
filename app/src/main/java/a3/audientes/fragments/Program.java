@@ -31,6 +31,10 @@ public class Program implements Parcelable {
         }
     };
 
+    public int getVolume(){
+        return this.volume;
+    }
+
     @Override
     public int describeContents() {
         return 0;
