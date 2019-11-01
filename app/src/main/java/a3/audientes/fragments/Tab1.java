@@ -65,8 +65,7 @@ public class Tab1 extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tab1, container, false);
     }
@@ -74,7 +73,7 @@ public class Tab1 extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.messageFromChildFragment(uri);
+            mListener.onFragmentInteraction(uri);
         }
     }
 
@@ -108,6 +107,6 @@ public class Tab1 extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
 
-        void messageFromChildFragment(Uri uri);
+        void onFragmentInteraction(Uri uri);
     }
 }

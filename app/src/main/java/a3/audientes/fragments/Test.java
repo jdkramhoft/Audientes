@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
 
-public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
+public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Child.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +25,11 @@ public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractio
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        final TestAdapter adapter = new TestAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
@@ -48,19 +48,22 @@ public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractio
 
     }
 
+    // Tab 1
     @Override
     public void onFragmentInteraction(Uri uri) {
-
+        Log.i("TAG", "received communication from child fragment");
     }
 
+    // Tab 2
     @Override
     public void messageFromParentFragment(Uri uri) {
         Log.i("TAG", "received communication from parent fragment");
     }
 
-
+    // Tab 2 child
     @Override
     public void messageFromChildFragment(Uri uri) {
         Log.i("TAG", "received communication from child fragment");
     }
+
 }

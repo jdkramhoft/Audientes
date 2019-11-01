@@ -10,11 +10,11 @@ import a3.audientes.fragments.Tab1;
  * Created by Chirag on 30-Jul-17.
  */
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class TestAdapter extends FragmentStatePagerAdapter {
 
     int mNoOfTabs;
 
-    public PagerAdapter(FragmentManager fm, int NumberOfTabs)
+    public TestAdapter(FragmentManager fm, int NumberOfTabs)
     {
         super(fm);
         this.mNoOfTabs = NumberOfTabs;

@@ -78,9 +78,10 @@ public class Tab2 extends Fragment implements View.OnClickListener{
         return root;
     }
 
+    // onViewCreated is called when onCreateView terminates
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        Fragment childFragment = new Audiogram();
+        Fragment childFragment = new Child();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.child_fragment_container, childFragment).commit();
     }
