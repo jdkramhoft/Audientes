@@ -97,6 +97,11 @@ public class Tab2 extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if (v == take_new_test_btn){
             System.out.println(mParam1 + mParam2);
+            assert getFragmentManager() != null;
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.emptyFrame, new HearingTest() )
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 
