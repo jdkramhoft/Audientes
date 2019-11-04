@@ -22,7 +22,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import a3.audientes.R;
 
@@ -34,10 +36,11 @@ import a3.audientes.R;
  * Use the {@link SelectModes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectModes extends Fragment {
+public class SelectModes extends Fragment implements View.OnClickListener {
 
     private static final String ARG_USER_PROGRAMS = "user_programs";
 
+    private final Map<Button, Program> associator = new HashMap<>();
     private final List<Program> default_programs = new ArrayList<>();
     private List<Program> user_programs;
 
@@ -159,6 +162,8 @@ public class SelectModes extends Fragment {
 
     private Button createButton(Program p) {
         Button b = new Button(getActivity());
+        b.setOnClickListener(this);
+        associator.put(b, p);
         int height = (int) getResources().getDimension(R.dimen.programHeight);
         int width = (int) getResources().getDimension(R.dimen.programWidth);
         b.setHeight(height);
@@ -192,6 +197,13 @@ public class SelectModes extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Button b = (Button) v;
+        Program p = associator.get(b);
+        System.out.println("Should edit program: " + p);
     }
 
     /**
