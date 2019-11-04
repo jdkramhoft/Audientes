@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import a3.audientes.R;
 
@@ -42,7 +43,7 @@ public class SelectModes extends Fragment implements View.OnClickListener {
 
     private final Map<Button, Program> associator = new HashMap<>();
     private final List<Program> default_programs = new ArrayList<>();
-    private List<Program> user_programs;
+    private final List<Program> user_programs = new ArrayList<>();
 
     {
         default_programs.add(new Program(25));
@@ -75,8 +76,8 @@ public class SelectModes extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            user_programs = getArguments().getParcelableArrayList(ARG_USER_PROGRAMS);
+        if (getArguments() != null) { //TODO: Stylize for requireNonNull
+            user_programs.addAll(Objects.requireNonNull(getArguments().getParcelableArrayList(ARG_USER_PROGRAMS)));
         }
         getView();
     }
