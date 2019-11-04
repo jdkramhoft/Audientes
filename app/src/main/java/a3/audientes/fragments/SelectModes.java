@@ -1,6 +1,7 @@
 package a3.audientes.fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,13 +87,38 @@ public class SelectModes extends Fragment {
         TableRow row = null;
         for (int i = 0; i < allPrograms.size(); i++) {
             if(i % 2 == 0){
-                if(row != null) layout.addView(row);
+                if(row != null){
+                    layout.addView(row);
+                    TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
+                    float dip = 100f;
+                    Resources r = getResources();
+                    float px = TypedValue.applyDimension(
+                            TypedValue.COMPLEX_UNIT_DIP,
+                            dip,
+                            r.getDisplayMetrics()
+                    );
+                    layoutParams.leftMargin = (int) px;
+                    //layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+                    row.setLayoutParams(layoutParams);
+                }
                 row = new TableRow(getActivity());
             }
             Program p = allPrograms.get(i);
             Button b = createButton(p); //TODO: Factory? Or builder pattern?
             row.addView(b);
-            if(i == allPrograms.size() -1) layout.addView(row);
+            if(i == allPrograms.size() -1){
+                layout.addView(row);
+                TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
+                float dip = 100f;
+                Resources r = getResources();
+                float px = TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        dip,
+                        r.getDisplayMetrics()
+                );
+                layoutParams.leftMargin = (int) px;
+                row.setLayoutParams(layoutParams);
+            }
         }
 
         return root;
