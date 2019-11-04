@@ -85,7 +85,7 @@ public class SelectModes extends Fragment {
 
         TableLayout layout = root.findViewById(R.id.table);
         TableRow row = null;
-        for (int i = 0; i < allPrograms.size(); i++) {
+        for (int i = 0; i < allPrograms.size(); i++) { //TODO: Refactor for readability
             if(i % 2 == 0){
                 if(row != null){
                     layout.addView(row);
