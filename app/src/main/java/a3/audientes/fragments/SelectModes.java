@@ -87,7 +87,7 @@ public class SelectModes extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_select_modes, container, false);
 
         List<Program> allPrograms = new ArrayList<>(default_programs);
-        if(user_programs != null) allPrograms.addAll(user_programs);
+        allPrograms.addAll(user_programs);
 
         TableLayout layout = root.findViewById(R.id.table);
         TableRow row = null;
