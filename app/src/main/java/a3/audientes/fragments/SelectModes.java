@@ -77,7 +77,9 @@ public class SelectModes extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) { //TODO: Stylize for requireNonNull
-            user_programs.addAll(Objects.requireNonNull(getArguments().getParcelableArrayList(ARG_USER_PROGRAMS)));
+            List<Program> saved_instance_user_programs = getArguments().getParcelableArrayList(ARG_USER_PROGRAMS);
+            if(saved_instance_user_programs != null)
+                user_programs.addAll(saved_instance_user_programs);
         }
         getView();
     }
