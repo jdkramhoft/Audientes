@@ -1,5 +1,6 @@
 package a3.audientes.fragments;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -90,14 +91,7 @@ public class SelectModes extends Fragment {
                 if(row != null){
                     layout.addView(row);
                     TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-                    float dip = 100f;
-                    Resources r = getResources();
-                    float px = TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_DIP,
-                            dip,
-                            r.getDisplayMetrics()
-                    );
-                    layoutParams.leftMargin = (int) px;
+                    layoutParams.leftMargin = getPx(100);
                     //layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
                     row.setLayoutParams(layoutParams);
                 }
@@ -106,22 +100,30 @@ public class SelectModes extends Fragment {
             Program p = allPrograms.get(i);
             Button b = createButton(p); //TODO: Factory? Or builder pattern?
             row.addView(b);
+            TableRow.LayoutParams layoutParams = (TableRow.LayoutParams) b.getLayoutParams();
+            layoutParams.leftMargin = getPx(10); //TODO: Refactor for dimension
+            layoutParams.rightMargin = getPx(10);
+            layoutParams.topMargin = getPx(10);
+            layoutParams.bottomMargin = getPx(10);
             if(i == allPrograms.size() -1){
                 layout.addView(row);
-                TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-                float dip = 100f;
-                Resources r = getResources();
-                float px = TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        dip,
-                        r.getDisplayMetrics()
-                );
-                layoutParams.leftMargin = (int) px;
-                row.setLayoutParams(layoutParams);
+                TableLayout.LayoutParams tableLayoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
+                tableLayoutParams.leftMargin = getPx(100);
+                row.setLayoutParams(tableLayoutParams);
             }
         }
 
         return root;
+    }
+
+    private int getPx(int dp) {
+        Resources r = getResources();
+        float px = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                r.getDisplayMetrics()
+        );
+        return (int) px;
     }
 
     private Button createButton(Program p) {
