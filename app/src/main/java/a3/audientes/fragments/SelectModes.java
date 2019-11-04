@@ -3,6 +3,7 @@ package a3.audientes.fragments;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -91,7 +92,7 @@ public class SelectModes extends Fragment {
                 if(row != null){
                     layout.addView(row);
                     TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-                    layoutParams.leftMargin = getPx(100);
+                    layoutParams.leftMargin = getPx(80);
                     //layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
                     row.setLayoutParams(layoutParams);
                 }
@@ -101,15 +102,45 @@ public class SelectModes extends Fragment {
             Button b = createButton(p); //TODO: Factory? Or builder pattern?
             row.addView(b);
             TableRow.LayoutParams layoutParams = (TableRow.LayoutParams) b.getLayoutParams();
+
             layoutParams.leftMargin = getPx(10); //TODO: Refactor for dimension
             layoutParams.rightMargin = getPx(10);
             layoutParams.topMargin = getPx(10);
             layoutParams.bottomMargin = getPx(10);
+            b.setLayoutParams(layoutParams);
             if(i == allPrograms.size() -1){
-                layout.addView(row);
-                TableLayout.LayoutParams tableLayoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-                tableLayoutParams.leftMargin = getPx(100);
-                row.setLayoutParams(tableLayoutParams);
+                if(i % 2 != 0){
+                    layout.addView(row);
+                    TableLayout.LayoutParams tableLayoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
+                    tableLayoutParams.leftMargin = getPx(100);
+                    row.setLayoutParams(tableLayoutParams);
+                    row = new TableRow(getActivity());
+                    layout.addView(row);
+                    TableLayout.LayoutParams lastRow = (TableLayout.LayoutParams) row.getLayoutParams();
+                    lastRow.leftMargin = getPx(100);
+                    row.setLayoutParams(lastRow);
+
+                    Button lastButton = createButton(new Program(1337));
+                    lastButton.setText("+");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        lastButton.setBackground(getResources().getDrawable(R.drawable.two_round_two_sharp_color));
+                    }
+                    row.addView(lastButton);
+                    lastButton.setLayoutParams(layoutParams);
+                } else {
+                    layout.addView(row);
+                    TableLayout.LayoutParams tableLayoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
+                    tableLayoutParams.leftMargin = getPx(100);
+                    row.setLayoutParams(tableLayoutParams);
+
+                    Button lastButton = createButton(new Program(1337));
+                    lastButton.setText("+");
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        lastButton.setBackground(getResources().getDrawable(R.drawable.two_round_two_sharp_color));
+                    }
+                    row.addView(lastButton);
+                    lastButton.setLayoutParams(layoutParams);
+                }
             }
         }
 
