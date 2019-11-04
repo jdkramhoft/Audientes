@@ -118,12 +118,12 @@ public class SelectModes extends Fragment implements View.OnClickListener {
                 if(i % 2 != 0){
                     layout.addView(row);
                     TableLayout.LayoutParams tableLayoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-                    tableLayoutParams.leftMargin = getPx(100);
+                    tableLayoutParams.leftMargin = getPx(80);
                     row.setLayoutParams(tableLayoutParams);
                     row = new TableRow(getActivity());
                     layout.addView(row);
                     TableLayout.LayoutParams lastRow = (TableLayout.LayoutParams) row.getLayoutParams();
-                    lastRow.leftMargin = getPx(100);
+                    lastRow.leftMargin = getPx(80);
                     row.setLayoutParams(lastRow);
 
                     Button lastButton = createButton(new Program(1337));
@@ -136,7 +136,7 @@ public class SelectModes extends Fragment implements View.OnClickListener {
                 } else {
                     layout.addView(row);
                     TableLayout.LayoutParams tableLayoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-                    tableLayoutParams.leftMargin = getPx(100);
+                    tableLayoutParams.leftMargin = getPx(80);
                     row.setLayoutParams(tableLayoutParams);
 
                     Button lastButton = createButton(new Program(1337));
