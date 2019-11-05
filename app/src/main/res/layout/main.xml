@@ -15,13 +15,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/main" />
+    <include layout="@layout/onboarding" />
 
     <!-- include bottom sheet -->
     <include
         layout="@layout/volume_slider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+         />
 
 
 

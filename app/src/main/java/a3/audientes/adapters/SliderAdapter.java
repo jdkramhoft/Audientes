@@ -23,7 +23,7 @@ public class SliderAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
 
     private int[] slide_images = {
-            R.drawable.handshake,
+            R.drawable.image_fingertouch,
             R.drawable.image_screenchart,
             R.drawable.image_fingertouch
     };
