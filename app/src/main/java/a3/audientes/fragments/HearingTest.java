@@ -59,12 +59,12 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             circle2.setVisibility(View.VISIBLE);
             */
 
-            // TODO: sound is heard, log data
+            // TODO: sound is image_heard, log data
             numOfTests = numOfTests + 1;
 
 
 
-            // TODO: if end of test, calculate audiogram and redirect user to audiogram activity
+            // TODO: if end of test, calculate image_temp_audiogram and redirect user to image_temp_audiogram activity
             if (numOfTests == 2){
                 /*
                 Intent i = new Intent(this, HearingTestAudiogramActivity.class);

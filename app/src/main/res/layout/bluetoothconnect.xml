@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rectangle36">
+    android:background="@drawable/image_rectangle36">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/devicerecycler"

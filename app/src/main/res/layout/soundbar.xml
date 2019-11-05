@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_volume_level_bg" />
+        android:src="@drawable/xml_bg_volumelevel" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -27,5 +27,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_volume_level_fg" />
+        android:src="@drawable/xml_fg_volumelevel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,8 +22,8 @@ public class SliderAdapter extends PagerAdapter {
 
     private int[] slide_images = {
             R.drawable.handshake,
-            R.drawable.screenchart,
-            R.drawable.fingertouch
+            R.drawable.image_screenchart,
+            R.drawable.image_fingertouch
     };
 
     private String[] slide_headings = {

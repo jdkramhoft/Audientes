@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rectangle36"
+    android:background="@drawable/image_rectangle36"
     tools:context=".fragments.HearingTest">
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_width="224dp"
         android:layout_height="224dp"
         android:layout_marginBottom="169dp"
-        android:background="@drawable/press_button"
+        android:background="@drawable/image_press_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

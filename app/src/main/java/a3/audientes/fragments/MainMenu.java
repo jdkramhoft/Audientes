@@ -48,7 +48,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
         cinema = rod.findViewById(R.id.cinema);
         cinema.setOnClickListener(this);
 */
-        //TODO: Check whether any audiogram is stored to determine if user requires setup.
+        //TODO: Check whether any image_temp_audiogram is stored to determine if user requires setup.
         FragmentActivity activity = getActivity();
         if(activity != null){
             String isUserFirstTime = Utils.readSharedSetting(activity, PREF_USER_FIRST_TIME, TRUE);
