@@ -9,6 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.util.TypedValue;
@@ -85,7 +87,68 @@ public class SelectModes extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saveInstanceState){
+        View root = inflater.inflate(R.layout.fragment_select_modes, container, false);
+
+        List<Program> allPrograms = new ArrayList<>();
+        allPrograms.addAll(default_programs);
+        allPrograms.addAll(user_programs);
+
+        List<Button> programButtons = new ArrayList<>();
+        for(Program program : allPrograms){
+            programButtons.add(createButton(program));
+        }
+
+        TableLayout table = root.findViewById(R.id.table);
+        List<TableRow> rows = new ArrayList<>();
+
+        TableRow row = new TableRow(getActivity());
+        for (int i = 0; i < programButtons.size(); i++) {
+            boolean newRow = i % 2 == 0;
+            if(newRow){
+                row = new TableRow(getActivity());
+                rows.add(row);
+            }
+            row.addView(programButtons.get(i));
+            setButtonLayout(programButtons.get(i));
+        }
+
+        int lastRowButtonCount = row.getChildCount();
+
+        if(lastRowButtonCount % 2 == 0){
+            TableRow newRow = new TableRow(getActivity());
+            Button addProgramButton = createButton(null);
+            newRow.addView(addProgramButton);
+            setButtonLayout(addProgramButton);
+            rows.add(newRow);
+        } else {
+            row.addView(createButton(null));
+        }
+
+        for(TableRow r : rows){
+            table.addView(r);
+            TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) r.getLayoutParams();
+            layoutParams.leftMargin = getResources().getDimensionPixelSize(R.dimen.rowLeftMargin);
+            r.setLayoutParams(layoutParams);
+        }
+
+        return root;
+
+    }
+
+    private void setButtonLayout(Button b) {
+        /*
+        TableRow.LayoutParams layoutParams = (TableRow.LayoutParams) b.getLayoutParams();
+        layoutParams.leftMargin = getPx(10); //TODO: Refactor for dimension
+        layoutParams.rightMargin = getPx(10);
+        layoutParams.topMargin = getPx(10);
+        layoutParams.bottomMargin = getPx(10);
+        b.setLayoutParams(layoutParams);
+
+         */
+    }
+
+    public View onCreateView2(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_select_modes, container, false);
 
         List<Program> allPrograms = new ArrayList<>(default_programs);
@@ -97,10 +160,7 @@ public class SelectModes extends Fragment implements View.OnClickListener {
             if(i % 2 == 0){
                 if(row != null){
                     layout.addView(row);
-                    TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-                    layoutParams.leftMargin = getPx(80);
-                    //layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-                    row.setLayoutParams(layoutParams);
+                    setRowLayout(row);
                 }
                 row = new TableRow(getActivity());
             }
@@ -153,6 +213,14 @@ public class SelectModes extends Fragment implements View.OnClickListener {
         return root;
     }
 
+    private void setRowLayout(TableRow row) {
+        /*
+        TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
+        layoutParams.leftMargin = getPx(80);
+        row.setLayoutParams(layoutParams);
+         */
+    }
+
     private int getPx(int dp) {
         Resources r = getResources();
         float px = TypedValue.applyDimension(
@@ -164,6 +232,9 @@ public class SelectModes extends Fragment implements View.OnClickListener {
     }
 
     private Button createButton(Program p) {
+        if(p == null){
+            p = new Program(17);
+        }
         Button b = new Button(getActivity());
         b.setOnClickListener(this);
         associator.put(b, p);

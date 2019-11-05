@@ -3,9 +3,10 @@
     <dimen name="list_item_spacing">16dp</dimen>
     <dimen name="list_item_spacing_half">8dp</dimen>
     <dimen name="programHeight">100dp</dimen>
-    <dimen name="programWidth">100dp</dimen>
+    <dimen name="programWidth">120dp</dimen>
     <dimen name="programMarginStart">30dp</dimen>
     <dimen name="programMarginEnd">30dp</dimen>
     <dimen name="programMarginTop">30dp</dimen>
     <dimen name="programMarginBottom">30dp</dimen>
+    <dimen name="rowLeftMargin">80dp</dimen>
 </resources>
