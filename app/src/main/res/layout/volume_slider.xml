@@ -78,10 +78,9 @@
 
     <ImageView
         android:id="@+id/imageView19"
-        android:layout_width="412dp"
+        android:layout_width="mat"
         android:layout_height="395dp"
         android:adjustViewBounds="false"
-
         android:src="@drawable/xml_bg_volume"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
