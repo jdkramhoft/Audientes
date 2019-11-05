@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="69dp"
-        app:srcCompat="@drawable/image_heard" />
+        app:srcCompat="@drawable/image_fingertouch" />
 
     <TextView
         android:id="@+id/slide_heading"
