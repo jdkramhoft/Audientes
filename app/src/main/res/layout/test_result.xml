@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rectangle36"
     tools:context=".fragments.TestResult">
 
 
@@ -13,7 +12,6 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/button_right_soft"
         android:elevation="10dp"
         android:gravity="center"
         android:textColor="#000"
@@ -30,7 +28,6 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/round_white_button"
         android:elevation="10dp"
         android:text="Done"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +114,6 @@
         android:layout_width="369dp"
         android:layout_height="200dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/audiogram"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />

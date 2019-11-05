@@ -20,6 +20,7 @@
     <!-- include bottom sheet -->
     <include
         layout="@layout/volume_slider"
+        android:layout_width="match_parent"
          />
 
 
