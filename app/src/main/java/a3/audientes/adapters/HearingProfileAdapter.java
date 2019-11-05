@@ -1,15 +1,19 @@
-package a3.audientes.fragments;
+package a3.audientes.adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import a3.audientes.fragments.Audiogram;
+import a3.audientes.fragments.Tab1;
+import a3.audientes.fragments.Tab2;
 
-public class TestAdapter extends FragmentStatePagerAdapter {
+
+public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
     private int mNoOfTabs;
 
-    public TestAdapter(FragmentManager fm, int NumberOfTabs)
+    public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs)
     {
         super(fm);
         this.mNoOfTabs = NumberOfTabs;

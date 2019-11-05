@@ -52,7 +52,7 @@ public class Tab2 extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_tab2, container, false);
+        View root = inflater.inflate(R.layout.tab2, container, false);
         take_new_test_btn = root.findViewById(R.id.take_new_test_btn);
         take_new_test_btn.setOnClickListener(this);
         return root;

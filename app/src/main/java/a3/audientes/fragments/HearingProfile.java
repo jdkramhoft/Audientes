@@ -11,16 +11,17 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
+import a3.audientes.adapters.HearingProfileAdapter;
 
-public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
+public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
 
     private final String TAB_1_TITLE = "Modes";
-    private final String TAB_2_TITLE = "Hearing Test";
+    private final String TAB_2_TITLE = "Hearing HearingProfile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.hearing_profile);
 
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText(TAB_1_TITLE));
@@ -28,7 +29,7 @@ public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractio
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ViewPager viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(new TestAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
+        viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
 

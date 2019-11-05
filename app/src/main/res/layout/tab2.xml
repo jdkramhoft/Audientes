@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="a3.audientes.fragments.Test"
+    tools:context="a3.audientes.fragments.HearingProfile"
     android:background="@drawable/main_background">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,7 +15,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/btn_monkas_color"
+        android:background="@drawable/xml_button_monkaFuckingS"
         android:gravity="center|center_vertical"
         android:text="Take New Test"
         android:textAllCaps="false"

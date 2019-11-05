@@ -15,12 +15,12 @@ import a3.audientes.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HHearingTest.OnFragmentInteractionListener} interface
+ * {@link HearingTest.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HHearingTest#newInstance} factory method to
+ * Use the {@link HearingTest#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HHearingTest extends Fragment {
+public class HearingTest extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +32,7 @@ public class HHearingTest extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public HHearingTest() {
+    public HearingTest() {
         // Required empty public constructor
     }
 
@@ -42,11 +42,11 @@ public class HHearingTest extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HHearingTest.
+     * @return A new instance of fragment HearingTest.
      */
     // TODO: Rename and change types and number of parameters
-    public static HHearingTest newInstance(String param1, String param2) {
-        HHearingTest fragment = new HHearingTest();
+    public static HearingTest newInstance(String param1, String param2) {
+        HearingTest fragment = new HearingTest();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,7 +67,7 @@ public class HHearingTest extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hhearing_test, container, false);
+        return inflater.inflate(R.layout.hearing_test, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

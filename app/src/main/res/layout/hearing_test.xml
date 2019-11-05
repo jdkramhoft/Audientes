@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HHearingTest"
-    android:background="@drawable/main_background">
+    tools:context=".fragments.HearingTest"
+    android:background="@drawable/baggrunden_app">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
