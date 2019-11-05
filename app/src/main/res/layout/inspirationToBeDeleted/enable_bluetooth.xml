@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rectangle36"
-    tools:context=".fragments.HearingTestAudiogramActivity">
+    tools:context=".fragments.TestResult">
 
 
     <TextView

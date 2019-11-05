@@ -1,4 +1,4 @@
-package a3.audientes;
+package a3.audientes.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import a3.audientes.R;
 
 /**
  * https://www.iconfinder.com/
@@ -59,7 +61,7 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
+        View view = layoutInflater.inflate(R.layout.onboarding_slider, container, false);
 
         ImageView slideImageView = view.findViewById(R.id.slide_image);
         TextView slideHeading = view.findViewById(R.id.slide_heading);

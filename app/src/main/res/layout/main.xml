@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.Main">
 
 
     <!-- include main content -->
@@ -15,11 +15,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/main_activity" />
+    <include layout="@layout/main" />
 
     <!-- include bottom sheet -->
     <include
-        layout="@layout/new_volume_layout"
+        layout="@layout/volume_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
