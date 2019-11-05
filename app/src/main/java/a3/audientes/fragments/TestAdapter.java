@@ -4,15 +4,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import a3.audientes.fragments.Tab1;
-
-/**
- * Created by Chirag on 30-Jul-17.
- */
 
 public class TestAdapter extends FragmentStatePagerAdapter {
 
-    int mNoOfTabs;
+    private int mNoOfTabs;
 
     public TestAdapter(FragmentManager fm, int NumberOfTabs)
     {
@@ -23,18 +18,18 @@ public class TestAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch(position)
-        {
+        switch(position) {
 
             case 0:
-                Tab1 tab1 = Tab1.newInstance("1", "1");
-                return tab1;
+                return Tab1.newInstance();
             case 1:
-                Tab2 tab2 = Tab2.newInstance("2", "2");
-                return  tab2;
+                Audiogram audiogram = Audiogram.newInstance(null, null, null);
+                return Tab2.newInstance(audiogram);
 
             default:
                 return null;
+
+
         }
     }
 

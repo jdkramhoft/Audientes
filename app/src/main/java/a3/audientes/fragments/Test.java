@@ -12,7 +12,10 @@ import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
 
-public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Child.OnFragmentInteractionListener {
+public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
+
+    private final String TAB_1_TITLE = "Modes";
+    private final String TAB_2_TITLE = "Hearing Test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +23,14 @@ public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractio
         setContentView(R.layout.activity_test);
 
         TabLayout tabLayout = findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Modes"));
-        tabLayout.addTab(tabLayout.newTab().setText("Hearing Test"));
+        tabLayout.addTab(tabLayout.newTab().setText(TAB_1_TITLE));
+        tabLayout.addTab(tabLayout.newTab().setText(TAB_2_TITLE));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = findViewById(R.id.pager);
-        final TestAdapter adapter = new TestAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
+        ViewPager viewPager = findViewById(R.id.pager);
+        viewPager.setAdapter(new TestAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -36,33 +39,25 @@ public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractio
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabUnselected(TabLayout.Tab tab) { }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) { }
         });
-
     }
 
-    // Tab 1
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onTab1Interaction(Uri uri) {
         Log.i("TAG", "received communication from child fragment");
     }
 
-    // Tab 2
     @Override
-    public void messageFromParentFragment(Uri uri) {
+    public void onTab2ParentInteraction(Uri uri) {
         Log.i("TAG", "received communication from parent fragment");
     }
 
-    // Tab 2 child
     @Override
-    public void messageFromChildFragment(Uri uri) {
+    public void onTab2ChildInteraction(Uri uri) {
         Log.i("TAG", "received communication from child fragment");
     }
 
