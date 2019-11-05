@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-
+/*
         if (savedInstanceState == null) {
             //Fragment fragment = new SplashScreen();
             getSupportFragmentManager().beginTransaction()
@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //setTitle("MainActivity");
+
+ */
     }
 
 }
