@@ -25,7 +25,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        View rod = i.inflate(R.layout.main_activity2, container, false);
+        View rod = i.inflate(R.layout.main_activity, container, false);
 /*
         hearingProfile = rod.findViewById(R.id.hearingProfile);
         hearingProfile.setOnClickListener(this);
