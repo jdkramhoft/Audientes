@@ -21,9 +21,9 @@ public final class Launcher extends AppCompatActivity {
         setContentView(R.layout.launch);
 
         if (savedInstanceState == null) {
-            Fragment fragment = new SplashScreen();
+            Fragment splashScreen = new SplashScreen();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.emptyFrame, fragment)
+                    .add(R.id.emptyFrame, splashScreen)
                     .commit();
         }
     }
