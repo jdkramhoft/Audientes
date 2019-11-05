@@ -3,24 +3,19 @@ package a3.audientes.fragments;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.media.Image;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import a3.audientes.R;
-import a3.audientes.SliderAdapter;
+import a3.audientes.adapters.SliderAdapter;
 
-public class OnboardingActivity extends Fragment implements View.OnClickListener {
+public class Onboarding extends Fragment implements View.OnClickListener {
 
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
@@ -33,7 +28,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        View rod = i.inflate(R.layout.activity_onboarding, container, false);
+        View rod = i.inflate(R.layout.onboarding, container, false);
 
 
         mSlideViewPager = rod.findViewById(R.id.slideViewPager);
@@ -95,7 +90,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
 
     private void launchHearingTestScreen(){
         /*
-        Utils.saveSharedSetting(OnboardingActivity.this, MainMenu.PREF_USER_FIRST_TIME, "false");
+        Utils.saveSharedSetting(Onboarding.this, MainMenu.PREF_USER_FIRST_TIME, "false");
 
         Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
         hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -106,7 +101,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
-                .replace(R.id.emptyFrame, new ConnectBluetooth() )
+                .replace(R.id.emptyFrame, new ConnectDevice() )
                 .addToBackStack(null)
                 .commit();
 
@@ -123,33 +118,14 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
             if (firstPage){
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
-
-                /*
-                mSkipBtn.setEnabled(true);
-                mSkipBtn.setText("Skip");
-                mSkipBtn.setVisibility(View.VISIBLE);
-                 */
             }
             else if (lastPage){
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Start");
-
-                /*
-                mSkipBtn.setEnabled(true);
-                mSkipBtn.setText("Skip");
-                mSkipBtn.setVisibility(View.VISIBLE);
-                 */
-
             }
             else {
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Next");
-
-                /*
-                mSkipBtn.setEnabled(true);
-                mSkipBtn.setText("Skip");
-                mSkipBtn.setVisibility(View.VISIBLE);
-                 */
             }
         }
 
@@ -159,5 +135,4 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
         @Override
         public void onPageScrollStateChanged(int state) { }
     };
-
 }

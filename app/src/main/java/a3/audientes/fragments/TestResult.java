@@ -10,12 +10,12 @@ import android.widget.Button;
 
 import a3.audientes.R;
 
-public class HearingTestAudiogramActivity extends Fragment implements View.OnClickListener {
+public class TestResult extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        View rod = i.inflate(R.layout.activity_hearing_test_audiogram, container, false);
+        View rod = i.inflate(R.layout.test_result, container, false);
         Button butt = rod.findViewById(R.id.button);
         butt.setOnClickListener(this);
         return rod;
@@ -26,14 +26,8 @@ public class HearingTestAudiogramActivity extends Fragment implements View.OnCli
         launchHearingTestScreen();
     }
     private void launchHearingTestScreen(){
-        /*
-        Utils.saveSharedSetting(OnboardingActivity.this, MainMenu.PREF_USER_FIRST_TIME, "false");
 
-        Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
-        hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(hearingTestIntent);
-        finish();
-        */
+        /* TODO: change X in .replace( , X)
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
         getFragmentManager().beginTransaction()
@@ -41,6 +35,7 @@ public class HearingTestAudiogramActivity extends Fragment implements View.OnCli
                 .addToBackStack(null)
                 .commit();
 
+         */
     }
 
 

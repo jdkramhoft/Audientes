@@ -1,4 +1,4 @@
-package a3.audientes.fragments;
+package a3.audientes.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +39,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.MyViewHold
     @Override @NonNull
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.devicerow, parent, false);
+                .inflate(R.layout.device_row, parent, false);
         itemView.setOnClickListener(onClick);
         return new MyViewHolder(itemView);
     }
