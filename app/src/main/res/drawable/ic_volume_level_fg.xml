@@ -2,7 +2,7 @@
     <item>
 
         <shape>
-            <solid android:color="282D4D"></solid>
+            <solid android:color="#282D4D"></solid>
             <gradient android:useLevel="true"
                 android:startColor="#FFC42FD1"
                 android:endColor="#FFFFC36A"/>

@@ -25,8 +25,8 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        View rod = i.inflate(R.layout.activity_main_menu, container, false);
-
+        View rod = i.inflate(R.layout.main_activity2, container, false);
+/*
         hearingProfile = rod.findViewById(R.id.hearingProfile);
         hearingProfile.setOnClickListener(this);
 
@@ -47,12 +47,12 @@ public class MainMenu extends Fragment implements View.OnClickListener {
 
         cinema = rod.findViewById(R.id.cinema);
         cinema.setOnClickListener(this);
-
+*/
         //TODO: Check whether any audiogram is stored to determine if user requires setup.
         FragmentActivity activity = getActivity();
         if(activity != null){
             String isUserFirstTime = Utils.readSharedSetting(activity, PREF_USER_FIRST_TIME, TRUE);
-            //if (isUserFirstTime.equals(TRUE))
+            if (isUserFirstTime.equals(TRUE))
                 launchHearingTestScreen();
         }
         /*
