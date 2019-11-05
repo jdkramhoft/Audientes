@@ -65,10 +65,10 @@ public class SelectModes extends Fragment implements View.OnClickListener {
      * @param user_programs List of stored user defined programs..
      * @return A new instance of fragment SelectModes.
      */
-    public static SelectModes newInstance(List<Program> user_programs) {
+    public static SelectModes newInstance(ArrayList<Program> user_programs) {
         SelectModes fragment = new SelectModes();
         Bundle args = new Bundle();
-        args.putString(ARG_USER_PROGRAMS, ARG_USER_PROGRAMS);
+        args.putParcelableArrayList(ARG_USER_PROGRAMS, user_programs);
         fragment.setArguments(args);
         return fragment;
     }
