@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
 
-public class Test extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Child.OnFragmentInteractionListener {
+public class Test extends AppCompatActivity implements HHearingTest.OnFragmentInteractionListener, Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Child.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

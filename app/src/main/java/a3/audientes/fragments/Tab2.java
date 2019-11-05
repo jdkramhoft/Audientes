@@ -1,6 +1,9 @@
 package a3.audientes.fragments;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -69,9 +72,12 @@ public class Tab2 extends Fragment implements View.OnClickListener{
         }
     }
 
+    private ViewGroup test;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        test = container;
         View root = inflater.inflate(R.layout.fragment_tab2, container, false);
         take_new_test_btn = root.findViewById(R.id.take_new_test_btn);
         take_new_test_btn.setOnClickListener(this);
@@ -95,14 +101,28 @@ public class Tab2 extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
+        if ( v == take_new_test_btn) {
+            Activity f = getActivity();
+            System.out.println("BREAK POOOOOOOINT");
+
+            //Intent intent = new Intent (this, Tab2.class);
+            //startActivity(intent);
+
+            //startActivity(new Intent(Tab2.this, HHearingTest.class));
+
+            //getActivity().beginTransaction()
+            //        .add(((Test)getActivity()).getView().findViewById(R.id.take_new_test_btn).getId(), new HHearingTest()).addToBackStack("").commit();
+        }
+
         if (v == take_new_test_btn){
-            System.out.println(mParam1 + mParam2);
+            if (getActivity() == null) return;
             assert getFragmentManager() != null;
             getFragmentManager().beginTransaction()
-                    .replace(R.id.emptyFrame, new HearingTest() )
-                    .addToBackStack(null)
+                    .replace(00, new HHearingTest())
                     .commit();
         }
+
     }
 
     @Override

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import a3.audientes.R;
 
@@ -29,6 +30,8 @@ public class HHearingTest extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ImageButton hearing_button;
 
     private OnFragmentInteractionListener mListener;
 
@@ -71,10 +74,12 @@ public class HHearingTest extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onClick(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
-        }
+        } //else if (uri == hearing_button){
+            //lyd modtaget
+        //}
     }
 
     @Override
