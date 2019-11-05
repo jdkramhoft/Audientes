@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="a3.audientes.fragments.HearingProfile"
-    android:background="@drawable/main_background">
+    tools:context="a3.audientes.activities.HearingProfile">
 
     <!-- TODO: Update blank fragment layout -->
     <Button
@@ -15,8 +14,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/xml_button_monkaFuckingS"
         android:gravity="center|center_vertical"
+        android:background="@drawable/xml_button_monka_fucking_s"
         android:text="Take New Test"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -36,10 +35,10 @@
 
     <FrameLayout
         android:id="@+id/child_fragment_container"
-        android:layout_width="347dp"
+        android:layout_width="match_parent"
         android:layout_height="187dp"
-        android:layout_marginTop="180dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="180dp"
         android:layout_marginRight="30dp" />
 
     <TextView

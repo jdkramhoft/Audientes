@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="a3.audientes.fragments.HearingProfile">
+    tools:context="a3.audientes.activities.HearingProfile"
+    android:background="@color/darkBlue">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

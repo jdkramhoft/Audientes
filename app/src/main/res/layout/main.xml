@@ -15,12 +15,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/onboarding" />
+    <include layout="@layout/hearing_profile" />
 
     <!-- include bottom sheet -->
     <include
         layout="@layout/volume_slider"
-        android:layout_width="match_parent"
+
          />
 
 

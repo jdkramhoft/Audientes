@@ -18,5 +18,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.Main" />
+        <activity android:name=".activities.HearingProfile" />
     </application>
 </manifest>

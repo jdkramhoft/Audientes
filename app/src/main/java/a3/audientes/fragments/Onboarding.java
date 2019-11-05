@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import a3.audientes.R;
+import a3.audientes.activities.HearingProfile;
 import a3.audientes.adapters.SliderAdapter;
 
 public class Onboarding extends Fragment implements View.OnClickListener {

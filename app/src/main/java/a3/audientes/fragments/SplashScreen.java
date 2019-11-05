@@ -13,16 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import a3.audientes.R;
-import a3.audientes.activities.Main;
+import a3.audientes.activities.HearingProfile;
 
 public final class SplashScreen extends Fragment {
 
     private final Handler handler = new Handler();
     private final Runnable splash = () -> {
-        // TODO: change X in .replace( , X)
 
-        Intent Main = new Intent(getContext(), new Main().getClass());
-        startActivity(Main);
+        if (getActivity()==null) return;
+        assert getFragmentManager() != null;
+        getFragmentManager().beginTransaction()
+                .replace(R.id.emptyFrame, new Onboarding() )
+                .addToBackStack(null)
+                .commit();
 
     };
 
