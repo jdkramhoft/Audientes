@@ -12,6 +12,13 @@ import a3.audientes.R;
 
 public class Programs extends Fragment {
 
+    public Programs() { }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 

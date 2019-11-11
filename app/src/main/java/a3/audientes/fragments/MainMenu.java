@@ -22,6 +22,13 @@ public class MainMenu extends Fragment implements View.OnClickListener {
 
     private Button hearingProfile, settings, more, normal, noisy, quiet, cinema;
 
+    public MainMenu() { }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
