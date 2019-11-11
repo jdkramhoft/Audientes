@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/main_bg">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -13,14 +14,17 @@
         android:id="@+id/toolbar"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/lightDarkerPurple"
-            android:text="TabsUsingViewPager"
-            android:textSize="20dp"/>
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Hearing Profile"
+            android:layout_marginRight="20sp"
+            android:textSize="24sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -29,7 +33,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/tablayout"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:tabTextColor="@color/lightDarkerPurple"
+        app:tabSelectedTextColor="@color/lightPurple"
+        app:tabIndicatorColor="@color/deepOrange"
+        app:tabIndicatorHeight="5sp">
 
     </com.google.android.material.tabs.TabLayout>
 

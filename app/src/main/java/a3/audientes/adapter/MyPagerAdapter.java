@@ -18,18 +18,18 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
         switch (position){
             case 0: return new Tab1();
             case 1: return new Tab2();
-            case 2: return new Tab3();
+            //case 2: return new Tab3();
         }
         return null;
     }
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
     @Override    public CharSequence getPageTitle(int position) {        switch (position){
-        case 0: return "Tab 1";
-        case 1: return "Tab 2";
-        default: return null;
+        case 0: return "Modes";
+        //case 1: return "Tab 2";
+        default: return "Hearing Test";
     }
     }
 }
