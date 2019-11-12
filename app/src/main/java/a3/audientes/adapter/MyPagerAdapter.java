@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import a3.audientes.fragments.EnabelBluetooth;
-import a3.audientes.fragments.Programs;
-import a3.audientes.fragments.Settings;
 import a3.audientes.textFragments.Tab1;
 import a3.audientes.textFragments.Tab2;
 import a3.audientes.textFragments.Tab3;
@@ -22,8 +19,6 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
             case 0: return new Tab1();
             case 1: return new Tab2();
             //case 2: return new Tab3();
-            //case 0: return new EnabelBluetooth();
-            //case 1: return new Programs();
         }
         return null;
     }
