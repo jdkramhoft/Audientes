@@ -1,9 +1,6 @@
 package a3.audientes.fragments;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
 
@@ -30,18 +25,9 @@ import a3.audientes.R;
  * create an instance of this fragment.
  */
 public class Tab2 extends Fragment implements View.OnClickListener{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private OnFragmentInteractionListener listener;
     private Button take_new_test_btn;
-
-    private OnFragmentInteractionListener mListener;
+    private static Fragment child;
 
     public Tab2() {
         // Required empty public constructor
@@ -51,85 +37,53 @@ public class Tab2 extends Fragment implements View.OnClickListener{
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment Tab1.
      */
     // TODO: Rename and change types and number of parameters
-    public static Tab2 newInstance(String param1, String param2) {
-        Tab2 fragment = new Tab2();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static Tab2 newInstance(Fragment child) {
+        Tab2.child = child;
+        return new Tab2();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
-
-    private ViewGroup test;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        test = container;
-        View root = inflater.inflate(R.layout.fragment_tab2, container, false);
+        View root = inflater.inflate(R.layout.tab2, container, false);
         take_new_test_btn = root.findViewById(R.id.take_new_test_btn);
         take_new_test_btn.setOnClickListener(this);
         return root;
     }
 
-    // onViewCreated is called when onCreateView terminates
+    // onViewCreated is called after onCreateView
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        Fragment childFragment = new Child();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.child_fragment_container, childFragment).commit();
+        transaction.replace(R.id.child_fragment_container, child).commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.messageFromParentFragment(uri);
+        if (listener != null) {
+            listener.onTab2ParentInteraction(uri);
         }
     }
 
     @Override
     public void onClick(View v) {
-
-        if ( v == take_new_test_btn) {
-            Activity a = getActivity();
-
-
-
-            //startActivity(new Intent(Tab2.this, HHearingTest.class));
-
-            //getActivity().beginTransaction()
-            //        .add(((Test)getActivity()).getView().findViewById(R.id.take_new_test_btn).getId(), new HHearingTest()).addToBackStack("").commit();
-        }
-
         if (v == take_new_test_btn){
-            if (getActivity() == null) return;
-            assert getFragmentManager() != null;
-            getFragmentManager().beginTransaction()
-                    .replace(00, new HHearingTest())
-                    .commit();
+            System.out.println("hurray, take new test btn clicked");
         }
-
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+            listener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -139,7 +93,7 @@ public class Tab2 extends Fragment implements View.OnClickListener{
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        listener = null;
     }
 
     /**
@@ -154,6 +108,6 @@ public class Tab2 extends Fragment implements View.OnClickListener{
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void messageFromParentFragment(Uri uri);
+        void onTab2ParentInteraction(Uri uri);
     }
 }
