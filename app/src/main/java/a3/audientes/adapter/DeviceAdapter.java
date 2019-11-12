@@ -1,4 +1,4 @@
-package a3.audientes.adapters;
+package a3.audientes.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

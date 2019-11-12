@@ -11,15 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.HearingProfile"/>
-        <activity android:name=".activities.Main" />
-        <activity android:name=".activities.Launcher" />
-        <activity android:name=".activities.TabActivity">
+        <activity android:name=".activities.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".activities.Main" />
+        <activity android:name=".activities.HearingProfile" />
     </application>
 </manifest>

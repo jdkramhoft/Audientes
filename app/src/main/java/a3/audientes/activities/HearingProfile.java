@@ -18,7 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
-import a3.audientes.adapters.HearingProfileAdapter;
+import a3.audientes.adapter.HearingProfileAdapter;
 import a3.audientes.fragments.Audiogram;
 import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
