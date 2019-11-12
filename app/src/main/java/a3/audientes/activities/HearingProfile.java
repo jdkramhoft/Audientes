@@ -10,12 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import a3.audientes.BoxedVertical;
 import a3.audientes.R;
 import a3.audientes.adapters.HearingProfileAdapter;
 import a3.audientes.fragments.Audiogram;
@@ -26,6 +28,8 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
 
     private final String TAB_1_TITLE = "Modes";
     private final String TAB_2_TITLE = "Hearing Test";
+    private BoxedVertical bv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,34 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
+
+/*
+       // bv = (BoxedVertical)findViewById(R.id.boxed_vertical);
+
+       // bv.setOnBoxedPointsChangeListener(new BoxedVertical.OnValuesChangeListener() {
+            @Override
+            public void onPointsChanged(BoxedVertical boxedPoints, final int points) {
+               // valueTextView.setText("Current Value is " + String.valueOf(points));
+            }
+
+            @Override
+            public void onStartTrackingTouch(BoxedVertical boxedPoints) {
+                Toast.makeText(HearingProfile.this, "onStartTrackingTouch", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(BoxedVertical boxedPoints) {
+                Toast.makeText(HearingProfile.this, "onStopTrackingTouch", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bv.setValue(60);
+
+        System.out.println("VALUE: " + bv.getValue());
+        //valueTextView.setText("Current Valuex is " + String.valueOf(bv.getValue()));
+
+*/
+
     }
 
     @Override
@@ -71,6 +103,21 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         Log.i("TAG", "received communication from child fragment");
     }
 
+
+
+
+    public void setBorder(View v) {
+        int val = Integer.valueOf(v.getTag().toString());
+        bv.setCornerRadius(val);
+        Toast.makeText(HearingProfile.this, "New corner radius is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
+    }
+
+    public void setMax(View v) {
+        int val = Integer.valueOf(v.getTag().toString());
+        bv.setMax(val);
+        Toast.makeText(HearingProfile.this, "New max value is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
+    }
+    //TODO HALP IT WONT BE TRANSPARTEN
     public void setStatusBarTrans(){
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
