@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.material.tabs.TabLayout;
+
 import a3.audientes.R;
 
 
@@ -103,11 +105,9 @@ public class Tab2 extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
 
         if ( v == take_new_test_btn) {
-            Activity f = getActivity();
-            System.out.println("BREAK POOOOOOOINT");
+            Activity a = getActivity();
 
-            //Intent intent = new Intent (this, Tab2.class);
-            //startActivity(intent);
+
 
             //startActivity(new Intent(Tab2.this, HHearingTest.class));
 

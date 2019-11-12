@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import a3.audientes.R;
 import a3.audientes.SliderAdapter;
+import a3.audientes.activities.LaunchActivity;
 
 public class OnboardingActivity extends Fragment implements View.OnClickListener {
 
@@ -83,18 +84,18 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
 
         if (v == mNextBtn){
             if (lastPage){
-                launchHearingTestScreen();
+                launchHHearingTest();
             }
             else {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
             }
         }
         else if (v == mSkipBtn){
-            launchHearingTestScreen();
+            launchHHearingTest();
         }
     }
 
-    private void launchHearingTestScreen(){
+    private void launchHHearingTest(){
         /*
         Utils.saveSharedSetting(OnboardingActivity.this, MainMenu.PREF_USER_FIRST_TIME, "false");
 
@@ -112,10 +113,16 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
                 .addToBackStack(null)
                 .commit();
 
-         */
-        Intent intent = new Intent(getActivity(), Test.class);
-        startActivity(intent);
 
+        Intent intent = new Intent(getActivity(), HHearingTest.class);
+        startActivity(intent);
+        */
+        if (getActivity()==null) return;
+        assert getFragmentManager() != null;
+        getFragmentManager().beginTransaction()
+                .replace(R.id.emptyFrame, new BeginHearingTestActivity() )
+                .addToBackStack(null)
+                .commit();
 
 
     }
@@ -141,6 +148,7 @@ public class OnboardingActivity extends Fragment implements View.OnClickListener
             else if (lastPage){
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText("Start");
+
 
                 /*
                 mSkipBtn.setEnabled(true);
