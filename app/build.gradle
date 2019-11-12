@@ -35,4 +35,11 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.2.0-alpha01'
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' //MVChart
+
+
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
 }
