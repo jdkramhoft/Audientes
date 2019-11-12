@@ -42,6 +42,7 @@ import a3.audientes.R;
 public class SelectModes extends Fragment implements View.OnClickListener {
 
     private static final String ARG_USER_PROGRAMS = "user_programs";
+    private static final String NEW_BUTTON_ID = "newBtn";
 
     private final Map<Button, Program> associator = new HashMap<>();
     private final List<Program> default_programs = new ArrayList<>();
