@@ -4,19 +4,31 @@ import androidx.room.Entity;
 
 @Entity(tableName = "program_table")
 public class Program {
-
+    private String name;
     private int low;
     private int low_plus;
     private int middle;
     private int high;
     private int high_plus;
+    private boolean deletable;
 
-    public Program(int low, int low_plus, int middle, int high, int high_plus) {
+    public Program(String name, int low, int low_plus, int middle, int high, int high_plus) {
+        this.name = name;
         this.low = low;
         this.low_plus = low_plus;
         this.middle = middle;
         this.high = high;
         this.high_plus = high_plus;
+    }
+
+    public Program(String name, int low, int low_plus, int middle, int high, int high_plus, boolean deletable) {
+        this.name = name;
+        this.low = low;
+        this.low_plus = low_plus;
+        this.middle = middle;
+        this.high = high;
+        this.high_plus = high_plus;
+        this.deletable = deletable;
     }
 
     public int getLow() {
@@ -57,5 +69,21 @@ public class Program {
 
     public void setHigh_plus(int high_plus) {
         this.high_plus = high_plus;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isDeletable() {
+        return deletable;
+    }
+
+    public void setDeletable(boolean deletable) {
+        this.deletable = deletable;
     }
 }
