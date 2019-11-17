@@ -28,8 +28,9 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
 
         if (v == hearing_button) {
-            Intent intent = new Intent(this, HearingTest.class);
-            startActivity(intent);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.start_hearing_test_framelayout, new HearingTest())
+                    .addToBackStack(null).commit();
         }
 
     }
