@@ -66,16 +66,16 @@ public class ButtonCreator {
 
     private void setButtonLayout(Button b) {
         TableRow.LayoutParams layoutParams = (TableRow.LayoutParams) b.getLayoutParams();
-        layoutParams.leftMargin = R.dimen.buttonLeftMargin;
-        layoutParams.rightMargin = R.dimen.buttonRightMargin;
-        layoutParams.topMargin = R.dimen.buttonTopMargin;
-        layoutParams.bottomMargin = R.dimen.buttonBottomMargin;
+        layoutParams.leftMargin = (int) root.getContext().getResources().getDimension(R.dimen.buttonLeftMargin);
+        layoutParams.rightMargin = (int) root.getContext().getResources().getDimension(R.dimen.buttonRightMargin);
+        layoutParams.topMargin = (int) root.getContext().getResources().getDimension(R.dimen.buttonTopMargin);
+        layoutParams.bottomMargin = (int) root.getContext().getResources().getDimension(R.dimen.buttonBottomMargin);
         b.setLayoutParams(layoutParams);
     }
 
     private void setRowLayout(TableRow row) {
         TableLayout.LayoutParams layoutParams = (TableLayout.LayoutParams) row.getLayoutParams();
-        layoutParams.leftMargin = R.dimen.rowLeftMargin;
+        layoutParams.leftMargin = (int) root.getContext().getResources().getDimension(R.dimen.rowLeftMargin);
         row.setLayoutParams(layoutParams);
     }
 

@@ -86,6 +86,8 @@ public class Tab1 extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saveInstanceState){
         View root = inflater.inflate(R.layout.fragment_select_modes, container, false);
+        //TableLayout table = root.findViewById(R.id.table);
+        //table.addView(new Button(getContext()));
         createButtonsProgrammatically(root);
         return root;
 
