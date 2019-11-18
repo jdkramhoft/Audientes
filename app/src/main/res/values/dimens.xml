@@ -15,4 +15,5 @@
     <dimen name="buttonRightMargin">10dp</dimen>
     <dimen name="buttonTopMargin">10dp</dimen>
     <dimen name="buttonBottomMargin">10dp</dimen>
+    <dimen name="plusSize">15sp</dimen>
 </resources>

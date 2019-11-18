@@ -80,20 +80,31 @@ public class ButtonCreator {
     }
 
     private Button createButton(Program p) {
-        if(p == null){
-            p = new Program(1337);
-        }
         Button b = new Button(root.getContext());
         b.setOnClickListener(listener);
-        btnProgramMap.put(b, p);
+        if(p != null){
+            btnProgramMap.put(b, p);
+        }
         int height = (int) root.getContext().getResources().getDimension(R.dimen.programHeight);
         int width = (int) root.getContext().getResources().getDimension(R.dimen.programWidth);
         b.setHeight(height);
         b.setWidth(width);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) { //TODO: Get rid of if, and simply update min API
-            b.setBackground(root.getContext().getResources().getDrawable(R.drawable.two_round_two_sharp));
+            if(p == null){
+                b.setBackground(root.getContext().getResources().getDrawable(R.drawable.xml_button_monka_fucking_s));
+            } else {
+                b.setBackground(root.getContext().getResources().getDrawable(R.drawable.two_round_two_sharp));
+            }
         }
-        b.setText(String.valueOf(p.getVolume()));
+        if(p != null){
+            b.setText(String.valueOf(p.getVolume()));
+        } else {
+            b.setText("+");
+            b.setTextSize(root.getContext().getResources().getDimension(R.dimen.plusSize));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                b.setTextColor(root.getContext().getColor(R.color.white));
+            }
+        }
         return b;
     }
 
