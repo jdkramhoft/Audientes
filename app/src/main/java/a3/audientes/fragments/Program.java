@@ -3,6 +3,8 @@ package a3.audientes.fragments;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 /**
  * Currently has dummy content.
  * Class represents a user-defined program
@@ -43,5 +45,10 @@ public class Program implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(volume);
+    }
+
+    @Override @NonNull
+    public String toString(){
+        return "I am a program with volume: " + volume;
     }
 }
