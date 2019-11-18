@@ -130,7 +130,10 @@ public class Tab1 extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Button b = (Button) v;
         Program p = btnProgramMap.get(b);
-        System.out.println("Pressed program: " + p);
+        if(p == null)
+            System.out.println("Should create new program");
+        else
+            System.out.println("Pressed program: " + p);
     }
 
     /**
