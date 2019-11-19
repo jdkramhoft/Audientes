@@ -22,6 +22,18 @@ public class ProgramViewModel extends AndroidViewModel {
         allPrograms = repositoty.getAllPrograms();
     }
 
+    public void Insert(Program program){
+        repositoty.InsertProgram(program);
+    }
+
+    public void Update(Program program){
+        repositoty.UpdateProgram(program);
+    }
+
+    public void Delete(Program program){
+        repositoty.DeleteProgram(program);
+    }
+
     public LiveData<List<Program>> getAllPrograms(){
         return allPrograms;
     }

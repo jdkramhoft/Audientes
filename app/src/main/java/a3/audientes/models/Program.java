@@ -1,9 +1,13 @@
 package a3.audientes.models;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "program_table")
 public class Program {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String name;
     private int low;
     private int low_plus;
@@ -11,15 +15,6 @@ public class Program {
     private int high;
     private int high_plus;
     private boolean deletable;
-
-    public Program(String name, int low, int low_plus, int middle, int high, int high_plus) {
-        this.name = name;
-        this.low = low;
-        this.low_plus = low_plus;
-        this.middle = middle;
-        this.high = high;
-        this.high_plus = high_plus;
-    }
 
     public Program(String name, int low, int low_plus, int middle, int high, int high_plus, boolean deletable) {
         this.name = name;
@@ -85,5 +80,13 @@ public class Program {
 
     public void setDeletable(boolean deletable) {
         this.deletable = deletable;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
