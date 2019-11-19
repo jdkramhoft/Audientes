@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import a3.audientes.adapters.DeviceAdapter;
+import a3.audientes.adapter.DeviceAdapter;
 import a3.audientes.logic.Device;
 import a3.audientes.R;
 
