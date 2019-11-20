@@ -17,9 +17,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import a3.audientes.BoxedVertical;
 import a3.audientes.R;
-import a3.audientes.adapters.HearingProfileAdapter;
+import a3.audientes.adapter.HearingProfileAdapter;
 import a3.audientes.fragments.Audiogram;
 import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
@@ -28,7 +27,7 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
 
     private final String TAB_1_TITLE = "Modes";
     private final String TAB_2_TITLE = "Hearing Test";
-    private BoxedVertical bv;
+    //private BoxedVertical bv;
 
 
     @Override
@@ -80,13 +79,13 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
 
     public void setBorder(View v) {
         int val = Integer.valueOf(v.getTag().toString());
-        bv.setCornerRadius(val);
+        //bv.setCornerRadius(val);
         Toast.makeText(HearingProfile.this, "New corner radius is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
     }
 
     public void setMax(View v) {
         int val = Integer.valueOf(v.getTag().toString());
-        bv.setMax(val);
+        //bv.setMax(val);
         Toast.makeText(HearingProfile.this, "New max value is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
     }
     //TODO HALP IT WONT BE TRANSPARTEN

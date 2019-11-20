@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/lightPurple</item>
-        <item name="colorPrimaryDark">@color/lightDarkerPurple</item>
+        <item name="colorPrimaryDark">@color/darkBlue</item>
         <item name="colorAccent">@color/darkerOrange</item>
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>

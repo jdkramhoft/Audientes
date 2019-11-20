@@ -1,4 +1,4 @@
-package a3.audientes.adapters;
+package a3.audientes.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,12 +11,11 @@ import a3.audientes.fragments.Tab2;
 
 public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
-    private int mNoOfTabs;
+    private int numOfTabs;
 
-    public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs)
-    {
+    public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs) {
         super(fm);
-        this.mNoOfTabs = NumberOfTabs;
+        this.numOfTabs = NumberOfTabs;
     }
 
 
@@ -39,6 +38,14 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mNoOfTabs;
+        return numOfTabs;
+    }
+
+    @Override    public CharSequence getPageTitle(int position) {
+        switch (position){
+            case 0: return "Modes";
+            //case 1: return "Tab 2";
+            default: return "Hearing Test";
+        }
     }
 }
