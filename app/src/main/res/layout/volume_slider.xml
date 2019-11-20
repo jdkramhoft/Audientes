@@ -139,17 +139,18 @@
         android:textColor="#B47800"
         android:textSize="20dp"
         app:backgroundColor="#1E2557"
-        app:defaultImage="@string/BoxedVertical_defaultImage"
-        app:imageEnabled="false"
+        app:defaultImage="@drawable/icon_image_rightear_default"
+        app:defaultValue="50"
+        app:imageEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
-        app:max="100"
-        app:maxImage="@string/BoxedVertical_maxImage"
-        app:min="0"
-        app:minImage="@string/BoxedVertical_minImage"
+        app:max="80"
+        app:maxImage="@drawable/icon_image_rightear_max"
+        app:min="10"
+        app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 
     <a3.audientes.BoxedVertical
@@ -160,11 +161,18 @@
         android:textColor="#BEC3E9"
         android:textSize="20dp"
         app:backgroundColor="#1E2557"
+        app:defaultImage="@drawable/icon_image_rightear_default"
+        app:defaultValue="50"
+        app:imageEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline0"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
+        app:max="80"
+        app:maxImage="@drawable/icon_image_rightear_max"
+        app:min="10"
+        app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 
     <a3.audientes.BoxedVertical
@@ -175,12 +183,18 @@
         android:textColor="#BEC3E9"
         android:textSize="20dp"
         app:backgroundColor="#1E2557"
-        app:defaultImage="@android:string/no"
+        app:defaultImage="@drawable/icon_image_rightear_default"
+        app:defaultValue="50"
+        app:imageEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
+        app:max="80"
+        app:maxImage="@drawable/icon_image_rightear_max"
+        app:min="10"
+        app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
