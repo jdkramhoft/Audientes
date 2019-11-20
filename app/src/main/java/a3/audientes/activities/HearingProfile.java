@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +26,7 @@ import a3.audientes.fragments.Audiogram;
 import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
 
-public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
+public class HearingProfile extends AppCompatActivity implements View.OnClickListener, Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
 
     private final String TAB_1_TITLE = "Modes";
     private final String TAB_2_TITLE = "Hearing Test";
@@ -43,7 +46,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         ViewPager viewPager = findViewById(R.id.pager);
         viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -103,6 +105,7 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         }
     }
 
+
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -114,6 +117,10 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         win.setAttributes(winParams);
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }
 
 

@@ -167,7 +167,7 @@ public class BoxedVertical extends View{
         };
 
         mProgressPaint = new Paint();
-        mProgressPaint.setShader(new LinearGradient(0, 1200, 0, getHeight(), COLLORS[1],COLLORS[0], Shader.TileMode.CLAMP));
+        mProgressPaint.setShader(new LinearGradient(0, 800, 0, getHeight(), COLLORS[1],COLLORS[0], Shader.TileMode.CLAMP));
         mProgressPaint.setColor(progressColor);
         mProgressPaint.setAntiAlias(true);
         mProgressPaint.setStyle(Paint.Style.STROKE);
@@ -208,10 +208,10 @@ public class BoxedVertical extends View{
 
         if (mImageEnabled && mDefaultImage != null && mMinImage != null && mMaxImage != null){
             //If image is enabled, text will not be shown
-            if (mPoints == mMax){
+            if (mPoints >= mMax-10){
                 drawIcon(mMaxImage, canvas);
             }
-            else if (mPoints == mMin){
+            else if (mPoints <= mMin+10){
                 drawIcon(mMinImage, canvas);
             }
             else{

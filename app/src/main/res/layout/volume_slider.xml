@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#0000"
     app:behavior_hideable="false"
     app:behavior_peekHeight="50dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -37,7 +36,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.82" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/botguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -51,14 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline45"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.0" />
+        app:layout_constraintGuide_percent="0.19" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
@@ -75,16 +74,18 @@
         app:layout_constraintGuide_percent="0.85" />
 
     <ImageView
-        android:id="@+id/imageView19"
+        android:id="@+id/bg_image"
         android:layout_width="0dp"
-        android:layout_height="395dp"
-        android:alpha="0.9"
+        android:layout_height="300dp"
         android:adjustViewBounds="false"
         android:src="@drawable/xml_bg_volume"
+        app:layout_constraintBottom_toTopOf="@+id/botguide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <ImageView
         android:id="@+id/speakerIcon"
@@ -95,7 +96,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline0"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="@+id/guideline45" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -147,9 +148,9 @@
         app:layout_constraintStart_toStartOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
-        app:max="80"
+        app:max="100"
         app:maxImage="@drawable/icon_image_rightear_max"
-        app:min="10"
+        app:min="0"
         app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 
@@ -169,9 +170,9 @@
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
-        app:max="80"
+        app:max="100"
         app:maxImage="@drawable/icon_image_rightear_max"
-        app:min="10"
+        app:min="0"
         app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 
@@ -191,9 +192,9 @@
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
-        app:max="80"
+        app:max="100"
         app:maxImage="@drawable/icon_image_rightear_max"
-        app:min="10"
+        app:min="0"
         app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 

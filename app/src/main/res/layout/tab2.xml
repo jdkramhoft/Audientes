@@ -17,6 +17,7 @@
         android:background="@drawable/xml_button_monka_fucking_s"
         android:gravity="center|center_vertical"
         android:text="Take New Test"
+        android:onClick="didTapButton"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20dp"

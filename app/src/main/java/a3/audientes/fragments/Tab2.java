@@ -11,8 +11,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import java.util.Objects;
+
+import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
 
 
@@ -75,6 +80,11 @@ public class Tab2 extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == take_new_test_btn){
+            final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.bounce);
+            MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+            myAnim.setInterpolator(interpolator);
+
+            take_new_test_btn.startAnimation(myAnim);
             System.out.println("hurray, take new test btn clicked");
         }
     }
