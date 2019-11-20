@@ -58,8 +58,9 @@ public class Audiogram extends Fragment {
 
     // TODO: add our colors
     private final int[] colors = new int[] {
-            Color.rgb(30, 176, 97), // green
-            Color.rgb(202, 0, 86)   // red
+            Color.rgb(30, 176, 97),     // green
+            Color.rgb(202, 0, 86),      // red
+            Color.rgb(190, 195, 233)    // purple
 
     };
 
@@ -137,7 +138,7 @@ public class Audiogram extends Fragment {
         yAxis.setSpaceBottom(25f);
         yAxis.setSpaceTop(25f);
         yAxis.setDrawZeroLine(false);
-        yAxis.setTextColor(Color.WHITE);
+        yAxis.setTextColor(colors[2]);
         yAxis.setDrawGridLines(false);
         yAxis.setLabelCount(3, true);
         //yl.setTypeface(tfLight);
@@ -149,7 +150,7 @@ public class Audiogram extends Fragment {
         xAxis.setSpaceMin(100f);
         xAxis.setSpaceMax(100f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextColor(Color.WHITE);
+        xAxis.setTextColor(colors[2]);
         xAxis.setDrawGridLines(false);
         xAxis.setLabelRotationAngle(30);
         xAxis.setLabelCount(5, true);
@@ -161,7 +162,7 @@ public class Audiogram extends Fragment {
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         legend.setDrawInside(false);
-        legend.setTextColor(Color.WHITE);
+        legend.setTextColor(colors[2]);
         legend.setTextSize(15f);
 
         // data
