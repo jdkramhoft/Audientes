@@ -58,34 +58,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
-
-/*
-       // bv = (BoxedVertical)findViewById(R.id.boxed_vertical);
-
-       // bv.setOnBoxedPointsChangeListener(new BoxedVertical.OnValuesChangeListener() {
-            @Override
-            public void onPointsChanged(BoxedVertical boxedPoints, final int points) {
-               // valueTextView.setText("Current Value is " + String.valueOf(points));
-            }
-
-            @Override
-            public void onStartTrackingTouch(BoxedVertical boxedPoints) {
-                Toast.makeText(HearingProfile.this, "onStartTrackingTouch", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStopTrackingTouch(BoxedVertical boxedPoints) {
-                Toast.makeText(HearingProfile.this, "onStopTrackingTouch", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        bv.setValue(60);
-
-        System.out.println("VALUE: " + bv.getValue());
-        //valueTextView.setText("Current Valuex is " + String.valueOf(bv.getValue()));
-
-*/
-
     }
 
     @Override
