@@ -7,12 +7,12 @@ import android.content.SharedPreferences;
  * https://www.sundanesepeople.com/creating-onboarding-screen-android-studio/
  */
 
-public class Utils {
+public class SharedPrefUtil {
 
     private static final String PREFERENCES_FILE = "myPref";
     private Context mContext;
 
-    public Utils(Context context) {
+    public SharedPrefUtil(Context context) {
         this.mContext = context;
     }
 

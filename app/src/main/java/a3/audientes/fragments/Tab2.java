@@ -19,6 +19,7 @@ import java.util.Objects;
 
 import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
+import utils.AnimBtnUtil;
 
 
 /**
@@ -80,11 +81,7 @@ public class Tab2 extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == take_new_test_btn){
-            final Animation myAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.bounce);
-            MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-            myAnim.setInterpolator(interpolator);
-
-            take_new_test_btn.startAnimation(myAnim);
+            AnimBtnUtil.bounce(take_new_test_btn, getActivity());
             System.out.println("hurray, take new test btn clicked");
         }
     }

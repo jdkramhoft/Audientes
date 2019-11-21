@@ -92,7 +92,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
 
     private void launchHearingTestScreen(){
         /*
-        Utils.saveSharedSetting(Onboarding.this, MainMenu.PREF_USER_FIRST_TIME, "false");
+        SharedPrefUtil.saveSharedSetting(Onboarding.this, MainMenu.PREF_USER_FIRST_TIME, "false");
 
         Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
         hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
