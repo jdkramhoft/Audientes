@@ -14,15 +14,17 @@ public class Program {
     private int middle;
     private int high;
     private int high_plus;
+    private int type;
     private boolean deletable;
 
-    public Program(String name, int low, int low_plus, int middle, int high, int high_plus, boolean deletable) {
+    public Program(String name, int low, int low_plus, int middle, int high, int high_plus, int type, boolean deletable) {
         this.name = name;
         this.low = low;
         this.low_plus = low_plus;
         this.middle = middle;
         this.high = high;
         this.high_plus = high_plus;
+        this.type = type;
         this.deletable = deletable;
     }
 
@@ -88,5 +90,13 @@ public class Program {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

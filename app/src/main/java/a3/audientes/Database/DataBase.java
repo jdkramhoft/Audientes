@@ -48,9 +48,9 @@ public abstract class DataBase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            DAO.insertProgram(new Program("Quiet", 10,10,10,10,10, false));
-            DAO.insertProgram(new Program("Home", 15,15,15,15,15, false));
-            DAO.insertProgram(new Program("Load", 25,25,25,25,25, false));
+            DAO.insertProgram(new Program("Quiet", 10,10,10,10,10,2, false));
+            DAO.insertProgram(new Program("Home", 15,15,15,15,15,2, false));
+            DAO.insertProgram(new Program("Load", 25,25,25,25,25,2, false));
             return null;
         }
     }

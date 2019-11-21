@@ -18,4 +18,5 @@
     <string name="BoxedVertical_maxImage">"@drawable/xml_fg_volumelevel"</string>
 
     <string name="addProgramText">+</string>
+    <string name="plus">+</string>
 </resources>
