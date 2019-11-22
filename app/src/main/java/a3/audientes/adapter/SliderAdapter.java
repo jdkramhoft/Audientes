@@ -33,7 +33,6 @@ public class SliderAdapter extends PagerAdapter {
             "Welcome to Audientes",
             "Experts",
             "Let's get started",
-
     };
 
     private String[] slide_descs = {
@@ -42,11 +41,9 @@ public class SliderAdapter extends PagerAdapter {
             "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna"
     };
 
-
     public SliderAdapter(Context context){
         this.context = context;
     }
-
 
     @Override
     public int getCount() {

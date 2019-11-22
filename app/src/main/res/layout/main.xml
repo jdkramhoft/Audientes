@@ -19,9 +19,8 @@
 
     <!-- include bottom sheet -->
     <include
-        layout="@layout/volume_slider"
-
-         />
+        android:id="@+id/slider"
+        layout="@layout/volume_slider" />
 
 
 
