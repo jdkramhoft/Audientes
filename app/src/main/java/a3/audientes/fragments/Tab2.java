@@ -99,7 +99,6 @@ public class Tab2 extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == take_new_test_btn){
-            AnimBtnUtil.bounce(take_new_test_btn, getActivity());
             System.out.println("hurray, take new test btn clicked");
             /*
             Fragment fragment = new test();

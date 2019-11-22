@@ -86,7 +86,6 @@ public class Onboarding extends Fragment implements View.OnClickListener {
             }
             else {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
-                AnimBtnUtil.bounce(mNextBtn, getActivity());
             }
         }
         else if (v == mSkipBtn){
