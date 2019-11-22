@@ -82,6 +82,8 @@ public class HearingTest extends Fragment {
     public void didTapButton(View view) {
 
     }
+    /*
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -98,6 +100,7 @@ public class HearingTest extends Fragment {
         super.onDetach();
         mListener = null;
     }
+    */
 
     /**
      * This interface must be implemented by activities that contain this
