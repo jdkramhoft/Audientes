@@ -16,6 +16,9 @@ import android.widget.TextView;
 import a3.audientes.R;
 import a3.audientes.activities.HearingProfile;
 import a3.audientes.adapter.SliderAdapter;
+import utils.AnimBtnUtil;
+
+import static java.lang.Thread.sleep;
 
 public class Onboarding extends Fragment implements View.OnClickListener {
 
@@ -83,6 +86,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
             }
             else {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
+                AnimBtnUtil.bounce(mNextBtn, getActivity());
             }
         }
         else if (v == mSkipBtn){

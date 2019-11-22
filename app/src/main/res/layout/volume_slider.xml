@@ -140,7 +140,7 @@
         android:textColor="#B47800"
         android:textSize="20dp"
         app:backgroundColor="#1E2557"
-        app:defaultImage="@drawable/icon_image_rightear_default"
+        app:defaultImage="@drawable/icon_image_leftear_default"
         app:defaultValue="50"
         app:imageEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -149,9 +149,9 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
         app:max="100"
-        app:maxImage="@drawable/icon_image_rightear_max"
+        app:maxImage="@drawable/icon_image_leftear_max"
         app:min="0"
-        app:minImage="@drawable/icon_image_rightear_min"
+        app:minImage="@drawable/icon_image_leftear_min"
         app:textEnabled="false" />
 
     <a3.audientes.BoxedVertical
@@ -162,7 +162,9 @@
         android:textColor="#BEC3E9"
         android:textSize="20dp"
         app:backgroundColor="#1E2557"
-        app:defaultImage="@drawable/icon_image_rightear_default"
+        app:defaultImage="@drawable/icon_image_mid_default"
+        app:minImage="@drawable/icon_image_mid_min"
+        app:maxImage="@drawable/icon_image_mid_max"
         app:defaultValue="50"
         app:imageEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -171,9 +173,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
         app:max="100"
-        app:maxImage="@drawable/icon_image_rightear_max"
         app:min="0"
-        app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 
     <a3.audientes.BoxedVertical
@@ -184,7 +184,6 @@
         android:textColor="#BEC3E9"
         android:textSize="20dp"
         app:backgroundColor="#1E2557"
-        app:defaultImage="@drawable/icon_image_rightear_default"
         app:defaultValue="50"
         app:imageEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -193,8 +192,9 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:libCornerRadius="30"
         app:max="100"
-        app:maxImage="@drawable/icon_image_rightear_max"
         app:min="0"
+        app:maxImage="@drawable/icon_image_rightear_max"
+        app:defaultImage="@drawable/icon_image_rightear_default"
         app:minImage="@drawable/icon_image_rightear_min"
         app:textEnabled="false" />
 

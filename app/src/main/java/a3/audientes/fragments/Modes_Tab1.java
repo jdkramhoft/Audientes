@@ -1,25 +1,20 @@
 package a3.audientes.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
@@ -50,13 +45,11 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
-
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
@@ -73,8 +66,9 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.createProgram){
-
         AnimBtnUtil.bounce(v, getActivity());
+        }
+        else{
 
         }
     }
