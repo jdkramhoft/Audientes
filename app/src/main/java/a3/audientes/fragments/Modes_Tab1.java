@@ -1,6 +1,7 @@
 package a3.audientes.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import a3.audientes.EditProgram;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
@@ -73,6 +75,9 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.createProgram){
+
+            Intent intent = new Intent(getActivity(), EditProgram.class);
+            startActivity(intent);
 
         AnimBtnUtil.bounce(v, getActivity());
 
