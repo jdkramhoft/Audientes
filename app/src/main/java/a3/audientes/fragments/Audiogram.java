@@ -106,6 +106,7 @@ public class Audiogram extends Fragment {
         chart = view.findViewById(R.id.chart);
         chart.getDescription().setEnabled(false);
         chart.setViewPortOffsets(100f, 100f, 100f, 100f);
+        chart.setTouchEnabled(false);
 
         // left ear
         LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
