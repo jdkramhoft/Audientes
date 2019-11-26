@@ -18,9 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
+import utils.AnimBtnUtil;
 
 public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
@@ -32,7 +34,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
     private final List<a3.audientes.fragments.Program> user_programs = new ArrayList<>();
 
 
-    private final int ONE_SECONDS = 1000;
+    private final int ONE_SECONDS = 600;
     private View currentBtn;
     private final Handler long_pressed_handler = new Handler();
     private Runnable longPressed = () -> { onLongClick(currentBtn); longClick = true; };
@@ -80,6 +82,8 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
     // Denne metode kaldes når der bliver holdt en knap nede i over 2 sekunder
     private void onLongClick(View v) {
+        AnimBtnUtil.bounceSlow(v, getActivity());
+
         System.out.println("Long click");
         /*
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());

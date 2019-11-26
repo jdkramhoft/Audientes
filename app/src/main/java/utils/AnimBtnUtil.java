@@ -18,4 +18,11 @@ public class AnimBtnUtil {
         myAnim.setInterpolator(interpolator);
         btn.startAnimation(myAnim);
     }
+
+    public static void bounceSlow(View btn, Activity activity) {
+        final Animation myAnim = AnimationUtils.loadAnimation(activity, R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.4, 1);
+        myAnim.setInterpolator(interpolator);
+        btn.startAnimation(myAnim);
+    }
 }
