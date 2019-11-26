@@ -98,6 +98,8 @@ public class Tab2 extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
+
         if (v == take_new_test_btn){
             System.out.println("hurray, take new test btn clicked");
             /*

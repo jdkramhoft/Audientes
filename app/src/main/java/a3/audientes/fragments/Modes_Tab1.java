@@ -1,11 +1,14 @@
 package a3.audientes.fragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -65,6 +68,33 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
+        Button button1 =  (Button)dialogView.findViewById(R.id.button1);
+        Button button2=  (Button)dialogView.findViewById(R.id.button2);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Cancel");
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Yes");
+            }
+        });
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+
         if(v.getId() == R.id.createProgram){
             AnimBtnUtil.bounce(v, getActivity());
         }
