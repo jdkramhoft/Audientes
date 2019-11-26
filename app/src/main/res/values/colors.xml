@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- TODO: give usable color names-->
-
     <!-- General -->
     <color name="white">#FEFEFE</color>
     <color name="lightPurple">#BEC3E9</color>
-    <color name="lightDarkerPurple">#959DD8</color>
+    <color name="lightDarkerPurple">#7934246B</color>
     <color name="deepOrange">#F38888</color>
     <color name="lightGreen">#5DCB9A</color>
     <color name="yellow">#FFD363</color>
@@ -30,6 +28,6 @@
     <color name="orange">#FFA66F</color>
 
     <color name="color_text">@android:color/black</color>
-    <color name="color_progress">#fbfbfb</color>
+    <color name="color_progress">#F38888</color>
     <color name="color_background">#4b4b4b</color>
 </resources>

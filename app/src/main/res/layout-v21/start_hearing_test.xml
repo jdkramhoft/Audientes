@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/start_hearing_test_framelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkBlue"
+    tools:context=".fragments.HearingTest">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageButton
+        android:id="@+id/hearing_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/xml_button_play" />
+
+    <TextView
+        android:id="@+id/running_test_text"
+        android:layout_width="230dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-135dp"
+        android:text="This test will take about 5 minutes. Press the button to start the test."
+        android:textColor="#BEC3E9" />
+
+    <TextView
+        android:id="@+id/hearing_test_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-240dp"
+        android:text="Hearing Test"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp" />
+
+
+</FrameLayout>

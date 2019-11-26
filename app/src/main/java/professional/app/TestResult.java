@@ -16,9 +16,9 @@ public class TestResult extends RealmObject
     public String phone;
     public int age;
     public int gender;
-    public byte left[];
-    public byte right[];
-    public byte freqs[];
+    public byte[] left;
+    public byte[] right;
+    public byte[] freqs;
     public boolean fromHistory;
     public boolean completed;
     public Date date;

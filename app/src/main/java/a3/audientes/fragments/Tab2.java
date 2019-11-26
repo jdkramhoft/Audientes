@@ -1,19 +1,27 @@
 package a3.audientes.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import java.util.Objects;
+
+import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
+import utils.AnimBtnUtil;
 
 
 /**
@@ -72,10 +80,38 @@ public class Tab2 extends Fragment implements View.OnClickListener{
         }
     }
 
+    public static class test extends Fragment {
+        public test() {
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+
+            View view = inflater.inflate(R.layout.start_hearing_test, container,
+                    false);
+
+            return view;
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
         if (v == take_new_test_btn){
             System.out.println("hurray, take new test btn clicked");
+            /*
+            Fragment fragment = new test();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.hearing_button, fragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            */
+
+            Intent intent = new Intent(getActivity(), StartHearingTest.class);
+            startActivity(intent);
+
         }
     }
 

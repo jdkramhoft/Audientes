@@ -16,6 +16,9 @@ import android.widget.TextView;
 import a3.audientes.R;
 import a3.audientes.activities.HearingProfile;
 import a3.audientes.adapter.SliderAdapter;
+import utils.AnimBtnUtil;
+
+import static java.lang.Thread.sleep;
 
 public class Onboarding extends Fragment implements View.OnClickListener {
 
@@ -92,7 +95,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
 
     private void launchHearingTestScreen(){
         /*
-        Utils.saveSharedSetting(Onboarding.this, MainMenu.PREF_USER_FIRST_TIME, "false");
+        SharedPrefUtil.saveSharedSetting(Onboarding.this, MainMenu.PREF_USER_FIRST_TIME, "false");
 
         Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
         hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

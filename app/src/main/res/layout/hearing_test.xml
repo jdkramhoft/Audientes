@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.HearingTest">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/darkBlue"
         android:text="Hearing Test"
         android:textColor="@color/white" />
+
+    <ImageButton
+        android:id="@+id/hearing_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/test_button" />
+
+    <TextView
+        android:id="@+id/running_test_text"
+        android:layout_width="197dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-135dp"
+        android:text="Please press the button every time you hear a sound"
+        android:textColor="#BEC3E9" />
+
+    <TextView
+        android:id="@+id/hearing_test_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-240dp"
+        android:text="Hearing Test"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp" />
 
 
 </FrameLayout>

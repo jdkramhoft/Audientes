@@ -13,5 +13,11 @@
     <string name="alert_dialog_cancel">cancel</string>
     <string name="alert_dialog_ok">Ok</string>
     <string name="alert_dialog_two_buttons_title">Title man</string>
+    <string name="BoxedVertical_defaultImage">"@drawable/xml_fg_volumelevel"</string>
+    <string name="BoxedVertical_minImage">"@drawable/xml_fg_volumelevel"</string>
+    <string name="BoxedVertical_maxImage">"@drawable/xml_fg_volumelevel"</string>
+
     <string name="addProgramText">+</string>
+    <string name="plus">+</string>
+    <string name="connect_device">Connect Device</string>
 </resources>
