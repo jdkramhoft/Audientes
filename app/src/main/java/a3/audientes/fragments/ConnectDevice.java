@@ -38,7 +38,7 @@ public class ConnectDevice extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
         View rod = i.inflate(R.layout.connect_device, container, false);
-
+/*
         RecyclerView recyclerView = rod.findViewById(R.id.devicerecycler);
         mAdapter = new DeviceAdapter(deviceList, this);
 
@@ -50,6 +50,8 @@ public class ConnectDevice extends Fragment implements View.OnClickListener {
         recyclerView.setAdapter(mAdapter);
 
         prepareDevices(NUM_OF_DEVICES);
+
+ */
         return rod;
     }
 

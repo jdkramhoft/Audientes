@@ -66,7 +66,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.createProgram){
-        AnimBtnUtil.bounce(v, getActivity());
+            AnimBtnUtil.bounce(v, getActivity());
         }
         else{
 
