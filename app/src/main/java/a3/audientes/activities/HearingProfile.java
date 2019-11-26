@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,7 +33,7 @@ import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
 import a3.audientes.models.StateManager;
 
-public class HearingProfile extends AppCompatActivity implements View.OnClickListener, Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
+public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
 
     private final String TAB_1_TITLE = "Modes";
     private final String TAB_2_TITLE = "Hearing Test";
@@ -95,6 +96,8 @@ public class HearingProfile extends AppCompatActivity implements View.OnClickLis
 */
 
         //  AlertDialog hearable
+
+        /*
         AlertDialog.Builder builderHearable = new AlertDialog.Builder(this);
         View hearableView = getLayoutInflater().inflate(R.layout.custom_popup_connect_hearable, null);
         Button buttonHearable =  (Button)hearableView.findViewById(R.id.button1);
@@ -108,8 +111,9 @@ public class HearingProfile extends AppCompatActivity implements View.OnClickLis
             }
         });
         hearableDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+         */
         //  AlertDialog bluetooth
+        /*
         AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
         View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_connect_bluetooth, null);
         Button buttonbluetooth =  (Button)bluetoothView.findViewById(R.id.button1);
@@ -147,9 +151,7 @@ public class HearingProfile extends AppCompatActivity implements View.OnClickLis
               }
           }, 2000 );
       }
-
-
-
+         */
     }
 
     @Override
@@ -206,11 +208,6 @@ public class HearingProfile extends AppCompatActivity implements View.OnClickLis
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }
 
