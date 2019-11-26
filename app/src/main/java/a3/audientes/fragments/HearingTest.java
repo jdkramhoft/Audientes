@@ -94,9 +94,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (test++ >= TEST_LENGTH){
-            Intent i = new Intent(getActivity(), HearingProfile.class);
             Objects.requireNonNull(getActivity()).finish();
-            startActivity(i);
         }
         else
             AnimBtnUtil.bounce(v, getActivity());
