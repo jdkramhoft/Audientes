@@ -30,13 +30,14 @@ import a3.audientes.adapter.HearingProfileAdapter;
 import a3.audientes.fragments.Audiogram;
 import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
+import a3.audientes.models.StateManager;
 
 public class HearingProfile extends AppCompatActivity implements View.OnClickListener, Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
 
     private final String TAB_1_TITLE = "Modes";
     private final String TAB_2_TITLE = "Hearing Test";
+    StateManager stateManager = StateManager.getInstance();
     //private BoxedVertical bv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,10 @@ public class HearingProfile extends AppCompatActivity implements View.OnClickLis
         System.out.println("VALUE: " + bv.getValue());
         //valueTextView.setText("Current Valuex is " + String.valueOf(bv.getValue()));
 
-*/      //  AlertDialog hearable
+
+*/
+
+        //  AlertDialog hearable
         AlertDialog.Builder builderHearable = new AlertDialog.Builder(this);
         View hearableView = getLayoutInflater().inflate(R.layout.custom_popup_connect_hearable, null);
         Button buttonHearable =  (Button)hearableView.findViewById(R.id.button1);
@@ -121,23 +125,30 @@ public class HearingProfile extends AppCompatActivity implements View.OnClickLis
         bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
+        if(!stateManager.isHearable()){
+            stateManager.setHearable(true);
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    hearableDialog.show();
+                }
+            }, 1000 );
+
+        }
+
+      if(!stateManager.isBluetooth()){
+          stateManager.setBluetooth(true);
+          new Handler().postDelayed(new Runnable() {
+
+              @Override
+              public void run() {
+                  bluetoothDialog.show();
+              }
+          }, 2000 );
+      }
 
 
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                hearableDialog.show();
-            }
-        }, 1000 );
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                bluetoothDialog.show();
-            }
-        }, 5000 );
 
     }
 
