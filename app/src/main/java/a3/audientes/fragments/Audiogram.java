@@ -29,6 +29,7 @@ import com.github.mikephil.charting.utils.EntryXComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import a3.audientes.R;
 
@@ -47,16 +48,14 @@ public class Audiogram extends Fragment {
 
     // TODO: Rename and change types of parameters
     private OnFragmentInteractionListener mListener;
-    //private byte[] left, right, freqs;
 
-    private static int[][] left = {{500, 30},{1000, 40},{1500, 50},{2000, 60}};
-    private static int[][] right = {{500, 35},{1000, 45},{1500, 55},{2000, 65}};
+    private static int[][] left = {{500, 38},{1000, 40},{1500, 50},{2000, 40},{2500, 60},{3000,58},{3500,50}};
+    private static int[][] right = {{500, 35},{1000, 45},{1500, 38},{2000, 55},{2500, 45},{3000,70},{3500,30}};
     private int[] freqs = {};
     private LineChart chart;
 
     private final String LEFT_EAR_LABEL = "Left Ear", RIGHT_EAR_LABEL = "Right Ear";
 
-    // TODO: add our colors
     private final int[] colors = new int[] {
             Color.rgb(30, 176, 97),     // green
             Color.rgb(202, 0, 86),      // red
@@ -141,7 +140,6 @@ public class Audiogram extends Fragment {
         yAxis.setTextColor(colors[2]);
         yAxis.setDrawGridLines(false);
         yAxis.setLabelCount(3, true);
-        //yl.setTypeface(tfLight);
 
         chart.getAxisRight().setEnabled(false);
 
@@ -154,7 +152,6 @@ public class Audiogram extends Fragment {
         xAxis.setDrawGridLines(false);
         xAxis.setLabelRotationAngle(30);
         xAxis.setLabelCount(5, true);
-        //xl.setTypeface(tfLight);
 
         // modify legend
         Legend legend = chart.getLegend();
@@ -174,7 +171,9 @@ public class Audiogram extends Fragment {
 
         // If animate(...) is called, no further calling of invalidate() is necessary to refresh the chart
         // TODO: Find a way to make chart.animateX() smooth instead of chart animateY();
-        chart.animateY(2000, Easing.EaseInCubic);
+        //chart.animateX(2500, Easing.EaseInCubic);
+        //chart.animateY(2000, Easing.EaseInCubic);
+        chart.animateXY(1500,1200, Easing.EaseInCubic);
 
     }
 
