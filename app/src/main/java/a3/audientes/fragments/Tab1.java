@@ -135,32 +135,6 @@ public class Tab1 extends Fragment implements View.OnClickListener {
         Program p = btnProgramMap.get(b);
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
-        Button button1 =  (Button)dialogView.findViewById(R.id.button1);
-        Button button2=  (Button)dialogView.findViewById(R.id.button2);
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
-
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Cancel");
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Yes");
-            }
-        });
-
-
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-
         if(p == null)
 
             System.out.println("Should create new program");
