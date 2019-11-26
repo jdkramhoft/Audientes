@@ -1,14 +1,13 @@
 package a3.audientes.fragments;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,9 +21,8 @@ import java.util.Map;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
-import utils.AnimBtnUtil;
 
-public class Modes_Tab1 extends Fragment implements View.OnClickListener {
+public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
 
     private List<Program> programList = new ArrayList<>();
@@ -32,6 +30,13 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
     private final Map<Button, a3.audientes.fragments.Program> btnProgramMap = new HashMap<>();
     private final List<a3.audientes.fragments.Program> default_programs = new ArrayList<>();
     private final List<a3.audientes.fragments.Program> user_programs = new ArrayList<>();
+
+
+    private final int ONE_SECONDS = 1000;
+    private View currentBtn;
+    private final Handler long_pressed_handler = new Handler();
+    private Runnable longPressed = () -> { onLongClick(currentBtn); longClick = true; };
+    private boolean longClick;
 
     public Modes_Tab1() {
         // Required empty public constructor
@@ -66,9 +71,17 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
         return rod;
     }
 
-    @Override
-    public void onClick(View v) {
 
+
+    // Denne metode kaldes når der bliver trykket på en knap
+    private void onClick(View view) {
+        System.out.println("short click");
+    }
+
+    // Denne metode kaldes når der bliver holdt en knap nede i over 2 sekunder
+    private void onLongClick(View v) {
+        System.out.println("Long click");
+        /*
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
@@ -101,5 +114,23 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener {
         else{
 
         }
+
+         */
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN) currentBtn = v;
+
+        long_pressed_handler.postDelayed(longPressed, ONE_SECONDS);
+        if(event.getAction() == MotionEvent.ACTION_UP){
+            long_pressed_handler.removeCallbacks(longPressed);
+
+            if(!longClick) onClick(v);
+
+            longClick = false;
+        }
+
+        return false;
     }
 }
