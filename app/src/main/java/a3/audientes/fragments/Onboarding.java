@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 import a3.audientes.R;
 import a3.audientes.activities.HearingProfile;
 import a3.audientes.adapter.SliderAdapter;
@@ -114,6 +116,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
          */
         Intent intent = new Intent(getActivity(), HearingProfile.class);
         startActivity(intent);
+        Objects.requireNonNull(getActivity()).finish();
 
 
 
