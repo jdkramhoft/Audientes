@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -140,7 +137,7 @@ public class Tab1 extends Fragment implements View.OnClickListener {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.custom_popup, null);
+        View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
         Button button1 =  (Button)dialogView.findViewById(R.id.button1);
         Button button2=  (Button)dialogView.findViewById(R.id.button2);
         builder.setView(dialogView);
