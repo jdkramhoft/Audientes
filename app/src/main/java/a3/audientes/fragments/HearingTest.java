@@ -13,7 +13,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import java.util.zip.Inflater;
+
 import a3.audientes.R;
+import utils.AnimBtnUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +26,7 @@ import a3.audientes.R;
  * Use the {@link HearingTest#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HearingTest extends Fragment {
+public class HearingTest extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -70,7 +73,10 @@ public class HearingTest extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.hearing_test, container, false);
+        View rod =  inflater.inflate(R.layout.hearing_test, container, false);
+        rod.findViewById(R.id.hearing_button).setOnClickListener(this);
+
+        return rod;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -79,28 +85,12 @@ public class HearingTest extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-    public void didTapButton(View view) {
-
-    }
-    /*
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onClick(View v) {
+        AnimBtnUtil.bounce(v, getActivity());
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-    */
 
     /**
      * This interface must be implemented by activities that contain this
