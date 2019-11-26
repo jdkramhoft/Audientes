@@ -1,6 +1,7 @@
 package a3.audientes.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,9 +14,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import java.util.Objects;
 import java.util.zip.Inflater;
 
 import a3.audientes.R;
+import a3.audientes.activities.HearingProfile;
 import utils.AnimBtnUtil;
 
 /**
@@ -35,6 +38,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private final int TEST_LENGTH = 1;
+    private int test = 0;
 
     private OnFragmentInteractionListener mListener;
 
@@ -88,7 +93,13 @@ public class HearingTest extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        AnimBtnUtil.bounce(v, getActivity());
+        if (test++ >= TEST_LENGTH){
+            Intent i = new Intent(getActivity(), HearingProfile.class);
+            Objects.requireNonNull(getActivity()).finish();
+            startActivity(i);
+        }
+        else
+            AnimBtnUtil.bounce(v, getActivity());
     }
 
 
