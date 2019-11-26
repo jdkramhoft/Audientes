@@ -1,20 +1,20 @@
 package a3.audientes.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +33,7 @@ import a3.audientes.R;
  */
 public class Tab1 extends Fragment implements View.OnClickListener {
 
+    private Dialog myDialog;
     private static final String ARG_USER_PROGRAMS = "user_programs";
     private static final String NEW_BUTTON_ID = "newBtn";
 
@@ -80,6 +81,7 @@ public class Tab1 extends Fragment implements View.OnClickListener {
             if(saved_instance_user_programs != null)
                 user_programs.addAll(saved_instance_user_programs);
         }
+
         getView();
     }
 
@@ -90,14 +92,12 @@ public class Tab1 extends Fragment implements View.OnClickListener {
         //table.addView(new Button(getContext()));
         createButtonsProgrammatically(root);
         return root;
-
     }
 
     private void createButtonsProgrammatically(View root) {
         List<Program> allPrograms = new ArrayList<>();
         allPrograms.addAll(default_programs);
         allPrograms.addAll(user_programs);
-
         ButtonCreator bc = new ButtonCreator(root, btnProgramMap, this);
         bc.createButtonsFromPrograms(allPrograms);
     }
@@ -108,6 +108,9 @@ public class Tab1 extends Fragment implements View.OnClickListener {
             listener.onTab1Interaction(uri);
         }
     }
+
+
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -130,7 +133,10 @@ public class Tab1 extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Button b = (Button) v;
         Program p = btnProgramMap.get(b);
+
+
         if(p == null)
+
             System.out.println("Should create new program");
         else
             System.out.println("Pressed program: " + p);

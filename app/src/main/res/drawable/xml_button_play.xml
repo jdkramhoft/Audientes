@@ -1,41 +1,6 @@
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:attr/colorControlHighlight">
-  <item>
-    <vector xmlns:aapt="http://schemas.android.com/aapt"
-        android:width="228dp"
-        android:height="228dp"
-        android:viewportWidth="228"
-        android:viewportHeight="228"
-        android:elevation="4dp">
-      <path
-          android:pathData="M114,113m107.982,1.983a108,108 0,1 1,-215.964 -3.966a108,108 0,1 1,215.964 3.966">
-        <aapt:attr name="android:fillColor">
-          <gradient
-              android:startY="244.96959"
-              android:startX="-22.25691"
-              android:endY="89.30405"
-              android:endX="341.01932"
-              android:type="linear">
-            <item android:offset="0" android:color="#FFFFBA69"/>
-            <item android:offset="0.591403" android:color="#FFFF6785"/>
-            <item android:offset="1" android:color="#FFFF3696"/>
-          </gradient>
-        </aapt:attr>
-      </path>
-      <path
-          android:pathData="M114.606,112.606m82.027,1.506a82.041,82.041 46.052,1 1,-164.054 -3.013a82.041,82.041 46.052,1 1,164.054 3.013"
-          android:strokeWidth="8"
-          android:fillColor="#00000000"
-          android:strokeColor="#F2F2F2"/>
-      <path
-          android:pathData="M141.109,111.236C142.179,112.036 142.179,113.639 141.109,114.439L94.682,149.171C93.156,150.313 91.049,148.875 91.556,147.038L100.853,113.369C100.949,113.021 100.949,112.653 100.853,112.305L91.556,78.637C91.049,76.799 93.156,75.361 94.682,76.503L141.109,111.236Z"
-          android:fillColor="#FEFEFE"/>
-      <path
-          android:pathData="M139.911,112.837L93.484,147.57L102.781,113.902C102.973,113.205 102.973,112.469 102.781,111.773L93.484,78.104L139.911,112.837Z"
-          android:strokeWidth="4"
-          android:fillColor="#00000000"
-          android:strokeColor="#FEFEFE"/>
-    </vector>
-  </item>
+    <item android:drawable="@drawable/image_button_play" />
+
 </ripple>

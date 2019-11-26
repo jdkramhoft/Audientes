@@ -2,19 +2,24 @@ package a3.audientes.activities;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -25,13 +30,14 @@ import a3.audientes.adapter.HearingProfileAdapter;
 import a3.audientes.fragments.Audiogram;
 import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
+import a3.audientes.models.StateManager;
 
 public class HearingProfile extends AppCompatActivity implements View.OnClickListener, Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
 
     private final String TAB_1_TITLE = "Modes";
     private final String TAB_2_TITLE = "Hearing Test";
+    StateManager stateManager = StateManager.getInstance();
     //private BoxedVertical bv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,91 @@ public class HearingProfile extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
+
+/*
+       // bv = (BoxedVertical)findViewById(R.id.boxed_vertical);
+
+       // bv.setOnBoxedPointsChangeListener(new BoxedVertical.OnValuesChangeListener() {
+            @Override
+            public void onPointsChanged(BoxedVertical boxedPoints, final int points) {
+               // valueTextView.setText("Current Value is " + String.valueOf(points));
+            }
+
+            @Override
+            public void onStartTrackingTouch(BoxedVertical boxedPoints) {
+                Toast.makeText(HearingProfile.this, "onStartTrackingTouch", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(BoxedVertical boxedPoints) {
+                Toast.makeText(HearingProfile.this, "onStopTrackingTouch", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bv.setValue(60);
+
+        System.out.println("VALUE: " + bv.getValue());
+        //valueTextView.setText("Current Valuex is " + String.valueOf(bv.getValue()));
+
+
+*/
+
+        //  AlertDialog hearable
+        AlertDialog.Builder builderHearable = new AlertDialog.Builder(this);
+        View hearableView = getLayoutInflater().inflate(R.layout.custom_popup_connect_hearable, null);
+        Button buttonHearable =  (Button)hearableView.findViewById(R.id.button1);
+        builderHearable.setView(hearableView);
+        AlertDialog hearableDialog = builderHearable.create();
+
+        buttonHearable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Connect");
+            }
+        });
+        hearableDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //  AlertDialog bluetooth
+        AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
+        View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_connect_bluetooth, null);
+        Button buttonbluetooth =  (Button)bluetoothView.findViewById(R.id.button1);
+        builderbluetooth.setView(bluetoothView);
+        AlertDialog bluetoothDialog = builderbluetooth.create();
+
+        buttonbluetooth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Connect");
+            }
+        });
+        bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        if(!stateManager.isHearable()){
+            stateManager.setHearable(true);
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    hearableDialog.show();
+                }
+            }, 1000 );
+
+        }
+
+      if(!stateManager.isBluetooth()){
+          stateManager.setBluetooth(true);
+          new Handler().postDelayed(new Runnable() {
+
+              @Override
+              public void run() {
+                  bluetoothDialog.show();
+              }
+          }, 2000 );
+      }
+
+
+
     }
 
     @Override
