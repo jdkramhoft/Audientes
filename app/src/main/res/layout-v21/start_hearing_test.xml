@@ -13,6 +13,7 @@
         android:id="@+id/hearing_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="143dp"
         android:background="#00FFFFFF"
         android:src="@drawable/xml_button_play"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,24 +23,27 @@
 
     <TextView
         android:id="@+id/running_test_text"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_width="322dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="74dp"
+        android:gravity="center"
         android:text="This test will take about 5 minutes. Press the button to start the test."
         android:textColor="#BEC3E9"
         app:layout_constraintBottom_toTopOf="@+id/hearing_button"
-        app:layout_constraintEnd_toEndOf="@+id/hearing_test_title"
-        app:layout_constraintStart_toStartOf="@+id/hearing_test_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hearing_test_title" />
 
     <TextView
         android:id="@+id/hearing_test_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="56dp"
         android:text="Hearing Test"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/running_test_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
