@@ -1,7 +1,10 @@
 package a3.audientes.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -20,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import a3.audientes.EditProgram;
 import a3.audientes.MyBounceInterpolator;
@@ -90,6 +94,8 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
         if (createBtn){
             System.out.println("+");
+            Intent intent = new Intent(getActivity(), EditProgram.class);
+            startActivity(intent);
             // TODO: ADD NEW PROGRAM
         }
         else if (deleteBtn){
@@ -124,48 +130,23 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
     private void onLongClick(View v) {
         System.out.println("Long click");
         AnimBtnUtil.bounceSlow(v, getActivity());
-        // TODO: PLEASE FIX WHAT IS HAPPENING
-        /*
-        Intent intent = new Intent(getActivity(), EditProgram.class);
-        startActivity(intent);
-        */
-        /*
+
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
-        Button button1 =  (Button)dialogView.findViewById(R.id.button1);
-        Button button2=  (Button)dialogView.findViewById(R.id.button2);
+        Button button1 = dialogView.findViewById(R.id.button1);
+        Button button2 = dialogView.findViewById(R.id.button2);
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
 
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Cancel");
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Yes");
-            }
+        button1.setOnClickListener(v12 -> dialog.dismiss());
+        button2.setOnClickListener(v1 -> {
+            startActivity(new Intent(getActivity(), EditProgram.class));
+            dialog.dismiss();
         });
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
-
-
-        if(v.getId() == R.id.createProgram){
-
-            Intent intent = new Intent(getActivity(), EditProgram.class);
-            startActivity(intent);
-
-        AnimBtnUtil.bounce(v, getActivity());
-
-        }
-
-         */
     }
 
     @Override
