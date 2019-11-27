@@ -30,7 +30,7 @@
             app:layout_constraintGuide_percent="0.96" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/program_bg_id"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="fitXY"
