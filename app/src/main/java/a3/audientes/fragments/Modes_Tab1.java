@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -18,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
@@ -32,10 +32,11 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
     private final Map<Button, a3.audientes.fragments.Program> btnProgramMap = new HashMap<>();
     private final List<a3.audientes.fragments.Program> default_programs = new ArrayList<>();
     private final List<a3.audientes.fragments.Program> user_programs = new ArrayList<>();
+    private final int DEFAULT_PROGRAMS = 4;
 
 
-    private final int ONE_SECONDS = 600;
-    private View currentBtn;
+    private final int RESPONSE_ON_LONG_CLICK_IN_MS = 600;
+    private View currentBtn, prevBtn;
     private final Handler long_pressed_handler = new Handler();
     private Runnable longPressed = () -> { onLongClick(currentBtn); longClick = true; };
     private boolean longClick;
@@ -55,11 +56,17 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
+        Program p;
+        for (int defaultProgram = 1; defaultProgram <= DEFAULT_PROGRAMS; defaultProgram++){
+            p = new Program("test"+defaultProgram,1,1,1,1,1,1,false);
+            p.setId(defaultProgram);
+            programList.add(p);
+        }
+        p = new Program("test5",1,1,1,1,1,2,false);
+        p.setId(5);
+        programList.add(p);
+        p = new a3.audientes.models.Program("+",1,1,1,1,1,3,false);
+        programList.add(p);
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
@@ -73,10 +80,39 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         return rod;
     }
 
-
-
     // Denne metode kaldes når der bliver trykket på en knap
     private void onClick(View view) {
+        boolean createBtn = view.getId() == 0, deleteBtn = view.getId() == R.id.canceltext;
+
+        if (createBtn){
+            System.out.println("+");
+            // TODO: ADD NEW PROGRAM
+        }
+        else if (deleteBtn){
+            System.out.println("x");
+        }
+        else {
+            ImageView imageView;
+            if (prevBtn != null) {
+                imageView = prevBtn.findViewById(R.id.program_bg_id);
+
+                // restore normal program layout
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
+
+
+                // TODO: make sure prev program is deleteable if not a default program
+                //       findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
+            }
+
+            imageView = view.findViewById(R.id.program_bg_id);
+
+            // visuals when program is selected
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.icon_image_leftear_max, null));
+            //view.findViewById(R.id.canceltext).setVisibility(View.GONE);
+
+            prevBtn = view;
+        }
+
         System.out.println("short click");
     }
 
@@ -126,7 +162,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN) currentBtn = v;
 
-        long_pressed_handler.postDelayed(longPressed, ONE_SECONDS);
+        long_pressed_handler.postDelayed(longPressed, RESPONSE_ON_LONG_CLICK_IN_MS);
         if(event.getAction() == MotionEvent.ACTION_UP){
             long_pressed_handler.removeCallbacks(longPressed);
 
