@@ -40,8 +40,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     StateManager stateManager = StateManager.getInstance();
     //private BoxedVertical bv;
 
-    //testtest
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
