@@ -1,14 +1,8 @@
 package a3.audientes.fragments;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,10 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import a3.audientes.EditProgram;
-import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
@@ -43,7 +35,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     private final int DEFAULT_PROGRAMS = 4;
 
 
-    private View addbtn, mbtn1, mbtn2, mbtn3, mbtn4, prevBtn;
+    private View addBtn, mbtn1, mbtn2, mbtn3, mbtn4, prevProgram;
 
     public Modes_Tab1() {
         // Required empty public constructor
@@ -66,11 +58,9 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         Program p;
         for (int defaultProgram = 1; defaultProgram <= DEFAULT_PROGRAMS; defaultProgram++){
             p = new Program("test"+defaultProgram,1,1,1,1,1,1,false);
-            p.setId(defaultProgram);
             programList.add(p);
         }
         p = new Program("test5",1,1,1,1,1,2,false);
-        p.setId(5);
         programList.add(p);
 
 
@@ -82,49 +72,48 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     }
 
     @Override
-    public void onClick(View view) {
-        boolean createBtn = view == addbtn;
-        boolean deletebtn = view.getId() == R.id.canceltext;
-
-        if (createBtn){
-            System.out.println("+");
+    public void onClick(View v) {
+        if (v == addBtn){
+            // TODO: send program data to be edited with activity
             Intent intent = new Intent(getActivity(), EditProgram.class);
             startActivity(intent);
-            // TODO: ADD NEW PROGRAM
-        }
-        else if(deletebtn){
-            System.out.println("x");
         }
         else {
             ImageView imageView;
-            if (prevBtn != null) {
-                imageView = prevBtn.findViewById(R.id.program_bg_id);
+            if (prevProgram != null) {
+                // restore prev program layout
+                imageView = prevProgram.findViewById(R.id.program_bg_id);
 
-                // restore normal program layout
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
-
-
-                // TODO: make sure prev program is deleteable if not a default program
-                //       findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
+                if (isProgramDefault(prevProgram)) setDefaultLayout(prevProgram, imageView);
+                else {
+                    prevProgram.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
+                }
             }
 
-            imageView = view.findViewById(R.id.program_bg_id);
+            // set layout when program is selected
+            imageView = v.findViewById(R.id.program_bg_id);
 
-            // visuals when program is selected
+            if (isProgramDefault(v)) setDefaultLayout(v, imageView);
+            else v.findViewById(R.id.canceltext).setVisibility(View.GONE);
+
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.icon_image_leftear_max, null));
-            //view.findViewById(R.id.canceltext).setVisibility(View.GONE);
 
-            prevBtn = view;
+            prevProgram = v;
         }
-
-        System.out.println("short click");
     }
 
     @Override
     public boolean onLongClick(View v) {
         System.out.println("Long click");
-        AnimBtnUtil.bounceSlow(v, getActivity());
-        startActivity(new Intent(getActivity(), EditProgram.class));
+        if (v.getId() != R.id.canceltext){
+            AnimBtnUtil.bounceSlow(v, getActivity());
+            startActivity(new Intent(getActivity(), EditProgram.class));
+            // TODO: send program data to be edited with activity
+        }
+        else {
+            // TODO: delete program
+        }
 
         /*
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
@@ -149,19 +138,19 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     }
 
     public void setupbuttons(View rod){
-        addbtn = rod.findViewById(R.id.addprogram_btn);
+        addBtn = rod.findViewById(R.id.addprogram_btn);
         mbtn1 = rod.findViewById(R.id.mainbtn1);
         mbtn2 = rod.findViewById(R.id.mainbtn2);
         mbtn3 = rod.findViewById(R.id.mainbtn3);
         mbtn4 = rod.findViewById(R.id.mainbtn4);
 
-        addbtn.setOnClickListener(this);
+        addBtn.setOnClickListener(this);
         mbtn1.setOnClickListener(this);
         mbtn2.setOnClickListener(this);
         mbtn3.setOnClickListener(this);
         mbtn4.setOnClickListener(this);
 
-        addbtn.setOnLongClickListener(this);
+        //addBtn.setOnLongClickListener(this);
         mbtn1.setOnLongClickListener(this);
         mbtn2.setOnLongClickListener(this);
         mbtn3.setOnLongClickListener(this);
@@ -184,6 +173,17 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
 
+    }
+
+    private void setDefaultLayout(View v, ImageView imageView) {
+        if (v == mbtn1) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_upleft, null));
+        else if (v == mbtn2) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_upright, null));
+        else if (v == mbtn3) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_botleft, null));
+        else if (v == mbtn4) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_botright, null));
+    }
+
+    private boolean isProgramDefault(View v) {
+        return v == mbtn1 || v == mbtn2 || v == mbtn3 || v == mbtn4;
     }
 
 }
