@@ -20,4 +20,7 @@
     <string name="addProgramText">+</string>
     <string name="plus">+</string>
     <string name="connect_device">Connect Device</string>
+    <string name="home_btn">Home</string>
+    <string name="loud_btn">Loud</string>
+    <string name="quiet_btn">Quiet</string>
 </resources>

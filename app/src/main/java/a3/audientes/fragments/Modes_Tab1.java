@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
@@ -35,7 +34,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
 
     private final int ONE_SECONDS = 600;
-    private View currentBtn;
+    private View currentBtn, addbtn, mbtn1, mbtn2, mbtn3, mbtn4;
     private final Handler long_pressed_handler = new Handler();
     private Runnable longPressed = () -> { onLongClick(currentBtn); longClick = true; };
     private boolean longClick;
@@ -55,20 +54,13 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
+
+        //TODO for testing only
+        addfakelist();
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
-        RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
-        mAdapter = new ProgramAdapter(programList, this, getActivity());
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+        setupbuttons(rod);
+        setupRecyclerView(rod);
 
         return rod;
     }
@@ -136,5 +128,36 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         }
 
         return false;
+    }
+
+    public void setupbuttons(View rod){
+        addbtn = rod.findViewById(R.id.addprogram_btn);
+        mbtn1 = rod.findViewById(R.id.mainbtn1);
+        mbtn2 = rod.findViewById(R.id.mainbtn2);
+        mbtn3 = rod.findViewById(R.id.mainbtn3);
+        mbtn4 = rod.findViewById(R.id.mainbtn4);
+
+        addbtn.setOnTouchListener(this);
+        mbtn1.setOnTouchListener(this);
+        mbtn2.setOnTouchListener(this);
+        mbtn3.setOnTouchListener(this);
+        mbtn4.setOnTouchListener(this);
+
+    }
+    public void setupRecyclerView(View rod){
+        RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
+        mAdapter = new ProgramAdapter(programList, this, getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+    }
+    public void addfakelist(){
+        programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
+        programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
+        programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
+        programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
+        programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
+
     }
 }
