@@ -68,15 +68,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
         //TODO for testing only
         addfakelist();
-        Program p;
-        for (int defaultProgram = 1; defaultProgram <= DEFAULT_PROGRAMS; defaultProgram++){
-            p = new Program("test"+defaultProgram,1,1,1,1,1,1,false);
-            p.setId(defaultProgram);
-            programList.add(p);
-        }
-        p = new Program("test5",1,1,1,1,1,2,false);
-        p.setId(5);
-        programList.add(p);
+
 
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
@@ -193,11 +185,15 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         recyclerView.setAdapter(mAdapter);
     }
     public void addfakelist(){
-        programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
+        Program p;
+        for (int defaultProgram = 1; defaultProgram <= DEFAULT_PROGRAMS; defaultProgram++){
+            p = new Program("test"+defaultProgram,1,1,1,1,1,1,false);
+            p.setId(defaultProgram);
+            programList.add(p);
+        }
+        p = new Program("test5",1,1,1,1,1,2,false);
+        p.setId(5);
+        programList.add(p);
 
     }
 }

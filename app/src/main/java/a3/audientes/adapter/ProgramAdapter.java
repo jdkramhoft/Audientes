@@ -24,6 +24,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
     private final View.OnTouchListener onTouch;
     private Context mcontext;
     private Activity mactivity;
+    int counter = 0;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
@@ -45,15 +46,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
     @Override @NonNull
     public a3.audientes.adapter.ProgramAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         boolean btnIsCreateProgram = viewType == 3, btnIsNotDeleteable = viewType != 2;
-        View itemView;
-
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-        itemView.findViewById(R.id.canceltext).setOnTouchListener(onTouch);
-
-
-        itemView.setOnTouchListener(onTouch);
-        itemView.setOnLongClickListener(v -> true);
-
+        View itemView = setLayout(parent);
        return new a3.audientes.adapter.ProgramAdapter.MyViewHolder(itemView);
     }
 
@@ -75,5 +68,37 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
         return programList.size();
     }
 
+    View setLayout(ViewGroup parent){
+        View itemView;
+        if(counter == 0){
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_upleft, parent, false) ;
+
+        }
+        else if(counter == 1){
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_upright, parent, false) ;
+
+        }
+        else if(counter == programList.size()-1){
+            if(programList.size()%2 == 0){
+                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botright, parent, false) ;
+
+            }
+            else{
+                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botleft, parent, false) ;
+            }
+        }
+        else{
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+            itemView.findViewById(R.id.canceltext).setOnTouchListener(onTouch);
+
+        }
+        counter++;
+
+
+
+        itemView.setOnTouchListener(onTouch);
+        itemView.setOnLongClickListener(v -> true);
+        return itemView;
+    }
 }
 
