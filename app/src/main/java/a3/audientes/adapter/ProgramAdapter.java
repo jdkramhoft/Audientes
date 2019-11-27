@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +20,8 @@ import a3.audientes.models.Program;
 public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.ProgramAdapter.MyViewHolder> {
 
     private final List<Program> programList;
-    private final View.OnTouchListener onTouch;
+    private final View.OnClickListener onClick;
+    private final View.OnLongClickListener onLongClick;
     private Context mcontext;
     private Activity mactivity;
 
@@ -35,25 +35,24 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
         }
     }
 
-    public ProgramAdapter(@NonNull List<Program> programList, @Nullable View.OnTouchListener onTouch, Activity mactivity) {
+    public ProgramAdapter(@NonNull List<Program> programList, @Nullable View.OnClickListener onClick, @Nullable View.OnLongClickListener onLongClick, Activity mactivity) {
         this.programList = programList;
-        this.onTouch = onTouch;
+        this.onClick = onClick;
+        this.onLongClick = onLongClick;
         this.mactivity = mactivity;
         mcontext= mactivity.getBaseContext();
     }
 
     @Override @NonNull
     public a3.audientes.adapter.ProgramAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        boolean btnIsCreateProgram = viewType == 3, btnIsNotDeleteable = viewType != 2;
         View itemView;
 
         itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-        itemView.findViewById(R.id.canceltext).setOnTouchListener(onTouch);
+        itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
 
 
-        itemView.setOnTouchListener(onTouch);
-        itemView.setOnLongClickListener(v -> true);
-
+        itemView.setOnClickListener(onClick);
+        itemView.setOnLongClickListener(onLongClick);
        return new a3.audientes.adapter.ProgramAdapter.MyViewHolder(itemView);
     }
 

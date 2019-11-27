@@ -32,7 +32,7 @@ import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
 import utils.AnimBtnUtil;
 
-public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
+public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
 
     private List<Program> programList = new ArrayList<>();
@@ -43,12 +43,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
     private final int DEFAULT_PROGRAMS = 4;
 
 
-    private final int ONE_SECONDS = 600;
-    private View currentBtn, addbtn, mbtn1, mbtn2, mbtn3, mbtn4, prevBtn;
-    private final int RESPONSE_ON_LONG_CLICK_IN_MS = 600;
-    private final Handler long_pressed_handler = new Handler();
-    private Runnable longPressed = () -> { onLongClick(currentBtn); longClick = true; };
-    private boolean longClick;
+    private View addbtn, mbtn1, mbtn2, mbtn3, mbtn4, prevBtn;
 
     public Modes_Tab1() {
         // Required empty public constructor
@@ -86,8 +81,8 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         return rod;
     }
 
-    // Denne metode kaldes når der bliver trykket på en knap
-    private void onClick(View view) {
+    @Override
+    public void onClick(View view) {
         boolean createBtn = view == addbtn;
         boolean deletebtn = view.getId() == R.id.canceltext;
 
@@ -125,11 +120,13 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         System.out.println("short click");
     }
 
-    // Denne metode kaldes når der bliver holdt en knap nede i over 2 sekunder
-    private void onLongClick(View v) {
+    @Override
+    public boolean onLongClick(View v) {
         System.out.println("Long click");
         AnimBtnUtil.bounceSlow(v, getActivity());
+        startActivity(new Intent(getActivity(), EditProgram.class));
 
+        /*
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
@@ -146,22 +143,9 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
-    }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN) currentBtn = v;
-
-        long_pressed_handler.postDelayed(longPressed, RESPONSE_ON_LONG_CLICK_IN_MS);
-        if(event.getAction() == MotionEvent.ACTION_UP){
-            long_pressed_handler.removeCallbacks(longPressed);
-
-            if(!longClick) onClick(v);
-
-            longClick = false;
-        }
-
-        return false;
+         */
+        return true;
     }
 
     public void setupbuttons(View rod){
@@ -171,27 +155,28 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         mbtn3 = rod.findViewById(R.id.mainbtn3);
         mbtn4 = rod.findViewById(R.id.mainbtn4);
 
-        addbtn.setOnTouchListener(this);
-        mbtn1.setOnTouchListener(this);
-        mbtn2.setOnTouchListener(this);
-        mbtn3.setOnTouchListener(this);
-        mbtn4.setOnTouchListener(this);
+        addbtn.setOnClickListener(this);
+        mbtn1.setOnClickListener(this);
+        mbtn2.setOnClickListener(this);
+        mbtn3.setOnClickListener(this);
+        mbtn4.setOnClickListener(this);
 
-        addbtn.setOnLongClickListener(v -> true);
-        mbtn1.setOnLongClickListener(v -> true);
-        mbtn2.setOnLongClickListener(v -> true);
-        mbtn3.setOnLongClickListener(v -> true);
-        mbtn4.setOnLongClickListener(v -> true);
+        addbtn.setOnLongClickListener(this);
+        mbtn1.setOnLongClickListener(this);
+        mbtn2.setOnLongClickListener(this);
+        mbtn3.setOnLongClickListener(this);
+        mbtn4.setOnLongClickListener(this);
 
     }
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
-        mAdapter = new ProgramAdapter(programList, this, getActivity());
+        mAdapter = new ProgramAdapter(programList, this, this, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
     }
+
     public void addfakelist(){
         programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
@@ -200,4 +185,5 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
 
     }
+
 }
