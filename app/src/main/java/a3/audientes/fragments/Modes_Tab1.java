@@ -1,5 +1,7 @@
 package a3.audientes.fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -19,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import a3.audientes.EditProgram;
+import a3.audientes.MyBounceInterpolator;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
@@ -118,6 +122,8 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
     // Denne metode kaldes når der bliver holdt en knap nede i over 2 sekunder
     private void onLongClick(View v) {
+        Intent intent = new Intent(getActivity(), EditProgram.class);
+        startActivity(intent);
         AnimBtnUtil.bounceSlow(v, getActivity());
 
         System.out.println("Long click");
@@ -149,9 +155,11 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
 
         if(v.getId() == R.id.createProgram){
-            AnimBtnUtil.bounce(v, getActivity());
-        }
-        else{
+
+            Intent intent = new Intent(getActivity(), EditProgram.class);
+            startActivity(intent);
+
+        AnimBtnUtil.bounce(v, getActivity());
 
         }
 

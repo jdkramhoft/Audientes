@@ -1,6 +1,7 @@
 package a3.audientes.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import a3.audientes.EditProgram;
 import a3.audientes.R;
 
 /**
@@ -135,12 +137,18 @@ public class Tab1 extends Fragment implements View.OnClickListener {
         Program p = btnProgramMap.get(b);
 
 
-        if(p == null)
 
+        if(p == null)
             System.out.println("Should create new program");
-        else
+        else {
+            Intent intent = new Intent(getActivity(), EditProgram.class);
+            startActivity(intent);
             System.out.println("Pressed program: " + p);
+        }
+        System.out.println(p.toString());
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
