@@ -8,14 +8,14 @@ public interface IHearable {
 
     /**
      * Initialize possibly necessary variables.
-     * Call until true returned once before using hearable.
+     * Call until true returned once before using icon_hearable.
      * @return true on success
      */
     public boolean initToWinIt();
 
 
     /**
-     * Pairs phone with nearby audientes hearable
+     * Pairs phone with nearby audientes icon_hearable
      * Assumes necessary permissions have been granted to app.
      * Current simulation requires location permission.
      * @return true on success
@@ -27,7 +27,7 @@ public interface IHearable {
      * Something like this is necessary as bluetooth connections can time out or disconnect.
      * Hearable sim times out every so often.
      * Not entirely sure how to implement/how the reconnecting that happens works.
-     * @return true if paired with audientes hearable
+     * @return true if paired with audientes icon_hearable
      */
     public boolean isPaired();
 

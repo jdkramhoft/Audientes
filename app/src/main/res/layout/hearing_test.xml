@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkBlue"
     tools:context=".fragments.HearingTest">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/darkBlue"
-        android:text="Hearing Test"
-        android:textColor="@color/white" />
-
     <ImageButton
         android:id="@+id/hearing_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginBottom="143dp"
         android:background="#00FFFFFF"
-        android:src="@drawable/test_button" />
+        android:src="@drawable/xml_button_sound"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/running_test_text" />
 
     <TextView
         android:id="@+id/running_test_text"
-        android:layout_width="197dp"
-        android:layout_height="63dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="-135dp"
+        android:layout_width="322dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="74dp"
+        android:gravity="center"
         android:text="Please press the button every time you hear a sound"
-        android:textColor="#BEC3E9" />
+        android:textColor="#BEC3E9"
+        app:layout_constraintBottom_toTopOf="@+id/hearing_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hearing_test_title" />
 
     <TextView
         android:id="@+id/hearing_test_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="-240dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="56dp"
         android:text="Hearing Test"
         android:textColor="#FFFFFF"
-        android:textSize="26sp" />
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/running_test_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

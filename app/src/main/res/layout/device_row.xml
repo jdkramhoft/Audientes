@@ -21,5 +21,4 @@ android:orientation="vertical">
         android:textStyle="normal"
         android:visibility="visible" />
 
-
 </RelativeLayout>
