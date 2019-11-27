@@ -79,6 +79,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_upright, parent, false) ;
 
         }
+
         else if(counter == programList.size()-1){
             if(programList.size()%2 == 0){
                 itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botright, parent, false) ;
@@ -88,17 +89,26 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
                 itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botleft, parent, false) ;
             }
         }
+        else if(counter == programList.size()-2){
+            if(programList.size()%2 == 0){
+                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botleft, parent, false) ;
+            }
+            else{
+                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+            }
+        }
         else{
+
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-            itemView.findViewById(R.id.canceltext).setOnTouchListener(onTouch);
+            itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
+            itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
 
         }
         counter++;
+        itemView.setOnClickListener(onClick);
+        itemView.setOnLongClickListener(onLongClick);
 
 
-
-        itemView.setOnTouchListener(onTouch);
-        itemView.setOnLongClickListener(v -> true);
         return itemView;
     }
 }

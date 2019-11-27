@@ -179,6 +179,9 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         p = new Program("test5",1,1,1,1,1,2,false);
         p.setId(5);
         programList.add(p);
+        p = new Program("test6",1,1,1,1,1,2,false);
+        p.setId(5);
+        programList.add(p);
 
     }
 
