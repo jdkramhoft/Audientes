@@ -98,8 +98,8 @@ public class Tab1 extends Fragment implements View.OnClickListener {
         List<Program> allPrograms = new ArrayList<>();
         allPrograms.addAll(default_programs);
         allPrograms.addAll(user_programs);
-        ButtonCreator bc = new ButtonCreator(root, btnProgramMap, this);
-        bc.createButtonsFromPrograms(allPrograms);
+       // ButtonCreator bc = new ButtonCreator(root, btnProgramMap, this);
+      //  bc.createButtonsFromPrograms(allPrograms);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

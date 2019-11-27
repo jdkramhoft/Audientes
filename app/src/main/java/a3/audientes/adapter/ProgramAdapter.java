@@ -22,14 +22,16 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
 
     private final List<Program> programList;
     private final View.OnTouchListener onTouch;
-    Context mcontext;
-    Activity mactivity;
+    private Context mcontext;
+    private Activity mactivity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
+        private int id;
         public MyViewHolder(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.programName);
+            id = view.getId();
         }
     }
 
@@ -45,6 +47,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
         View itemView;
        if(viewType == 3){
            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_createprogram, parent, false) ;
+           itemView.setId(0);
        }
        else{
            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
@@ -54,6 +57,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
 
        return new a3.audientes.adapter.ProgramAdapter.MyViewHolder(itemView);
     }
+
     @Override
     public int getItemViewType(int position) {
         return programList.get(position).getType();
@@ -64,6 +68,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
 
         Program program = programList.get(position);
         holder.title.setText(program.getName());
+        holder.id = program.getId();
     }
 
     @Override
