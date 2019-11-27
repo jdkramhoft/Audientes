@@ -7,7 +7,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/bg_image"
+        android:id="@+id/program_bg_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/xml_program_botleft" />

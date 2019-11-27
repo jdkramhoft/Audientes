@@ -47,21 +47,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
         boolean btnIsCreateProgram = viewType == 3, btnIsNotDeleteable = viewType != 2;
         View itemView;
 
-        if(btnIsCreateProgram){
-           itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_createprogram, parent, false) ;
-           itemView.setId(0);
-       }
-       else{
-           itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-           if(btnIsNotDeleteable){
-               itemView.findViewById(R.id.canceltext).setVisibility(View.GONE);
-           }
-           itemView.findViewById(R.id.canceltext).setOnTouchListener(onTouch);
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+        itemView.findViewById(R.id.canceltext).setOnTouchListener(onTouch);
 
-       }
 
-       itemView.setOnTouchListener(onTouch);
-       itemView.setOnLongClickListener(v -> true);
+        itemView.setOnTouchListener(onTouch);
+        itemView.setOnLongClickListener(v -> true);
 
        return new a3.audientes.adapter.ProgramAdapter.MyViewHolder(itemView);
     }

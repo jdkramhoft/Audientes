@@ -44,7 +44,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
 
     private final int ONE_SECONDS = 600;
-    private View currentBtn, addbtn, mbtn1, mbtn2, mbtn3, mbtn4;
+    private View currentBtn, addbtn, mbtn1, mbtn2, mbtn3, mbtn4, prevBtn;
     private final int RESPONSE_ON_LONG_CLICK_IN_MS = 600;
     private final Handler long_pressed_handler = new Handler();
     private Runnable longPressed = () -> { onLongClick(currentBtn); longClick = true; };
@@ -77,8 +77,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         p = new Program("test5",1,1,1,1,1,2,false);
         p.setId(5);
         programList.add(p);
-        p = new a3.audientes.models.Program("+",1,1,1,1,1,3,false);
-        programList.add(p);
+
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
         setupbuttons(rod);
@@ -89,7 +88,8 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
     // Denne metode kaldes når der bliver trykket på en knap
     private void onClick(View view) {
-        boolean createBtn = view.getId() == 0, deleteBtn = view.getId() == R.id.canceltext;
+        boolean createBtn = view == addbtn;
+        boolean deletebtn = view.getId() == R.id.canceltext;
 
         if (createBtn){
             System.out.println("+");
@@ -97,7 +97,7 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
             startActivity(intent);
             // TODO: ADD NEW PROGRAM
         }
-        else if (deleteBtn){
+        else if(deletebtn){
             System.out.println("x");
         }
         else {
@@ -176,6 +176,12 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
         mbtn2.setOnTouchListener(this);
         mbtn3.setOnTouchListener(this);
         mbtn4.setOnTouchListener(this);
+
+        addbtn.setOnLongClickListener(v -> true);
+        mbtn1.setOnLongClickListener(v -> true);
+        mbtn2.setOnLongClickListener(v -> true);
+        mbtn3.setOnLongClickListener(v -> true);
+        mbtn4.setOnLongClickListener(v -> true);
 
     }
     public void setupRecyclerView(View rod){
