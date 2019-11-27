@@ -76,15 +76,17 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         if (v == addBtn){
             // TODO: send program data to be edited with activity
             Intent intent = new Intent(getActivity(), EditProgram.class);
+            //intent.putExtra();
             startActivity(intent);
         }
         else {
             ImageView imageView;
+
+            // restore prev program layout
             if (prevProgram != null) {
-                // restore prev program layout
                 imageView = prevProgram.findViewById(R.id.program_bg_id);
 
-                if (isProgramDefault(prevProgram)) setDefaultLayout(prevProgram, imageView);
+                if (programIsDefault(prevProgram)) setDefaultLayout(prevProgram, imageView);
                 else {
                     prevProgram.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
                     imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
@@ -94,7 +96,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
             // set layout when program is selected
             imageView = v.findViewById(R.id.program_bg_id);
 
-            if (isProgramDefault(v)) setDefaultLayout(v, imageView);
+            if (programIsDefault(v)) setDefaultLayout(v, imageView);
             else v.findViewById(R.id.canceltext).setVisibility(View.GONE);
 
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.icon_image_leftear_max, null));
@@ -108,32 +110,15 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         System.out.println("Long click");
         if (v.getId() != R.id.canceltext){
             AnimBtnUtil.bounceSlow(v, getActivity());
-            startActivity(new Intent(getActivity(), EditProgram.class));
             // TODO: send program data to be edited with activity
+            Intent intent = new Intent(getActivity(), EditProgram.class);
+            //intent.putExtra();
+            startActivity(intent);
         }
         else {
             // TODO: delete program
         }
 
-        /*
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
-        Button button1 = dialogView.findViewById(R.id.button1);
-        Button button2 = dialogView.findViewById(R.id.button2);
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
-
-        button1.setOnClickListener(v12 -> dialog.dismiss());
-        button2.setOnClickListener(v1 -> {
-            startActivity(new Intent(getActivity(), EditProgram.class));
-            dialog.dismiss();
-        });
-
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-
-         */
         return true;
     }
 
@@ -182,7 +167,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         else if (v == mbtn4) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_botright, null));
     }
 
-    private boolean isProgramDefault(View v) {
+    private boolean programIsDefault(View v) {
         return v == mbtn1 || v == mbtn2 || v == mbtn3 || v == mbtn4;
     }
 
