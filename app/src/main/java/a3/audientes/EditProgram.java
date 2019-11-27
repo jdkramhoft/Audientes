@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
     private SeekBar low_plus, low, medium, high, high_plus;
     private TextView set_one, set_two, set_three, set_four, set_five;
+    private Button save_btn_config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,9 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         set_three = findViewById(R.id.set_three);
         set_four = findViewById(R.id.set_four);
         set_five = findViewById(R.id.set_five);
+
+        save_btn_config = findViewById(R.id.save_btn_config);
+        save_btn_config.setOnClickListener(this);
 
         low_plus = findViewById(R.id.low_plus);
         low_plus.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
