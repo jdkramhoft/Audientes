@@ -55,7 +55,6 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
            if(btnIsNotDeleteable){
                itemView.findViewById(R.id.canceltext).setVisibility(View.GONE);
-               itemView.setId(1);
            }
            itemView.findViewById(R.id.canceltext).setOnTouchListener(onTouch);
 

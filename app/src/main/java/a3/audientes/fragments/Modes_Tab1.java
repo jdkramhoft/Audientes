@@ -122,11 +122,13 @@ public class Modes_Tab1 extends Fragment implements View.OnTouchListener {
 
     // Denne metode kaldes når der bliver holdt en knap nede i over 2 sekunder
     private void onLongClick(View v) {
+        System.out.println("Long click");
+        AnimBtnUtil.bounceSlow(v, getActivity());
+        // TODO: PLEASE FIX WHAT IS HAPPENING
+        /*
         Intent intent = new Intent(getActivity(), EditProgram.class);
         startActivity(intent);
-        AnimBtnUtil.bounceSlow(v, getActivity());
-
-        System.out.println("Long click");
+        */
         /*
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
         LayoutInflater inflater = this.getLayoutInflater();
