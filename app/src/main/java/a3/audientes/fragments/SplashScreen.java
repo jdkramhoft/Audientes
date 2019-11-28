@@ -42,15 +42,12 @@ public final class SplashScreen extends Fragment {
     public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         if (savedInstanceState == null){
-            handler.postDelayed(splash, 1000);
+            handler.postDelayed(splash, 2000);
         }
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
-        programviewmodel.getAllPrograms().observe(this, new Observer<List<Program>>() {
-            @Override
-            public void onChanged(List<Program> programs) {
-                System.out.println(programs.size());
-                programManager.setProgramList(programs);
-            }
+        programviewmodel.getAllPrograms().observe(this, programs -> {
+            System.out.println(programs.size());
+            programManager.setProgramList(programs);
         });
         return i.inflate(R.layout.splash_screen, container, false);
     }
