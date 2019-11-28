@@ -27,10 +27,11 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
     int counter = 0;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView title;
+        private TextView title, hiddenId;
         private int id;
         public MyViewHolder(@NonNull View view) {
             super(view);
+            hiddenId = view.findViewById(R.id.hiddenId);
             title = view.findViewById(R.id.programName);
             id = view.getId();
         }
@@ -46,29 +47,19 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
 
     @Override @NonNull
     public a3.audientes.adapter.ProgramAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        boolean btnIsCreateProgram = viewType == 3, btnIsNotDeleteable = viewType != 2;
+        boolean btnIsNotDeleteable = viewType == 2;
         View itemView;
-        if(btnIsCreateProgram){
-
-
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_createprogram, parent, false) ;
-            itemView.setOnClickListener(onClick);
-            itemView.setOnLongClickListener(onLongClick);
-
-        }
-        else if(btnIsNotDeleteable){
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-            itemView.findViewById(R.id.canceltext).setVisibility(View.GONE);
-            itemView.setOnClickListener(onClick);
-            itemView.setOnLongClickListener(onLongClick);
-
-        }
-        else{
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-            itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
-            itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
-            itemView.setOnClickListener(onClick);
-            itemView.setOnLongClickListener(onLongClick);
+         if(!btnIsNotDeleteable){
+             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+             itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
+             itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
+             itemView.setOnClickListener(onClick);
+             itemView.setOnLongClickListener(onLongClick);
+        } else{
+             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+             itemView.findViewById(R.id.canceltext).setVisibility(View.GONE);
+             itemView.setOnClickListener(onClick);
+             itemView.setOnLongClickListener(onLongClick);
         }
        return new a3.audientes.adapter.ProgramAdapter.MyViewHolder(itemView);
     }
@@ -83,6 +74,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
 
         Program program = programList.get(position);
         holder.title.setText(program.getName());
+        holder.hiddenId.setText(String.valueOf(program.getId()));
         holder.id = program.getId();
     }
 
@@ -93,15 +85,11 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
 
     View setLayout(ViewGroup parent){
         View itemView;
-
         itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
         itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
         itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
-
         itemView.setOnClickListener(onClick);
         itemView.setOnLongClickListener(onLongClick);
-
-
         return itemView;
     }
 }
