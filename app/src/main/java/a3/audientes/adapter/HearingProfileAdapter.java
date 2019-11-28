@@ -39,7 +39,7 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
     @Override    public CharSequence getPageTitle(int position) {
         switch (position){
-            case 0: return "Modes";
+            case 0: return "Programs";
             //case 1: return "Tab 2";
             default: return "Hearing Test";
         }
