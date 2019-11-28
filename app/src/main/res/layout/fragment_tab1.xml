@@ -26,7 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toTopOf="@+id/topguide"
         app:layout_constraintEnd_toStartOf="@+id/rightguide"
@@ -63,8 +63,8 @@
 " />
 
         <include
-            layout="@layout/layout_program_upleft"
             android:id="@+id/mainbtn1"
+            layout="@layout/layout_program_upleft"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="3dp"
@@ -80,25 +80,8 @@
 
 
         <include
-            layout="@layout/layout_program_upright"
-            android:id="@+id/mainbtn2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="3dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:layout_constraintBottom_toTopOf="@+id/topguide2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline14"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include
-            layout="@layout/layout_program_botleft"
             android:id="@+id/mainbtn3"
+            layout="@layout/layout_program_botleft"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="3dp"
@@ -131,6 +114,22 @@
             app:layout_constraintTop_toTopOf="@+id/topguide2" />
 
 
+        <include
+            android:id="@+id/mainbtn2"
+            layout="@layout/layout_program_upright"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toTopOf="@+id/topguide2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline14"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView18"
@@ -168,6 +167,7 @@
         android:id="@+id/programRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:clickable="false"
         android:longClickable="false"
         app:layout_constraintBottom_toTopOf="@+id/botguide"

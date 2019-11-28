@@ -2,9 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/xml_program_upright"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="@dimen/programheight"
+    android:layout_marginStart="3dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginEnd="3dp"
+    android:layout_marginBottom="1dp"
+    android:background="@drawable/xml_program_upright">
 
     <ImageView
         android:id="@+id/program_bg_id"
@@ -13,7 +18,7 @@
         app:srcCompat="@drawable/xml_program_upright" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/programName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/quiet_btn"

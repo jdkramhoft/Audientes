@@ -16,4 +16,5 @@
     <dimen name="buttonTopMargin">10dp</dimen>
     <dimen name="buttonBottomMargin">10dp</dimen>
     <dimen name="plusSize">15sp</dimen>
+    <dimen name="programheight">80dp</dimen>
 </resources>
