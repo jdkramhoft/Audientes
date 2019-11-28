@@ -52,7 +52,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         programList = programManager.getProgramList();
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
-        setupBtns(rod);
+        //setupBtns(rod);
         setupRecyclerView(rod);
 
         return rod;
@@ -100,11 +100,11 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     }
 
     public void setupBtns(View rod){
-        addBtn = rod.findViewById(R.id.addprogram_btn);
-        mbtn1 = rod.findViewById(R.id.mainbtn1);
-        mbtn2 = rod.findViewById(R.id.mainbtn2);
-        mbtn3 = rod.findViewById(R.id.mainbtn3);
-        mbtn4 = rod.findViewById(R.id.mainbtn4);
+        //addBtn = rod.findViewById(R.id.addprogram_btn);
+        //mbtn1 = rod.findViewById(R.id.mainbtn1);
+        //mbtn2 = rod.findViewById(R.id.mainbtn2);
+        //mbtn3 = rod.findViewById(R.id.mainbtn3);
+        //mbtn4 = rod.findViewById(R.id.mainbtn4);
 
         addBtn.setOnClickListener(this);
         mbtn1.setOnClickListener(this);
