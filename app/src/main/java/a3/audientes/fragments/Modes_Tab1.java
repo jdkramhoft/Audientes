@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,6 +29,7 @@ import utils.AnimBtnUtil;
 
 public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     private View addBtn, mbtn1, mbtn2, mbtn3, mbtn4, prevProgram;
+    private Button newCustomProgram;
     private List<Program> programList = new ArrayList<>();
     private ProgramAdapter adapter;
     private ProgramViewModel programviewmodel;
@@ -52,7 +55,10 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         programList = programManager.getProgramList();
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
-        //setupBtns(rod);
+
+        newCustomProgram = rod.findViewById(R.id.newCustomMode);
+        newCustomProgram.setOnClickListener(this);
+
         setupRecyclerView(rod);
 
         return rod;
@@ -68,56 +74,50 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
 
     @Override
     public void onClick(View v) {
-        if (v == addBtn){
+
+
+        if (v == newCustomProgram){
             // TODO: Create new program
             Intent intent = new Intent(getActivity(), EditProgram.class);
             //intent.putExtra();
             startActivity(intent);
         }
-        else {
-            updateLayout(v);
-            // TODO: activate a program
+
+        if (v.getId() == R.id.canceltext){
+            System.out.println("Delete short");
         }
     }
 
 
     @Override
     public boolean onLongClick(View v) {
-        System.out.println("Long click");
-        if (v.getId() == R.id.canceltext){
-            // TODO: delete program
-            //  Is it allowed to delete a selected program?
-        }
-        else {
-            AnimBtnUtil.bounceSlow(v, getActivity());
-            // TODO: send program data to be edited with activity
+
+
+        if (v == newCustomProgram){
+            // TODO: Create new program
             Intent intent = new Intent(getActivity(), EditProgram.class);
-            //intent.putExtra();
+            startActivity(intent);
+        }
+
+        if (v.getId() == R.id.canceltext){
+            TextView currentId = v.findViewById(R.id.hiddenId);
+            System.out.println("Delete long");
+            System.out.println(v.getId());
+
+
+        }else{
+            TextView currentId = v.findViewById(R.id.hiddenId);
+            System.out.println(currentId.getText().toString());
+            System.out.println("edit long");
+
+            Intent intent = new Intent(getActivity(), EditProgram.class);
+            intent.putExtra("id", currentId.getText().toString());
             startActivity(intent);
         }
 
         return true;
     }
 
-    public void setupBtns(View rod){
-        //addBtn = rod.findViewById(R.id.addprogram_btn);
-        //mbtn1 = rod.findViewById(R.id.mainbtn1);
-        //mbtn2 = rod.findViewById(R.id.mainbtn2);
-        //mbtn3 = rod.findViewById(R.id.mainbtn3);
-        //mbtn4 = rod.findViewById(R.id.mainbtn4);
-
-        addBtn.setOnClickListener(this);
-        mbtn1.setOnClickListener(this);
-        mbtn2.setOnClickListener(this);
-        mbtn3.setOnClickListener(this);
-        mbtn4.setOnClickListener(this);
-
-        //addBtn.setOnLongClickListener(this);
-        mbtn1.setOnLongClickListener(this);
-        mbtn2.setOnLongClickListener(this);
-        mbtn3.setOnLongClickListener(this);
-        mbtn4.setOnLongClickListener(this);
-    }
 
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);

@@ -29,6 +29,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     private EditText name;
     private ProgramViewModel programviewmodel;
     private ProgramManager programManager = ProgramManager.getInstance();
+    private int programId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,12 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 return false;
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            programId = Integer.parseInt(extras.getString("id"));
+        }
+
     }
 
 
@@ -76,20 +83,38 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
         if(v == save_btn_config){
-            Program newProgram = new Program(
-                    name.getText().toString(),
-                    Integer.parseInt(low_plus_txt.getText().toString()),
-                    Integer.parseInt(low_plus_txt.getText().toString()),
-                    Integer.parseInt(low_plus_txt.getText().toString()),
-                    Integer.parseInt(low_plus_txt.getText().toString()),
-                    Integer.parseInt(low_plus_txt.getText().toString()),
-                    2,
-                    true
-            );
-            newProgram.setId(programManager.getNextId());
-            programManager.addProgram(newProgram);
-            programviewmodel.Insert(newProgram);
-            System.out.println(programManager.getNextId());
+
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                Program newProgram = new Program(
+                        name.getText().toString(),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        1,
+                        true
+                );
+                newProgram.setId(programId);
+                System.out.println(programId);
+
+            }else{
+                Program newProgram = new Program(
+                        name.getText().toString(),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        1,
+                        true
+                );
+                newProgram.setId(programManager.getNextId());
+                programManager.addProgram(newProgram);
+                programviewmodel.Insert(newProgram);
+                System.out.println(programManager.getNextId());
+            }
 
             Intent intent = new Intent(EditProgram.this, HearingProfile.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -141,5 +166,14 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            programId = Integer.parseInt(extras.getString("id"));
+        }
     }
 }
