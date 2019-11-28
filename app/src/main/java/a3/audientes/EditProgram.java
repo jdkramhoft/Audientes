@@ -205,7 +205,12 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     }
 
     public void updateSliders(Program program){
-
+        name.setText(program.getName());
+        low_plus_txt.setText(String.valueOf(program.getLow_plus()));
+        low_txt.setText(String.valueOf(program.getLow()));
+        medium_txt.setText(String.valueOf(program.getMiddle()));
+        high_txt.setText(String.valueOf(program.getHigh()));
+        high_plus_txt.setText(String.valueOf(program.getHigh_plus()));
     }
 
 
