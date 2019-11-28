@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EditProgram"></activity>
+        <activity
+            android:name=".EditProgram"
+            android:theme="@style/AppTheme.ActionBar.Light" />
         <activity android:name=".fragment_edit_popup" />
         <activity android:name=".activities.Launcher">
             <intent-filter>
@@ -21,8 +23,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.Main" />
-        <activity android:name=".activities.HearingProfile" />
+
+        <activity android:name=".activities.HearingProfile"
+            android:theme="@style/AppTheme.ActionBar.Dark"/>
         <activity android:name=".fragments.StartHearingTest" />
+
         <activity android:name=".fragments.HearingTest" />
     </application>
 
