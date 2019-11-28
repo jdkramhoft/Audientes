@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
@@ -14,9 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import a3.audientes.EditProgram;
 import a3.audientes.R;
@@ -25,17 +22,9 @@ import a3.audientes.models.Program;
 import utils.AnimBtnUtil;
 
 public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.OnLongClickListener {
-
-
-    private List<Program> programList = new ArrayList<>();
-    private ProgramAdapter mAdapter;
-    private final Map<Button, a3.audientes.fragments.Program> btnProgramMap = new HashMap<>();
-    private final List<a3.audientes.fragments.Program> default_programs = new ArrayList<>();
-    private final List<a3.audientes.fragments.Program> user_programs = new ArrayList<>();
-    private final int DEFAULT_PROGRAMS = 4;
-
-
     private View addBtn, mbtn1, mbtn2, mbtn3, mbtn4, prevProgram;
+    private List<Program> programList = new ArrayList<>();
+    private ProgramAdapter adapter;
 
     public Modes_Tab1() {
         // Required empty public constructor
@@ -55,14 +44,6 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
 
         //TODO for testing only
         addfakelist();
-        Program p;
-        for (int defaultProgram = 1; defaultProgram <= DEFAULT_PROGRAMS; defaultProgram++){
-            p = new Program("test"+defaultProgram,1,1,1,1,1,1,false);
-            programList.add(p);
-        }
-        p = new Program("test5",1,1,1,1,1,2,false);
-        programList.add(p);
-
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
         setupbuttons(rod);
@@ -144,11 +125,11 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     }
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
-        mAdapter = new ProgramAdapter(programList, this, this, getActivity());
+        adapter = new ProgramAdapter(programList, this, this, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(adapter);
     }
 
     public void addfakelist(){
