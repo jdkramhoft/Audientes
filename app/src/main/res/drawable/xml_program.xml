@@ -6,6 +6,10 @@
                 android:angle="225"
                 android:startColor="#fff"
                 android:endColor="#ddd"/>
+        <corners
+            android:topRightRadius="19dp"
+            android:bottomLeftRadius="19dp"
+            />
         </shape>
     </item>
 </ripple>

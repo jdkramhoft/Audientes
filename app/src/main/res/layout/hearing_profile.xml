@@ -7,14 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="a3.audientes.activities.HearingProfile"
-    android:background="@color/darkBlue">
+    android:background="@drawable/main_bg">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="92dp"
-        android:background="@color/darkBlue"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -33,7 +32,6 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="@color/darkBlue"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"></com.google.android.material.tabs.TabLayout>
 

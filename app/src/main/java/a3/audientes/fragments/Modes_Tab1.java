@@ -45,7 +45,6 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         addFakeList();
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
-        setupBtns(rod);
         setupRecyclerView(rod);
 
         return rod;
@@ -80,30 +79,9 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
             //intent.putExtra();
             startActivity(intent);
         }
-
         return true;
     }
 
-    public void setupBtns(View rod){
-        addBtn = rod.findViewById(R.id.addprogram_btn);
-        mbtn1 = rod.findViewById(R.id.mainbtn1);
-        mbtn2 = rod.findViewById(R.id.mainbtn2);
-        mbtn3 = rod.findViewById(R.id.mainbtn3);
-        mbtn4 = rod.findViewById(R.id.mainbtn4);
-
-        addBtn.setOnClickListener(this);
-        mbtn1.setOnClickListener(this);
-        mbtn2.setOnClickListener(this);
-        mbtn3.setOnClickListener(this);
-        mbtn4.setOnClickListener(this);
-
-        //addBtn.setOnLongClickListener(this);
-        mbtn1.setOnLongClickListener(this);
-        mbtn2.setOnLongClickListener(this);
-        mbtn3.setOnLongClickListener(this);
-        mbtn4.setOnLongClickListener(this);
-
-    }
 
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
@@ -119,6 +97,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
+        programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,2,false));
         programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
 
     }
