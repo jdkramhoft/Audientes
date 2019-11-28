@@ -120,6 +120,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
 
 
         }else{
+            AnimBtnUtil.bounceSlow(v, getActivity());
             TextView currentId = v.findViewById(R.id.hiddenId);
             System.out.println(currentId.getText().toString());
             System.out.println("edit long");
