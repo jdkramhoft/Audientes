@@ -41,12 +41,11 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         //TODO for testing only
-        addfakelist();
+        addFakeList();
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
-        setupbuttons(rod);
+        setupBtns(rod);
         setupRecyclerView(rod);
 
         return rod;
@@ -55,55 +54,37 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     @Override
     public void onClick(View v) {
         if (v == addBtn){
-            // TODO: send program data to be edited with activity
+            // TODO: Create new program
             Intent intent = new Intent(getActivity(), EditProgram.class);
             //intent.putExtra();
             startActivity(intent);
         }
         else {
-            ImageView imageView;
-
-            // restore prev program layout
-            if (prevProgram != null) {
-                imageView = prevProgram.findViewById(R.id.program_bg_id);
-
-                if (programIsDefault(prevProgram)) setDefaultLayout(prevProgram, imageView);
-                else {
-                    prevProgram.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
-                }
-            }
-
-            // set layout when program is selected
-            imageView = v.findViewById(R.id.program_bg_id);
-
-            if (programIsDefault(v)) setDefaultLayout(v, imageView);
-            else v.findViewById(R.id.canceltext).setVisibility(View.GONE);
-
-            imageView.setImageDrawable(getResources().getDrawable(R.drawable.icon_image_leftear_max, null));
-
-            prevProgram = v;
+            updateLayout(v);
+            // TODO: activate a program
         }
     }
+
 
     @Override
     public boolean onLongClick(View v) {
         System.out.println("Long click");
-        if (v.getId() != R.id.canceltext){
+        if (v.getId() == R.id.canceltext){
+            // TODO: delete program
+            //  Is it allowed to delete a selected program?
+        }
+        else {
             AnimBtnUtil.bounceSlow(v, getActivity());
             // TODO: send program data to be edited with activity
             Intent intent = new Intent(getActivity(), EditProgram.class);
             //intent.putExtra();
             startActivity(intent);
         }
-        else {
-            // TODO: delete program
-        }
 
         return true;
     }
 
-    public void setupbuttons(View rod){
+    public void setupBtns(View rod){
         addBtn = rod.findViewById(R.id.addprogram_btn);
         mbtn1 = rod.findViewById(R.id.mainbtn1);
         mbtn2 = rod.findViewById(R.id.mainbtn2);
@@ -123,6 +104,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         mbtn4.setOnLongClickListener(this);
 
     }
+
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
         adapter = new ProgramAdapter(programList, this, this, getActivity());
@@ -132,13 +114,40 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         recyclerView.setAdapter(adapter);
     }
 
-    public void addfakelist(){
+    public void addFakeList(){
         programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
         programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
 
+    }
+
+    private void updateLayout(View v) {
+        ImageView imageView;
+
+        // restore prev program layout
+        if (prevProgram != null) {
+            imageView = prevProgram.findViewById(R.id.program_bg_id);
+
+            if (programIsDefault(prevProgram)) setDefaultLayout(prevProgram, imageView);
+            else {
+                prevProgram.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
+                imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
+            }
+        }
+
+        // set layout when program is selected
+        imageView = v.findViewById(R.id.program_bg_id);
+
+        if (programIsDefault(v)) setDefaultLayout(v, imageView);
+        else v.findViewById(R.id.canceltext).setVisibility(View.GONE);
+
+        // TODO: update drawable to a more appropriate one
+        imageView.setImageDrawable(getResources().getDrawable(R.drawable.icon_image_leftear_max, null));
+        prevProgram = v;
+
+        // TODO: should selected program be moved to beginning of recyclerView?
     }
 
     private void setDefaultLayout(View v, ImageView imageView) {
@@ -151,5 +160,4 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     private boolean programIsDefault(View v) {
         return v == mbtn1 || v == mbtn2 || v == mbtn3 || v == mbtn4;
     }
-
 }

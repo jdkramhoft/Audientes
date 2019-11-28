@@ -9,9 +9,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-
-    private SeekBar low_plus, low, medium, high, high_plus;
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt;
+    private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;
 
     @Override
