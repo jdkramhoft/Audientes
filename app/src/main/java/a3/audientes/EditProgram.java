@@ -12,23 +12,26 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt;
     private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;
+    private int a, b, c, d, e;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_program);
+        setContentView(R.layout.layout_edit_program);
 
-        low_plus_txt = findViewById(R.id.set_one);
-        low_txt = findViewById(R.id.set_two);
-        medium_txt = findViewById(R.id.set_three);
-        high_txt = findViewById(R.id.set_four);
-        high_plus_txt = findViewById(R.id.set_five);
+        low_plus_txt = findViewById(R.id.low_plus).findViewById(R.id.seekbar_text);
+        low_txt = findViewById(R.id.low).findViewById(R.id.seekbar_text);
+        medium_txt = findViewById(R.id.medium).findViewById(R.id.seekbar_text);
+        high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
+        high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
 
-        low_plus = findViewById(R.id.low_plus);
-        low = findViewById(R.id.low);
-        medium = findViewById(R.id.medium);
-        high = findViewById(R.id.high);
-        high_plus = findViewById(R.id.high_plus);
+        low_plus = findViewById(R.id.low_plus).findViewById(R.id.seekbar);
+        low = findViewById(R.id.low).findViewById(R.id.seekbar);
+        medium = findViewById(R.id.medium).findViewById(R.id.seekbar);
+        high = findViewById(R.id.high).findViewById(R.id.seekbar);
+        high_plus = findViewById(R.id.high_plus).findViewById(R.id.seekbar);
+
+
 
         low_plus.setOnSeekBarChangeListener(this);
         low.setOnSeekBarChangeListener(this);
@@ -38,6 +41,15 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
         save_btn_config = findViewById(R.id.save_btn_config);
         save_btn_config.setOnClickListener(this);
+
+        a = low.getId();
+        b = low_plus.getId();
+        c = medium.getId();
+        d = high.getId();
+        e = high_plus.getId();
+        System.out.println(a);
+        System.out.println(b);
+
     }
 
 
@@ -71,12 +83,21 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        switch (seekBar.getId()){
-            case R.id.low_plus: low_plus_txt.setText("" + progress); break;
-            case R.id.low: low_txt.setText("" + progress); break;
-            case R.id.medium: medium_txt.setText("" + progress); break;
-            case R.id.high: high_txt.setText("" + progress); break;
-            case R.id.high_plus: high_plus_txt.setText("" + progress); break;
+
+        if( seekBar.equals(low) ){
+            low_txt.setText("" + progress);
+        }
+        if( seekBar.equals(low_plus) ){
+            low_plus_txt.setText("" + progress);
+        }
+        if( seekBar.equals(medium) ){
+            medium_txt.setText("" + progress);
+        }
+        if( seekBar.equals(high) ){
+            high_txt.setText("" + progress);
+        }
+        if( seekBar.equals(high_plus) ){
+            high_plus_txt.setText("" + progress);
         }
     }
 
