@@ -45,12 +45,9 @@ public final class SplashScreen extends Fragment {
             handler.postDelayed(splash, 2000);
         }
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
-        programviewmodel.getAllPrograms().observe(this, new Observer<List<Program>>() {
-            @Override
-            public void onChanged(List<Program> programs) {
-                System.out.println(programs.size());
-                programManager.setProgramList(programs);
-            }
+        programviewmodel.getAllPrograms().observe(this, programs -> {
+            System.out.println(programs.size());
+            programManager.setProgramList(programs);
         });
         return i.inflate(R.layout.splash_screen, container, false);
     }
