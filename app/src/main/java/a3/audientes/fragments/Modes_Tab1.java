@@ -52,7 +52,6 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //TODO for testing only
 
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programList = programManager.getProgramList();
