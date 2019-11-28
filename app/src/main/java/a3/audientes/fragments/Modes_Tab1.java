@@ -1,6 +1,9 @@
 package a3.audientes.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,9 +85,11 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
             //intent.putExtra();
             startActivity(intent);
         }
-
-        if (v.getId() == R.id.canceltext){
+        else if (v.getId() == R.id.canceltext){
             System.out.println("Delete short");
+        }
+        else {
+            updateLayout(v);
         }
     }
 
@@ -128,14 +133,6 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         recyclerView.setAdapter(adapter);
     }
 
-    public void addFakeList(){
-        programList.add(new a3.audientes.models.Program("test1",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test2",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test3",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("test4",1,1,1,1,1,1,false));
-        programList.add(new a3.audientes.models.Program("+",1,1,1,1,1,3,false));
-
-    }
 
     private void updateLayout(View v) {
         ImageView imageView;
@@ -144,34 +141,33 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         if (prevProgram != null) {
             imageView = prevProgram.findViewById(R.id.program_bg_id);
 
-            if (programIsDefault(prevProgram)) setDefaultLayout(prevProgram, imageView);
-            else {
+            if (!programIsDefault(prevProgram))
                 prevProgram.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
-            }
+
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
         }
 
         // set layout when program is selected
         imageView = v.findViewById(R.id.program_bg_id);
 
-        if (programIsDefault(v)) setDefaultLayout(v, imageView);
-        else v.findViewById(R.id.canceltext).setVisibility(View.GONE);
+        if (!programIsDefault(v))
+            v.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
+
 
         // TODO: update drawable to a more appropriate one
-        imageView.setImageDrawable(getResources().getDrawable(R.drawable.icon_image_leftear_max, null));
-        prevProgram = v;
+        imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
+
+
+
 
         // TODO: should selected program be moved to beginning of recyclerView?
-    }
+        prevProgram = v;
 
-    private void setDefaultLayout(View v, ImageView imageView) {
-        if (v == mbtn1) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_upleft, null));
-        else if (v == mbtn2) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_upright, null));
-        else if (v == mbtn3) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_botleft, null));
-        else if (v == mbtn4) imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_botright, null));
     }
 
     private boolean programIsDefault(View v) {
-        return v == mbtn1 || v == mbtn2 || v == mbtn3 || v == mbtn4;
+        TextView view = v.findViewById(R.id.hiddenId);
+        int id = Integer.parseInt(view.getText().toString());
+        return id == 1 || id == 2 || id == 3;
     }
 }
