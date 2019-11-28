@@ -68,6 +68,10 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     public void onResume() {
         super.onResume();
         programList = programManager.getProgramList();
+
+        for(int i = 0; i < programList.size(); i++){
+            System.out.println(programList.get(i).getName());
+        }
         adapter.notifyDataSetChanged();
        System.out.println("Back to fragment model tab 1");
     }
@@ -100,9 +104,15 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         }
 
         if (v.getId() == R.id.canceltext){
-            TextView currentId = v.findViewById(R.id.hiddenId);
+            ConstraintLayout view =  (ConstraintLayout)v.getParent();
+            TextView currentId = view.findViewById(R.id.hiddenId);
             System.out.println("Delete long");
             System.out.println(v.getId());
+            System.out.println(currentId.getText().toString());
+            Intent intent = new Intent(getActivity(), EditProgram.class);
+            intent.putExtra("id", currentId.getText().toString());
+            intent.putExtra("delete", true);
+            startActivity(intent);
 
 
         }else{
@@ -112,6 +122,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
 
             Intent intent = new Intent(getActivity(), EditProgram.class);
             intent.putExtra("id", currentId.getText().toString());
+            intent.putExtra("delete", false);
             startActivity(intent);
         }
 

@@ -76,6 +76,8 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
             programId = Integer.parseInt(extras.getString("id"));
         }
 
+
+
     }
 
 
@@ -98,6 +100,8 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 );
                 newProgram.setId(programId);
                 System.out.println(programId);
+                programManager.update(newProgram);
+                programviewmodel.Update(newProgram);
 
             }else{
                 Program newProgram = new Program(
@@ -174,6 +178,36 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             programId = Integer.parseInt(extras.getString("id"));
+
+            if(extras.getBoolean("delete") == true){
+
+                Program newProgram = new Program(
+                        name.getText().toString(),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        Integer.parseInt(low_plus_txt.getText().toString()),
+                        1,
+                        true
+                );
+                newProgram.setId(programId);
+                System.out.println(programId);
+                programManager.deleteProgram(newProgram);
+                programviewmodel.Delete(newProgram);
+
+                Intent intent = new Intent(EditProgram.this, HearingProfile.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                EditProgram.this.startActivity(intent);
+            }
         }
+
     }
+
+    public void updateSliders(Program program){
+
+    }
+
+
+
 }
