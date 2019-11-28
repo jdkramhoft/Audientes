@@ -47,7 +47,29 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
     @Override @NonNull
     public a3.audientes.adapter.ProgramAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         boolean btnIsCreateProgram = viewType == 3, btnIsNotDeleteable = viewType != 2;
-        View itemView = setLayout(parent);
+        View itemView;
+        if(btnIsCreateProgram){
+
+
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_createprogram, parent, false) ;
+            itemView.setOnClickListener(onClick);
+            itemView.setOnLongClickListener(onLongClick);
+
+        }
+        else if(btnIsNotDeleteable){
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+            itemView.findViewById(R.id.canceltext).setVisibility(View.GONE);
+            itemView.setOnClickListener(onClick);
+            itemView.setOnLongClickListener(onLongClick);
+
+        }
+        else{
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+            itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
+            itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
+            itemView.setOnClickListener(onClick);
+            itemView.setOnLongClickListener(onLongClick);
+        }
        return new a3.audientes.adapter.ProgramAdapter.MyViewHolder(itemView);
     }
 
@@ -71,40 +93,11 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
 
     View setLayout(ViewGroup parent){
         View itemView;
-        if(counter == 0){
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_upleft, parent, false) ;
 
-        }
-        else if(counter == 1){
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_upright, parent, false) ;
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
+        itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
+        itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
 
-        }
-
-        else if(counter == programList.size()-1){
-            if(programList.size()%2 == 0){
-                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botright, parent, false) ;
-
-            }
-            else{
-                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botleft, parent, false) ;
-            }
-        }
-        else if(counter == programList.size()-2){
-            if(programList.size()%2 == 0){
-                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program_botleft, parent, false) ;
-            }
-            else{
-                itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-            }
-        }
-        else{
-
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_program, parent, false) ;
-            itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
-            itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
-
-        }
-        counter++;
         itemView.setOnClickListener(onClick);
         itemView.setOnLongClickListener(onLongClick);
 
