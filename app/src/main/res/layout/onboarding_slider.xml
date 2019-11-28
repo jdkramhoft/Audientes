@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image_fingertouch"/>
+        app:srcCompat="@drawable/boarding_image_liftoff"/>
 
     <TextView
         android:id="@+id/slide_heading"

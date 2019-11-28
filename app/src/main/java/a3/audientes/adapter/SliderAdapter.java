@@ -24,21 +24,21 @@ public class SliderAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
 
     private int[] slide_images = {
-            R.drawable.image_fingertouch,
-            R.drawable.image_screenchart,
-            R.drawable.image_fingertouch
+            R.drawable.boarding_image_handshake,
+            R.drawable.boarding_image_speaker,
+            R.drawable.boarding_image_liftoff
     };
 
     private String[] slide_headings = {
             "Welcome to Audientes",
-            "Experts",
+            "Your surroundings",
             "Let's get started",
     };
 
     private String[] slide_descs = {
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli, sed do eiusmod tempor incididunt ut labore et dolore magna"
+            "Your hearable will work optimally when you perform a hearing test using the built-in Pure Tone Audiometry, just like when visiting a hearing specialist. ",
+            "Before starting the hearing test, we check the surrounding noise level, if it is greater than expected value, we would suggest that the user find another quiet place.",
+            "You will be asked to wear the hearable and sit in a quiet area free for disturbing sounds and other factors. A series of sounds will be broadcast through the earphones. It will measure your ability to hear sounds at various pitches and volumes. "
     };
 
     public SliderAdapter(Context context){
