@@ -22,6 +22,12 @@
     <color name="darkYellow">#FFC36A</color>
     <color name="purple">#C42FD1</color>
 
+    <!-- Action Bar -->
+    <color name="actionBarDark">#161637</color>
+    <color name="actionBarLight">#C42FD1</color>
+
+
+
     <!-- Main event button -->
     <color name="pink">#FF568B</color>
     <color name="lightDarkPink">#FF7D7E</color>

@@ -44,7 +44,7 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        setStatusBarTrans();
+        //setStatusBarTrans();
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText(TAB_1_TITLE));
         tabLayout.addTab(tabLayout.newTab().setText(TAB_2_TITLE));
