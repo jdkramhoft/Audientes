@@ -22,6 +22,7 @@ public class SliderAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
+    //test
 
     private int[] slide_images = {
             R.drawable.boarding_image_handshake,
