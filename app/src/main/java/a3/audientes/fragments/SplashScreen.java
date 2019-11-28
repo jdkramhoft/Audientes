@@ -11,16 +11,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import java.util.List;
 
 import a3.audientes.R;
 import a3.audientes.activities.HearingProfile;
+import a3.audientes.models.Program;
+import a3.audientes.models.ProgramManager;
 import a3.audientes.viewModels.ProgramViewModel;
 
 public final class SplashScreen extends Fragment {
 
     private final Handler handler = new Handler();
     private ProgramViewModel programviewmodel;
+    private ProgramManager programManager = ProgramManager.getInstance();
     private final Runnable splash = () -> {
 
         if (getActivity()==null) return;
@@ -34,10 +40,18 @@ public final class SplashScreen extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         if (savedInstanceState == null){
             handler.postDelayed(splash, 1000);
         }
-        programviewmodel = ViewModelProviders.of(getActivity()).get(ProgramViewModel.class);
+        programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
+        programviewmodel.getAllPrograms().observe(this, new Observer<List<Program>>() {
+            @Override
+            public void onChanged(List<Program> programs) {
+                System.out.println(programs.size());
+                programManager.setProgramList(programs);
+            }
+        });
         return i.inflate(R.layout.splash_screen, container, false);
     }
 

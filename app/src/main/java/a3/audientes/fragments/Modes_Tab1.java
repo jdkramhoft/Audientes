@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,13 +21,16 @@ import a3.audientes.EditProgram;
 import a3.audientes.R;
 import a3.audientes.adapter.ProgramAdapter;
 import a3.audientes.models.Program;
+import a3.audientes.models.ProgramManager;
+import a3.audientes.viewModels.ProgramViewModel;
 import utils.AnimBtnUtil;
 
 public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     private View addBtn, mbtn1, mbtn2, mbtn3, mbtn4, prevProgram;
     private List<Program> programList = new ArrayList<>();
     private ProgramAdapter adapter;
-
+    private ProgramViewModel programviewmodel;
+    private ProgramManager programManager = ProgramManager.getInstance();
     public Modes_Tab1() {
         // Required empty public constructor
     }
@@ -42,13 +47,23 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //TODO for testing only
-        addFakeList();
+
+        programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
+        programList = programManager.getProgramList();
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
         setupBtns(rod);
         setupRecyclerView(rod);
 
         return rod;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        programList = programManager.getProgramList();
+        adapter.notifyDataSetChanged();
+       System.out.println("Back to fragment model tab 1");
     }
 
     @Override
@@ -102,7 +117,6 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         mbtn2.setOnLongClickListener(this);
         mbtn3.setOnLongClickListener(this);
         mbtn4.setOnLongClickListener(this);
-
     }
 
     public void setupRecyclerView(View rod){

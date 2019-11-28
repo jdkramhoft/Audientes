@@ -155,6 +155,12 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("Return");
+    }
+
+    @Override
     public void onTab1Interaction(Uri uri) {
         Log.i("TAG", "received communication from child fragment");
     }

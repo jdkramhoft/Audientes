@@ -1,22 +1,41 @@
 package a3.audientes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.util.List;
+
+import a3.audientes.activities.HearingProfile;
+import a3.audientes.models.Program;
+import a3.audientes.models.ProgramManager;
+import a3.audientes.viewModels.ProgramViewModel;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt;
     private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;
+    private EditText name;
+    private ProgramViewModel programviewmodel;
+    private ProgramManager programManager = ProgramManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_program);
+
+        programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
 
         low_plus_txt = findViewById(R.id.set_one);
         low_txt = findViewById(R.id.set_two);
@@ -38,11 +57,45 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
         save_btn_config = findViewById(R.id.save_btn_config);
         save_btn_config.setOnClickListener(this);
+
+        name = findViewById(R.id.editText);
+
+        name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(name.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                return false;
+            }
+        });
     }
 
 
     @Override
     public void onClick(View v) {
+
+        if(v == save_btn_config){
+            Program newProgram = new Program(
+                    name.getText().toString(),
+                    Integer.parseInt(low_plus_txt.getText().toString()),
+                    Integer.parseInt(low_plus_txt.getText().toString()),
+                    Integer.parseInt(low_plus_txt.getText().toString()),
+                    Integer.parseInt(low_plus_txt.getText().toString()),
+                    Integer.parseInt(low_plus_txt.getText().toString()),
+                    2,
+                    true
+            );
+            newProgram.setId(programManager.getNextId());
+            programManager.addProgram(newProgram);
+            programviewmodel.Insert(newProgram);
+            System.out.println(programManager.getNextId());
+
+            Intent intent = new Intent(EditProgram.this, HearingProfile.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            EditProgram.this.startActivity(intent);
+        }
+
         // TODO: if any changes were made
               /*
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
