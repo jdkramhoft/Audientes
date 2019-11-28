@@ -47,6 +47,18 @@ public class ProgramManager {
         }
     }
 
+    public Program getProgram(int id){
+
+        Program temp = null;
+
+        for(int i = 0; i < programList.size(); i++){
+            if(id == programList.get(i).getId()){
+                temp = programList.get(i);
+            }
+        }
+        return temp;
+    }
+
 
 
     public List<Program> getProgramList() {
