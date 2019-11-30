@@ -23,8 +23,8 @@
     <color name="purple">#C42FD1</color>
 
     <!-- Action Bar -->
-    <color name="actionBarDark">#161637</color>
-    <color name="actionBarLight">#314351</color>
+    <color name="actionBarDark">#00161637</color>
+    <color name="actionBarLight">#00314351</color>
 
 
 
