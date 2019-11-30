@@ -15,6 +15,7 @@ import java.util.List;
 
 import a3.audientes.R;
 import a3.audientes.models.Program;
+import a3.audientes.models.ProgramManager;
 
 
 public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.ProgramAdapter.MyViewHolder> {
@@ -43,6 +44,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
         this.onLongClick = onLongClick;
         this.mactivity = mactivity;
         mcontext= mactivity.getBaseContext();
+        ProgramManager.getInstance().setAdapter(this);
     }
 
     @Override @NonNull
@@ -76,6 +78,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
         holder.title.setText(program.getName());
         holder.hiddenId.setText(String.valueOf(program.getId()));
         holder.id = program.getId();
+
     }
 
     @Override
@@ -91,6 +94,9 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.adapter.Pr
         itemView.setOnClickListener(onClick);
         itemView.setOnLongClickListener(onLongClick);
         return itemView;
+    }
+    public ProgramAdapter get(){
+        return this;
     }
 }
 

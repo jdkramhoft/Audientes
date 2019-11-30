@@ -51,10 +51,10 @@ public class GridRecyclerView extends RecyclerView {
             final int invertedIndex = count - 1 - index;
             animationParams.column = columns - 1 - (invertedIndex % columns);
             animationParams.row = animationParams.rowsCount - 1 - invertedIndex / columns;
-
         } else {
             // Proceed as normal if using another type of LayoutManager
             super.attachLayoutAnimationParameters(child, params, index, count);
         }
     }
+
 }

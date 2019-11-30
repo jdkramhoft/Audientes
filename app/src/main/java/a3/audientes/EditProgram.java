@@ -115,9 +115,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                         1,
                         true
                 );
-                newProgram.setId(programManager.getNextId());
+                int nextindex = programManager.getNextId();
+                newProgram.setId(nextindex);
                 programManager.addProgram(newProgram);
                 programViewModel.Insert(newProgram);
+                programManager.programadapter.notifyItemInserted(nextindex);
                 System.out.println(programManager.getNextId());
             }
 

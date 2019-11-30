@@ -74,8 +74,8 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
         for(int i = 0; i < programList.size(); i++){
             System.out.println(programList.get(i).getName());
         }
-        adapter.notifyDataSetChanged();
-       System.out.println("Back to fragment model tab 1");
+        //adapter.notifyDataSetChanged();
+        System.out.println("Back to fragment model tab 1");
     }
 
     @Override
