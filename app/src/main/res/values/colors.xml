@@ -12,6 +12,7 @@
     <color name="red">#FC391D</color>
     <color name="transparentWhite">#CCCCCC</color>
     <color name="transparent">#00000000 </color>
+    <color name="bgcolor">#161637</color>
 
     <!-- Volume icon -->
     <color name="darkBlue">#3F435E</color>

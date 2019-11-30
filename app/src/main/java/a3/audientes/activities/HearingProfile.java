@@ -35,7 +35,7 @@ import a3.audientes.models.StateManager;
 
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
 
-    private final String TAB_1_TITLE = "Modes";
+    private final String TAB_1_TITLE = "Programs";
     private final String TAB_2_TITLE = "Hearing Test";
     StateManager stateManager = StateManager.getInstance();
     //private BoxedVertical bv;
