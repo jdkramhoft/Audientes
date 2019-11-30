@@ -156,6 +156,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
                 prevProgram.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
 
             imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
+            ((TextView)prevProgram.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white));
         }
 
         // set layout when program is selected
@@ -167,6 +168,7 @@ public class Modes_Tab1 extends Fragment implements View.OnClickListener, View.O
 
         // TODO: update drawable to a more appropriate one
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
+        ((TextView)v.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor));
 
 
 

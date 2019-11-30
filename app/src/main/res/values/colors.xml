@@ -27,6 +27,8 @@
     <color name="actionBarDark">#00161637</color>
     <color name="actionBarLight">#00314351</color>
 
+    <color name="textColor">#283593</color>
+
 
 
     <!-- Main event button -->
