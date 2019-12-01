@@ -18,9 +18,198 @@
     <include layout="@layout/hearing_profile" />
 
     <!-- include bottom sheet -->
-    <include
-        android:id="@+id/slider"
-        layout="@layout/volume_slider" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sheet_volume"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="50dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.57" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.43" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.71" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.82" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/botguide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="1.0" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.28" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.19" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.13" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <ImageView
+            android:id="@+id/bg_image"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:adjustViewBounds="false"
+            android:src="@drawable/xml_bg_volume"
+            app:layout_constraintBottom_toTopOf="@+id/botguide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <ImageView
+            android:id="@+id/speakerIcon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_speaker"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4"
+            app:layout_constraintEnd_toStartOf="@+id/guideline0"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L"
+            android:textColor="#BEC3E9"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BB"
+            android:textColor="#BEC3E9"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline0"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:textColor="#BEC3E9"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+        <a3.audientes.BoxedVertical
+            android:id="@+id/boxedL"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="R"
+            android:textColor="#B47800"
+            android:textSize="20dp"
+            app:backgroundColor="#1E2557"
+            app:defaultImage="@drawable/icon_image_leftear_default"
+            app:defaultValue="50"
+            app:imageEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            app:libCornerRadius="30"
+            app:max="100"
+            app:maxImage="@drawable/icon_image_leftear_max"
+            app:min="0"
+            app:minImage="@drawable/icon_image_leftear_min"
+            app:textEnabled="false" />
+
+        <a3.audientes.BoxedVertical
+            android:id="@+id/boxedM"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="R"
+            android:textColor="#BEC3E9"
+            android:textSize="20dp"
+            app:backgroundColor="#1E2557"
+            app:defaultImage="@drawable/icon_image_mid_default"
+            app:minImage="@drawable/icon_image_mid_min"
+            app:maxImage="@drawable/icon_image_mid_max"
+            app:defaultValue="50"
+            app:imageEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline0"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            app:libCornerRadius="30"
+            app:max="100"
+            app:min="0"
+            app:textEnabled="false" />
+
+        <a3.audientes.BoxedVertical
+            android:id="@+id/boxedR"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="R"
+            android:textColor="#BEC3E9"
+            android:textSize="20dp"
+            app:backgroundColor="#1E2557"
+            app:defaultValue="50"
+            app:imageEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/guideline4"
+            app:libCornerRadius="30"
+            app:max="100"
+            app:min="0"
+            app:maxImage="@drawable/icon_image_rightear_max"
+            app:defaultImage="@drawable/icon_image_rightear_default"
+            app:minImage="@drawable/icon_image_rightear_min"
+            app:textEnabled="false" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

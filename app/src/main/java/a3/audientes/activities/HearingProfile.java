@@ -20,10 +20,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
@@ -38,7 +40,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     private final String TAB_1_TITLE = "Programs";
     private final String TAB_2_TITLE = "Hearing Test";
     StateManager stateManager = StateManager.getInstance();
-    //private BoxedVertical bv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,25 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        View v = findViewById(R.id.sheet_volume);
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(v);
+        // set callback for changes
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                // Called every time when the bottom sheet changes its state.
+                System.out.println(newState);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                findViewById(R.id.bg_image).setAlpha(slideOffset);
+            }
+
+        });
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -67,33 +87,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
             public void onTabReselected(TabLayout.Tab tab) { }
         });
 
-/*
-       // bv = (BoxedVertical)findViewById(R.id.boxed_vertical);
-
-       // bv.setOnBoxedPointsChangeListener(new BoxedVertical.OnValuesChangeListener() {
-            @Override
-            public void onPointsChanged(BoxedVertical boxedPoints, final int points) {
-               // valueTextView.setText("Current Value is " + String.valueOf(points));
-            }
-
-            @Override
-            public void onStartTrackingTouch(BoxedVertical boxedPoints) {
-                Toast.makeText(HearingProfile.this, "onStartTrackingTouch", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStopTrackingTouch(BoxedVertical boxedPoints) {
-                Toast.makeText(HearingProfile.this, "onStopTrackingTouch", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        bv.setValue(60);
-
-        System.out.println("VALUE: " + bv.getValue());
-        //valueTextView.setText("Current Valuex is " + String.valueOf(bv.getValue()));
-
-
-*/
 
         //  AlertDialog hearable
 
