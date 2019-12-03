@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/fragholder"
-        android:name="a3.audientes.fragments.ConnectDevice"
+        android:name="a3.audientes.view.fragments.ConnectDevice"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

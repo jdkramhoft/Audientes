@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.HearingProfile">
+    tools:context=".view.activities.HearingProfile">
 
 
     <!-- include main content -->
@@ -142,7 +142,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
-        <a3.audientes.BoxedVertical
+        <a3.audientes.view.BoxedVertical
             android:id="@+id/boxedL"
 
             android:layout_width="0dp"
@@ -165,7 +165,7 @@
             app:minImage="@drawable/icon_image_leftear_min"
             app:textEnabled="false" />
 
-        <a3.audientes.BoxedVertical
+        <a3.audientes.view.BoxedVertical
             android:id="@+id/boxedM"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -187,7 +187,7 @@
             app:min="0"
             app:textEnabled="false" />
 
-        <a3.audientes.BoxedVertical
+        <a3.audientes.view.BoxedVertical
             android:id="@+id/boxedR"
             android:layout_width="0dp"
             android:layout_height="0dp"

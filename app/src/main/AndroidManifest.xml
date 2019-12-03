@@ -12,9 +12,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".EditProgram"
+            android:name=".view.activities.EditProgram"
             android:theme="@style/AppTheme.ActionBar.Light" />
-        <activity android:name=".activities.Launcher">
+        <activity android:name=".view.activities.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.HearingProfile"
+        <activity android:name=".view.activities.HearingProfile"
             android:theme="@style/AppTheme.ActionBar.Dark"/>
-        <activity android:name=".fragments.StartHearingTest" />
+        <activity android:name=".view.activities.StartHearingTest" />
 
-        <activity android:name=".fragments.HearingTest" />
+        <activity android:name=".view.fragments.HearingTest" />
     </application>
 
 </manifest>
