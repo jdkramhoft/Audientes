@@ -1,8 +1,8 @@
 package a3.audientes;
 
 public class MyBounceInterpolator implements android.view.animation.Interpolator {
-    private double mAmplitude = 1;
-    private double mFrequency = 10;
+    private final double mAmplitude;
+    private final double mFrequency;
 
     public MyBounceInterpolator(double amplitude, double frequency) {
         mAmplitude = amplitude;
