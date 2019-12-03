@@ -154,11 +154,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     }
 
     @Override
-    public void onTab1Interaction(Uri uri) {
-        Log.i("TAG", "received communication from child fragment");
-    }
-
-    @Override
     public void onTab2ParentInteraction(Uri uri) {
         Log.i("TAG", "received communication from parent fragment");
     }
@@ -169,6 +164,11 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     }
 
 
+    @Override
+    public void onTab1Interaction(Uri uri) {
+        Log.i("TAG", "received communication from tab 1 fragment");
+    }
+
 
 
     public void setBorder(View v) {
@@ -176,13 +176,13 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         //bv.setCornerRadius(val);
         Toast.makeText(HearingProfile.this, "New corner radius is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
     }
-
     public void setMax(View v) {
         int val = Integer.valueOf(v.getTag().toString());
         //bv.setMax(val);
         Toast.makeText(HearingProfile.this, "New max value is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
     }
     //TODO HALP IT WONT BE TRANSPARTEN
+
     public void setStatusBarTrans(){
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -208,6 +208,7 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         }
         win.setAttributes(winParams);
     }
+
 }
 
 

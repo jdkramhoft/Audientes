@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import a3.audientes.fragments.Audiogram;
-import a3.audientes.fragments.Modes_Tab1;
 import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
 
@@ -23,7 +22,7 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return Modes_Tab1.newInstance();
+                return Tab1.newInstance();
             case 1:
                 Audiogram audiogram = Audiogram.newInstance(null, null, null);
                 return Tab2.newInstance(audiogram);
