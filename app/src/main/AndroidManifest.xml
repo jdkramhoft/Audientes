@@ -14,7 +14,6 @@
         <activity
             android:name=".EditProgram"
             android:theme="@style/AppTheme.ActionBar.Light" />
-        <activity android:name=".fragment_edit_popup" />
         <activity android:name=".activities.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
