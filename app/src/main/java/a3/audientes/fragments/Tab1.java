@@ -35,7 +35,6 @@ import a3.audientes.R;
  */
 public class Tab1 extends Fragment implements View.OnClickListener {
 
-    private Dialog myDialog;
     private static final String ARG_USER_PROGRAMS = "user_programs";
     private static final String NEW_BUTTON_ID = "newBtn";
 
