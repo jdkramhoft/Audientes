@@ -2,26 +2,17 @@ package a3.audientes.activities;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -33,13 +24,13 @@ import a3.audientes.adapter.HearingProfileAdapter;
 import a3.audientes.fragments.Audiogram;
 import a3.audientes.fragments.Tab1;
 import a3.audientes.fragments.Tab2;
-import a3.audientes.models.StateManager;
+import a3.audientes.models.PopupManager;
 
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
 
     private final String TAB_1_TITLE = "Programs";
     private final String TAB_2_TITLE = "Hearing Test";
-    StateManager stateManager = StateManager.getInstance();
+    PopupManager popupManager = PopupManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,8 +113,8 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
-        if(!stateManager.isHearable()){
-            stateManager.setHearable(true);
+        if(!popupManager.isHearable()){
+            popupManager.setHearable(true);
             new Handler().postDelayed(new Runnable() {
 
                 @Override
@@ -134,8 +125,8 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
 
         }
 
-      if(!stateManager.isBluetooth()){
-          stateManager.setBluetooth(true);
+      if(!popupManager.isBluetooth()){
+          popupManager.setBluetooth(true);
           new Handler().postDelayed(new Runnable() {
 
               @Override

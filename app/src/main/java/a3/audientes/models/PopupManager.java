@@ -1,22 +1,22 @@
 package a3.audientes.models;
 
-public class StateManager {
+public class PopupManager {
     // static variable single_instance of type Singleton
-    private static StateManager single_instance = null;
+    private static PopupManager single_instance = null;
 
     // variable
     boolean bluetooth = false;
     boolean hearable = false;
 
     // private constructor restricted to this class itself
-    private StateManager() {
+    private PopupManager() {
 
     }
 
     // static method to create instance of Singleton class
-    public static StateManager getInstance() {
+    public static PopupManager getInstance() {
         if (single_instance == null)
-            single_instance = new StateManager();
+            single_instance = new PopupManager();
 
         return single_instance;
     }
