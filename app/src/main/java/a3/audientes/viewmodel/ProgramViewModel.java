@@ -34,6 +34,7 @@ public class ProgramViewModel extends AndroidViewModel {
         repositoty.DeleteProgram(program);
     }
 
+
     public LiveData<List<Program>> getAllPrograms(){
         return allPrograms;
     }

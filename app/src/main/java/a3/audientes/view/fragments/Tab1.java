@@ -1,6 +1,8 @@
 package a3.audientes.view.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -79,17 +82,18 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     @Override
     public void onClick(View v) {
 
-
         if (v == newCustomProgram){
-            // TODO: Create new program
+            System.out.println("Create short");
             Intent intent = new Intent(getActivity(), EditProgram.class);
-            //intent.putExtra();
+            intent.putExtra("new", true);
             startActivity(intent);
         }
         else if (v.getId() == R.id.canceltext){
+            ConstraintLayout view =  (ConstraintLayout)v.getParent();
+            TextView currentId = view.findViewById(R.id.hiddenId);
             System.out.println("Delete short");
-        }
-        else {
+            deletePopup(v, Integer.parseInt(currentId.getText().toString()));
+        }else {
             updateLayout(v);
         }
     }
@@ -100,8 +104,8 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
 
         if (v == newCustomProgram){
-            // TODO: Create new program
             Intent intent = new Intent(getActivity(), EditProgram.class);
+            intent.putExtra("new", true);
             startActivity(intent);
         }
 
@@ -109,14 +113,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
             TextView currentId = view.findViewById(R.id.hiddenId);
             System.out.println("Delete long");
-            System.out.println(v.getId());
-            System.out.println(currentId.getText().toString());
-            Intent intent = new Intent(getActivity(), EditProgram.class);
-            intent.putExtra("id", currentId.getText().toString());
-            intent.putExtra("delete", true);
-            startActivity(intent);
-
-
+            deletePopup(v, Integer.parseInt(currentId.getText().toString()));
         }else{
             AnimBtnUtil.bounceSlow(v, getActivity());
             TextView currentId = v.findViewById(R.id.hiddenId);
@@ -124,11 +121,20 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             System.out.println("edit long");
 
             Intent intent = new Intent(getActivity(), EditProgram.class);
-            intent.putExtra("id", currentId.getText().toString());
-            intent.putExtra("delete", false);
+            intent.putExtra("new", false);
+
+            // Check if default program is selected... id 1,2,3 are default
+            if(currentId.getText().toString().equals("1")
+            || currentId.getText().toString().equals("2")
+            || currentId.getText().toString().equals("3")){
+                intent.putExtra("id", currentId.getText().toString());
+                intent.putExtra("edit", false);
+            }else{
+                intent.putExtra("id", currentId.getText().toString());
+                intent.putExtra("edit", true);
+            }
             startActivity(intent);
         }
-
         return true;
     }
 
@@ -195,5 +201,26 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onTab1Interaction(Uri uri);
+    }
+
+    public void deletePopup(View v, int programid){
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_popup_delete_program, null);
+        Button button1 = dialogView.findViewById(R.id.button1);
+        Button button2 = dialogView.findViewById(R.id.button2);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+
+        button1.setOnClickListener(v12 -> dialog.dismiss());
+        button2.setOnClickListener(v1 -> {
+            System.out.println("Delete program");
+            Program currentProgram = programManager.getProgram(programid);
+            programManager.deleteProgram(currentProgram);
+            programviewmodel.Delete(currentProgram);
+            dialog.dismiss();
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
 }

@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit a program"
+        android:text="Delete program"
         android:gravity="center"
         android:textColor="@color/darkerOrange"
         android:textSize="22sp"
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure that you want to edit this program?"
+        android:text="Are you sure that you want to delete this program?"
         android:gravity="center"
         android:textColor="@color/lightPurple"
         android:textSize="22sp"

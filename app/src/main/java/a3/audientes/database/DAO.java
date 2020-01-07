@@ -23,6 +23,9 @@ public interface DAO {
     @Delete
     void deleteProgram(Program program);
 
+    @Query("DELETE FROM program_table WHERE id = :ID")
+    void deleteProgramWithID(int ID);
+
     @Query("SELECT * FROM program_table")
     LiveData<List<Program>> getAllPrograms();
 }

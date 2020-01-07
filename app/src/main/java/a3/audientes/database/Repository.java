@@ -36,7 +36,6 @@ public class Repository {
         new DeleteProgramAsyncTask(DAO).execute(program);
     }
 
-
     public LiveData<List<Program>> getAllPrograms(){
         return allPrograms;
     }
