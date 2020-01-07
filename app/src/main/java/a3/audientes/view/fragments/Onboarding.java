@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.Objects;
 
 import a3.audientes.R;
+import a3.audientes.bluetooth.BluetoothPairingActivity;
 import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.view.adapter.SliderAdapter;
 
@@ -113,9 +114,17 @@ public class Onboarding extends Fragment implements View.OnClickListener {
                 .commit();
 
          */
-        Intent intent = new Intent(getActivity(), HearingProfile.class);
-        startActivity(intent);
-        Objects.requireNonNull(getActivity()).finish();
+        if (!isHearableConnected()){
+            Intent intent = new Intent(getContext(), BluetoothPairingActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+        }
+        else {
+            Intent intent = new Intent(getActivity(), HearingProfile.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+        }
+
 
 
 
@@ -149,4 +158,9 @@ public class Onboarding extends Fragment implements View.OnClickListener {
         @Override
         public void onPageScrollStateChanged(int state) { }
     };
+
+    private boolean isHearableConnected() {
+        // TODO: somehow check if the correct device is already connected
+        return false;
+    }
 }

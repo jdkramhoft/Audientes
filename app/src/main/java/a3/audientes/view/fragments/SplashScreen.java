@@ -31,10 +31,22 @@ public final class SplashScreen extends Fragment {
     private final Runnable splash = () -> {
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
-        getFragmentManager().beginTransaction()
-                .replace(R.id.emptyFrame, new Onboarding() )
-                .addToBackStack(null)
-                .commit();
+
+        // first visit onboarding
+
+        if (true){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.emptyFrame, new Onboarding() )
+                    .addToBackStack(null)
+                    .commit();
+        }
+        else if (!isHearableConnected()){
+            Intent intent = new Intent(getContext(), BluetoothPairingActivity.class);
+            startActivity(intent);
+            Objects.requireNonNull(getActivity()).finish();
+
+        }
+
 
     };
 
@@ -45,12 +57,6 @@ public final class SplashScreen extends Fragment {
         if (savedInstanceState == null){
             // TODO: only onboarding on first visit
             handler.postDelayed(splash, 2000);
-            if (!isHearableConnected()){
-                Intent intent = new Intent(getContext(), BluetoothPairingActivity.class);
-                startActivity(intent);
-                Objects.requireNonNull(getActivity()).finish();
-
-            }
         }
 
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
