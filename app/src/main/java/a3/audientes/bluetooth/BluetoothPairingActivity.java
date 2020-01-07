@@ -25,9 +25,14 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import a3.audientes.R;
 import a3.audientes.model.PopupManager;
 import a3.audientes.view.activities.HearingProfile;
+import a3.audientes.view.activities.StartHearingTest;
+import a3.audientes.view.fragments.HearingTest;
+import utils.SharedPrefUtil;
 
 
 public class BluetoothPairingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
@@ -37,6 +42,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     PopupManager popupManager = PopupManager.getInstance();
     private Button connectToDevice;
+    private boolean newVisitor;
 
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -102,6 +108,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         registerReceiver(broadcastReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         registerReceiver(broadcastReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
 
+        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -193,8 +200,16 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
     @Override
     public void onClick(View v) {
         if (v == connectToDevice){
-            // TODO: not sure how we pair with device, for now it redirects to hearingProfile
-            startActivity(new Intent(this, HearingProfile.class));
+            SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
+
+            // TODO: newVisitor && check DB for audiogram
+            if (newVisitor){
+                startActivity(new Intent(this, StartHearingTest.class));
+            }
+            else {
+                // TODO: not sure how we pair with device, for now it redirects to hearingProfile
+                startActivity(new Intent(this, HearingProfile.class));
+            }
             finish();
         }
     }
