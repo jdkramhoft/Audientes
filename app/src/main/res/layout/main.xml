@@ -125,7 +125,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BB"
+            android:text="LR"
             android:textColor="#BEC3E9"
             android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline0"

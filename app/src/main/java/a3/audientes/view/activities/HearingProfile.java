@@ -67,10 +67,11 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                findViewById(R.id.bg_image).setAlpha(slideOffset);
+                //findViewById(R.id.bg_image).setAlpha(slideOffset);
             }
-
         });
+
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
