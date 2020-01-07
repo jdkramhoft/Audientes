@@ -45,8 +45,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         high = findViewById(R.id.high).findViewById(R.id.seekbar);
         high_plus = findViewById(R.id.high_plus).findViewById(R.id.seekbar);
 
-
-
         low_plus.setOnSeekBarChangeListener(this);
         low.setOnSeekBarChangeListener(this);
         medium.setOnSeekBarChangeListener(this);
@@ -57,7 +55,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         save_btn_config.setOnClickListener(this);
 
         name = findViewById(R.id.editText);
-
         name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
@@ -70,11 +67,59 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            programId = Integer.parseInt(extras.getString("id"));
-            updateSliders(programManager.getProgram(programId));
+            if(extras.getBoolean("new") == false){
+                programId = Integer.parseInt(extras.getString("id"));
+                updateSliders(programManager.getProgram(programId));
+
+                if(extras.getBoolean("edit") == false){
+                    low_plus.setEnabled(false);
+                    low.setEnabled(false);
+                    medium.setEnabled(false);
+                    high.setEnabled(false);
+                    high_plus.setEnabled(false);
+                    save_btn_config.setVisibility(View.INVISIBLE);
+                    name.setEnabled(false);
+                }else{
+                    low_plus.setEnabled(true);
+                    low.setEnabled(true);
+                    medium.setEnabled(true);
+                    high.setEnabled(true);
+                    high_plus.setEnabled(true);
+                    save_btn_config.setVisibility(View.VISIBLE);
+                    name.setEnabled(true);
+                }
+            }
         }
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if(extras.getBoolean("new") == false){
+                programId = Integer.parseInt(extras.getString("id"));
+                updateSliders(programManager.getProgram(programId));
 
+                if(extras.getBoolean("edit") == false){
+                    low_plus.setEnabled(false);
+                    low.setEnabled(false);
+                    medium.setEnabled(false);
+                    high.setEnabled(false);
+                    high_plus.setEnabled(false);
+                    save_btn_config.setVisibility(View.INVISIBLE);
+                    name.setEnabled(false);
+                }else{
+                    low_plus.setEnabled(true);
+                    low.setEnabled(true);
+                    medium.setEnabled(true);
+                    high.setEnabled(true);
+                    high_plus.setEnabled(true);
+                    save_btn_config.setVisibility(View.VISIBLE);
+                    name.setEnabled(true);
+                }
+            }
+        }
     }
 
 
@@ -82,7 +127,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
         if(v == save_btn_config){
-
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 Program newProgram = new Program(
@@ -95,59 +139,25 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                         1,
                         true
                 );
-                newProgram.setId(programId);
-                System.out.println(programId);
-                programManager.update(newProgram);
-                programViewModel.Update(newProgram);
 
-            }else{
-                Program newProgram = new Program(
-                        name.getText().toString(),
-                        Integer.parseInt(low_txt.getText().toString()),
-                        Integer.parseInt(low_plus_txt.getText().toString()),
-                        Integer.parseInt(medium_txt.getText().toString()),
-                        Integer.parseInt(high_txt.getText().toString()),
-                        Integer.parseInt(high_plus_txt.getText().toString()),
-                        1,
-                        true
-                );
-                int nextindex = programManager.getNextId();
-                newProgram.setId(nextindex);
-                programManager.addProgram(newProgram);
-                programViewModel.Insert(newProgram);
-                programManager.programadapter.notifyItemInserted(nextindex);
-                System.out.println(programManager.getNextId());
+                if(extras.getBoolean("new") == false){
+                    newProgram.setId(programId);
+                    System.out.println(programId);
+                    programManager.update(newProgram);
+                    programViewModel.Update(newProgram);
+                }else{
+                    int nextindex = programManager.getNextId();
+                    newProgram.setId(nextindex);
+                    programManager.addProgram(newProgram);
+                    programViewModel.Insert(newProgram);
+                    programManager.programadapter.notifyItemInserted(nextindex);
+                }
             }
 
             Intent intent = new Intent(EditProgram.this, HearingProfile.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             EditProgram.this.startActivity(intent);
         }
-
-        // TODO: if any changes were made
-              /*
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
-        Button button1 = dialogView.findViewById(R.id.button1);
-        Button button2 = dialogView.findViewById(R.id.button2);
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
-
-        button1.setOnClickListener(v12 -> dialog.dismiss());
-        button2.setOnClickListener(v1 -> {
-            startActivity(new Intent(getActivity(), EditProgram.class));
-            dialog.dismiss();
-        });
-
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-
-         */
-
-          // TODO: else save and redirect to hearingprofile
-
-
     }
 
     @Override
@@ -180,37 +190,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            programId = Integer.parseInt(extras.getString("id"));
-            updateSliders(programManager.getProgram(programId));
-            if(extras.getBoolean("delete") == true){
 
-                Program newProgram = new Program(
-                        name.getText().toString(),
-                        Integer.parseInt(low_txt.getText().toString()),
-                        Integer.parseInt(low_plus_txt.getText().toString()),
-                        Integer.parseInt(medium_txt.getText().toString()),
-                        Integer.parseInt(high_txt.getText().toString()),
-                        Integer.parseInt(high_plus_txt.getText().toString()),
-                        1,
-                        true
-                );
-                newProgram.setId(programId);
-                System.out.println(programId);
-                programManager.deleteProgram(newProgram);
-                programViewModel.Delete(newProgram);
-
-                Intent intent = new Intent(EditProgram.this, HearingProfile.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                EditProgram.this.startActivity(intent);
-            }
-        }
-
-    }
 
     public void updateSliders(Program program){
         name.setText(program.getName());
@@ -225,7 +205,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         medium.setProgress(program.getMiddle());
         high.setProgress(program.getHigh());
         high_plus.setProgress(program.getHigh_plus());
-
     }
 
 
