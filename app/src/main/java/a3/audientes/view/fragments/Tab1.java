@@ -86,6 +86,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             System.out.println("Create short");
             Intent intent = new Intent(getActivity(), EditProgram.class);
             intent.putExtra("new", true);
+            intent.putExtra("edit", true);
             startActivity(intent);
         }
         else if (v.getId() == R.id.canceltext){
@@ -106,6 +107,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         if (v == newCustomProgram){
             Intent intent = new Intent(getActivity(), EditProgram.class);
             intent.putExtra("new", true);
+            intent.putExtra("edit", true);
             startActivity(intent);
         }
 

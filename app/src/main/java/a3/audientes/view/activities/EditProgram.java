@@ -1,17 +1,22 @@
 package a3.audientes.view.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import a3.audientes.R;
 import a3.audientes.model.Program;
@@ -122,11 +127,52 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if(extras.getBoolean("edit") == true){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
+                Button button1 = dialogView.findViewById(R.id.button1);
+                Button button2 = dialogView.findViewById(R.id.button2);
+                builder.setView(dialogView);
+                AlertDialog dialog = builder.create();
+
+                button1.setOnClickListener(v12 ->{
+                    dialog.dismiss();
+                });
+                button2.setOnClickListener(v1 -> {
+                    EditProgram.this.finish();
+                });
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }else{
+                EditProgram.this.finish();
+            }
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
 
         if(v == save_btn_config){
+
+            String nameInput = name.getText().toString();
+            if (nameInput.length() == 0) {
+                System.out.println("Min 1 characters");
+                name.setError("Min 1 characters");
+                return;
+            }
+            if (nameInput.length() > 5) {
+                System.out.println("Max 5 characters");
+                name.setError("Max 5 characters");
+                return;
+            }
+
             Bundle extras = getIntent().getExtras();
             if (extras != null) {
                 Program newProgram = new Program(
