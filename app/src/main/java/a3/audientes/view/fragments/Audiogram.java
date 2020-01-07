@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 import a3.audientes.R;
+import a3.audientes.model.AudiogramManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +41,7 @@ import a3.audientes.R;
  * create an instance of this fragment.
  */
 public class Audiogram extends Fragment {
+    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param3";
@@ -47,12 +49,12 @@ public class Audiogram extends Fragment {
     // TODO: Rename and change types of parameters
     private OnFragmentInteractionListener mListener;
 
-    private static int[][] left = {{500, 38},{1000, 40},{1500, 50},{2000, 40},{2500, 60},{3000,58},{3500,50}};
-    private static int[][] right = {{500, 35},{1000, 45},{1500, 38},{2000, 55},{2500, 45},{3000,70},{3500,30}};
+    private  List<int[]> left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
+    private  List<int[]> right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
     private int[] freqs = {};
     private LineChart chart;
 
-    private final String LEFT_EAR_LABEL = "Left Ear", RIGHT_EAR_LABEL = "Right Ear";
+    private final String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "Right and left Ear";
 
     private final int[] colors = new int[] {
             Color.rgb(30, 176, 97),     // green
@@ -85,11 +87,6 @@ public class Audiogram extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            //left = getArguments().getByteArray(ARG_PARAM1);
-            //right = getArguments().getByteArray(ARG_PARAM2);
-            //freqs = getArguments().getByteArray(ARG_PARAM3);
-        }
     }
 
     @Override
@@ -98,6 +95,79 @@ public class Audiogram extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.audiogram, container, false);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
+        right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
+
+        // left ear
+        LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
+        left_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        // styling left ear
+        left_ear.setColor(0);
+        left_ear.setCircleColor(colors[0]);
+        left_ear.setLineWidth(3f);
+        left_ear.setCircleRadius(4f);
+        left_ear.setDrawCircleHole(false);
+        left_ear.setDrawValues(false);
+
+
+        // right ear
+        LineDataSet right_ear = new LineDataSet(makeEntries(right), RIGHT_EAR_LABEL);
+        right_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        // styling right ear
+        right_ear.setColor(colors[1]);
+        right_ear.setCircleColor(colors[1]);
+        right_ear.setLineWidth(3f);
+        right_ear.setCircleRadius(4f);
+        right_ear.setDrawCircleHole(false);
+        right_ear.setDrawValues(false);
+
+        // y axis
+        YAxis yAxis = chart.getAxisLeft();
+        yAxis.setSpaceBottom(25f);
+        yAxis.setSpaceTop(25f);
+        yAxis.setDrawZeroLine(false);
+        yAxis.setTextColor(colors[2]);
+        yAxis.setDrawGridLines(false);
+        yAxis.setLabelCount(3, true);
+
+        chart.getAxisRight().setEnabled(false);
+
+        // x axis
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setSpaceMin(100f);
+        xAxis.setSpaceMax(100f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextColor(colors[2]);
+        xAxis.setDrawGridLines(false);
+        xAxis.setLabelRotationAngle(30);
+        xAxis.setLabelCount(5, true);
+
+        // modify legend
+        Legend legend = chart.getLegend();
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legend.setDrawInside(false);
+        legend.setTextColor(colors[2]);
+        legend.setTextSize(15f);
+
+        // data
+        List<ILineDataSet> data_lines = new ArrayList<>();
+        data_lines.add(left_ear);
+        data_lines.add(right_ear);
+        LineData data = new LineData(data_lines);
+        chart.setData(data);
+        chart.animateXY(1500,1200, Easing.EaseInCubic);
+
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -167,11 +237,6 @@ public class Audiogram extends Fragment {
         data_lines.add(right_ear);
         LineData data = new LineData(data_lines);
         chart.setData(data);
-
-        // If animate(...) is called, no further calling of invalidate() is necessary to refresh the chart
-        // TODO: Find a way to make chart.animateX() smooth instead of chart animateY();
-        //chart.animateX(2500, Easing.EaseInCubic);
-        //chart.animateY(2000, Easing.EaseInCubic);
         chart.animateXY(1500,1200, Easing.EaseInCubic);
 
     }
@@ -214,14 +279,13 @@ public class Audiogram extends Fragment {
         void onTab2ChildInteraction(Uri uri);
     }
 
-    private List<Entry> makeEntries(int[][] data){
+    private List<Entry> makeEntries(List<int[]> graf){
         int x = 0, y = 1;
         List<Entry> coordinates = new ArrayList<>();
 
-        for (int[] coordinate : data) {
-            coordinates.add(new Entry(coordinate[x], coordinate[y]));
+        for(int i = 0; i < graf.size(); i++){
+            coordinates.add(new Entry(graf.get(i)[x], graf.get(i)[y]));
         }
-
         Collections.sort(coordinates, new EntryXComparator());
 
         return coordinates;
