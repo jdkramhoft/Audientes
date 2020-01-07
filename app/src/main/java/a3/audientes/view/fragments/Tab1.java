@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ import utils.animation.AnimBtnUtil;
 
 public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     private View addBtn, mbtn1, mbtn2, mbtn3, mbtn4, prevProgram;
-    private Button newCustomProgram;
+    private FloatingActionButton newCustomProgram;
     private List<Program> programList = new ArrayList<>();
     private ProgramAdapter adapter;
     private ProgramViewModel programviewmodel;
@@ -59,7 +61,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
         View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
 
-        newCustomProgram = rod.findViewById(R.id.newCustomMode);
+        newCustomProgram = rod.findViewById(R.id.fab);
         newCustomProgram.setOnClickListener(this);
 
         setupRecyclerView(rod);
@@ -172,7 +174,6 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             v.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
 
 
-        // TODO: update drawable to a more appropriate one
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
         ((TextView)v.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor));
 
