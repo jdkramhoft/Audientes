@@ -56,7 +56,7 @@
             android:background="@drawable/custom_popup_buttom_left"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/connectToDevice"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"

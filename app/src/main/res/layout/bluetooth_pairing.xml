@@ -8,15 +8,16 @@
     android:background="#3F435E"
     android:orientation="vertical" >
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ListView
+        android:id="@+id/lvNewDevices"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
@@ -40,7 +41,7 @@
         app:layout_constraintGuide_percent="0.7" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/connectToDevice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

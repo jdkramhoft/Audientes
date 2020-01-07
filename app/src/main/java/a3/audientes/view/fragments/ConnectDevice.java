@@ -10,12 +10,16 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import a3.audientes.view.adapter.DeviceAdapter;
 import a3.audientes.bluetooth.logic.Device;
 import a3.audientes.R;
 
 public class ConnectDevice extends Fragment implements View.OnClickListener {
+    @Override
+    public void onClick(View v) {
 
+    }
+
+    /*
 
     private List<Device> deviceList;
     private DeviceAdapter mAdapter;
@@ -31,7 +35,9 @@ public class ConnectDevice extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
-        View rod = i.inflate(R.layout.connect_device, container, false);
+        View rod = i.inflate(R.layout.bluetooth_connect_device, container, false);
+
+     */
 /*
         RecyclerView recyclerView = rod.findViewById(R.id.devicerecycler);
         mAdapter = new DeviceAdapter(deviceList, this);
@@ -46,6 +52,7 @@ public class ConnectDevice extends Fragment implements View.OnClickListener {
         prepareDevices(NUM_OF_DEVICES);
 
  */
+/*
         return rod;
     }
 
@@ -55,6 +62,8 @@ public class ConnectDevice extends Fragment implements View.OnClickListener {
     }
     private void launchHearingTestScreen(){
 
+
+ */
         /* TODO: change X in .replace( , X)
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
@@ -64,7 +73,7 @@ public class ConnectDevice extends Fragment implements View.OnClickListener {
                 .commit();
 
          */
-
+/*
     }
 
     public void prepareDevices(int n){
@@ -78,4 +87,8 @@ public class ConnectDevice extends Fragment implements View.OnClickListener {
      public void setDeviceList(List<Device> deviceList){
         this.deviceList = deviceList;
      }
+
+ */
 }
+
+

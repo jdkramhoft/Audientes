@@ -1,7 +1,11 @@
 package a3.audientes.view.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 
 import android.os.Build;
@@ -10,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +24,10 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Objects;
+
 import a3.audientes.R;
+import a3.audientes.bluetooth.BluetoothPairingActivity;
 import a3.audientes.view.adapter.HearingProfileAdapter;
 import a3.audientes.view.fragments.Audiogram;
 import a3.audientes.view.fragments.Tab1;
@@ -30,7 +38,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
 
     private final String TAB_1_TITLE = "Programs";
     private final String TAB_2_TITLE = "Hearing Test";
-    PopupManager popupManager = PopupManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,63 +86,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         });
 
 
-        //  AlertDialog hearable
-
-        /*
-        AlertDialog.Builder builderHearable = new AlertDialog.Builder(this);
-        View hearableView = getLayoutInflater().inflate(R.layout.custom_popup_connect_hearable, null);
-        Button buttonHearable =  (Button)hearableView.findViewById(R.id.button1);
-        builderHearable.setView(hearableView);
-        AlertDialog hearableDialog = builderHearable.create();
-
-        buttonHearable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Connect");
-            }
-        });
-        hearableDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-         */
-        //  AlertDialog bluetooth
-        /*
-        AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
-        View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_connect_bluetooth, null);
-        Button buttonbluetooth =  (Button)bluetoothView.findViewById(R.id.button1);
-        builderbluetooth.setView(bluetoothView);
-        AlertDialog bluetoothDialog = builderbluetooth.create();
-
-        buttonbluetooth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("Connect");
-            }
-        });
-        bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-        if(!popupManager.isHearable()){
-            popupManager.setHearable(true);
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    hearableDialog.show();
-                }
-            }, 1000 );
-
-        }
-
-      if(!popupManager.isBluetooth()){
-          popupManager.setBluetooth(true);
-          new Handler().postDelayed(new Runnable() {
-
-              @Override
-              public void run() {
-                  bluetoothDialog.show();
-              }
-          }, 2000 );
-      }
-         */
     }
 
     @Override
