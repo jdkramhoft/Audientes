@@ -27,7 +27,8 @@
         app:behavior_hideable="false"
         app:behavior_peekHeight="50dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        >
+        android:clickable="true"
+        android:focusable="true">
 
 
         <androidx.constraintlayout.widget.Guideline
