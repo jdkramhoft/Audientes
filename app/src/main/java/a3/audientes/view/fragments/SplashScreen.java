@@ -21,20 +21,21 @@ import a3.audientes.R;
 import a3.audientes.model.ProgramManager;
 import a3.audientes.bluetooth.BluetoothPairingActivity;
 import a3.audientes.viewmodel.ProgramViewModel;
+import utils.SharedPrefUtil;
 
 public final class SplashScreen extends Fragment {
 
     private final Handler handler = new Handler();
     private ProgramViewModel programviewmodel;
     private ProgramManager programManager = ProgramManager.getInstance();
+    private boolean newVisitor;
 
     private final Runnable splash = () -> {
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
 
-        // first visit onboarding
-
-        if (true){
+        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(getActivity(), getString(R.string.new_visitor_pref), "true"));
+        if (newVisitor){
             getFragmentManager().beginTransaction()
                     .replace(R.id.emptyFrame, new Onboarding() )
                     .addToBackStack(null)
@@ -44,10 +45,7 @@ public final class SplashScreen extends Fragment {
             Intent intent = new Intent(getContext(), BluetoothPairingActivity.class);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
-
         }
-
-
     };
 
     @Override

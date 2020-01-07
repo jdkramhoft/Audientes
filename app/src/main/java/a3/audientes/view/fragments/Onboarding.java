@@ -19,6 +19,7 @@ import a3.audientes.R;
 import a3.audientes.bluetooth.BluetoothPairingActivity;
 import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.view.adapter.SliderAdapter;
+import utils.SharedPrefUtil;
 
 import static java.lang.Thread.sleep;
 
@@ -31,6 +32,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
     private final int NUM_OF_DOTS = 3;
+    private boolean newVisitor;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +55,10 @@ public class Onboarding extends Fragment implements View.OnClickListener {
         addDotsIndicator(0);
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
+
+
+        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(getActivity(), getString(R.string.new_visitor_pref), "true"));
+
         return rod;
     }
 
@@ -84,50 +90,32 @@ public class Onboarding extends Fragment implements View.OnClickListener {
 
         if (v == mNextBtn){
             if (lastPage){
-                launchHearingTestScreen();
+                launchAcitivity();
             }
             else {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
             }
         }
         else if (v == mSkipBtn){
-            launchHearingTestScreen();
+            launchAcitivity();
         }
     }
 
-    private void launchHearingTestScreen(){
-        /*
-        SharedPrefUtil.saveSharedSetting(Onboarding.this, MainMenu.PREF_USER_FIRST_TIME, "false");
-
-        Intent hearingTestIntent = new Intent(this, BeginHearingTestActivity.class);
-        hearingTestIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(hearingTestIntent);
-        finish();
-        */
-        //int id = ((View)getView().getParent()).getId();
-        /*
-        if (getActivity()==null) return;
-        assert getFragmentManager() != null;
-        getFragmentManager().beginTransaction()
-                .replace(R.id.emptyFrame, new ConnectDevice() )
-                .addToBackStack(null)
-                .commit();
-
-         */
-        if (!isHearableConnected()){
-            Intent intent = new Intent(getContext(), BluetoothPairingActivity.class);
-            startActivity(intent);
-            Objects.requireNonNull(getActivity()).finish();
+    private void launchAcitivity(){
+        Intent intent;
+        if (!isHearableConnected())
+            intent = new Intent(getContext(), BluetoothPairingActivity.class);
+        else if (newVisitor){
+            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(getActivity()), getString(R.string.new_visitor_pref), "false");
+            intent = new Intent(getActivity(), HearingTest.class);
         }
-        else {
-            Intent intent = new Intent(getActivity(), HearingProfile.class);
-            startActivity(intent);
-            Objects.requireNonNull(getActivity()).finish();
+        else{
+            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(getActivity()), getString(R.string.new_visitor_pref), "false");
+            intent = new Intent(getActivity(), HearingProfile.class);
         }
 
-
-
-
+        startActivity(intent);
+        Objects.requireNonNull(getActivity()).finish();
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {

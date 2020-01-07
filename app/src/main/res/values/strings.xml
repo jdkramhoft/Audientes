@@ -23,4 +23,5 @@
     <string name="home_btn">Home</string>
     <string name="loud_btn">Loud</string>
     <string name="quiet_btn">Quiet</string>
+    <string name="new_visitor_pref">newVisitor</string>
 </resources>
