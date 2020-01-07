@@ -30,8 +30,8 @@
         android:layout_margin="24dp"
         app:fabSize="normal"
         app:layout_anchor="@id/programRecycler"
-        android:backgroundTint="@color/darkerOrange"
         app:layout_anchorGravity="end|bottom"
+        android:src="@drawable/xml_bg_fab"
         app:srcCompat="@mipmap/ic_plus_white_24dp"
         app:useCompatPadding="true"
         />
