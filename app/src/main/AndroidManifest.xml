@@ -3,6 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="a3.audientes">
 
+    <!-- Necessary bluetooth permissions -->
+    <uses-feature android:name="android.hardware.bluetooth" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <!-- Superfluous bluetooth permissions for later -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Extra permission that causes ignorable error -->
+    <!-- uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" / -->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +39,8 @@
         <activity android:name=".view.activities.StartHearingTest" />
 
         <activity android:name=".view.fragments.HearingTest" />
+        <activity android:name=".bluetooth.BluetoothPairingActivity" />
+
     </application>
 
 </manifest>
