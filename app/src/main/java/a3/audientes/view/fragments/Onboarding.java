@@ -4,12 +4,14 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,13 +33,14 @@ public class Onboarding extends Fragment implements View.OnClickListener {
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 3;
+    private final int NUM_OF_DOTS = 4;
     private boolean newVisitor;
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
         View rod = i.inflate(R.layout.onboarding, container, false);
+
 
 
         mSlideViewPager = rod.findViewById(R.id.slideViewPager);
