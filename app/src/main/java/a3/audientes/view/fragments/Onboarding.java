@@ -33,7 +33,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 4;
+    private final int NUM_OF_DOTS = 5;
     private boolean newVisitor;
 
     @Override

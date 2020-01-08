@@ -198,6 +198,9 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
+            startActivity(new Intent(this,HearingProfile.class));
+
+            /*
             if(!hasSearched){
                 search();
                 ((Button)v).setText(R.string.cntnue);
@@ -205,6 +208,8 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
             else{
                 navigate();
             }
+            */
+
         }
     }
 
