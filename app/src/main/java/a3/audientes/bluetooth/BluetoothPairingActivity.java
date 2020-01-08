@@ -223,15 +223,13 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
 
     private void navigate() {
         SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
-
         // TODO: newVisitor && check DB for audiogram
-        if (newVisitor){
+
+        startActivity(new Intent(this, HearingProfile.class));
+
+        if (newVisitor)
             startActivity(new Intent(this, StartHearingTest.class));
-        }
-        else {
-            // TODO: not sure how we pair with device, for now it redirects to hearingProfile
-            startActivity(new Intent(this, HearingProfile.class));
-        }
+
         finish();
     }
 
