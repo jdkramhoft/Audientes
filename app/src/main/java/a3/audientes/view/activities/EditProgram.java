@@ -268,7 +268,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        /*
+
         if( seekBar.equals(low) ){
             trackEq.setBandLevel((short)0, (short)(progress - 1500));
             short bandLevel = trackEq.getBandLevel((short)0);
@@ -299,7 +299,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
             System.out.println("BandLevel: 4 "+bandLevel);
             high_plus_txt.setText("" + progress);
         }
-         */
+
     }
 
     @Override
@@ -352,7 +352,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
             musicTrack.seekTo(resumePosition);
             musicTrack.start();
         }
-
          */
 
     }
