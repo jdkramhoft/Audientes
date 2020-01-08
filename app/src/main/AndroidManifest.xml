@@ -6,12 +6,9 @@
     <!-- Necessary bluetooth permissions -->
     <uses-feature android:name="android.hardware.bluetooth" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
-    <!-- Superfluous bluetooth permissions for later -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <!-- Extra permission that causes ignorable error -->
     <!-- uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" / -->
 
@@ -24,8 +21,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".view.activities.EditProgram"
-            android:theme="@style/AppTheme.ActionBar.Light" />
+            android:name=".view.activities.EditProgram" />
         <activity android:name=".view.activities.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
