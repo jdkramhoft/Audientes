@@ -14,7 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,12 +36,16 @@ import a3.audientes.view.fragments.Audiogram;
 import a3.audientes.view.fragments.Tab1;
 import a3.audientes.view.fragments.Tab2;
 import a3.audientes.model.PopupManager;
+import utils.SharedPrefUtil;
 
-public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
+public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
 
     private final String TAB_1_TITLE = "Programs";
     private final String TAB_2_TITLE = "Hearing Test";
-
+    private BottomSheetBehavior bottomSheetBehavior;
+    View speaker, v;
+    ImageView layoutShader;
+    AppCompatActivity act = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,24 +60,44 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        View v = findViewById(R.id.sheet_volume);
+        v = findViewById(R.id.sheet_volume);
+        v.setOnClickListener(this);
 
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(v);
+        layoutShader = findViewById(R.id.hearingProfileShader);
+
+        bottomSheetBehavior = BottomSheetBehavior.from(v);
         // set callback for changes
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 // Called every time when the bottom sheet changes its state.
+                /*
                 System.out.println(newState);
+                if (newState == BottomSheetBehavior.STATE_EXPANDED){
+                    v.setAlpha(0);
+
+                    layoutShader.setImageBitmap(SharedPrefUtil.takeScreenShot(act));
+                    v.setAlpha(1);
+
+                }
+
+                View speaker = bottomSheet.findViewById(R.id.speakerIcon);
+                Animation myAnim = AnimationUtils.loadAnimation(getBaseContext(), R.anim.rotate);
+                speaker.startAnimation(myAnim);
+*/
+
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                findViewById(R.id.bg_image).setAlpha(slideOffset);
+                System.out.println("slide " +slideOffset);
+                speaker = bottomSheet.findViewById(R.id.speakerIcon);
+                speaker.setRotation(slideOffset*180);
             }
-
         });
+
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -150,6 +177,20 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         win.setAttributes(winParams);
     }
 
+    @Override
+    public void onClick(View v) {
+        // if collapsed
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+        }
+        else {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        }
+
+
+    }
 }
 
 

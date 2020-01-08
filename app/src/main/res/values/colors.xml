@@ -30,6 +30,9 @@
     <color name="textColor">#283593</color>
 
 
+    <!-- Bluetooth -->
+    <color name="device">#565b7d</color>
+
 
     <!-- Main event button -->
     <color name="pink">#FF568B</color>

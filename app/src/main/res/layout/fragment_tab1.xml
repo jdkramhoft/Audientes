@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout3"
@@ -7,34 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.Tab1">
 
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/rightguide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/leftguide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
     <a3.audientes.view.GridRecyclerView
         android:id="@+id/programRecycler"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
         android:clickable="false"
         android:layoutAnimation="@anim/gidlayout_anim_frombot"
-        android:longClickable="false"
-        app:layout_constraintBottom_toTopOf="@+id/botguide3"
-        app:layout_constraintEnd_toStartOf="@+id/rightguide"
-        app:layout_constraintStart_toStartOf="@+id/leftguide"
-        app:layout_constraintTop_toTopOf="@+id/topguide" />
+        android:longClickable="false" />
 
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/programRecycler"
+        app:layout_anchorGravity="end|bottom"
+        android:src="@drawable/xml_bg_fab"
+        app:srcCompat="@mipmap/ic_plus_white_24dp"
+        app:useCompatPadding="true"
+        />
+    <!--
     <Button
         android:id="@+id/newCustomMode"
         android:layout_width="match_parent"
@@ -51,6 +50,22 @@
         android:textSize="24sp"
         android:text="Create New Program"
         android:textAllCaps="false"/>
+        -->
+
+    <!--
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftguide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/topguide"
@@ -65,5 +80,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.69" />
+        -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="list_item_spacing">16dp</dimen>
     <dimen name="list_item_spacing_half">8dp</dimen>
     <dimen name="width">300dp</dimen>
@@ -17,4 +17,7 @@
     <dimen name="buttonBottomMargin">10dp</dimen>
     <dimen name="plusSize">15sp</dimen>
     <dimen name="programheight">80dp</dimen>
+    <dimen name="design_fab_size_normal" tools:override="true">70dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">70dp</dimen>
 </resources>
+

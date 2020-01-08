@@ -57,7 +57,7 @@
         android:id="@+id/audiogram_desc_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="The audiogram above shows the results of the newest hearing test that you have taken."
+        android:text="Newest hearing test: DATO FROM DB"
         android:textColor="@color/lightPurple"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"

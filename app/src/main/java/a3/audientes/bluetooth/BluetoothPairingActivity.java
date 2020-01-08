@@ -2,6 +2,7 @@ package a3.audientes.bluetooth;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -14,24 +15,21 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import a3.audientes.R;
 import a3.audientes.model.PopupManager;
 import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.view.activities.StartHearingTest;
-import a3.audientes.view.fragments.HearingTest;
 import utils.SharedPrefUtil;
 
 
@@ -41,7 +39,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
     private ListView lvNewDevices;
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     PopupManager popupManager = PopupManager.getInstance();
-    private Button connectToDevice;
+    private Button searchConnectButton;
     private boolean newVisitor;
 
 
@@ -70,7 +68,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
             if(action.equals(BluetoothDevice.ACTION_FOUND)){
                 final BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
-                if(device == null)
+                if(device == null || device.getName() == null)
                     return;
 
                 //Consider checking if device name is missing - we might not want those
@@ -99,8 +97,8 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         lvNewDevices = findViewById(R.id.lvNewDevices);
         bluetoothDevices = new ArrayList<>();
 
-        connectToDevice = findViewById(R.id.connectToDevice);
-        connectToDevice.setOnClickListener(this);
+        searchConnectButton = findViewById(R.id.connectToDevice);
+        searchConnectButton.setOnClickListener(this);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         lvNewDevices.setOnItemClickListener(this);
@@ -118,15 +116,10 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         }
         else if (!bluetoothAdapter.isEnabled())
             enableBluetooth();
-        else {
-            btnDiscover();
-        }
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void btnDiscover() {
+    public void discover() {
         System.out.println("Looking for bluetooth devices");
 
         if(bluetoothAdapter.isDiscovering())
@@ -150,15 +143,12 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //TODO: Create progress dialogue and properly wait
         bluetoothDevices.get(position).createBond();
 
-        //Dummy wait
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Pairing device...");
+        progressDialog.show();
+        handler.postDelayed(progressDialog::dismiss, 3000);
 
         //Stackoverflow code snippet
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
@@ -180,13 +170,19 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         AlertDialog bluetoothDialog = builderbluetooth.create();
 
         buttonbluetooth.setOnClickListener(v12 -> {
-            //bluetoothAdapter.enable();
+            if(bluetoothAdapter == null){
+                System.out.println("Bluetooth not supported");
+            } else {
+                Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivity(enableBTIntent);
+            }
             bluetoothDialog.dismiss();
         });
         bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bluetoothDialog.show();
     }
 
+    //TODO -- ???
     private void noBluetoothSupport() {
         AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
         View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_no_bluetooth_support, null);
@@ -197,21 +193,44 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         bluetoothDialog.show();
     }
 
+    private boolean hasSearched = false;
+
     @Override
     public void onClick(View v) {
-        if (v == connectToDevice){
-            SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
-
-            // TODO: newVisitor && check DB for audiogram
-            if (newVisitor){
-                startActivity(new Intent(this, StartHearingTest.class));
+        if (v == searchConnectButton){
+            if(!hasSearched){
+                search();
+                ((Button)v).setText(R.string.cntnue);
             }
-            else {
-                // TODO: not sure how we pair with device, for now it redirects to hearingProfile
-                startActivity(new Intent(this, HearingProfile.class));
+            else{
+                navigate();
             }
-            finish();
         }
+    }
+
+    private final Handler handler = new Handler();
+
+    private void search() {
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setTitle("Searching for devices");
+        dialog.show();
+        discover();
+        handler.postDelayed(dialog::dismiss, 5000);
+        hasSearched = true;
+    }
+
+    private void navigate() {
+        SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
+
+        // TODO: newVisitor && check DB for audiogram
+        if (newVisitor){
+            startActivity(new Intent(this, StartHearingTest.class));
+        }
+        else {
+            // TODO: not sure how we pair with device, for now it redirects to hearingProfile
+            startActivity(new Intent(this, HearingProfile.class));
+        }
+        finish();
     }
 
     /*
