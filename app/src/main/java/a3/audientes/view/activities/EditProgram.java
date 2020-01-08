@@ -268,38 +268,38 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        /*
+
         if( seekBar.equals(low) ){
             trackEq.setBandLevel((short)0, (short)(progress - 1500));
             short bandLevel = trackEq.getBandLevel((short)0);
             System.out.println("BandLevel: 0 "+bandLevel);
-            low_txt.setText("" + progress);
+            //low_txt.setText("" + progress);
         }
         if( seekBar.equals(low_plus) ){
             trackEq.setBandLevel((short)1, (short)(progress - 1500));
             short bandLevel = trackEq.getBandLevel((short)1);
             System.out.println("BandLevel: 1 "+bandLevel);
-            low_plus_txt.setText("" + progress);
+            //low_plus_txt.setText("" + progress);
         }
         if( seekBar.equals(medium) ){
             trackEq.setBandLevel((short)2, (short)(progress - 1500));
             short bandLevel = trackEq.getBandLevel((short)2);
             System.out.println("BandLevel: 2 "+bandLevel);
-            medium_txt.setText("" + progress);
+            //medium_txt.setText("" + progress);
         }
         if( seekBar.equals(high) ){
             trackEq.setBandLevel((short)3, (short)(progress - 1500));
             short bandLevel = trackEq.getBandLevel((short)3);
             System.out.println("BandLevel: 3 "+bandLevel);
-            high_txt.setText("" + progress);
+            //high_txt.setText("" + progress);
         }
         if( seekBar.equals(high_plus) ){
             trackEq.setBandLevel((short)4, (short)(progress - 1500));
             short bandLevel = trackEq.getBandLevel((short)4);
             System.out.println("BandLevel: 4 "+bandLevel);
-            high_plus_txt.setText("" + progress);
+            //high_plus_txt.setText("" + progress);
         }
-         */
+
     }
 
     @Override
@@ -352,7 +352,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
             musicTrack.seekTo(resumePosition);
             musicTrack.start();
         }
-
          */
 
     }

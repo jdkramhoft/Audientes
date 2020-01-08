@@ -20,6 +20,7 @@ import java.util.Objects;
 import a3.audientes.R;
 import a3.audientes.model.ProgramManager;
 import a3.audientes.bluetooth.BluetoothPairingActivity;
+import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.viewmodel.ProgramViewModel;
 import utils.SharedPrefUtil;
 
