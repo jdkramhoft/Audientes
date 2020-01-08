@@ -44,6 +44,13 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
         high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
 
+        low_plus_txt.setText("low+");
+        low_txt.setText("low");
+        medium_txt.setText("medium");
+        high_txt.setText("high");
+        high_plus_txt.setText("high+");
+
+
         low_plus = findViewById(R.id.low_plus).findViewById(R.id.seekbar);
         low = findViewById(R.id.low).findViewById(R.id.seekbar);
         medium = findViewById(R.id.medium).findViewById(R.id.seekbar);
@@ -177,11 +184,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
             if (extras != null) {
                 Program newProgram = new Program(
                         name.getText().toString(),
-                        Integer.parseInt(low_txt.getText().toString()),
-                        Integer.parseInt(low_plus_txt.getText().toString()),
-                        Integer.parseInt(medium_txt.getText().toString()),
-                        Integer.parseInt(high_txt.getText().toString()),
-                        Integer.parseInt(high_plus_txt.getText().toString()),
+                        low.getProgress(),
+                        low_plus.getProgress(),
+                        medium.getProgress(),
+                        high.getProgress(),
+                        high_plus.getProgress(),
                         1,
                         true
                 );
@@ -209,6 +216,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+        /*
         if( seekBar.equals(low) ){
             low_txt.setText("" + progress);
         }
@@ -224,6 +232,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         if( seekBar.equals(high_plus) ){
             high_plus_txt.setText("" + progress);
         }
+         */
     }
 
     @Override
@@ -240,12 +249,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
     public void updateSliders(Program program){
         name.setText(program.getName());
-        low_plus_txt.setText(String.valueOf(program.getLow_plus()));
-        low_txt.setText(String.valueOf(program.getLow()));
-        medium_txt.setText(String.valueOf(program.getMiddle()));
-        high_txt.setText(String.valueOf(program.getHigh()));
-        high_plus_txt.setText(String.valueOf(program.getHigh_plus()));
-
         low_plus.setProgress(program.getLow_plus());
         low.setProgress(program.getLow());
         medium.setProgress(program.getMiddle());

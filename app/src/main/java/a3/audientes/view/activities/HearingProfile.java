@@ -34,11 +34,11 @@ import a3.audientes.view.fragments.Tab1;
 import a3.audientes.view.fragments.Tab2;
 import a3.audientes.model.PopupManager;
 
-public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener {
+public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
 
     private final String TAB_1_TITLE = "Programs";
     private final String TAB_2_TITLE = "Hearing Test";
-
+    private BottomSheetBehavior bottomSheetBehavior;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +54,9 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         View v = findViewById(R.id.sheet_volume);
+        v.setOnClickListener(this);
 
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(v);
+        bottomSheetBehavior = BottomSheetBehavior.from(v);
         // set callback for changes
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 
@@ -151,6 +152,18 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         win.setAttributes(winParams);
     }
 
+    @Override
+    public void onClick(View v) {
+        // if collapsed
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED){
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
+        else {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+
+
+    }
 }
 
 
