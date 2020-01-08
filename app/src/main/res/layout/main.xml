@@ -105,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerInside"
-            android:src="@drawable/icon_speaker"
+            android:src="@drawable/icon_image_volume_arrow"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/guideline0"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
