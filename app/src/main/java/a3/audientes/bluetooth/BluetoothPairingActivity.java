@@ -200,6 +200,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         if (v == searchConnectButton){
             if(!hasSearched){
                 search();
+                hasSearched = true;
                 ((Button)v).setText(R.string.cntnue);
             }
             else{
@@ -211,12 +212,13 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
     private final Handler handler = new Handler();
 
     private void search() {
+        if(bluetoothAdapter == null)
+            return;
         ProgressDialog dialog = new ProgressDialog(this);
         dialog.setTitle("Searching for devices");
         dialog.show();
         discover();
         handler.postDelayed(dialog::dismiss, 5000);
-        hasSearched = true;
     }
 
     private void navigate() {
