@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,10 +18,14 @@
 
     <include layout="@layout/hearing_profile" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/hearingProfileShader"
+        android:contentDescription="TODO" />
     <!-- include bottom sheet -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sheet_volume"
@@ -99,17 +104,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <ImageView
             android:id="@+id/speakerIcon"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="23dp"
+            android:layout_height="21dp"
             android:scaleType="centerInside"
             android:src="@drawable/icon_image_volume_arrow"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/guideline0"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.42000002" />
 
         <TextView
             android:id="@+id/textView3"
