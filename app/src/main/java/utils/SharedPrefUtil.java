@@ -73,7 +73,7 @@ public class SharedPrefUtil {
         Rect frame = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int statusBarHeight = frame.top;
-        int[] widthHeight = getScreenSize(activity);
+        int[] widthHeight = getScreenSize(activity.getParent());
         Bitmap bitmapResult = Bitmap.createBitmap(bitmap, 0, statusBarHeight, widthHeight[0], widthHeight[1]  - statusBarHeight);
         view.destroyDrawingCache();
         return bitmapResult;
