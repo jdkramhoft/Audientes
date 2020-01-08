@@ -3,6 +3,8 @@ package a3.audientes.view.fragments;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
+import android.media.audiofx.Equalizer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +40,9 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     private ProgramAdapter adapter;
     private ProgramViewModel programviewmodel;
     private ProgramManager programManager = ProgramManager.getInstance();
+    private Equalizer trackEq;
+    private MediaPlayer musicTrack;
+
     public Tab1() {
         // Required empty public constructor
     }
@@ -64,6 +69,12 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
         setupRecyclerView(rod);
 
+        musicTrack = MediaPlayer.create(getContext(), R.raw.song);
+        trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
+        trackEq.setEnabled(true);
+
+        //musicTrack.start();
+
         return rod;
     }
 
@@ -88,6 +99,8 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             intent.putExtra("new", true);
             intent.putExtra("edit", true);
             startActivity(intent);
+
+
         }
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
@@ -150,6 +163,16 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         recyclerView.setAdapter(adapter);
     }
 
+    public void changeEqualizer(int id){
+        Program currentProgram = programManager.getProgram(id);
+        // Set Equalizer bands
+        trackEq.setBandLevel((short)0, (short)(currentProgram.getLow()-1500));
+        trackEq.setBandLevel((short)1, (short)(currentProgram.getLow_plus()-1500));
+        trackEq.setBandLevel((short)2, (short)(currentProgram.getMiddle()-1500));
+        trackEq.setBandLevel((short)3, (short)(currentProgram.getHigh()-1500));
+        trackEq.setBandLevel((short)4, (short)(currentProgram.getHigh_plus()-1500));
+    }
+
 
     private void updateLayout(View v) {
         ImageView imageView;
@@ -168,20 +191,17 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         // set layout when program is selected
         imageView = v.findViewById(R.id.program_bg_id);
 
-        if (!programIsDefault(v))
+        if (!programIsDefault(v)){
             v.findViewById(R.id.canceltext).setVisibility(View.VISIBLE);
+        }
 
+        // Change Equalizer
+        changeEqualizer(getID(v));
 
-        // TODO: update drawable to a more appropriate one
         imageView.setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
         ((TextView)v.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor));
 
-
-
-
-        // TODO: should selected program be moved to beginning of recyclerView?
         prevProgram = v;
-
     }
 
     private boolean programIsDefault(View v) {
@@ -190,16 +210,12 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         return id == 1 || id == 2 || id == 3;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    private int getID(View v) {
+        TextView view = v.findViewById(R.id.hiddenId);
+        int id = Integer.parseInt(view.getText().toString());
+        return id;
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onTab1Interaction(Uri uri);
@@ -225,4 +241,5 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
+
 }
