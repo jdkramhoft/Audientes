@@ -99,6 +99,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
 
 
     private void playSound(Sound sound, int volume){
+        if (getActivity() == null) return;
         AudioManager audioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
 
