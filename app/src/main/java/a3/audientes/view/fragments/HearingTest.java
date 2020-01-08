@@ -1,6 +1,7 @@
 package a3.audientes.view.fragments;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -17,6 +18,7 @@ import a3.audientes.R;
 import a3.audientes.model.AudiogramManager;
 import a3.audientes.model.Sound;
 import a3.audientes.model.SoundManager;
+import a3.audientes.view.activities.StartHearingTest;
 import utils.animation.AnimBtnUtil;
 
 
@@ -27,6 +29,11 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     private int currentHz = 0;
     private AudiogramManager audiogramManager = AudiogramManager.getInstance();
 
+
+
+    public static final int HEARING_TEST = 1;
+    public static final int TEST_OKAY = 13;
+    public static final int TEST_NOT_COMPLETE = 37;
     // Sound
    SoundManager soundManager = SoundManager.getInstance();
 
@@ -69,7 +76,9 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             handler.removeCallbacksAndMessages(null);
             audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             audiogramManager.saveCurrentAudiogram();
-            Objects.requireNonNull(getActivity()).finish();
+            Activity activity = Objects.requireNonNull(getActivity());
+            activity.setResult(TEST_OKAY, null);
+            activity.finish();
         }
         else{
             AnimBtnUtil.bounce(v, getActivity());

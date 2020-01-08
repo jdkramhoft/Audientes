@@ -30,6 +30,7 @@ import a3.audientes.R;
 import a3.audientes.model.PopupManager;
 import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.view.activities.StartHearingTest;
+import a3.audientes.view.fragments.HearingTest;
 import utils.SharedPrefUtil;
 
 
@@ -221,16 +222,35 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         handler.postDelayed(dialog::dismiss, 5000);
     }
 
+
+
     private void navigate() {
         SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
         // TODO: newVisitor && check DB for audiogram
 
-        startActivity(new Intent(this, HearingProfile.class));
+        if (newVisitor){
+            Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
+            startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);
+        } else {
+            startActivity(new Intent(this, HearingProfile.class));
+            finish();
+        }
 
-        if (newVisitor)
-            startActivity(new Intent(this, StartHearingTest.class));
+    }
 
-        finish();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == HearingTest.HEARING_TEST) {
+            if (resultCode == HearingTest.TEST_OKAY) {
+                startActivity(new Intent(this, HearingProfile.class));
+                finish();
+            }
+            if (resultCode == HearingTest.TEST_NOT_COMPLETE) {
+                Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
+                startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);
+            }
+        }
     }
 
     /*
