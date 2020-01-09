@@ -53,6 +53,7 @@ public abstract class DataBase extends RoomDatabase {
             DAO.insertProgram(new Program("Quiet", 1000,1000,1000,1000,1000,2, false));
             DAO.insertProgram(new Program("Home", 1500,1500,1500,1500,1500,2, false));
             DAO.insertProgram(new Program("Loud", 2000,2000,2000,2000,2000,2, false));
+            DAO.insertProgram(new Program("Windy", 3000,3000,3000,3000,3000,2, false));
             return null;
         }
     }

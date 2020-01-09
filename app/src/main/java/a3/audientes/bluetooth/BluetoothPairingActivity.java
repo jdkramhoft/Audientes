@@ -156,7 +156,14 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
 
 
     private void enableBluetooth() {
+        if(bluetoothAdapter == null){
+            System.out.println("Bluetooth not supported");
+        } else {
+            Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivity(enableBTIntent);
+        }
 
+        /*
         AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
         View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_connect_bluetooth, null);
         Button buttonbluetooth =  bluetoothView.findViewById(R.id.button1);
@@ -174,6 +181,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
         });
         bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bluetoothDialog.show();
+         */
     }
 
     //TODO -- ???
@@ -192,6 +200,9 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
+            startActivity(new Intent(this,HearingProfile.class));
+
+            /*
             if(!hasSearched){
                 search();
                 hasSearched = true;
@@ -200,6 +211,8 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
             else{
                 navigate();
             }
+            */
+
         }
         else{
             bluetoothDevices.get(adapter.getPosition(v)).createBond();
