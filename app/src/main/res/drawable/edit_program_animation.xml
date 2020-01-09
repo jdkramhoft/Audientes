@@ -97,7 +97,6 @@
     <item
         android:drawable="@drawable/edit_15"
         android:duration="20" />
-
     <item
         android:drawable="@drawable/edit_16"
         android:duration="20" />
