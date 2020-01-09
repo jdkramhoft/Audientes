@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:color="?android:attr/colorControlHighlight"
     tools:targetApi="lollipop">
+
     <item>
         <shape
             android:shape="rectangle">

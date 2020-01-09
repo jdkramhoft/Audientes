@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,9 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<a3.audiente
     public void onBindViewHolder(@NonNull a3.audientes.bluetooth.BluetoothDeviceListAdapter.MyViewHolder holder, int position) {
 
         BluetoothDevice program = devicelist.get(position);
+        if(program.getName().length()>8){
+            ((ImageView)holder.itemView.findViewById(R.id.imagee1)).setImageResource(R.drawable.icon_bigfatredx);
+        }
         holder.title.setText(program.getName());
     }
 
