@@ -36,15 +36,15 @@ public class SliderAdapter extends PagerAdapter {
             "Your surroundings",
             "Let's get started",
             "How to delete programs",
-            "How to navigate",
+            "How to edit a program",
     };
 
     private String[] slide_descs = {
             "Your hearable will work optimally when you perform a hearing test using the built-in Pure Tone Audiometry, just like when visiting a hearing specialist. ",
             "Before starting the hearing test, we check the surrounding noise level, if it is greater than expected value, we would suggest that the user find another quiet place.",
             "You will be asked to wear the hearable and sit in a quiet area free for disturbing sounds and other factors. A series of sounds will be broadcast through the earphones. It will measure your ability to hear sounds at various pitches and volumes. ",
-            "When deleting a program, you will need to click and hold on the 'x' button in order to delete it. If a program does not have a 'x' in the upper right corner, it means that it is a default program and cannot be deleted.",
-            "When trying to get to the Hearing Test tab, you will have to slide from right to left, or simply tab the Hearing Test title.",
+            "When deleting a program, you will need to click on the 'x' button in order to delete it. If a program does not have a 'x' in the upper right corner, it means that it is a default program and cannot be deleted.",
+            "In order to edit a program, a default or custom program, you will need to click and hold the button - otherwise you will only select the program.",
     };
 
     public SliderAdapter(Context context){
@@ -80,7 +80,7 @@ public class SliderAdapter extends PagerAdapter {
 
         if (position == 4) {
             ImageView anim = (ImageView) view.findViewById(R.id.slide_image);
-            anim.setBackgroundResource(R.drawable.circle_slider_animation);
+            anim.setBackgroundResource(R.drawable.edit_program_animation);
             AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
             animAnimation.start();
         }
