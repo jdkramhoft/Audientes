@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,11 +17,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/hearing_profile" />
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/hearingProfileShader"
+        android:contentDescription="TODO" />
     <!-- include bottom sheet -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sheet_volume"
@@ -99,17 +103,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <ImageView
             android:id="@+id/speakerIcon"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="23dp"
+            android:layout_height="21dp"
             android:scaleType="centerInside"
             android:src="@drawable/icon_image_volume_arrow"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toStartOf="@+id/guideline0"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.42000002" />
 
         <TextView
             android:id="@+id/textView3"
@@ -157,14 +161,14 @@
             android:textSize="20dp"
             app:backgroundColor="#1E2557"
             app:defaultImage="@drawable/icon_image_leftear_default"
-            app:defaultValue="50"
+            app:defaultValue="15"
             app:imageEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline6"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             app:libCornerRadius="30"
-            app:max="100"
+            app:max="15"
             app:maxImage="@drawable/icon_image_leftear_max"
             app:min="0"
             app:minImage="@drawable/icon_image_leftear_min"
@@ -181,14 +185,14 @@
             app:defaultImage="@drawable/icon_image_mid_default"
             app:minImage="@drawable/icon_image_mid_min"
             app:maxImage="@drawable/icon_image_mid_max"
-            app:defaultValue="50"
+            app:defaultValue="15"
             app:imageEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline0"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             app:libCornerRadius="30"
-            app:max="100"
+            app:max="15"
             app:min="0"
             app:textEnabled="false" />
 
@@ -200,14 +204,14 @@
             android:textColor="#BEC3E9"
             android:textSize="20dp"
             app:backgroundColor="#1E2557"
-            app:defaultValue="50"
+            app:defaultValue="15"
             app:imageEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             app:libCornerRadius="30"
-            app:max="100"
+            app:max="15"
             app:min="0"
             app:maxImage="@drawable/icon_image_rightear_max"
             app:defaultImage="@drawable/icon_image_rightear_default"
