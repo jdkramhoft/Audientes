@@ -18,9 +18,11 @@ import androidx.lifecycle.ViewModelProviders;
 import java.util.Objects;
 
 import a3.audientes.R;
+import a3.audientes.model.AudiogramManager;
 import a3.audientes.model.ProgramManager;
 import a3.audientes.bluetooth.BluetoothPairingActivity;
 import a3.audientes.view.activities.HearingProfile;
+import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
 import utils.SharedPrefUtil;
 
@@ -28,7 +30,9 @@ public final class SplashScreen extends Fragment {
 
     private final Handler handler = new Handler();
     private ProgramViewModel programviewmodel;
+    private AudiogramViewModel audiogramViewModel;
     private ProgramManager programManager = ProgramManager.getInstance();
+    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
     private boolean newVisitor;
 
     private final Runnable splash = () -> {
@@ -63,6 +67,13 @@ public final class SplashScreen extends Fragment {
             System.out.println(programs.size());
             programManager.setProgramList(programs);
         });
+        audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
+        audiogramViewModel.getAllAudiogram().observe(this, audiograms -> {
+            audiogramManager.setAudiograms(audiograms);
+
+            System.out.println("Audiograms in db: "+audiograms.size());
+        });
+
 
         return i.inflate(R.layout.splash_screen, container, false);
     }

@@ -9,10 +9,13 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import a3.audientes.model.Audiogram;
 import a3.audientes.model.Program;
 
 @Dao
 public interface DAO {
+
+    // Program
 
     @Insert
     void insertProgram(Program program);
@@ -28,4 +31,21 @@ public interface DAO {
 
     @Query("SELECT * FROM program_table")
     LiveData<List<Program>> getAllPrograms();
+
+    // Audiogram
+
+    @Insert
+    void insertAudiogram(Audiogram audiogram);
+
+    @Update
+    void updateAudiogram(Audiogram audiogram);
+
+    @Delete
+    void deleteAudiogram(Audiogram audiogram);
+
+    @Query("DELETE FROM audiogram_table WHERE id = :ID")
+    void deleteAudiogramWithID(int ID);
+
+    @Query("SELECT * FROM audiogram_table")
+    LiveData<List<Audiogram>> getAllAudiogram();
 }
