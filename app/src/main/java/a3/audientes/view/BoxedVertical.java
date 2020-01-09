@@ -20,6 +20,8 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
+import android.nfc.Tag;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,6 +33,7 @@ import a3.audientes.R;
 
 public class BoxedVertical extends View{
     private static final String TAG = BoxedVertical.class.getSimpleName();
+    private final int LR_ID = 2131230801;
 
     private static final int MAX = 100;
     private static final int MIN = 0;
@@ -97,6 +100,7 @@ public class BoxedVertical extends View{
     private Bitmap mMaxImage;
     private Rect dRect = new Rect();
     private boolean firstRun = true;
+    private AudioManager audioManager;
 
     public BoxedVertical(Context context) {
         super(context);
@@ -120,6 +124,8 @@ public class BoxedVertical extends View{
         int textColor = ContextCompat.getColor(context, R.color.color_text);
         mTextSize = (int) (mTextSize * density);
         mDefaultValue = mMax/2;
+
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
         if (attrs != null) {
             final TypedArray a = context.obtainStyledAttributes(attrs,
@@ -307,6 +313,9 @@ public class BoxedVertical extends View{
         double mTouch = convertTouchEventPoint(event.getY());
         int progress = (int) Math.round(mTouch);
         updateProgress(progress);
+
+
+
     }
 
     private double convertTouchEventPoint(float yPos) {
@@ -334,6 +343,13 @@ public class BoxedVertical extends View{
 
         //convert progress to min-max range
         mPoints = progress * (mMax - mMin) / scrHeight + mMin;
+
+        if (this.getId() == R.id.boxedM){
+            int x = 15 - mPoints;
+            System.out.println("Middlebar progress = " + x);
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, x, 0);
+        }
+
         //reverse value because progress is descending
         mPoints = mMax + mMin - mPoints;
         //if value is not max or min, apply step
@@ -345,6 +361,7 @@ public class BoxedVertical extends View{
             mOnValuesChangeListener
                     .onPointsChanged(this, mPoints);
         }
+
 
         invalidate();
     }
