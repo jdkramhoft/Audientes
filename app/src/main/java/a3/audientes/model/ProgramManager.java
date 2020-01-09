@@ -77,6 +77,9 @@ public class ProgramManager {
     }
 
     public int getNextId(){
+        if(programList.size()==0){
+            return 0;
+        }
         return programList.get(programList.size()-1).getId()+ 1;
     }
 

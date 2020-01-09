@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/longclick1"
+        android:duration="1000" />
+    <item
+        android:drawable="@drawable/longclick2"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick3"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick4"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick5"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick6"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick7"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick8"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick9"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick10"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick11"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick12x9"
+        android:duration="950" />
+    <item
+        android:drawable="@drawable/longclick12_1"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick12_2"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick13"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick14"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick15"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick16x2"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick8"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick7"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick6"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick5"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick4"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick3"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick2"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/longclick1"
+        android:duration="50" />
+
+
+</animation-list>

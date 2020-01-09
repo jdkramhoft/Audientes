@@ -99,15 +99,12 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     }
 
     private void startTest(int testIndex){
-        for (int i = 1; i <=5 ;i++) {
+        for (int i = 0; i <=5 ;i++) {
             int volume = i*2;
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    currentIndex = volume;
-                    currentHz = soundManager.getSounds().get(testIndex).getFreqOfTone();
-                    playSound(soundManager.getSounds().get(testIndex), volume);
-                }
+            handler.postDelayed(() -> {
+                currentIndex = volume;
+                currentHz = soundManager.getSounds().get(testIndex).getFreqOfTone();
+                playSound(soundManager.getSounds().get(testIndex), volume);
             }, 1000 * i);
         }
     }

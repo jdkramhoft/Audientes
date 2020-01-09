@@ -48,7 +48,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:text="Create New Program"
+        android:text="Create New Device"
         android:textAllCaps="false"/>
         -->
 

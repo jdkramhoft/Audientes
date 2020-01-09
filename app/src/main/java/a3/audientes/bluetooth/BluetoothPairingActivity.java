@@ -18,12 +18,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 import a3.audientes.R;
@@ -34,14 +39,16 @@ import a3.audientes.view.fragments.HearingTest;
 import utils.SharedPrefUtil;
 
 
-public class BluetoothPairingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class BluetoothPairingActivity extends AppCompatActivity implements OnClickListener {
 
     private BluetoothAdapter bluetoothAdapter;
-    private ListView lvNewDevices;
+    private RecyclerView lvNewDevices;
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     PopupManager popupManager = PopupManager.getInstance();
     private Button searchConnectButton;
     private boolean newVisitor;
+    OnClickListener clicker = this;
+    BluetoothDeviceListAdapter adapter;
 
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -75,9 +82,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
                 //Consider checking if device name is missing - we might not want those
                 bluetoothDevices.add(device);
                 Log.i("New device found", device.getName() + " " + device.getAddress());
-
-                BluetoothDeviceListAdapter mDeviceListAdapter = new BluetoothDeviceListAdapter(context, R.layout.bluetooth_device_adapter_view, bluetoothDevices);
-                lvNewDevices.setAdapter(mDeviceListAdapter);
+                adapter.notifyItemInserted(bluetoothDevices.size()-1);
             }
 
         }
@@ -98,11 +103,19 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         lvNewDevices = findViewById(R.id.lvNewDevices);
         bluetoothDevices = new ArrayList<>();
 
+
+
+        adapter = new BluetoothDeviceListAdapter(bluetoothDevices, this);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
+        lvNewDevices.setLayoutManager(mLayoutManager);
+        lvNewDevices.setItemAnimator(new DefaultItemAnimator());
+        lvNewDevices.setAdapter(adapter);
+
+
         searchConnectButton = findViewById(R.id.connectToDevice);
         searchConnectButton.setOnClickListener(this);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        lvNewDevices.setOnItemClickListener(this);
 
         registerReceiver(broadcastReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         registerReceiver(broadcastReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
@@ -141,29 +154,16 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        bluetoothDevices.get(position).createBond();
-
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Pairing device...");
-        progressDialog.show();
-        handler.postDelayed(progressDialog::dismiss, 3000);
-
-        //Stackoverflow code snippet
-        final Intent intent = new Intent(Intent.ACTION_MAIN, null);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        final ComponentName cn = new ComponentName("com.android.settings",
-                "com.android.settings.bluetooth.BluetoothSettings");
-        intent.setComponent(cn);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
 
     private void enableBluetooth() {
+        if(bluetoothAdapter == null){
+            System.out.println("Bluetooth not supported");
+        } else {
+            Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivity(enableBTIntent);
+        }
 
+        /*
         AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
         View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_connect_bluetooth, null);
         Button buttonbluetooth =  bluetoothView.findViewById(R.id.button1);
@@ -181,6 +181,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
         });
         bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bluetoothDialog.show();
+         */
     }
 
     //TODO -- ???
@@ -199,6 +200,9 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
+            startActivity(new Intent(this,HearingProfile.class));
+
+            /*
             if(!hasSearched){
                 search();
                 hasSearched = true;
@@ -207,6 +211,25 @@ public class BluetoothPairingActivity extends AppCompatActivity implements Adapt
             else{
                 navigate();
             }
+            */
+
+        }
+        else{
+            bluetoothDevices.get(adapter.getPosition(v)).createBond();
+
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Pairing device...");
+            progressDialog.show();
+            handler.postDelayed(progressDialog::dismiss, 3000);
+
+            //Stackoverflow code snippet
+            final Intent intent = new Intent(Intent.ACTION_MAIN, null);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            final ComponentName cn = new ComponentName("com.android.settings",
+                    "com.android.settings.bluetooth.BluetoothSettings");
+            intent.setComponent(cn);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 
