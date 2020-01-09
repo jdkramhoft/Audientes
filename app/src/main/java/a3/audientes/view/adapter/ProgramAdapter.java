@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import java.util.List;
 import a3.audientes.R;
 import a3.audientes.model.Program;
 import a3.audientes.model.ProgramManager;
+import utils.SharedPrefUtil;
 
 
 public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapter.ProgramAdapter.MyViewHolder> {
@@ -26,6 +28,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
     private Context mcontext;
     private Activity mactivity;
     int counter = 0;
+    private int currentProgramId;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title, hiddenId;
@@ -38,11 +41,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
         }
     }
 
-    public ProgramAdapter(@NonNull List<Program> programList, @Nullable View.OnClickListener onClick, @Nullable View.OnLongClickListener onLongClick, Activity mactivity) {
+    public ProgramAdapter(@NonNull List<Program> programList, @Nullable View.OnClickListener onClick, @Nullable View.OnLongClickListener onLongClick, Activity mactivity, int currentProgramId) {
         this.programList = programList;
         this.onClick = onClick;
         this.onLongClick = onLongClick;
         this.mactivity = mactivity;
+        this.currentProgramId = currentProgramId;
         mcontext= mactivity.getBaseContext();
         ProgramManager.getInstance().setAdapter(this);
     }
@@ -63,6 +67,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
              itemView.setOnClickListener(onClick);
              itemView.setOnLongClickListener(onLongClick);
         }
+
        return new a3.audientes.view.adapter.ProgramAdapter.MyViewHolder(itemView);
     }
 
@@ -79,6 +84,11 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
         holder.hiddenId.setText(String.valueOf(program.getId()));
         holder.id = program.getId();
 
+        if(currentProgramId == holder.id ){
+            View itemView = holder.itemView;
+            ((TextView)itemView.findViewById(R.id.programName)).setTextColor(mcontext.getResources().getColor(R.color.textColor));
+            ((ImageView)itemView.findViewById(R.id.program_bg_id)).setImageDrawable(mcontext.getResources().getDrawable(R.drawable.xml_program_selected));
+        }
     }
 
     @Override
