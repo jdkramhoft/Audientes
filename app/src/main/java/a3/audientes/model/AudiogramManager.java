@@ -34,6 +34,10 @@ public class AudiogramManager {
         return audiograms;
     }
 
+    public void setAudiograms(List<Audiogram> audiograms) {
+        this.audiograms = audiograms;
+    }
+
     public void resetAudiogram(){
         currentAudiogram = new Audiogram();
     }
@@ -44,5 +48,17 @@ public class AudiogramManager {
 
     public void saveCurrentAudiogram(){
         audiograms.add(currentAudiogram);
+    }
+
+    public int getNextId(){
+        if(audiograms.size() == 0){
+            return 0;
+        }else{
+            return audiograms.get(audiograms.size()-1).getId()+ 1;
+        }
+    }
+
+    public Audiogram getCurrentAudiogram() {
+        return currentAudiogram;
     }
 }

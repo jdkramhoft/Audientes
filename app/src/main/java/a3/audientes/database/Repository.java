@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import java.util.List;
 
+import a3.audientes.model.Audiogram;
 import a3.audientes.model.Program;
 
 
@@ -13,14 +14,14 @@ public class Repository {
 
     private DAO DAO;
     private LiveData<List<Program>> allPrograms;
+    private LiveData<List<Audiogram>> allAudiogram;
 
     public Repository(Application application){
         DataBase dataBase = DataBase.getInstance(application);
         DAO = dataBase.dao();
         allPrograms = DAO.getAllPrograms();
-
+        allAudiogram = DAO.getAllAudiogram();
     }
-
 
     // Program
 
@@ -83,4 +84,72 @@ public class Repository {
             return null;
         }
     }
+
+    // Program
+
+    public void InsertAudiogram(Audiogram audiogram){
+        new InsertAudiogramAsyncTask(DAO).execute(audiogram);
+    }
+
+    public void UpdateAudiogram(Audiogram audiogram){
+        new UpdateAudiogramAsyncTask(DAO).execute(audiogram);
+    }
+
+    public void DeleteAudiogram(Audiogram audiogram){
+        new DeleteAudiogramAsyncTask(DAO).execute(audiogram);
+    }
+
+    public LiveData<List<Audiogram>> getAllAudiogram(){
+        return allAudiogram;
+    }
+
+    // AsyncTask
+
+    private static class InsertAudiogramAsyncTask extends AsyncTask<Audiogram, Void, Void> {
+
+        private DAO dao;
+        private InsertAudiogramAsyncTask(DAO DAO){
+            this.dao = DAO;
+        }
+
+        @Override
+        protected Void doInBackground(Audiogram... audiogram) {
+            dao.insertAudiogram(audiogram[0]);
+            return null;
+        }
+    }
+
+
+    private static class UpdateAudiogramAsyncTask extends AsyncTask<Audiogram, Void, Void> {
+
+        private DAO dao;
+        private UpdateAudiogramAsyncTask(DAO DAO){
+            this.dao = DAO;
+        }
+
+        @Override
+        protected Void doInBackground(Audiogram... audiogram) {
+            dao.updateAudiogram(audiogram[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAudiogramAsyncTask extends AsyncTask<Audiogram, Void, Void> {
+
+        private DAO dao;
+        private DeleteAudiogramAsyncTask(DAO DAO){
+            this.dao = DAO;
+        }
+
+        @Override
+        protected Void doInBackground(Audiogram... audiogram) {
+            dao.deleteAudiogram(audiogram[0]);
+            return null;
+        }
+    }
+
+
+
+
+
 }
