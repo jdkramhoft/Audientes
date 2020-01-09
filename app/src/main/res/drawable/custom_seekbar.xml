@@ -1,30 +1,21 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape
-            android:shape="line">
-
-            <stroke
-                android:color="#333353"
-                android:width="10dp"/>
+            android:shape="rectangle"
+            android:thickness="1dp">
+            <solid
+                android:color="#333353" />
             <corners
-                android:radius="1dp"/>
+                android:radius="5dp"/>
         </shape>
 
     </item>
-
     <item android:id="@android:id/progress">
-        <clip android:drawable="@color/lightDarkPink">
-
-        </clip>
-    </item>
-
-    <item android:id="@android:id/secondaryProgress">
         <clip>
             <shape
-                android:shape="line">
-                <stroke
-                    android:color="#9808"
-                    android:width="10dp"/>
+                android:shape="rectangle">
+                <solid
+                    android:color="@color/lightDarkPink" />
                 <corners
                     android:radius="5dp"/>
             </shape>

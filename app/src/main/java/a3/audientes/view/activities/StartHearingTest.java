@@ -13,6 +13,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     ImageButton hearing_button;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +26,6 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-
         if (v == hearing_button) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.start_hearing_test_framelayout, new HearingTest())
@@ -33,4 +33,6 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         }
 
     }
+
+
 }
