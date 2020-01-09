@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="?android:attr/colorControlHighlight"
+    tools:targetApi="lollipop">
+    <item>
+        <shape
+            android:shape="rectangle">
+            <corners android:radius="15dp" />
+            <gradient
+                android:startColor="@color/transparentWhite"
+                android:centerColor="@color/transparentWhite"
+                android:endColor="@color/transparentWhite"
+                android:angle="45"
+                />
+        </shape>
+    </item>
+</layer-list>
