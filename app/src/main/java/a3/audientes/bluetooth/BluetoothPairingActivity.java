@@ -19,9 +19,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -154,7 +152,6 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
 
     }
 
-
     private void enableBluetooth() {
         if(bluetoothAdapter == null){
             System.out.println("Bluetooth not supported");
@@ -200,9 +197,6 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
-            startActivity(new Intent(this,HearingProfile.class));
-
-            /*
             if(!hasSearched){
                 search();
                 hasSearched = true;
@@ -211,7 +205,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
             else{
                 navigate();
             }
-            */
+
 
         }
         else{
