@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,8 @@ public class Audiogram {
     private ArrayList<Integer> x = new ArrayList<>();
     @TypeConverters(AudiogramConverter.class)
     private ArrayList<Integer> y = new ArrayList<>();
-    private String date;
+    @TypeConverters(AudiogramTimeConverter.class)
+    private Date date;
 
     public Audiogram() {}
 
@@ -60,11 +61,15 @@ public class Audiogram {
         this.y = y;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public String getDateString() {
+        return date.toString().substring(0,11);
+    }
+
+    public void setDate(Date date) {
         this.date = date;
     }
 }

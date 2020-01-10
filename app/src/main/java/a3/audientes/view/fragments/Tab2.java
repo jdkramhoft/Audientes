@@ -15,7 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import a3.audientes.R;
+import a3.audientes.model.AudiogramManager;
 import a3.audientes.view.activities.StartHearingTest;
 
 
@@ -32,7 +35,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     private Button take_new_test_btn;
     private TextView desc;
     private static Fragment child;
-    private String audiogramDate;
+    private String date;
+    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
 
     public Tab2() {
         // Required empty public constructor
@@ -50,6 +54,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         return new Tab2();
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +67,16 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         take_new_test_btn.setOnClickListener(this);
         desc = root.findViewById(R.id.audiogram_desc_id);
         // TODO: get audiogramDate from db
-        desc.setText("Newest audiogram " + audiogramDate);
+        date = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getDateString();
+        desc.setText("Newest audiogram " + date);
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        date = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getDateString();
+        desc.setText("Newest audiogram " + date);
     }
 
     // onViewCreated is called after onCreateView
