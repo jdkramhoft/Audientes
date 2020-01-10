@@ -28,7 +28,7 @@
         android:layout_height="55dp"
         android:layout_marginBottom="74dp"
         android:gravity="center"
-        android:text="Please press the button every time you hear a sound"
+        android:text="Press button when you hear a sound"
         android:textColor="#BEC3E9"
         app:layout_constraintBottom_toTopOf="@+id/hearing_button"
         app:layout_constraintEnd_toEndOf="parent"
