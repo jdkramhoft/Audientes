@@ -258,7 +258,7 @@ public class BoxedVertical extends View{
 
     private void drawIcon(Bitmap bitmap, Canvas canvas){
         bitmap = getResizedBitmap(bitmap,canvas.getWidth()/2, canvas.getWidth()/2);
-        canvas.drawBitmap(bitmap, null, new RectF((canvas.getWidth()/2)-(bitmap.getWidth()/2), canvas.getHeight()-bitmap.getHeight(), (canvas.getWidth()/3)+bitmap.getWidth(), canvas.getHeight()), null);
+        canvas.drawBitmap(bitmap, null, new RectF((canvas.getWidth()/2)-(bitmap.getWidth()/2), (canvas.getHeight()-bitmap.getHeight()-30), (canvas.getWidth()/3)+bitmap.getWidth(), (canvas.getHeight()-40)), null);
     }
 
     private Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".view.activities.HearingProfile">
 
-
     <!-- include main content -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,11 +35,18 @@
 
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline0"
+            android:id="@+id/guideline6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.57" />
+            app:layout_constraintGuide_percent="0.15" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.29" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
             android:layout_width="wrap_content"
@@ -48,17 +54,26 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.43" />
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.57" />
+
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.71" />
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
+            android:id="@+id/guideline7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.82" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/botguide"
             android:layout_width="wrap_content"
@@ -66,29 +81,17 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="1.0" />
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
+            android:id="@+id/guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.28" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.82" />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.19" />
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.13" />
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85" />
 
         <ImageView
             android:id="@+id/bg_image"
@@ -160,6 +163,7 @@
             android:textColor="#B47800"
             android:textSize="20dp"
             app:backgroundColor="#1E2557"
+            app:defaultImage="@drawable/icon_ear_default"
             app:imageEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -168,9 +172,8 @@
             app:libCornerRadius="30"
             app:max="100"
             app:min="0"
-            app:maxImage="@drawable/icon_image_leftear_max"
-            app:defaultImage="@drawable/icon_image_leftear_default"
-            app:minImage="@drawable/icon_image_leftear_min"
+            app:maxImage="@drawable/icon_ear_max"
+            app:minImage="@drawable/icon_ear_min"
             app:textEnabled="false" />
 
         <a3.audientes.view.BoxedVertical
@@ -181,6 +184,10 @@
             android:textColor="#BEC3E9"
             android:textSize="20dp"
             app:backgroundColor="#1E2557"
+            app:defaultImage="@drawable/icon_volume_deafult_1"
+            app:minImage="@drawable/icon_volume_min_1"
+            app:maxImage="@drawable/icon_volume_max_1"
+            app:defaultValue="15"
             app:imageEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
             app:layout_constraintEnd_toStartOf="@+id/guideline0"
@@ -189,9 +196,6 @@
             app:libCornerRadius="30"
             app:max="100"
             app:min="0"
-            app:maxImage="@drawable/icon_image_mid_max"
-            app:defaultImage="@drawable/icon_image_mid_default"
-            app:minImage="@drawable/icon_image_mid_min"
             app:textEnabled="false" />
 
         <a3.audientes.view.BoxedVertical
@@ -210,9 +214,9 @@
             app:libCornerRadius="30"
             app:max="100"
             app:min="0"
-            app:maxImage="@drawable/icon_image_rightear_max"
-            app:defaultImage="@drawable/icon_image_rightear_default"
-            app:minImage="@drawable/icon_image_rightear_min"
+            app:maxImage="@drawable/icon_ear_right_max"
+            app:defaultImage="@drawable/icon_ear_right_default"
+            app:minImage="@drawable/icon_ear_right_min"
             app:textEnabled="false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
