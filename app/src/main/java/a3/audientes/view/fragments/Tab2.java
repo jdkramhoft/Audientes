@@ -19,6 +19,7 @@ import java.util.Date;
 
 import a3.audientes.R;
 import a3.audientes.model.AudiogramManager;
+import a3.audientes.view.activities.AudiogramHistory;
 import a3.audientes.view.activities.StartHearingTest;
 
 
@@ -32,7 +33,7 @@ import a3.audientes.view.activities.StartHearingTest;
  */
 public class Tab2 extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener listener;
-    private Button take_new_test_btn;
+    private Button take_new_test_btn, audiogram_history_btn;
     private TextView desc;
     private static Fragment child;
     private String date;
@@ -65,6 +66,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.tab2, container, false);
         take_new_test_btn = root.findViewById(R.id.take_new_test_btn);
         take_new_test_btn.setOnClickListener(this);
+
+
+        // TODO: only display button if any audiograms in db
+        audiogram_history_btn = root.findViewById(R.id.audiogram_history_btn);
+        audiogram_history_btn.setOnClickListener(this);
+
+
+
         desc = root.findViewById(R.id.audiogram_desc_id);
         // TODO: get audiogramDate from db
         date = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getDateString();
@@ -126,6 +135,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
 
             Intent intent = new Intent(getActivity(), StartHearingTest.class);
             startActivity(intent);
+
+        }
+        else if (v == audiogram_history_btn){
+            // show popup with scrollable cards
+            startActivity(new Intent(getContext(), AudiogramHistory.class));
+
+
+
 
         }
     }

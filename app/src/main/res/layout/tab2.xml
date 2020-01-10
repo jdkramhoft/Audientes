@@ -107,5 +107,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.93" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/audiogram_history_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        android:text="History"
+        android:textColor="@color/transparentWhite"
+        android:background="@color/darkBlue">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
