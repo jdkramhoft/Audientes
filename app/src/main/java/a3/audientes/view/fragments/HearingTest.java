@@ -14,14 +14,14 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.sql.Date;
 import java.util.Objects;
 import a3.audientes.R;
 import a3.audientes.model.AudiogramManager;
 import a3.audientes.model.Sound;
 import a3.audientes.model.SoundManager;
-import a3.audientes.view.activities.StartHearingTest;
 import a3.audientes.viewmodel.AudiogramViewModel;
-import a3.audientes.viewmodel.ProgramViewModel;
 import utils.animation.AnimBtnUtil;
 
 
@@ -81,6 +81,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             handler.removeCallbacksAndMessages(null);
             audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             audiogramManager.getCurrentAudiogram().setId(audiogramManager.getNextId());
+            long millis=System.currentTimeMillis();
+            audiogramManager.getCurrentAudiogram().setDate(new Date(millis).toString());
             audiogramViewModel.Insert(audiogramManager.getCurrentAudiogram());
             audiogramManager.saveCurrentAudiogram();
             Activity activity = Objects.requireNonNull(getActivity());

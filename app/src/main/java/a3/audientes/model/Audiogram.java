@@ -2,8 +2,10 @@ package a3.audientes.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Audiogram {
     private ArrayList<Integer> x = new ArrayList<>();
     @TypeConverters(AudiogramConverter.class)
     private ArrayList<Integer> y = new ArrayList<>();
+    private String date;
 
     public Audiogram() {}
 
@@ -55,5 +58,13 @@ public class Audiogram {
 
     public void setY(ArrayList<Integer> y) {
         this.y = y;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

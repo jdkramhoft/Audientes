@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import a3.audientes.R;
 import a3.audientes.view.activities.StartHearingTest;
@@ -26,10 +27,12 @@ import a3.audientes.view.activities.StartHearingTest;
  * Use the {@link a3.audientes.view.fragments.Tab2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Tab2 extends Fragment implements View.OnClickListener{
+public class Tab2 extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener listener;
     private Button take_new_test_btn;
+    private TextView desc;
     private static Fragment child;
+    private String audiogramDate;
 
     public Tab2() {
         // Required empty public constructor
@@ -57,6 +60,9 @@ public class Tab2 extends Fragment implements View.OnClickListener{
         View root = inflater.inflate(R.layout.tab2, container, false);
         take_new_test_btn = root.findViewById(R.id.take_new_test_btn);
         take_new_test_btn.setOnClickListener(this);
+        desc = root.findViewById(R.id.audiogram_desc_id);
+        // TODO: get audiogramDate from db
+        desc.setText("Newest audiogram " + audiogramDate);
         return root;
     }
 
