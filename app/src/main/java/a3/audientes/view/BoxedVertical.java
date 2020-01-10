@@ -125,9 +125,14 @@ public class BoxedVertical extends View{
 
         int textColor = ContextCompat.getColor(context, R.color.color_text);
         mTextSize = (int) (mTextSize * density);
-        mDefaultValue = mMax/2;
 
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        int streamVolume= audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+
+        int newRange = mMax - mMin;
+        int oldRange = (SOUND_MAX - SOUND_MIN);
+        int soundValue = (((streamVolume - mMin) * newRange) / oldRange);
+        mDefaultValue = soundValue > mMax ? mMax/2 : soundValue;
 
         if (attrs != null) {
             final TypedArray a = context.obtainStyledAttributes(attrs,
@@ -345,7 +350,6 @@ public class BoxedVertical extends View{
             int oldRange = mMax - mMin;
             int newRange = (SOUND_MAX - SOUND_MIN);
             int soundValue = 15 - (((mPoints - mMin) * newRange) / oldRange);
-            System.out.println("Midint new_value = ((mPoints - mMin) / (mMax - mMin)) * (15);dlebar progress = " + soundValue);
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, soundValue, 0);
         }
 
