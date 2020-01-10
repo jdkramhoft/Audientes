@@ -27,6 +27,7 @@ import a3.audientes.model.AudiogramManager;
 import a3.audientes.model.Program;
 import a3.audientes.model.ProgramManager;
 import a3.audientes.viewmodel.ProgramViewModel;
+import utils.SharedPrefUtil;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt, name;
@@ -256,6 +257,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                     programManager.addProgram(newProgram);
                     programViewModel.Insert(newProgram);
                     programManager.programadapter.notifyItemInserted(nextindex);
+                    SharedPrefUtil.saveSharedSetting(this,"currentProgram", Integer.toString(nextindex));
                 }
             }
 

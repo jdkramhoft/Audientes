@@ -9,6 +9,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import a3.audientes.model.Audiogram;
 import a3.audientes.model.Program;
 
@@ -73,6 +76,7 @@ public abstract class DataBase extends RoomDatabase {
             newAudiogram.addIndex(new int[]{2000,6});
             newAudiogram.addIndex(new int[]{5000,4});
             newAudiogram.addIndex(new int[]{10000,5});
+            newAudiogram.setDate(new Date());
             DAO.insertAudiogram(newAudiogram);
             return null;
         }

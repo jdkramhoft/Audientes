@@ -83,6 +83,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
         holder.title.setText(program.getName());
         holder.hiddenId.setText(String.valueOf(program.getId()));
         holder.id = program.getId();
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(mactivity, "currentProgram", "1"));
 
         if(currentProgramId == holder.id ){
             View itemView = holder.itemView;
