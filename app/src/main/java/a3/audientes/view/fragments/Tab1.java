@@ -80,8 +80,6 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
         trackEq.setEnabled(true);
         changeEqualizer(currentProgramId);
-        //musicTrack.start();
-
         return rod;
     }
 
@@ -95,7 +93,9 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             System.out.println(programList.get(i).getName());
         }
         currentProgramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentProgram", "1"));
-        //adapter.notifyDataSetChanged();
+        System.out.println(currentProgramId);
+        changeEqualizer(currentProgramId);
+        selecedProgram(currentProgramId);
     }
 
     @Override

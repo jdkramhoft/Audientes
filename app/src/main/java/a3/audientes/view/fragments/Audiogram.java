@@ -27,6 +27,7 @@ import com.github.mikephil.charting.utils.EntryXComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import a3.audientes.R;
@@ -51,6 +52,7 @@ public class Audiogram extends Fragment {
 
     private  List<int[]> left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
     private  List<int[]> right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
+
 
     private int[] freqs = {};
     private LineChart chart;
