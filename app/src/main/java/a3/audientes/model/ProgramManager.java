@@ -1,5 +1,7 @@
 package a3.audientes.model;
 
+import android.widget.Switch;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,5 +87,22 @@ public class ProgramManager {
 
     public void setAdapter(ProgramAdapter programadapter){
         this.programadapter = programadapter;
+    }
+
+    public int defaultLevel(int level, int program) {
+        int max = 3000;
+        int diffents = (level-5)*100;
+        switch (program) {
+            case 1:
+                return max/3+diffents;
+            case 2:
+                return max/2+diffents;
+            case 3:
+                return max-(max/3)+diffents;
+            case 4:
+                return max-(max/6)+diffents;
+            default:
+                return max/2;
+        }
     }
 }

@@ -149,7 +149,8 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             // Check if default program is selected... id 1,2,3 are default
             if(currentId.getText().toString().equals("1")
             || currentId.getText().toString().equals("2")
-            || currentId.getText().toString().equals("3")){
+            || currentId.getText().toString().equals("3")
+            || currentId.getText().toString().equals("4")){
                 intent.putExtra("id", currentId.getText().toString());
                 intent.putExtra("edit", false);
             }else{
@@ -220,7 +221,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     private boolean programIsDefault(View v) {
         TextView view = v.findViewById(R.id.hiddenId);
         int id = Integer.parseInt(view.getText().toString());
-        return id == 1 || id == 2 || id == 3;
+        return id == 1 || id == 2 || id == 3 || id == 4;
     }
 
     private int getID(View v) {

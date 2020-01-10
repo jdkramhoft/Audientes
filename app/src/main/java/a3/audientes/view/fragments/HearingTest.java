@@ -16,15 +16,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import a3.audientes.R;
+import a3.audientes.model.Audiogram;
 import a3.audientes.model.AudiogramManager;
+import a3.audientes.model.Program;
+import a3.audientes.model.ProgramManager;
 import a3.audientes.model.Sound;
 import a3.audientes.model.SoundManager;
 import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.viewmodel.AudiogramViewModel;
+import a3.audientes.viewmodel.ProgramViewModel;
 import utils.animation.AnimBtnUtil;
 
 
@@ -32,8 +37,11 @@ public class HearingTest extends Fragment implements View.OnClickListener {
 
     private int testIndex = 0;
     private int currentIndex = 0;
+    private int currentVolume = 0;
     private int currentHz = 0;
     private AudiogramManager audiogramManager = AudiogramManager.getInstance();
+    private ProgramManager programManager = ProgramManager.getInstance();
+    private ProgramViewModel programViewModel;
     private AudiogramViewModel audiogramViewModel;
 
 
@@ -64,6 +72,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         audiogramManager.resetAudiogram();
         audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
+        programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         startTest(testIndex);
     }
 
@@ -85,9 +94,9 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             audiogramManager.getCurrentAudiogram().setId(audiogramManager.getNextId());
             audiogramManager.getCurrentAudiogram().setDate(new Date());
-            System.out.println(audiogramManager.getCurrentAudiogram().getDate());
             audiogramViewModel.Insert(audiogramManager.getCurrentAudiogram());
             audiogramManager.saveCurrentAudiogram();
+            updateDefualtPrograms(audiogramManager.getCurrentAudiogram());
             Activity activity = Objects.requireNonNull(getActivity());
             activity.setResult(TEST_OKAY, null);
             Intent i = new Intent(getContext(), HearingProfile.class);
@@ -98,8 +107,9 @@ public class HearingTest extends Fragment implements View.OnClickListener {
         else{
             AnimBtnUtil.bounce(v, getActivity());
             handler.removeCallbacksAndMessages(null);
-            System.out.println(currentIndex);
-            System.out.println(currentHz);
+            System.out.println("Index: "+currentIndex);
+            System.out.println("Volume:"+currentVolume);
+            System.out.println("Hz: "+currentHz);
             audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             startTest(testIndex);
         }
@@ -107,8 +117,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     }
 
     private void startTest(int testIndex){
-        for (int i = 0; i <=5 ;i++) {
-            int volume = i*2;
+        for (int i = 1; i <=10 ;i++) {
+            int volume = i;
             handler.postDelayed(() -> {
                 currentIndex = volume;
                 currentHz = soundManager.getSounds().get(testIndex).getFreqOfTone();
@@ -130,5 +140,21 @@ public class HearingTest extends Fragment implements View.OnClickListener {
                 AudioTrack.MODE_STATIC);
         audioTrack.write(sound.getGeneratedSnd(), 0, sound.getGeneratedSnd().length);
         audioTrack.play();
+    }
+
+    private void updateDefualtPrograms(Audiogram audiogram){
+        for(int i = 1; i <= 4; i++){
+            Program program = programManager.getProgram(i);
+            System.out.println(program.getId());
+            ArrayList<Integer> y = audiogram.getY();
+            program.setLow(programManager.defaultLevel(y.get(0),i));
+            program.setLow_plus(programManager.defaultLevel(y.get(1),i));
+            program.setMiddle(programManager.defaultLevel(y.get(2),i));
+            program.setHigh(programManager.defaultLevel(y.get(3),i));
+            program.setHigh_plus(programManager.defaultLevel(y.get(4),i));
+            programManager.update(program);
+            programViewModel.Update(program);
+        }
+
     }
 }
