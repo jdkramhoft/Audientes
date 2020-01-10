@@ -33,6 +33,8 @@ import a3.audientes.R;
 
 public class BoxedVertical extends View{
     private static final String TAG = BoxedVertical.class.getSimpleName();
+    private static final int SOUND_MAX = 15;
+    private static final int SOUND_MIN = 0;
     private final int LR_ID = 2131230801;
 
     private static final int MAX = 100;
@@ -123,9 +125,14 @@ public class BoxedVertical extends View{
 
         int textColor = ContextCompat.getColor(context, R.color.color_text);
         mTextSize = (int) (mTextSize * density);
-        mDefaultValue = mMax/2;
 
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        int streamVolume= audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+
+        int newRange = mMax - mMin;
+        int oldRange = (SOUND_MAX - SOUND_MIN);
+        int soundValue = (((streamVolume - mMin) * newRange) / oldRange);
+        mDefaultValue = soundValue > mMax ? mMax/2 : soundValue;
 
         if (attrs != null) {
             final TypedArray a = context.obtainStyledAttributes(attrs,
@@ -286,11 +293,6 @@ public class BoxedVertical extends View{
                     updateOnTouch(event);
                     break;
                 case MotionEvent.ACTION_UP:
-                    if (mOnValuesChangeListener != null)
-                        mOnValuesChangeListener.onStopTrackingTouch(this);
-                    setPressed(false);
-                    this.getParent().requestDisallowInterceptTouchEvent(false);
-                    break;
                 case MotionEvent.ACTION_CANCEL:
                     if (mOnValuesChangeListener != null)
                         mOnValuesChangeListener.onStopTrackingTouch(this);
@@ -345,9 +347,10 @@ public class BoxedVertical extends View{
         mPoints = progress * (mMax - mMin) / scrHeight + mMin;
 
         if (this.getId() == R.id.boxedM){
-            int x = 15 - mPoints;
-            System.out.println("Middlebar progress = " + x);
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, x, 0);
+            int oldRange = mMax - mMin;
+            int newRange = (SOUND_MAX - SOUND_MIN);
+            int soundValue = 15 - (((mPoints - mMin) * newRange) / oldRange);
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, soundValue, 0);
         }
 
         //reverse value because progress is descending
