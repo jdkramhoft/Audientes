@@ -152,7 +152,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             program.setMiddle(programManager.defaultLevel(y.get(2),i));
             program.setHigh(programManager.defaultLevel(y.get(3),i));
             program.setHigh_plus(programManager.defaultLevel(y.get(4),i));
-            programManager.update(program);
+            programManager.updateDefault(program);
             programViewModel.Update(program);
         }
 
