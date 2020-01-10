@@ -3,6 +3,7 @@ package a3.audientes.view.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
@@ -22,6 +23,7 @@ import a3.audientes.R;
 import a3.audientes.model.AudiogramManager;
 import a3.audientes.model.Sound;
 import a3.audientes.model.SoundManager;
+import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.viewmodel.AudiogramViewModel;
 import utils.animation.AnimBtnUtil;
 
@@ -88,6 +90,9 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             audiogramManager.saveCurrentAudiogram();
             Activity activity = Objects.requireNonNull(getActivity());
             activity.setResult(TEST_OKAY, null);
+            Intent i = new Intent(getContext(), HearingProfile.class);
+            i.putExtra("ARG_PAGE", 1);
+            startActivity(i);
             activity.finish();
         }
         else{

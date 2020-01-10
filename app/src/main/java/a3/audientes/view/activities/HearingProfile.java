@@ -59,6 +59,8 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         ViewPager viewPager = findViewById(R.id.pager);
         viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        int page = getIntent().getIntExtra("ARG_PAGE", 0);
+        viewPager.setCurrentItem(page);
 
         v = findViewById(R.id.sheet_volume);
         v.setOnClickListener(this);
