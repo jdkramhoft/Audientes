@@ -184,9 +184,9 @@
             android:textColor="#BEC3E9"
             android:textSize="20dp"
             app:backgroundColor="#1E2557"
-            app:defaultImage="@drawable/icon_volume_deafult"
-            app:minImage="@drawable/icon_volume_min"
-            app:maxImage="@drawable/icon_volume_max"
+            app:defaultImage="@drawable/icon_volume_deafult_1"
+            app:minImage="@drawable/icon_volume_min_1"
+            app:maxImage="@drawable/icon_volume_max_1"
             app:defaultValue="15"
             app:imageEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/guideline5"
@@ -214,9 +214,9 @@
             app:libCornerRadius="30"
             app:max="100"
             app:min="0"
-            app:maxImage="@drawable/icon_image_rightear_max"
-            app:defaultImage="@drawable/icon_image_rightear_default"
-            app:minImage="@drawable/icon_image_rightear_min"
+            app:maxImage="@drawable/icon_ear_right_max"
+            app:defaultImage="@drawable/icon_ear_right_default"
+            app:minImage="@drawable/icon_ear_right_min"
             app:textEnabled="false" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
