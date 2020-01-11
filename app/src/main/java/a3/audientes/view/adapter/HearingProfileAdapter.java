@@ -24,7 +24,7 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return Tab1.newInstance();
             case 1:
-                Audiogram audiogram = Audiogram.newInstance(null, null, null);
+                Audiogram audiogram = Audiogram.newInstance();
                 return Tab2.newInstance(audiogram);
             default:
                 return null;

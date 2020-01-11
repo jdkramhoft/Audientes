@@ -5,4 +5,5 @@
     android:id="@+id/audiogram_history_recycler"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activities.AudiogramHistory" />
+    tools:context=".view.activities.AudiogramHistory"
+    android:background="@drawable/main_bg"/>
