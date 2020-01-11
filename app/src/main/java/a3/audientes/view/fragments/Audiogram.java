@@ -147,7 +147,8 @@ public class Audiogram extends Fragment {
         LineChart chart = v.findViewById(R.id.chart);
         chart.getDescription().setEnabled(false);
         chart.setViewPortOffsets(100f, 100f, 100f, 100f);
-        chart.setTouchEnabled(false);        LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
+        chart.setTouchEnabled(false);
+        LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
         left_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
         // styling left ear
@@ -207,7 +208,7 @@ public class Audiogram extends Fragment {
         data_lines.add(right_ear);
         LineData data = new LineData(data_lines);
         chart.setData(data);
-        chart.animateXY(1500,1200, Easing.EaseInCubic);
+        chart.animateXY(150,120, Easing.EaseInCubic);
     }
 
     private List<Entry> makeEntries(List<int[]> graf){

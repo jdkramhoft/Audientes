@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,40 +17,40 @@ import java.util.List;
 
 import a3.audientes.R;
 import a3.audientes.model.Audiogram;
+import a3.audientes.model.AudiogramManager;
 
 public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapter.AudiogramAdapter.MyViewHolder> {
 
+    private final AudiogramManager audiogramManager;
     private List<a3.audientes.model.Audiogram> audiogramList;
     FragmentManager fragmentManager;
     boolean selected;
 
-    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager) {
+    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramManager audiogramManager) {
         this.audiogramList = audiogramList;
         this.fragmentManager = fragmentManager;
+        this.audiogramManager = audiogramManager;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+        private TextView date, title, apply;
+        private Audiogram currentAudiogram;
+        private LottieAnimationView anim;
+
+        public MyViewHolder(@NonNull View view) {
+            super(view);
+            currentAudiogram = audiogramManager.getCurrentAudiogram();
+            date = view.findViewById(R.id.subtitle_text);
+            title = view.findViewById(R.id.title_text);
+            anim = view.findViewById(R.id.action_button_1);
+            apply = view.findViewById(R.id.textview_1);
+        }
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.audiogram_card, parent, false);
-
-        TextView tv = itemView.findViewById(R.id.textview_1);
-        LottieAnimationView action_btn = itemView.findViewById(R.id.action_button_1);
-        action_btn.setAnimation(R.raw.success);
-
-        action_btn.addAnimatorListener(new AnimatorListenerAdapter() {
-            @Override public void onAnimationEnd(Animator animation) {
-                action_btn.setVisibility(View.INVISIBLE);
-                action_btn.setProgress(0);
-                tv.setVisibility(View.VISIBLE);
-            }
-        });
-        tv.setOnClickListener(v -> {
-            tv.setVisibility(View.INVISIBLE);
-            action_btn.setVisibility(View.VISIBLE);
-            action_btn.playAnimation();
-        });
-
         return new a3.audientes.view.adapter.AudiogramAdapter.MyViewHolder(itemView);
     }
 
@@ -59,36 +58,59 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Audiogram audiogram = audiogramList.get(position);
 
+        holder.apply.setOnClickListener(v -> {
+            holder.apply.setVisibility(View.INVISIBLE);
+            holder.anim.setVisibility(View.VISIBLE);
+            holder.anim.playAnimation();
+            audiogramManager.setCurrentAudiogram(audiogramList.get(position));
+        });
+
+        holder.anim.addAnimatorListener(new AnimatorListenerAdapter() {
+            @Override public void onAnimationEnd(Animator animation) {
+                holder.anim.setVisibility(View.INVISIBLE);
+                holder.anim.setProgress(0);
+                notifyDataSetChanged();
+            }
+        });
+
+        if (audiogram.equals(audiogramManager.getCurrentAudiogram())){
+            updateLayout(true, holder);
+        }
+        else {
+            updateLayout(false, holder);
+        }
+
         // TODO: use audiogram.getDateString() instead
-        holder.dateView.setText(audiogram.getDate().toString());
-
-
+        holder.date.setText(audiogram.getDate().toString());
         a3.audientes.view.fragments.Audiogram fragment = a3.audientes.view.fragments.Audiogram.newInstance();
-
         //fragment.drawAudiogram(audiogram.getGraf(), audiogram.getGraf(), holder.view);
 
-
         fragmentManager.beginTransaction().replace(R.id.media_image, fragment).commit();
-
-
     }
+
 
     @Override
     public int getItemCount() {
         return audiogramList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-        private FrameLayout frameLayout;
-        private TextView dateView;
-
-
-        public MyViewHolder(@NonNull View view) {
-            super(view);
-            frameLayout = view.findViewById(R.id.media_image);
-            dateView = view.findViewById(R.id.subtitle_text);
+    private void updateLayout(boolean isSelected, MyViewHolder holder){
+        if (isSelected){
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.lightGreen));
+            holder.apply.setEnabled(false);
+            holder.apply.setClickable(false);
+            holder.apply.setVisibility(View.INVISIBLE);
         }
+        else {
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.white));
+            holder.apply.setEnabled(true);
+            holder.apply.setClickable(true);
+            holder.apply.setVisibility(View.VISIBLE);
+        }
+
     }
+
+
 
 
 }

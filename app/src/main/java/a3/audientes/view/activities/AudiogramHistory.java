@@ -19,6 +19,7 @@ import a3.audientes.R;
 import a3.audientes.model.Audiogram;
 import a3.audientes.model.AudiogramManager;
 import a3.audientes.view.adapter.AudiogramAdapter;
+import utils.SharedPrefUtil;
 
 public class AudiogramHistory extends AppCompatActivity implements a3.audientes.view.fragments.Audiogram.OnFragmentInteractionListener{
     private AudiogramManager audiogramManager = AudiogramManager.getInstance();
@@ -34,7 +35,10 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         audiogramList = audiogramManager.getAudiograms();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager ));
+
+        // TODO: get selected Audiogram
+        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramManager));
+
     }
 
 

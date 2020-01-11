@@ -7,16 +7,16 @@ public class AudiogramManager {
 
     private static AudiogramManager single_instance = null;
     private List<Audiogram> audiograms = new ArrayList<>();
-    private Audiogram currentAudiogram = new Audiogram();
+    private Audiogram currentAudiogram;
 
     private AudiogramManager() {
-        Audiogram newAudiogram = new Audiogram();
-        newAudiogram.addIndex(new int[]{500,5});
-        newAudiogram.addIndex(new int[]{1000,7});
-        newAudiogram.addIndex(new int[]{2000,4});
-        newAudiogram.addIndex(new int[]{5000,5});
-        newAudiogram.addIndex(new int[]{10000,7});
-        audiograms.add(newAudiogram);
+        currentAudiogram = new Audiogram();
+        currentAudiogram.addIndex(new int[]{500,5});
+        currentAudiogram.addIndex(new int[]{1000,7});
+        currentAudiogram.addIndex(new int[]{2000,4});
+        currentAudiogram.addIndex(new int[]{5000,5});
+        currentAudiogram.addIndex(new int[]{10000,7});
+        audiograms.add(currentAudiogram);
     }
 
     public static AudiogramManager getInstance() {
@@ -60,5 +60,9 @@ public class AudiogramManager {
 
     public Audiogram getCurrentAudiogram() {
         return currentAudiogram;
+    }
+
+    public void setCurrentAudiogram(Audiogram currentAudiogram) {
+        this.currentAudiogram = currentAudiogram;
     }
 }
