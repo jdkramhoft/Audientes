@@ -27,7 +27,6 @@ import com.github.mikephil.charting.utils.EntryXComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import a3.audientes.R;
@@ -43,19 +42,16 @@ import a3.audientes.model.AudiogramManager;
  */
 public class Audiogram extends Fragment {
     private AudiogramManager audiogramManager = AudiogramManager.getInstance();
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static final String ARG_PARAM3 = "param3";
 
     // TODO: Rename and change types of parameters
     private OnFragmentInteractionListener mListener;
 
-    private  List<int[]> left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
-    private  List<int[]> right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
+    private  List<int[]> left = audiogramManager.getCurrentAudiogram().getGraf();
+    private  List<int[]> right = audiogramManager.getCurrentAudiogram().getGraf();
 
 
     private int[] freqs = {};
-    private LineChart chart;
+    private View v;
 
     private final String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "Right and left Ear";
 
@@ -66,25 +62,10 @@ public class Audiogram extends Fragment {
 
     };
 
-    public Audiogram() {
-        // Required empty public constructor
-    }
+    public Audiogram() { }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment Audiogram.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Audiogram newInstance(byte[] left_ear, byte[] right_ear, byte[] freqs) {
-        Audiogram fragment = new Audiogram();
-        Bundle args = new Bundle();
-        args.putByteArray(ARG_PARAM1, left_ear);
-        args.putByteArray(ARG_PARAM2, right_ear);
-        args.putByteArray(ARG_PARAM3, freqs);
-        fragment.setArguments(args);
-        return fragment;
+    public static Audiogram newInstance() {
+        return new Audiogram();
     }
 
     @Override
@@ -102,153 +83,15 @@ public class Audiogram extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
-        right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
-
-        // left ear
-        LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
-        left_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-        // styling left ear
-        left_ear.setColor(0);
-        left_ear.setCircleColor(colors[0]);
-        left_ear.setLineWidth(3f);
-        left_ear.setCircleRadius(4f);
-        left_ear.setDrawCircleHole(false);
-        left_ear.setDrawValues(false);
-
-
-        // right ear
-        LineDataSet right_ear = new LineDataSet(makeEntries(right), RIGHT_EAR_LABEL);
-        right_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-        // styling right ear
-        right_ear.setColor(colors[1]);
-        right_ear.setCircleColor(colors[1]);
-        right_ear.setLineWidth(3f);
-        right_ear.setCircleRadius(4f);
-        right_ear.setDrawCircleHole(false);
-        right_ear.setDrawValues(false);
-
-        // y axis
-        YAxis yAxis = chart.getAxisLeft();
-        yAxis.setSpaceBottom(25f);
-        yAxis.setSpaceTop(25f);
-        yAxis.setDrawZeroLine(false);
-        yAxis.setTextColor(colors[2]);
-        yAxis.setDrawGridLines(false);
-        yAxis.setLabelCount(3, true);
-
-        chart.getAxisRight().setEnabled(false);
-
-        // x axis
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setSpaceMin(100f);
-        xAxis.setSpaceMax(100f);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextColor(colors[2]);
-        xAxis.setDrawGridLines(false);
-        xAxis.setLabelRotationAngle(30);
-        xAxis.setLabelCount(5, true);
-
-        // modify legend
-        Legend legend = chart.getLegend();
-        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        legend.setDrawInside(false);
-        legend.setTextColor(colors[2]);
-        legend.setTextSize(15f);
-
-        // data
-        List<ILineDataSet> data_lines = new ArrayList<>();
-        data_lines.add(left_ear);
-        data_lines.add(right_ear);
-        LineData data = new LineData(data_lines);
-        chart.setData(data);
-        chart.animateXY(1500,1200, Easing.EaseInCubic);
-
+        left = audiogramManager.getCurrentAudiogram().getGraf();
+        right = audiogramManager.getCurrentAudiogram().getGraf();
+        drawAudiogram(left, right, v);
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        chart = view.findViewById(R.id.chart);
-        chart.getDescription().setEnabled(false);
-        chart.setViewPortOffsets(100f, 100f, 100f, 100f);
-        chart.setTouchEnabled(false);
-
-        // left ear
-        LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
-        left_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-        // styling left ear
-        left_ear.setColor(colors[0]);
-        left_ear.setCircleColor(colors[0]);
-        left_ear.setLineWidth(3f);
-        left_ear.setCircleRadius(4f);
-        left_ear.setDrawCircleHole(false);
-        left_ear.setDrawValues(false);
-
-
-        // right ear
-        LineDataSet right_ear = new LineDataSet(makeEntries(right), RIGHT_EAR_LABEL);
-        right_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-        // styling right ear
-        right_ear.setColor(colors[1]);
-        right_ear.setCircleColor(colors[1]);
-        right_ear.setLineWidth(3f);
-        right_ear.setCircleRadius(4f);
-        right_ear.setDrawCircleHole(false);
-        right_ear.setDrawValues(false);
-
-        // y axis
-        YAxis yAxis = chart.getAxisLeft();
-        yAxis.setSpaceBottom(25f);
-        yAxis.setSpaceTop(25f);
-        yAxis.setDrawZeroLine(false);
-        yAxis.setTextColor(colors[2]);
-        yAxis.setDrawGridLines(false);
-        yAxis.setLabelCount(3, true);
-
-        chart.getAxisRight().setEnabled(false);
-
-        // x axis
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setSpaceMin(100f);
-        xAxis.setSpaceMax(100f);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextColor(colors[2]);
-        xAxis.setDrawGridLines(false);
-        xAxis.setLabelRotationAngle(30);
-        xAxis.setLabelCount(5, true);
-
-        // modify legend
-        Legend legend = chart.getLegend();
-        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        legend.setDrawInside(false);
-        legend.setTextColor(colors[2]);
-        legend.setTextSize(15f);
-
-        // data
-        List<ILineDataSet> data_lines = new ArrayList<>();
-        data_lines.add(left_ear);
-        data_lines.add(right_ear);
-        LineData data = new LineData(data_lines);
-        chart.setData(data);
-        chart.animateXY(1500,1200, Easing.EaseInCubic);
-
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onTab2ChildInteraction(uri);
-        }
+        v = view.findViewById(R.id.chart);
+        drawAudiogram(left, right, view);
     }
 
     @Override
@@ -267,19 +110,75 @@ public class Audiogram extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onTab2ChildInteraction(Uri uri);
+    }
+
+    public void drawAudiogram(List<int[]> left, List<int[]> right, View v){
+
+        LineChart chart = v.findViewById(R.id.chart);
+        chart.getDescription().setEnabled(false);
+        chart.setTouchEnabled(false);
+        LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
+        left_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        // styling left ear
+        left_ear.setColor(0);
+        left_ear.setCircleColor(colors[0]);
+        left_ear.setLineWidth(3f);
+        left_ear.setCircleRadius(4f);
+        left_ear.setDrawCircleHole(false);
+        left_ear.setDrawValues(false);
+
+        // right ear
+        LineDataSet right_ear = new LineDataSet(makeEntries(right), RIGHT_EAR_LABEL);
+        right_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+        // styling right ear
+        right_ear.setColor(colors[1]);
+        right_ear.setCircleColor(colors[1]);
+        right_ear.setLineWidth(3f);
+        right_ear.setCircleRadius(4f);
+        right_ear.setDrawCircleHole(false);
+        right_ear.setDrawValues(false);
+
+        // y axis
+        YAxis yAxis = chart.getAxisLeft();
+        yAxis.setSpaceBottom(25f);
+        yAxis.setSpaceTop(25f);
+        yAxis.setDrawZeroLine(false);
+        yAxis.setTextColor(colors[2]);
+        yAxis.setDrawGridLines(false);
+        yAxis.setLabelCount(3, true);
+
+        chart.getAxisRight().setEnabled(false);
+
+        // x axis
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setSpaceMin(100f);
+        xAxis.setSpaceMax(100f);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextColor(colors[2]);
+        xAxis.setDrawGridLines(false);
+        xAxis.setLabelRotationAngle(30);
+        xAxis.setLabelCount(5, true);
+
+        // modify legend
+        Legend legend = chart.getLegend();
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legend.setDrawInside(false);
+        legend.setTextColor(colors[2]);
+        legend.setTextSize(15f);
+
+        // data
+        List<ILineDataSet> data_lines = new ArrayList<>();
+        data_lines.add(left_ear);
+        data_lines.add(right_ear);
+        LineData data = new LineData(data_lines);
+        chart.setData(data);
     }
 
     private List<Entry> makeEntries(List<int[]> graf){

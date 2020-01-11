@@ -1,5 +1,6 @@
 package a3.audientes.model;
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "audiogram_table")
-public class Audiogram {
+public class Audiogram implements Comparable<Audiogram> {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -71,5 +72,36 @@ public class Audiogram {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Audiogram audiogram = (Audiogram) o;
+        return id == audiogram.id &&
+                x == audiogram.x &&
+                y == audiogram.y &&
+                date == audiogram.date;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Audiogram{" +
+                "id=" + id +
+                ", x=" + x +
+                ", y=" + y +
+                ", date=" + date +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Audiogram o) {
+        return this.date.compareTo(o.date) > 0 ? -1 : 1 ;
     }
 }
