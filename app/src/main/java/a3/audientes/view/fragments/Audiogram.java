@@ -62,17 +62,8 @@ public class Audiogram extends Fragment {
 
     };
 
-    public Audiogram() {
-        // Required empty public constructor
-    }
+    public Audiogram() { }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment Audiogram.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Audiogram newInstance() {
         return new Audiogram();
     }
@@ -95,20 +86,12 @@ public class Audiogram extends Fragment {
         left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
         right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
         drawAudiogram(left, right, v);
-        // left ear
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         v = view.findViewById(R.id.chart);
         drawAudiogram(left, right, view);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onTab2ChildInteraction(uri);
-        }
     }
 
     @Override
@@ -127,16 +110,6 @@ public class Audiogram extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onTab2ChildInteraction(Uri uri);
@@ -146,7 +119,6 @@ public class Audiogram extends Fragment {
 
         LineChart chart = v.findViewById(R.id.chart);
         chart.getDescription().setEnabled(false);
-        chart.setViewPortOffsets(100f, 100f, 100f, 100f);
         chart.setTouchEnabled(false);
         LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
         left_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
@@ -158,7 +130,6 @@ public class Audiogram extends Fragment {
         left_ear.setCircleRadius(4f);
         left_ear.setDrawCircleHole(false);
         left_ear.setDrawValues(false);
-
 
         // right ear
         LineDataSet right_ear = new LineDataSet(makeEntries(right), RIGHT_EAR_LABEL);
@@ -208,7 +179,6 @@ public class Audiogram extends Fragment {
         data_lines.add(right_ear);
         LineData data = new LineData(data_lines);
         chart.setData(data);
-        chart.animateXY(150,120, Easing.EaseInCubic);
     }
 
     private List<Entry> makeEntries(List<int[]> graf){

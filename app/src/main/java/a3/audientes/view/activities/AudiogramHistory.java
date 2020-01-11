@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import a3.audientes.R;
@@ -23,7 +27,6 @@ import utils.SharedPrefUtil;
 
 public class AudiogramHistory extends AppCompatActivity implements a3.audientes.view.fragments.Audiogram.OnFragmentInteractionListener{
     private AudiogramManager audiogramManager = AudiogramManager.getInstance();
-    List<Audiogram> audiogramList;
     LottieAnimationView action_btn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,12 +36,12 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
 
         RecyclerView recyclerView = findViewById(R.id.audiogram_history_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        audiogramList = audiogramManager.getAudiograms();
+        List<Audiogram> audiogramList = new ArrayList<>(audiogramManager.getAudiograms());
+
+        Collections.sort(audiogramList);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        // TODO: get selected Audiogram
         recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramManager));
-
     }
 
 

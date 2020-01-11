@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "audiogram_table")
-public class Audiogram {
+public class Audiogram implements Comparable<Audiogram> {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -98,5 +98,10 @@ public class Audiogram {
                 ", y=" + y +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Audiogram o) {
+        return this.date.compareTo(o.date) > 0 ? -1 : 1 ;
     }
 }

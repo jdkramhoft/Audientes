@@ -23,8 +23,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     private final AudiogramManager audiogramManager;
     private List<a3.audientes.model.Audiogram> audiogramList;
-    FragmentManager fragmentManager;
-    boolean selected;
+    private FragmentManager fragmentManager;
 
     public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramManager audiogramManager) {
         this.audiogramList = audiogramList;
@@ -34,12 +33,10 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView date, title, apply;
-        private Audiogram currentAudiogram;
         private LottieAnimationView anim;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
-            currentAudiogram = audiogramManager.getCurrentAudiogram();
             date = view.findViewById(R.id.subtitle_text);
             title = view.findViewById(R.id.title_text);
             anim = view.findViewById(R.id.action_button_1);
@@ -73,21 +70,21 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             }
         });
 
-        if (audiogram.equals(audiogramManager.getCurrentAudiogram())){
+        if (audiogram.equals(audiogramManager.getCurrentAudiogram()))
             updateLayout(true, holder);
-        }
-        else {
+        else
             updateLayout(false, holder);
-        }
 
-        // TODO: use audiogram.getDateString() instead
+        // TODO: use fragment.getDateString() instead
         holder.date.setText(audiogram.getDate().toString());
+
+
+
+        // TODO: TIME TO SHINE;
         a3.audientes.view.fragments.Audiogram fragment = a3.audientes.view.fragments.Audiogram.newInstance();
         //fragment.drawAudiogram(audiogram.getGraf(), audiogram.getGraf(), holder.view);
-
-        fragmentManager.beginTransaction().replace(R.id.media_image, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.audiogram_frame_layout, fragment).commit();
     }
-
 
     @Override
     public int getItemCount() {
