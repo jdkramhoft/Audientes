@@ -34,6 +34,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView date, title, apply;
         private LottieAnimationView anim;
+        private View chart;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
@@ -41,6 +42,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             title = view.findViewById(R.id.title_text);
             anim = view.findViewById(R.id.action_button_1);
             apply = view.findViewById(R.id.textview_1);
+            chart = view.findViewById(R.id.chart);
         }
     }
 
@@ -75,15 +77,10 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
         else
             updateLayout(false, holder);
 
-        // TODO: use fragment.getDateString() instead
-        holder.date.setText(audiogram.getDate().toString());
+        holder.date.setText(audiogram.getDateString());
 
-
-
-        // TODO: TIME TO SHINE;
         a3.audientes.view.fragments.Audiogram fragment = a3.audientes.view.fragments.Audiogram.newInstance();
-        //fragment.drawAudiogram(audiogram.getGraf(), audiogram.getGraf(), holder.view);
-        fragmentManager.beginTransaction().replace(R.id.audiogram_frame_layout, fragment).commit();
+        fragment.drawAudiogram(audiogram.getGraf(), audiogram.getGraf(), holder.chart);
     }
 
     @Override

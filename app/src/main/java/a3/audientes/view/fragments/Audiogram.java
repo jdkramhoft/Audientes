@@ -46,8 +46,8 @@ public class Audiogram extends Fragment {
     // TODO: Rename and change types of parameters
     private OnFragmentInteractionListener mListener;
 
-    private  List<int[]> left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
-    private  List<int[]> right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
+    private  List<int[]> left = audiogramManager.getCurrentAudiogram().getGraf();
+    private  List<int[]> right = audiogramManager.getCurrentAudiogram().getGraf();
 
 
     private int[] freqs = {};
@@ -83,8 +83,8 @@ public class Audiogram extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        left = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
-        right = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getGraf();
+        left = audiogramManager.getCurrentAudiogram().getGraf();
+        right = audiogramManager.getCurrentAudiogram().getGraf();
         drawAudiogram(left, right, v);
     }
 

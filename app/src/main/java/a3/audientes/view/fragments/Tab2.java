@@ -73,10 +73,14 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         audiogram_history_btn.setOnClickListener(this);
 
 
+        if (savedInstanceState == null)
+            date = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getDateString();
+        else
+            date = audiogramManager.getCurrentAudiogram().getDateString();
+
+
 
         desc = root.findViewById(R.id.audiogram_desc_id);
-        // TODO: get audiogramDate from db
-        date = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getDateString();
         desc.setText("Newest audiogram " + date);
         return root;
     }
