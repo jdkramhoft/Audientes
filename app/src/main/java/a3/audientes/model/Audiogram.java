@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +69,8 @@ public class Audiogram implements Comparable<Audiogram> {
     }
 
     public String getDateString() {
-        return date.toString().substring(0,11);
+        DateFormat x = SimpleDateFormat.getDateInstance();
+        return x.format(date);
     }
 
     public void setDate(Date date) {
