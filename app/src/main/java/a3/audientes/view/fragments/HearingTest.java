@@ -15,6 +15,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,15 +39,13 @@ import utils.animation.AnimBtnUtil;
 public class HearingTest extends Fragment implements View.OnClickListener {
 
     private int testIndex = 0;
-    private int currentIndex = 0;
-    private int currentVolume = 0;
+    private int currentIndex = 1;
     private int currentHz = 0;
     private AudiogramManager audiogramManager = AudiogramManager.getInstance();
     private ProgramManager programManager = ProgramManager.getInstance();
     private ProgramViewModel programViewModel;
     private AudiogramViewModel audiogramViewModel;
-
-
+    private ImageButton testButton;
 
     public static final int HEARING_TEST = 1;
     public static final int TEST_OKAY = 13;
@@ -81,7 +81,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rod =  inflater.inflate(R.layout.hearing_test, container, false);
-        rod.findViewById(R.id.hearing_button).setOnClickListener(this);
+        testButton = rod.findViewById(R.id.hearing_button);
+        testButton.setOnClickListener(this);
         return rod;
     }
 
@@ -89,15 +90,21 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         testIndex++;
+        testButton.setEnabled(false);
+        handler.removeCallbacksAndMessages(null);
+        handler.postDelayed(() -> {
+            testButton.setEnabled(true);
+        }, 1000);
+
         if (testIndex == soundManager.getSounds().size()){
             System.out.println("done");
-            handler.removeCallbacksAndMessages(null);
+            System.out.println("Index: "+currentIndex);
+            System.out.println("Hz: "+currentHz);
             audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             audiogramManager.getCurrentAudiogram().setId(audiogramManager.getNextId());
             audiogramManager.getCurrentAudiogram().setDate(new Date());
             audiogramViewModel.Insert(audiogramManager.getCurrentAudiogram());
             audiogramManager.saveCurrentAudiogram();
-            System.out.println(audiogramManager.getCurrentAudiogram().getId());
             SharedPrefUtil.saveSharedSetting(getContext(),"currentAudiogram", Integer.toString(audiogramManager.getCurrentAudiogram().getId()));
             updateDefualtPrograms(audiogramManager.getCurrentAudiogram());
             Activity activity = Objects.requireNonNull(getActivity());
@@ -109,9 +116,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
         }
         else{
             AnimBtnUtil.bounce(v, getActivity());
-            handler.removeCallbacksAndMessages(null);
             System.out.println("Index: "+currentIndex);
-            System.out.println("Volume:"+currentVolume);
             System.out.println("Hz: "+currentHz);
             audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             startTest(testIndex);

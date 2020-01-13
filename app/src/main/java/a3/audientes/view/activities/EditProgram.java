@@ -205,6 +205,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                     dialog.dismiss();
                 });
                 button2.setOnClickListener(v1 -> {
+                    dialog.cancel();
                     EditProgram.this.finish();
                 });
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
