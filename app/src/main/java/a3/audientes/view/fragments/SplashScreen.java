@@ -34,13 +34,17 @@ public final class SplashScreen extends Fragment {
     private ProgramManager programManager = ProgramManager.getInstance();
     private AudiogramManager audiogramManager = AudiogramManager.getInstance();
     private boolean newVisitor;
+    private int currentAudiogramId;
 
     private final Runnable splash = () -> {
         if (getActivity()==null) return;
         assert getFragmentManager() != null;
 
         newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(getActivity(), getString(R.string.new_visitor_pref), "true"));
-        if (newVisitor){
+        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0"));
+        System.out.println("Current: "+currentAudiogramId);
+        System.out.println(newVisitor);
+        if (newVisitor || currentAudiogramId == 0){
             getFragmentManager().beginTransaction()
                     .replace(R.id.emptyFrame, new Onboarding() )
                     .addToBackStack(null)

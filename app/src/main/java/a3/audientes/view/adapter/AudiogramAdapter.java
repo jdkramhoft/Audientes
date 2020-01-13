@@ -71,6 +71,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             holder.anim.setVisibility(View.VISIBLE);
             holder.anim.playAnimation();
             audiogramManager.setCurrentAudiogram(audiogramList.get(position));
+            SharedPrefUtil.saveSharedSetting(holder.itemView.getContext(),"currentAudiogram", Integer.toString(audiogramList.get(position).getId()));
             updateDefualtPrograms(audiogram);
         });
 

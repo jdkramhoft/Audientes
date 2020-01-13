@@ -47,6 +47,7 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
     private boolean newVisitor;
     OnClickListener clicker = this;
     BluetoothDeviceListAdapter adapter;
+    private int currentAudiogramId;
 
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -244,8 +245,8 @@ public class BluetoothPairingActivity extends AppCompatActivity implements OnCli
     private void navigate() {
         SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
         // TODO: newVisitor && check DB for audiogram
-
-        if (newVisitor){
+        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        if (newVisitor || currentAudiogramId == 0){
             Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
             startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);
         } else {

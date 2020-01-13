@@ -21,6 +21,7 @@ import a3.audientes.R;
 import a3.audientes.model.AudiogramManager;
 import a3.audientes.view.activities.AudiogramHistory;
 import a3.audientes.view.activities.StartHearingTest;
+import utils.SharedPrefUtil;
 
 
 /**
@@ -71,14 +72,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         // TODO: only display button if any audiograms in db
         audiogram_history_btn = root.findViewById(R.id.audiogram_history_btn);
         audiogram_history_btn.setOnClickListener(this);
-
-
-        if (savedInstanceState == null)
-            date = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getDateString();
-        else
-            date = audiogramManager.getCurrentAudiogram().getDateString();
-
-
+        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        date = audiogramManager.getCurrentAudiogram().getDateString();
 
         desc = root.findViewById(R.id.audiogram_desc_id);
         desc.setText("Newest audiogram " + date);
@@ -88,7 +83,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        date = audiogramManager.getAudiograms().get(audiogramManager.getAudiograms().size()-1).getDateString();
+        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        date = audiogramManager.getCurrentAudiogram().getDateString();
         desc.setText("Newest audiogram " + date);
     }
 

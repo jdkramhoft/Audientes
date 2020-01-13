@@ -31,6 +31,7 @@ import java.util.List;
 
 import a3.audientes.R;
 import a3.audientes.model.AudiogramManager;
+import utils.SharedPrefUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,9 +46,8 @@ public class Audiogram extends Fragment {
 
     // TODO: Rename and change types of parameters
     private OnFragmentInteractionListener mListener;
-
-    private  List<int[]> left = audiogramManager.getCurrentAudiogram().getGraf();
-    private  List<int[]> right = audiogramManager.getCurrentAudiogram().getGraf();
+    private  List<int[]> left;
+    private  List<int[]> right;
 
 
     private int[] freqs = {};
@@ -77,12 +77,16 @@ public class Audiogram extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        left = audiogramManager.getCurrentAudiogram().getGraf();
+        right = audiogramManager.getCurrentAudiogram().getGraf();
         return inflater.inflate(R.layout.audiogram, container, false);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
         left = audiogramManager.getCurrentAudiogram().getGraf();
         right = audiogramManager.getCurrentAudiogram().getGraf();
         drawAudiogram(left, right, v);

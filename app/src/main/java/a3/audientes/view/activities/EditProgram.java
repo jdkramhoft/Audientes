@@ -263,7 +263,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
             Intent intent = new Intent(EditProgram.this, HearingProfile.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            EditProgram.this.startActivity(intent);
+            EditProgram.this.finish();
         }
     }
 

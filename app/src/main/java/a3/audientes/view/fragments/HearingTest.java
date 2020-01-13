@@ -30,6 +30,7 @@ import a3.audientes.model.SoundManager;
 import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
+import utils.SharedPrefUtil;
 import utils.animation.AnimBtnUtil;
 
 
@@ -96,6 +97,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             audiogramManager.getCurrentAudiogram().setDate(new Date());
             audiogramViewModel.Insert(audiogramManager.getCurrentAudiogram());
             audiogramManager.saveCurrentAudiogram();
+            System.out.println(audiogramManager.getCurrentAudiogram().getId());
+            SharedPrefUtil.saveSharedSetting(getContext(),"currentAudiogram", Integer.toString(audiogramManager.getCurrentAudiogram().getId()));
             updateDefualtPrograms(audiogramManager.getCurrentAudiogram());
             Activity activity = Objects.requireNonNull(getActivity());
             activity.setResult(TEST_OKAY, null);
