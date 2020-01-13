@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +24,10 @@ import java.util.List;
 import a3.audientes.R;
 import a3.audientes.model.Audiogram;
 import a3.audientes.model.AudiogramManager;
+import a3.audientes.model.Program;
+import a3.audientes.model.ProgramManager;
 import a3.audientes.view.adapter.AudiogramAdapter;
+import a3.audientes.viewmodel.ProgramViewModel;
 import utils.SharedPrefUtil;
 
 public class AudiogramHistory extends AppCompatActivity implements a3.audientes.view.fragments.Audiogram.OnFragmentInteractionListener{
@@ -41,7 +46,10 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
         Collections.sort(audiogramList);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramManager));
+        ProgramManager programManager = ProgramManager.getInstance();
+        ProgramViewModel programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
+
+        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramManager, programViewModel, programManager));
     }
 
 

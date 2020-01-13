@@ -13,22 +13,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import a3.audientes.R;
 import a3.audientes.model.Audiogram;
 import a3.audientes.model.AudiogramManager;
+import a3.audientes.model.Program;
+import a3.audientes.model.ProgramManager;
+import a3.audientes.viewmodel.ProgramViewModel;
+import utils.SharedPrefUtil;
 
 public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapter.AudiogramAdapter.MyViewHolder> {
 
     private final AudiogramManager audiogramManager;
     private List<a3.audientes.model.Audiogram> audiogramList;
     private FragmentManager fragmentManager;
+    private ProgramManager programManager;
+    private ProgramViewModel programViewModel;
 
-    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramManager audiogramManager) {
+    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramManager audiogramManager, ProgramViewModel programViewModel, ProgramManager programManager) {
         this.audiogramList = audiogramList;
         this.fragmentManager = fragmentManager;
         this.audiogramManager = audiogramManager;
+        this.programManager = programManager;
+        this.programViewModel = programViewModel;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -62,6 +71,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             holder.anim.setVisibility(View.VISIBLE);
             holder.anim.playAnimation();
             audiogramManager.setCurrentAudiogram(audiogramList.get(position));
+            updateDefualtPrograms(audiogram);
         });
 
         holder.anim.addAnimatorListener(new AnimatorListenerAdapter() {
@@ -102,6 +112,21 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             holder.apply.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    private void updateDefualtPrograms(Audiogram audiogram){
+        for(int i = 1; i <= 4; i++){
+            Program program = programManager.getProgram(i);
+            System.out.println(program.getId());
+            ArrayList<Integer> y = audiogram.getY();
+            program.setLow(programManager.defaultLevel(y.get(0),i));
+            program.setLow_plus(programManager.defaultLevel(y.get(1),i));
+            program.setMiddle(programManager.defaultLevel(y.get(2),i));
+            program.setHigh(programManager.defaultLevel(y.get(3),i));
+            program.setHigh_plus(programManager.defaultLevel(y.get(4),i));
+            programManager.updateDefault(program);
+            programViewModel.Update(program);
+        }
     }
 
 
