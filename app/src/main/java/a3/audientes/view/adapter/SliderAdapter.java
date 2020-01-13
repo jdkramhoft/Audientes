@@ -32,7 +32,7 @@ public class SliderAdapter extends PagerAdapter {
     };
 
     private String[] slide_headings = {
-            "Welcome to Audientes",
+            "Welcome to a3.audientes.Audientes",
             "Your surroundings",
             "Let's get started",
             "How to delete programs",
