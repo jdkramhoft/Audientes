@@ -10,25 +10,7 @@ public class AudiogramManager {
     private Audiogram currentAudiogram;
     //private Audiogram currentAudiogram = new Audiogram();
 
-    private AudiogramManager() {
-        currentAudiogram = new Audiogram();
-        currentAudiogram.addIndex(new int[]{500,5});
-        currentAudiogram.addIndex(new int[]{1000,7});
-        currentAudiogram.addIndex(new int[]{2000,4});
-        currentAudiogram.addIndex(new int[]{5000,5});
-        currentAudiogram.addIndex(new int[]{10000,7});
-        audiograms.add(currentAudiogram);
-
-        /*
-        Audiogram newAudiogram = new Audiogram();
-        newAudiogram.addIndex(new int[]{500,5});
-        newAudiogram.addIndex(new int[]{1000,7});
-        newAudiogram.addIndex(new int[]{2000,4});
-        newAudiogram.addIndex(new int[]{5000,5});
-        newAudiogram.addIndex(new int[]{10000,7});
-        audiograms.add(newAudiogram);
-         */
-    }
+    private AudiogramManager() {}
 
     public static AudiogramManager getInstance() {
         if (single_instance == null)

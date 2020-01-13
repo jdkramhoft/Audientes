@@ -40,7 +40,7 @@ public abstract class DataBase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             new CreateDefualtProgramsAsyncTask(instance).execute();
-            new CreateDefualtAudiogramAsyncTask(instance).execute();
+            //new CreateDefualtAudiogramAsyncTask(instance).execute();
         }
     };
 

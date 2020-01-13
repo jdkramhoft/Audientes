@@ -155,6 +155,5 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             programManager.updateDefault(program);
             programViewModel.Update(program);
         }
-
     }
 }
