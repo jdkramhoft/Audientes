@@ -179,15 +179,6 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     }
 
     //TODO -- ???
-    private void noBluetoothSupport() {
-        AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
-        View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_no_bluetooth_support, null);
-        builderbluetooth.setView(bluetoothView);
-        AlertDialog bluetoothDialog = builderbluetooth.create();
-        bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        bluetoothDialog.setCancelable(false);
-        bluetoothDialog.show();
-    }
 
     private boolean hasSearched = false;
 
