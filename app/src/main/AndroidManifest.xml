@@ -43,7 +43,8 @@
 
         <activity android:name=".view.fragments.HearingTest"
             android:theme="@style/AppTheme.ActionBar.Dark"/>
-        <activity android:name=".bluetooth.BluetoothPairingActivity" />
+        <activity android:name=".bluetooth.BluetoothPairingActivity"
+            android:theme="@style/AppTheme.ActionBar.Dark"/>
 
     </application>
 
