@@ -3,7 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/xml_bg_audiogram">
+    android:background="@drawable/xml_bg_audiogram"
+    android:id="@+id/audiogram_data_displayer">
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"

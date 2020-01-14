@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/slide_desc"
         android:layout_width="342dp"
-        android:layout_height="89dp"
+        android:layout_height="150dp"
         android:layout_below="@+id/slide_heading"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image_fingertouch"/>
+        app:srcCompat="@drawable/boarding_image_liftoff"/>
 
     <TextView
         android:id="@+id/slide_heading"

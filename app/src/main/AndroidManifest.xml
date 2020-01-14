@@ -3,27 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="a3.audientes">
 
+    <!-- Necessary bluetooth permissions -->
+    <uses-feature android:name="android.hardware.bluetooth" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Extra permission that causes ignorable error -->
+    <!-- uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" / -->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EditProgram"></activity>
-        <activity android:name=".fragment_edit_popup" />
-        <activity android:name=".activities.Launcher">
+        <activity
+            android:name=".view.activities.EditProgram"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activities.Launcher"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Main" />
-        <activity android:name=".activities.HearingProfile" />
-        <activity android:name=".fragments.StartHearingTest" />
-        <activity android:name=".fragments.HearingTest" />
+        <activity android:name=".view.activities.AudiogramHistory"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".view.activities.HearingProfile"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activities.StartHearingTest"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".view.activities.HearingTest"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.activities.BluetoothPairing"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

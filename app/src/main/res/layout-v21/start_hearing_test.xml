@@ -5,8 +5,8 @@
     android:id="@+id/start_hearing_test_framelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBlue"
-    tools:context=".fragments.HearingTest">
+    android:background="@drawable/main_bg"
+    tools:context=".view.activities.HearingTest">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageButton
@@ -27,7 +27,8 @@
         android:layout_height="55dp"
         android:layout_marginBottom="74dp"
         android:gravity="center"
-        android:text="This test will take about 5 minutes. Press the button to start the test."
+        android:textSize="16sp"
+        android:text="Test will take 5 minutes\nPress button to start"
         android:textColor="#BEC3E9"
         app:layout_constraintBottom_toTopOf="@+id/hearing_button"
         app:layout_constraintEnd_toEndOf="parent"
