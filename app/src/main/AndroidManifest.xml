@@ -23,28 +23,35 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".view.activities.EditProgram"
-            android:theme="@style/AppTheme.ActionBar.Dark"/>
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
         <activity android:name=".view.activities.Launcher"
-            android:theme="@style/AppTheme.ActionBar.Dark">
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.AudiogramHistory">
+        <activity android:name=".view.activities.AudiogramHistory"
+            android:screenOrientation="portrait">
 
         </activity>
 
         <activity android:name=".view.activities.HearingProfile"
-            android:theme="@style/AppTheme.ActionBar.Dark"/>
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
         <activity android:name=".view.activities.StartHearingTest"
-            android:theme="@style/AppTheme.ActionBar.Dark"/>
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".view.fragments.HearingTest"
-            android:theme="@style/AppTheme.ActionBar.Dark"/>
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
         <activity android:name=".bluetooth.BluetoothPairingActivity"
-            android:theme="@style/AppTheme.ActionBar.Dark"/>
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
 
     </application>
 
