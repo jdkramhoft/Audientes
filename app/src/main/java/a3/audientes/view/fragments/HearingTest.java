@@ -111,6 +111,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             activity.setResult(TEST_OKAY, null);
             Intent i = new Intent(getContext(), HearingProfile.class);
             i.putExtra("ARG_PAGE", 1);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             activity.finish();
         }
