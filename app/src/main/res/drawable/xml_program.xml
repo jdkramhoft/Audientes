@@ -3,7 +3,7 @@
     <item android:id="@+id/gradientDrawable" >
         <shape android:shape="rectangle">
             <solid
-                android:color="#3E7986CB"/>
+                android:color="#28999BC5"/>
         <corners
             android:topRightRadius="19dp"
             android:bottomLeftRadius="19dp"
