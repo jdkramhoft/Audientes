@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 import java.util.List;
 
-import a3.audientes.model.Audiogram;
-import a3.audientes.model.Program;
+import a3.audientes.dto.Audiogram;
+import a3.audientes.dto.Program;
 
 
 public class Repository {

@@ -1,11 +1,7 @@
 package a3.audientes.view.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 
 import android.os.Build;
@@ -14,9 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,16 +20,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Objects;
-
 import a3.audientes.R;
-import a3.audientes.bluetooth.BluetoothPairingActivity;
 import a3.audientes.view.adapter.HearingProfileAdapter;
 import a3.audientes.view.fragments.Audiogram;
 import a3.audientes.view.fragments.Tab1;
 import a3.audientes.view.fragments.Tab2;
-import a3.audientes.model.PopupManager;
-import utils.SharedPrefUtil;
 
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
 

@@ -16,20 +16,19 @@ import androidx.lifecycle.ViewModelProviders;
 import java.util.Objects;
 
 import a3.audientes.R;
-import a3.audientes.model.AudiogramManager;
-import a3.audientes.model.ProgramManager;
-import a3.audientes.bluetooth.BluetoothPairingActivity;
+import a3.audientes.dao.AudiogramDAO;
+import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
+import a3.audientes.utils.SharedPrefUtil;
 
 public final class SplashScreen extends Fragment {
 
     private final Handler handler = new Handler();
     private ProgramViewModel programviewmodel;
     private AudiogramViewModel audiogramViewModel;
-    private ProgramManager programManager = ProgramManager.getInstance();
-    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
+    private ProgramDAO programDAO = ProgramDAO.getInstance();
+    private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
     private boolean newVisitor;
     private int currentAudiogramId;
 
@@ -48,7 +47,7 @@ public final class SplashScreen extends Fragment {
                     .commit();
         }
         else if (!isHearableConnected()){
-            Intent intent = new Intent(getContext(), BluetoothPairingActivity.class);
+            Intent intent = new Intent(getContext(), BluetoothPairing.class);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
         }
@@ -66,11 +65,11 @@ public final class SplashScreen extends Fragment {
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programviewmodel.getAllPrograms().observe(this, programs -> {
             System.out.println(programs.size());
-            programManager.setProgramList(programs);
+            programDAO.setProgramList(programs);
         });
         audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
         audiogramViewModel.getAllAudiogram().observe(this, audiograms -> {
-            audiogramManager.setAudiograms(audiograms);
+            audiogramDAO.setAudiograms(audiograms);
 
             System.out.println("Audiograms in db: "+audiograms.size());
         });

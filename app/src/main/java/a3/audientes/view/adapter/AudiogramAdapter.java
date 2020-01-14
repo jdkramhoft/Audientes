@@ -17,26 +17,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import a3.audientes.R;
-import a3.audientes.model.Audiogram;
-import a3.audientes.model.AudiogramManager;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
+import a3.audientes.dto.Audiogram;
+import a3.audientes.dao.AudiogramDAO;
+import a3.audientes.dto.Program;
+import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
+import a3.audientes.utils.SharedPrefUtil;
 
 public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapter.AudiogramAdapter.MyViewHolder> {
 
-    private final AudiogramManager audiogramManager;
-    private List<a3.audientes.model.Audiogram> audiogramList;
+    private final AudiogramDAO audiogramDAO;
+    private List<a3.audientes.dto.Audiogram> audiogramList;
     private FragmentManager fragmentManager;
-    private ProgramManager programManager;
+    private ProgramDAO programDAO;
     private ProgramViewModel programViewModel;
 
-    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramManager audiogramManager, ProgramViewModel programViewModel, ProgramManager programManager) {
+    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO) {
         this.audiogramList = audiogramList;
         this.fragmentManager = fragmentManager;
-        this.audiogramManager = audiogramManager;
-        this.programManager = programManager;
+        this.audiogramDAO = audiogramDAO;
+        this.programDAO = programDAO;
         this.programViewModel = programViewModel;
     }
 
@@ -70,7 +70,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             holder.apply.setVisibility(View.INVISIBLE);
             holder.anim.setVisibility(View.VISIBLE);
             holder.anim.playAnimation();
-            audiogramManager.setCurrentAudiogram(audiogramList.get(position));
+            audiogramDAO.setCurrentAudiogram(audiogramList.get(position));
             SharedPrefUtil.saveSharedSetting(holder.itemView.getContext(),"currentAudiogram", Integer.toString(audiogramList.get(position).getId()));
             updateDefualtPrograms(audiogram);
         });
@@ -83,7 +83,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             }
         });
 
-        if (audiogram.equals(audiogramManager.getCurrentAudiogram()))
+        if (audiogram.equals(audiogramDAO.getCurrentAudiogram()))
             updateLayout(true, holder);
         else
             updateLayout(false, holder);
@@ -117,15 +117,15 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     private void updateDefualtPrograms(Audiogram audiogram){
         for(int i = 1; i <= 4; i++){
-            Program program = programManager.getProgram(i);
+            Program program = programDAO.getProgram(i);
             System.out.println(program.getId());
             ArrayList<Integer> y = audiogram.getY();
-            program.setLow(programManager.defaultLevel(y.get(0),i));
-            program.setLow_plus(programManager.defaultLevel(y.get(1),i));
-            program.setMiddle(programManager.defaultLevel(y.get(2),i));
-            program.setHigh(programManager.defaultLevel(y.get(3),i));
-            program.setHigh_plus(programManager.defaultLevel(y.get(4),i));
-            programManager.updateDefault(program);
+            program.setLow(programDAO.defaultLevel(y.get(0),i));
+            program.setLow_plus(programDAO.defaultLevel(y.get(1),i));
+            program.setMiddle(programDAO.defaultLevel(y.get(2),i));
+            program.setHigh(programDAO.defaultLevel(y.get(3),i));
+            program.setHigh_plus(programDAO.defaultLevel(y.get(4),i));
+            programDAO.updateDefault(program);
             programViewModel.Update(program);
         }
     }

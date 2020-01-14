@@ -2,36 +2,29 @@ package a3.audientes.view.activities;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import a3.audientes.R;
-import a3.audientes.model.Audiogram;
-import a3.audientes.model.AudiogramManager;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
+import a3.audientes.dto.Audiogram;
+import a3.audientes.dao.AudiogramDAO;
+import a3.audientes.dao.ProgramDAO;
 import a3.audientes.view.adapter.AudiogramAdapter;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
 
 public class AudiogramHistory extends AppCompatActivity implements a3.audientes.view.fragments.Audiogram.OnFragmentInteractionListener{
-    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
+    private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
     LottieAnimationView action_btn;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,15 +34,15 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
 
         RecyclerView recyclerView = findViewById(R.id.audiogram_history_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Audiogram> audiogramList = new ArrayList<>(audiogramManager.getAudiograms());
+        List<Audiogram> audiogramList = new ArrayList<>(audiogramDAO.getAudiograms());
 
         Collections.sort(audiogramList);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        ProgramManager programManager = ProgramManager.getInstance();
+        ProgramDAO programDAO = ProgramDAO.getInstance();
         ProgramViewModel programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
 
-        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramManager, programViewModel, programManager));
+        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramDAO, programViewModel, programDAO));
     }
 
 

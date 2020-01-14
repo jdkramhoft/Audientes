@@ -9,11 +9,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.Calendar;
 import java.util.Date;
 
-import a3.audientes.model.Audiogram;
-import a3.audientes.model.Program;
+import a3.audientes.dto.Audiogram;
+import a3.audientes.dto.Program;
 
 
 @Database(entities = {Program.class, Audiogram.class}, version = 1)

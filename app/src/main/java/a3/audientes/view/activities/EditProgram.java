@@ -10,8 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.media.audiofx.Equalizer;
-import android.media.audiofx.Equalizer.OnParameterChangeListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,21 +18,19 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import a3.audientes.R;
-import a3.audientes.model.AudiogramManager;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
+import a3.audientes.dto.Program;
+import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
+import a3.audientes.utils.SharedPrefUtil;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt, name;
     private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;
     private int programId;
-    private ProgramManager programManager = ProgramManager.getInstance();
+    private ProgramDAO programDAO = ProgramDAO.getInstance();
     private ProgramViewModel programViewModel;
     private Equalizer trackEq;
     private MediaPlayer musicTrack;
@@ -128,7 +124,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         if (extras != null) {
             if(extras.getBoolean("new") == false){
                 programId = Integer.parseInt(extras.getString("id"));
-                updateSliders(programManager.getProgram(programId));
+                updateSliders(programDAO.getProgram(programId));
 
                 if(extras.getBoolean("edit") == false){
                     low_plus.setEnabled(false);
@@ -163,7 +159,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         if (extras != null) {
             if(extras.getBoolean("new") == false){
                 programId = Integer.parseInt(extras.getString("id"));
-                updateSliders(programManager.getProgram(programId));
+                updateSliders(programDAO.getProgram(programId));
 
                 if(extras.getBoolean("edit") == false){
                     low_plus.setEnabled(false);
@@ -251,14 +247,14 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 if(extras.getBoolean("new") == false){
                     newProgram.setId(programId);
                     System.out.println(programId);
-                    programManager.update(newProgram);
+                    programDAO.update(newProgram);
                     programViewModel.Update(newProgram);
                 }else{
-                    int nextindex = programManager.getNextId();
+                    int nextindex = programDAO.getNextId();
                     newProgram.setId(nextindex);
-                    programManager.addProgram(newProgram);
+                    programDAO.addProgram(newProgram);
                     programViewModel.Insert(newProgram);
-                    programManager.programadapter.notifyItemInserted(nextindex);
+                    programDAO.programadapter.notifyItemInserted(nextindex);
                     SharedPrefUtil.saveSharedSetting(this,"currentProgram", Integer.toString(nextindex));
                 }
             }

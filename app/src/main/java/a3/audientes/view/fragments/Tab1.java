@@ -1,6 +1,5 @@
 package a3.audientes.view.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -32,11 +31,11 @@ import java.util.List;
 import a3.audientes.view.activities.EditProgram;
 import a3.audientes.R;
 import a3.audientes.view.adapter.ProgramAdapter;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
+import a3.audientes.dto.Program;
+import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
-import utils.animation.AnimBtnUtil;
+import a3.audientes.utils.SharedPrefUtil;
+import a3.audientes.utils.animation.AnimBtnUtil;
 
 public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     private View addBtn, mbtn1, mbtn2, mbtn3, mbtn4, prevProgram;
@@ -44,7 +43,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     private List<Program> programList = new ArrayList<>();
     private ProgramAdapter adapter;
     private ProgramViewModel programviewmodel;
-    private ProgramManager programManager = ProgramManager.getInstance();
+    private ProgramDAO programDAO = ProgramDAO.getInstance();
     private Equalizer trackEq;
     private MediaPlayer musicTrack;
     private int currentProgramId;
@@ -66,9 +65,9 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
-        programList = programManager.getProgramList();
+        programList = programDAO.getProgramList();
 
-        View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
+        View rod = inflater.inflate(R.layout.tab1, container, false);
 
         newCustomProgram = rod.findViewById(R.id.fab);
         newCustomProgram.setOnClickListener(this);
@@ -87,7 +86,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     @Override
     public void onResume() {
         super.onResume();
-        programList = programManager.getProgramList();
+        programList = programDAO.getProgramList();
 
         for(int i = 0; i < programList.size(); i++){
             System.out.println(programList.get(i).getName());
@@ -173,7 +172,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     }
 
     public void changeEqualizer(int id){
-        Program currentProgram = programManager.getProgram(id);
+        Program currentProgram = programDAO.getProgram(id);
         // Set Equalizer bands
         trackEq.setBandLevel((short)0, (short)(currentProgram.getLow()-1500));
         trackEq.setBandLevel((short)1, (short)(currentProgram.getLow_plus()-1500));
@@ -247,8 +246,8 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         button1.setOnClickListener(v12 -> dialog.dismiss());
         button2.setOnClickListener(v1 -> {
             System.out.println("Delete program");
-            Program currentProgram = programManager.getProgram(programid);
-            programManager.deleteProgram(currentProgram);
+            Program currentProgram = programDAO.getProgram(programid);
+            programDAO.deleteProgram(currentProgram);
             programviewmodel.Delete(currentProgram);
 
             System.out.println("current "+currentProgramId);

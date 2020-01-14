@@ -9,8 +9,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import a3.audientes.model.Audiogram;
-import a3.audientes.model.Program;
+import a3.audientes.dto.Audiogram;
+import a3.audientes.dto.Program;
 
 @Dao
 public interface DAO {

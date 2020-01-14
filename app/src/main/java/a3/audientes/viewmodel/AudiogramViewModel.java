@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import a3.audientes.database.Repository;
-import a3.audientes.model.Audiogram;
+import a3.audientes.dto.Audiogram;
 
 public class AudiogramViewModel extends AndroidViewModel {
 

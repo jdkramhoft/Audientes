@@ -15,13 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Date;
-
 import a3.audientes.R;
-import a3.audientes.model.AudiogramManager;
+import a3.audientes.dao.AudiogramDAO;
 import a3.audientes.view.activities.AudiogramHistory;
 import a3.audientes.view.activities.StartHearingTest;
-import utils.SharedPrefUtil;
+import a3.audientes.utils.SharedPrefUtil;
 
 
 /**
@@ -39,7 +37,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     private TextView desc;
     private static Fragment child;
     private String date;
-    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
+    private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
 
     public Tab2() {
         // Required empty public constructor
@@ -73,8 +71,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         // TODO: only display button if any audiograms in db
         audiogram_history_btn = root.findViewById(R.id.audiogram_history_btn);
         audiogram_history_btn.setOnClickListener(this);
-        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
-        date = audiogramManager.getCurrentAudiogram().getDateString();
+        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        date = audiogramDAO.getCurrentAudiogram().getDateString();
 
         desc = root.findViewById(R.id.audiogram_desc_id);
         desc.setText("Selected audiogram " + date);
@@ -84,8 +82,8 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
-        date = audiogramManager.getCurrentAudiogram().getDateString();
+        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        date = audiogramDAO.getCurrentAudiogram().getDateString();
         desc.setText("Selected audiogram " + date);
     }
 

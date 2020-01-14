@@ -21,16 +21,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import a3.audientes.R;
-import a3.audientes.model.Audiogram;
-import a3.audientes.model.AudiogramManager;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
-import a3.audientes.model.Sound;
-import a3.audientes.model.SoundManager;
+import a3.audientes.dto.Audiogram;
+import a3.audientes.dao.AudiogramDAO;
+import a3.audientes.dto.Program;
+import a3.audientes.dao.ProgramDAO;
+import a3.audientes.dto.Sound;
+import a3.audientes.dao.SoundDAO;
 import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
-import utils.animation.AnimBtnUtil;
+import a3.audientes.utils.SharedPrefUtil;
+import a3.audientes.utils.animation.AnimBtnUtil;
 
 
 public class HearingTest extends Fragment implements View.OnClickListener {
@@ -38,8 +38,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     private int testIndex = 0;
     private int currentIndex = 1;
     private int currentHz = 0;
-    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
-    private ProgramManager programManager = ProgramManager.getInstance();
+    private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
+    private ProgramDAO programDAO = ProgramDAO.getInstance();
     private ProgramViewModel programViewModel;
     private AudiogramViewModel audiogramViewModel;
     private ImageButton testButton;
@@ -48,7 +48,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     public static final int TEST_OKAY = 13;
     public static final int TEST_NOT_COMPLETE = 37;
     // Sound
-   SoundManager soundManager = SoundManager.getInstance();
+   SoundDAO soundDAO = SoundDAO.getInstance();
 
     Handler handler = new Handler();
 
@@ -62,13 +62,13 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        audiogramManager.resetAudiogram();
+        audiogramDAO.resetAudiogram();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        audiogramManager.resetAudiogram();
+        audiogramDAO.resetAudiogram();
         audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         startTest(testIndex);
@@ -93,17 +93,17 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             testButton.setEnabled(true);
         }, 1000);
 
-        if (testIndex == soundManager.getSounds().size()){
+        if (testIndex == soundDAO.getSounds().size()){
             System.out.println("done");
             System.out.println("Index: "+currentIndex);
             System.out.println("Hz: "+currentHz);
-            audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
-            audiogramManager.getCurrentAudiogram().setId(audiogramManager.getNextId());
-            audiogramManager.getCurrentAudiogram().setDate(new Date());
-            audiogramViewModel.Insert(audiogramManager.getCurrentAudiogram());
-            audiogramManager.saveCurrentAudiogram();
-            SharedPrefUtil.saveSharedSetting(getContext(),"currentAudiogram", Integer.toString(audiogramManager.getCurrentAudiogram().getId()));
-            updateDefualtPrograms(audiogramManager.getCurrentAudiogram());
+            audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
+            audiogramDAO.getCurrentAudiogram().setId(audiogramDAO.getNextId());
+            audiogramDAO.getCurrentAudiogram().setDate(new Date());
+            audiogramViewModel.Insert(audiogramDAO.getCurrentAudiogram());
+            audiogramDAO.saveCurrentAudiogram();
+            SharedPrefUtil.saveSharedSetting(getContext(),"currentAudiogram", Integer.toString(audiogramDAO.getCurrentAudiogram().getId()));
+            updateDefualtPrograms(audiogramDAO.getCurrentAudiogram());
             Activity activity = Objects.requireNonNull(getActivity());
             activity.setResult(TEST_OKAY, null);
             Intent i = new Intent(getContext(), HearingProfile.class);
@@ -116,7 +116,7 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             AnimBtnUtil.bounce(v, getActivity());
             System.out.println("Index: "+currentIndex);
             System.out.println("Hz: "+currentHz);
-            audiogramManager.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
+            audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             startTest(testIndex);
         }
 
@@ -127,8 +127,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             int volume = i;
             handler.postDelayed(() -> {
                 currentIndex = volume;
-                currentHz = soundManager.getSounds().get(testIndex).getFreqOfTone();
-                playSound(soundManager.getSounds().get(testIndex), volume);
+                currentHz = soundDAO.getSounds().get(testIndex).getFreqOfTone();
+                playSound(soundDAO.getSounds().get(testIndex), volume);
             }, 1000 * i);
         }
     }
@@ -150,15 +150,15 @@ public class HearingTest extends Fragment implements View.OnClickListener {
 
     private void updateDefualtPrograms(Audiogram audiogram){
         for(int i = 1; i <= 4; i++){
-            Program program = programManager.getProgram(i);
+            Program program = programDAO.getProgram(i);
             System.out.println(program.getId());
             ArrayList<Integer> y = audiogram.getY();
-            program.setLow(programManager.defaultLevel(y.get(0),i));
-            program.setLow_plus(programManager.defaultLevel(y.get(1),i));
-            program.setMiddle(programManager.defaultLevel(y.get(2),i));
-            program.setHigh(programManager.defaultLevel(y.get(3),i));
-            program.setHigh_plus(programManager.defaultLevel(y.get(4),i));
-            programManager.updateDefault(program);
+            program.setLow(programDAO.defaultLevel(y.get(0),i));
+            program.setLow_plus(programDAO.defaultLevel(y.get(1),i));
+            program.setMiddle(programDAO.defaultLevel(y.get(2),i));
+            program.setHigh(programDAO.defaultLevel(y.get(3),i));
+            program.setHigh_plus(programDAO.defaultLevel(y.get(4),i));
+            programDAO.updateDefault(program);
             programViewModel.Update(program);
         }
     }

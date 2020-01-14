@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import a3.audientes.model.Program;
+import a3.audientes.dto.Program;
 import a3.audientes.database.Repository;
 
 public class ProgramViewModel extends AndroidViewModel {

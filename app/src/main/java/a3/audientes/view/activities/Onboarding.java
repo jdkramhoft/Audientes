@@ -16,9 +16,8 @@ import android.widget.TextView;
 import java.util.Objects;
 
 import a3.audientes.R;
-import a3.audientes.bluetooth.BluetoothPairingActivity;
-import a3.audientes.view.adapter.SliderAdapter;
-import utils.SharedPrefUtil;
+import a3.audientes.view.adapter.OnboardingSliderAdapter;
+import a3.audientes.utils.SharedPrefUtil;
 
 import static java.lang.Thread.sleep;
 
@@ -26,7 +25,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
 
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
-    private SliderAdapter sliderAdapter;
+    private OnboardingSliderAdapter sliderAdapter;
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
@@ -49,7 +48,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
         mNextBtn.setOnClickListener(this);
         mSkipBtn.setOnClickListener(this);
 
-        sliderAdapter = new SliderAdapter(getContext());
+        sliderAdapter = new OnboardingSliderAdapter(getContext());
         mSlideViewPager.setAdapter(sliderAdapter);
 
         addDotsIndicator(0);
@@ -104,7 +103,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
     private void launchAcitivity(){
         Intent intent;
         if (!isHearableConnected())
-            intent = new Intent(getContext(), BluetoothPairingActivity.class);
+            intent = new Intent(getContext(), BluetoothPairing.class);
         else if (newVisitor){
             SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(getActivity()), getString(R.string.new_visitor_pref), "false");
             intent = new Intent(getActivity(), HearingTest.class);
