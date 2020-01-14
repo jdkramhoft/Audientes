@@ -13,7 +13,7 @@
         android:gravity="center"
         android:textColor="@color/darkerOrange"
         android:textSize="22sp"
-        android:layout_margin="10sp"/>
+        android:layout_margin="16sp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -22,7 +22,6 @@
         android:gravity="center"
         android:textColor="@color/lightPurple"
         android:textSize="22sp"
-        android:layout_marginTop="10sp"
         android:layout_marginBottom="10sp"
         android:layout_marginRight="80sp"
         android:layout_marginLeft="80sp"/>
@@ -38,11 +37,10 @@
         android:layout_marginLeft="50sp"/>
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50sp"
-        android:layout_marginTop="10sp"
         android:layout_marginBottom="10sp">
 
         <Button

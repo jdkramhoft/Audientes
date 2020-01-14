@@ -33,18 +33,6 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="115dp"
-        android:layout_height="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelin"
-        app:layout_constraintEnd_toStartOf="@+id/guideline19"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0"
-        app:srcCompat="@drawable/xml_button_monka_fucking_s" />
-
-    <ImageView
         android:id="@+id/imageView4"
         android:layout_width="300dp"
         android:layout_height="3dp"
@@ -155,14 +143,17 @@
 
     <Button
         android:id="@+id/save_btn_config"
-        android:layout_width="290dp"
+        android:layout_width="0dp"
         android:layout_height="63dp"
         android:background="@drawable/xml_button_monka_fucking_s"
-        android:text="Save"
+        android:text="Save Changes"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline17" />
+        app:layout_constraintTop_toTopOf="@+id/guideline17"
+        app:layout_constraintVertical_bias="0.318" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

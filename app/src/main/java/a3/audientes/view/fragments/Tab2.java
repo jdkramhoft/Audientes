@@ -77,7 +77,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         date = audiogramManager.getCurrentAudiogram().getDateString();
 
         desc = root.findViewById(R.id.audiogram_desc_id);
-        desc.setText("Newest audiogram " + date);
+        desc.setText("Selected audiogram " + date);
         return root;
     }
 
@@ -86,7 +86,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         super.onResume();
         audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
         date = audiogramManager.getCurrentAudiogram().getDateString();
-        desc.setText("Newest audiogram " + date);
+        desc.setText("Selected audiogram " + date);
     }
 
     // onViewCreated is called after onCreateView

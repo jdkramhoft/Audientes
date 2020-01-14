@@ -53,7 +53,7 @@ public class Audiogram extends Fragment {
     private int[] freqs = {};
     private View v;
 
-    private final String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "Right and left Ear";
+    private final String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "Right & Left Ear";
 
     private final int[] colors = new int[] {
             Color.rgb(30, 176, 97),     // green

@@ -27,6 +27,7 @@
         android:layout_height="55dp"
         android:layout_marginBottom="74dp"
         android:gravity="center"
+        android:textSize="16sp"
         android:text="Test will take 5 minutes\nPress button to start"
         android:textColor="#BEC3E9"
         app:layout_constraintBottom_toTopOf="@+id/hearing_button"

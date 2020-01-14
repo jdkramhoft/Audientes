@@ -116,8 +116,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="0dp"
-
-        android:text="Change"
+        android:textSize="16dp"
+        android:text="Edit"
         android:textAlignment="textStart"
         android:textAllCaps="false"
 
