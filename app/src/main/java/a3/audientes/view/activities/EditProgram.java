@@ -190,7 +190,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     public void onBackPressed() {
 
         Bundle extras = getIntent().getExtras();
-        musicTrack.stop();
         if (extras != null) {
             if(extras.getBoolean("edit") == true){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -206,11 +205,13 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 });
                 button2.setOnClickListener(v1 -> {
                     dialog.cancel();
+                    musicTrack.stop();
                     EditProgram.this.finish();
                 });
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }else{
+                musicTrack.stop();
                 EditProgram.this.finish();
             }
         }
@@ -261,7 +262,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                     SharedPrefUtil.saveSharedSetting(this,"currentProgram", Integer.toString(nextindex));
                 }
             }
-
+            musicTrack.stop();
             Intent intent = new Intent(EditProgram.this, HearingProfile.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             EditProgram.this.finish();
