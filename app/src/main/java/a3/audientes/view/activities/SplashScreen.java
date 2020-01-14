@@ -47,7 +47,7 @@ public final class SplashScreen extends Fragment {
                     .commit();
         }
         else if (!isHearableConnected()){
-            Intent intent = new Intent(getContext(), Language.class);
+            Intent intent = new Intent(getContext(), BluetoothPairing.class);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).finish();
         }

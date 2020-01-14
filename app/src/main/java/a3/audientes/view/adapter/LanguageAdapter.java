@@ -67,5 +67,14 @@ public class LanguageAdapter extends Adapter<LanguageAdapter.MyViewHolder> {
         return localeList.size();
     }
 
+    public Locale getlocale(String name) {
+        Locale temp=null;
+        for (Locale l : localeList) {
+            if(l.getDisplayLanguage().equals(name)){
+                temp=l;
+            }
+        }
+        return temp;
+    }
 }
 

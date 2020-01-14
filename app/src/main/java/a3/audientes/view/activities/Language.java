@@ -1,8 +1,15 @@
 package a3.audientes.view.activities;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -28,21 +35,20 @@ public class Language extends AppCompatActivity implements View.OnClickListener 
         for(Locale l:locales) {
             if(localcountries.size()>0){
                 if(!l.getDisplayLanguage().equals(localcountries.get(localcountries.size()-1).getDisplayLanguage())){
-                    if(!l.getDisplayLanguage().equals(Locale.getDefault().getDisplayLanguage())){
+                    if(!l.getDisplayLanguage().toString().equals(Locale.getDefault().getDisplayLanguage().toString())){
                         localcountries.add(l);
-                        System.out.println(l.getDisplayLanguage().toString());
-                    }
-                    else{
 
                     }
                 }
             }
             else{
                 localcountries.add(l);
-                System.out.println(l.getDisplayLanguage().toString());
+
             }
 
         }
+        localcountries.add(0, Locale.ENGLISH);
+
         System.out.println(Locale.getDefault().getDisplayLanguage());
         setupRecyclerView(findViewById(R.id.languageRecView))   ;
     }
@@ -58,6 +64,21 @@ public class Language extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-
+        switchLocal(this.getBaseContext(),((TextView)v.findViewById(R.id.Title)).getText().toString(),this);
+    }
+    public void switchLocal(Context context, String lcode, Activity activity) {
+        if (lcode.equalsIgnoreCase(""))
+            return;
+        Resources resources = context.getResources();
+        Locale locale =  adapter.getlocale(lcode);
+        Locale.setDefault(locale);
+        android.content.res.Configuration config = new
+                android.content.res.Configuration();
+        config.locale = locale;
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+        //restart base activity
+        Locale.setDefault(locale);
+        activity.finish();
+        activity.startActivity(activity.getIntent());
     }
 }
