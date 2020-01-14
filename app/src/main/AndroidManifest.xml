@@ -41,6 +41,10 @@
         <activity android:name=".view.activities.HearingProfile"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>
+        <activity android:name=".view.activities.Language"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".view.activities.StartHearingTest"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>

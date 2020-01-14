@@ -26,4 +26,5 @@
     <string name="new_visitor_pref">newVisitor</string>
     <string name="search_for_devices">Search for devices</string>
     <string name="cntnue">Continue</string>
+    <string name="select_lan">Select your language</string>
 </resources>

@@ -1,5 +1,6 @@
 package a3.audientes.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -18,7 +19,6 @@ public final class Launcher extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launch);
-
 
         if (savedInstanceState == null) {
             Fragment splashScreen = new SplashScreen();
