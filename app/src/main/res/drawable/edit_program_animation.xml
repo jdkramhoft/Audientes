@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:drawable="@drawable/edit_program1"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/edit_program2"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/edit_program3"
-        android:duration="50" />
+
     <item
         android:drawable="@drawable/edit_program4"
-        android:duration="50" />
+        android:duration="200" />
     <item
         android:drawable="@drawable/edit_program5"
         android:duration="50" />
@@ -27,102 +19,52 @@
         android:duration="50" />
     <item
         android:drawable="@drawable/edit_program9"
-        android:duration="80" />
-    <item
-        android:drawable="@drawable/edit_program10"
-        android:duration="100" />
-    <item
-        android:drawable="@drawable/edit_program11"
-        android:duration="100" />
-    <item
-        android:drawable="@drawable/edit_program12"
         android:duration="400" />
     <item
+        android:drawable="@drawable/edit_program10"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/edit_program11"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/edit_program12"
+        android:duration="50" />
+    <item
         android:drawable="@drawable/edit_program12_1"
-        android:duration="100" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_program13"
-        android:duration="80" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_program14"
-        android:duration="80" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_program13_1"
-        android:duration="80" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_program13_2"
-        android:duration="80" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_program13_3"
-        android:duration="80" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_program13_4"
-        android:duration="80" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_1"
         android:duration="100" />
-    <item
-        android:drawable="@drawable/edit_2"
-        android:duration="100" />
-    <item
-        android:drawable="@drawable/edit_3"
-        android:duration="100" />
-    <item
-        android:drawable="@drawable/edit_4"
-        android:duration="100" />
-    <item
-        android:drawable="@drawable/edit_5"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/edit_6"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/edit_7"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/edit_8"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/edit_9"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/edit_10"
-        android:duration="30" />
-    <item
-        android:drawable="@drawable/edit_11"
-        android:duration="30" />
-    <item
-        android:drawable="@drawable/edit_12"
-        android:duration="30" />
-    <item
-        android:drawable="@drawable/edit_15"
-        android:duration="20" />
-    <item
-        android:drawable="@drawable/edit_16"
-        android:duration="20" />
-    <item
-        android:drawable="@drawable/edit_17"
-        android:duration="20" />
-    <item
-        android:drawable="@drawable/edit_18"
-        android:duration="30" />
-    <item
-        android:drawable="@drawable/edit_19"
-        android:duration="30" />
-    <item
-        android:drawable="@drawable/edit_20"
-        android:duration="30" />
+
     <item
         android:drawable="@drawable/edit_21"
-        android:duration="30" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_22"
-        android:duration="30" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_23"
-        android:duration="30" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/edit_23"
-        android:duration="200" />
+        android:duration="500" />
 
 </animation-list>

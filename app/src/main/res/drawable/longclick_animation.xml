@@ -2,14 +2,8 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/longclick1"
-        android:duration="1000" />
-    <item
-        android:drawable="@drawable/longclick2"
-        android:duration="50" />
-    <item
         android:drawable="@drawable/longclick3"
-        android:duration="50" />
+        android:duration="1000" />
     <item
         android:drawable="@drawable/longclick4"
         android:duration="50" />
@@ -36,7 +30,7 @@
         android:duration="50" />
     <item
         android:drawable="@drawable/longclick12x9"
-        android:duration="950" />
+        android:duration="50" />
     <item
         android:drawable="@drawable/longclick12_1"
         android:duration="50" />
@@ -72,13 +66,8 @@
         android:duration="50" />
     <item
         android:drawable="@drawable/longclick3"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/longclick2"
-        android:duration="50" />
-    <item
-        android:drawable="@drawable/longclick1"
-        android:duration="50" />
+        android:duration="200" />
+
 
 
 </animation-list>
