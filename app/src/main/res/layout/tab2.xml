@@ -10,13 +10,6 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
-
     <Button
         android:id="@+id/take_new_test_btn"
         android:layout_width="0dp"
@@ -24,7 +17,6 @@
         android:background="@drawable/xml_button_monka_fucking_s"
         android:gravity="center|center_vertical"
         android:text="Take New Test"
-        android:onClick="didTapButton"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="20dp"
@@ -54,11 +46,13 @@
         android:id="@+id/child_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/audiogram_desc_id"
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toBottomOf="@+id/active_test_id" />
+        app:layout_constraintTop_toBottomOf="@+id/active_test_id" >
+
+    </FrameLayout>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -88,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.77" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -116,26 +110,27 @@
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toBottomOf="@+id/child_fragment_container" />
 
-    <androidx.appcompat.widget.AppCompatButton
+
+    <TextView
         android:id="@+id/audiogram_history_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/darkBlue"
         android:minWidth="0dp"
-        android:layout_marginTop="8dp"
-        android:paddingEnd="4dp"
-        android:paddingStart="4dp"
 
-        android:text="Audiogram archive"
+        android:text="Change"
         android:textAlignment="textStart"
         android:textAllCaps="false"
-        android:textColor="@color/transparentWhite"
 
-        app:layout_constraintStart_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/guideline4">
+        android:textColor="@color/lightGreen"
+        tools:layout_editor_absoluteX="221dp"
+        tools:layout_editor_absoluteY="483dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline4"
+        app:layout_constraintEnd_toStartOf="@id/guideline9"
+        >
 
 
-    </androidx.appcompat.widget.AppCompatButton>
+    </TextView>
+
 
     <!--
     <ImageView
