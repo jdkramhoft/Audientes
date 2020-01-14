@@ -1,4 +1,4 @@
-package a3.audientes.view.fragments;
+package a3.audientes.view.activities;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

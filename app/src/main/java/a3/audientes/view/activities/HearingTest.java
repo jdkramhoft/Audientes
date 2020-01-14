@@ -1,4 +1,4 @@
-package a3.audientes.view.fragments;
+package a3.audientes.view.activities;
 
 
 import android.app.Activity;
@@ -15,11 +15,9 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import a3.audientes.R;
@@ -29,7 +27,6 @@ import a3.audientes.model.Program;
 import a3.audientes.model.ProgramManager;
 import a3.audientes.model.Sound;
 import a3.audientes.model.SoundManager;
-import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
 import utils.SharedPrefUtil;

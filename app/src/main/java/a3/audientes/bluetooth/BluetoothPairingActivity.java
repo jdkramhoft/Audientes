@@ -33,7 +33,7 @@ import a3.audientes.R;
 import a3.audientes.model.PopupManager;
 import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.view.activities.StartHearingTest;
-import a3.audientes.view.fragments.HearingTest;
+import a3.audientes.view.activities.HearingTest;
 import utils.SharedPrefUtil;
 
 

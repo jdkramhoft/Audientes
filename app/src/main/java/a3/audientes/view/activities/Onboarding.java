@@ -1,17 +1,15 @@
-package a3.audientes.view.fragments;
+package a3.audientes.view.activities;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +17,6 @@ import java.util.Objects;
 
 import a3.audientes.R;
 import a3.audientes.bluetooth.BluetoothPairingActivity;
-import a3.audientes.view.activities.HearingProfile;
 import a3.audientes.view.adapter.SliderAdapter;
 import utils.SharedPrefUtil;
 

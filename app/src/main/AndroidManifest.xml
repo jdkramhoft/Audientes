@@ -46,7 +46,7 @@
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".view.fragments.HearingTest"
+        <activity android:name=".view.activities.HearingTest"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>
         <activity android:name=".bluetooth.BluetoothPairingActivity"

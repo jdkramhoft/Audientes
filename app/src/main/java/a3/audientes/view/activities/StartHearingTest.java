@@ -7,7 +7,6 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import a3.audientes.R;
-import a3.audientes.view.fragments.HearingTest;
 
 public class StartHearingTest extends AppCompatActivity implements View.OnClickListener {
 

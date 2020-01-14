@@ -9,14 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import org.acra.ACRA;
-import org.acra.config.CoreConfigurationBuilder;
-import org.acra.config.ToastConfigurationBuilder;
-import org.acra.data.StringFormat;
-
-import a3.audientes.BuildConfig;
 import a3.audientes.R;
-import a3.audientes.view.fragments.SplashScreen;
 
 public final class Launcher extends AppCompatActivity {
 
