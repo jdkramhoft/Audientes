@@ -77,7 +77,7 @@ public class SliderAdapter extends PagerAdapter {
             AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
             animAnimation.start();
         }
-/*
+
         if (position == 4) {
             ImageView anim = (ImageView) view.findViewById(R.id.slide_image);
             anim.setBackgroundResource(R.drawable.edit_program_animation);
@@ -85,7 +85,7 @@ public class SliderAdapter extends PagerAdapter {
             animAnimation.start();
         }
 
- */
+
 
         slideImageView.setImageResource(slide_images[position]);
         slideHeading.setText(slide_headings[position]);

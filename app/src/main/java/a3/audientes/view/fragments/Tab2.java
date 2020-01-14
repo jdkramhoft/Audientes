@@ -35,7 +35,7 @@ import utils.SharedPrefUtil;
 public class Tab2 extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener listener;
     private Button take_new_test_btn;
-    private TextView audiogram_history_btn;
+    private Button audiogram_history_btn;
     private TextView desc;
     private static Fragment child;
     private String date;
