@@ -103,14 +103,14 @@ public class Onboarding extends Fragment implements View.OnClickListener {
     private void launchAcitivity(){
         Intent intent;
         if (!isHearableConnected())
-            intent = new Intent(getContext(), Language.class);
+            intent = new Intent(getContext(), BluetoothPairing.class);
         else if (newVisitor){
             SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(getActivity()), getString(R.string.new_visitor_pref), "false");
-            intent = new Intent(getActivity(), Language.class);
+            intent = new Intent(getActivity(), HearingTest.class);
         }
         else{
             SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(getActivity()), getString(R.string.new_visitor_pref), "false");
-            intent = new Intent(getActivity(), Language.class);
+            intent = new Intent(getActivity(), HearingProfile.class);
         }
 
         startActivity(intent);
