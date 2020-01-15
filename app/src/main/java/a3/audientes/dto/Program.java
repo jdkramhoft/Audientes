@@ -28,6 +28,8 @@ public class Program {
         this.deletable = deletable;
     }
 
+    // Getters and setters
+
     public int getLow() {
         return low;
     }

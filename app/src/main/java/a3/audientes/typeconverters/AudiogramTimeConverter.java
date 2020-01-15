@@ -1,8 +1,6 @@
 package a3.audientes.typeconverters;
 
-
 import androidx.room.TypeConverter;
-
 import java.util.Date;
 
 public class AudiogramTimeConverter {
