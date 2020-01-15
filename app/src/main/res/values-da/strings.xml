@@ -1,16 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Audientes</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="audioGram_left">The air conduction results for the left ear are marked with a blue... "X"</string>
     <string name="audioGram_right">The air conduction results for the right ear are marked with a red...     "O"</string>
-    <string name="enabel_bluetooth">This app requires that bluetooth is enabled, to connect your device to the Audientes hearing aid</string>
+    <string name="enabel_bluetooth">Denne app kræver bluetooth for at forbinde til Audientes høreapperat </string>
     <string name="audientes">Audientes</string>
     <string name="bottom_sheet_peek">peek</string>
-    <string name="bottom_sheet_content">content</string>
-    <string name="alert_dialog_cancel">cancel</string>
+    <string name="bottom_sheet_content">Indhold</string>
+    <string name="alert_dialog_cancel">Fortryd</string>
     <string name="alert_dialog_ok">Ok</string>
     <string name="alert_dialog_two_buttons_title">Title man</string>
     <string name="BoxedVertical_defaultImage">"@drawable/xml_fg_volumelevel"</string>
@@ -19,12 +19,13 @@
 
     <string name="addProgramText">+</string>
     <string name="plus">+</string>
-    <string name="connect_device">Connect Device</string>
-    <string name="home_btn">Home</string>
-    <string name="loud_btn">Loud</string>
-    <string name="quiet_btn">Quiet</string>
+    <string name="connect_device">Forbind enhed</string>
+    <string name="home_btn">Hjemme</string>
+    <string name="loud_btn">Larm</string>
+    <string name="quiet_btn">Stille</string>
     <string name="new_visitor_pref">newVisitor</string>
-    <string name="search_for_devices">Search for devices</string>
-    <string name="cntnue">Continue</string>
-    <string name="select_lan">Select your language</string>
+    <string name="search_for_devices">Søg efter enheder</string>
+    <string name="cntnue">Fortsæt</string>
+    <string name="select_lan">Vælg dit sprog</string>
+
 </resources>

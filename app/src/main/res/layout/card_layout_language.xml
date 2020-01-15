@@ -15,8 +15,8 @@
 
     <ImageView
         android:id="@+id/imgViewFlag"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:elevation="5dp"
@@ -29,23 +29,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/icon_circle" />
-
-    <ImageView
-        android:id="@+id/imagee1"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="5dp"
-        android:scaleX="0.6"
-        android:scaleY="0.6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline15"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55"
-        app:srcCompat="@drawable/icon_hearable" />
 
 
     <TextView
@@ -70,5 +53,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="89dp" />
+        app:layout_constraintGuide_begin="83dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

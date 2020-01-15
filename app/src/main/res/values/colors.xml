@@ -5,11 +5,7 @@
     <color name="white">#FEFEFE</color>
     <color name="lightPurple">#BEC3E9</color>
     <color name="lightDarkerPurple">#7934246B</color>
-    <color name="deepOrange">#F38888</color>
     <color name="lightGreen">#5DCB9A</color>
-    <color name="yellow">#FFD363</color>
-    <color name="blue">#65D1FF</color>
-    <color name="red">#FC391D</color>
     <color name="transparentWhite">#CCCCCC</color>
     <color name="transparent">#00000000 </color>
     <color name="bgcolor">#161637</color>
@@ -17,14 +13,21 @@
     <!-- Volume icon -->
     <color name="darkBlue">#3F435E</color>
     <color name="darkerOrange">#FF7B62</color>
-    <color name="lightPink">#FF62AD</color>
+    <!-- not used
+    <color name="lightPink">#FF62AD</color> -->
+
 
     <!-- Volume control -->
+
+    <!-- not used
     <color name="darkYellow">#FFC36A</color>
-    <color name="purple">#C42FD1</color>
+    <color name="purple">#C42FD1</color> -->
 
     <!-- Action Bar -->
-    <color name="actionBarDark">#7934246B</color>
+
+    <!-- not used
+    <color name="actionBarDark">#7934246B</color> -->
+
     <color name="actionBarLight">#00314351</color>
 
     <color name="textColor">#283593</color>

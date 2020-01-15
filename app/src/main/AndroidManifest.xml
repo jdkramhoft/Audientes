@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:configChanges="locale">
 
         <activity android:name=".view.activities.SplashScreen"
             android:theme="@style/AppTheme.ActionBar.Dark"
@@ -46,6 +47,12 @@
         <activity android:name=".view.activities.HearingProfile"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".view.activities.Language"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"
+            android:configChanges="locale"
+            />
 
         <activity android:name=".view.activities.StartHearingTest"
             android:theme="@style/AppTheme.ActionBar.Dark"
