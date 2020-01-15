@@ -127,6 +127,7 @@ public class VolumeSlider extends View{
 
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         int streamVolume= audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        System.out.println("streamVolume"+streamVolume);
 
         int newRange = mMax - mMin;
         int oldRange = (SOUND_MAX - SOUND_MIN);
