@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.shuhart.stepview.StepView;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -45,6 +47,8 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     private ProgramViewModel programViewModel;
     private AudiogramViewModel audiogramViewModel;
     private ImageButton testButton;
+    private StepView stepView;
+    private final int ONE_SECOND = 1000;
 
     public static final int HEARING_TEST = 1;
     public static final int TEST_OKAY = 13;
@@ -72,6 +76,22 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         testButton = findViewById(R.id.hearing_button);
         testButton.setOnClickListener(this);
         startTest(testIndex);
+
+        stepView = findViewById(R.id.step_view);
+
+
+        stepView.getState()
+                .animationType(StepView.ANIMATION_LINE)
+                .steps(new ArrayList<String>() {{
+                    add("Low+");
+                    add("Low");
+                    add("Medium");
+                    add("High");
+                    add("High+");
+                }})
+                .stepsNumber(5)
+                .animationDuration(ONE_SECOND)
+                .commit();
     }
 
     @Override
@@ -79,14 +99,12 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         testIndex++;
         testButton.setEnabled(false);
         handler.removeCallbacksAndMessages(null);
-        handler.postDelayed(() -> {
-            testButton.setEnabled(true);
-        }, 1000);
+        handler.postDelayed(() -> testButton.setEnabled(true), ONE_SECOND);
+        stepView.go(testIndex, true);
+
 
         if (testIndex == soundDAO.getSounds().size()){
-            System.out.println("done");
-            System.out.println("Index: "+currentIndex);
-            System.out.println("Hz: "+currentHz);
+            stepView.done(true);
             audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             audiogramDAO.getCurrentAudiogram().setId(audiogramDAO.getNextId());
             audiogramDAO.getCurrentAudiogram().setDate(new Date());
@@ -104,8 +122,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         }
         else{
             AnimBtnUtil.bounce(v, this);
-            System.out.println("Index: "+currentIndex);
-            System.out.println("Hz: "+currentHz);
+
             audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             startTest(testIndex);
         }
@@ -119,7 +136,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
                 currentIndex = volume;
                 currentHz = soundDAO.getSounds().get(testIndex).getFreqOfTone();
                 playSound(soundDAO.getSounds().get(testIndex), volume);
-            }, 1000 * i);
+            }, ONE_SECOND * i);
         }
     }
 
