@@ -1,6 +1,8 @@
 package a3.audientes.view.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 
@@ -27,23 +30,26 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         hearing_button.setOnClickListener(this);
         mRecorder = new MediaRecorder();
 
-        if (android.os.Build.MODEL.contains("google_sdk") || android.os.Build.MODEL.contains("Emulator")) {
+        if (!(android.os.Build.MODEL.contains("google_sdk") || android.os.Build.MODEL.contains("Emulator"))) {
             mRecorder = new MediaRecorder();
+
             try {
                 start();
                 System.out.println(getAmplitude());
-
                 final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                handler.postDelayed(new Runnable(){
                     @Override
                     public void run() {
                         System.out.println(getAmplitude());
+                        handler.postDelayed(this,1000);
                     }
-                }, 5000);
-            } catch (IOException e) {
-                e.printStackTrace();
+                }
+                ,1000);
             }
-        }
+            catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
     }
 
@@ -52,11 +58,9 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         if (v == hearing_button) {
             startActivity(new Intent(this, HearingTest.class));
         }
-
     }
 
     // MediaRecorder
-
     public void start() throws IOException {
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);

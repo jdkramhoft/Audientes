@@ -1,10 +1,13 @@
 package a3.audientes.view.activities;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 import java.util.Objects;
 
@@ -33,6 +36,11 @@ public final class SplashScreen extends AppCompatActivity {
         if (savedInstanceState == null){
             // TODO: only onboarding on first visit
             handler.postDelayed(splash, 2000);
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
+                    0);
         }
 
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
