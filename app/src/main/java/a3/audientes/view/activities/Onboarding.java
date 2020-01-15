@@ -1,5 +1,6 @@
 package a3.audientes.view.activities;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -21,7 +22,7 @@ import a3.audientes.utils.SharedPrefUtil;
 
 import static java.lang.Thread.sleep;
 
-public class Onboarding extends Fragment implements View.OnClickListener {
+public class Onboarding extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
@@ -31,34 +32,30 @@ public class Onboarding extends Fragment implements View.OnClickListener {
     private int mCurrentPage;
     private final int NUM_OF_DOTS = 5;
     private boolean newVisitor;
+    private int currentAudiogramId;
 
     @Override
-    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.onboarding);
 
-        View rod = i.inflate(R.layout.onboarding, container, false);
+        mSlideViewPager = findViewById(R.id.slideViewPager);
+        mDotLayout = findViewById(R.id.dotsLayout);
 
-
-
-        mSlideViewPager = rod.findViewById(R.id.slideViewPager);
-        mDotLayout = rod.findViewById(R.id.dotsLayout);
-
-        mNextBtn = rod.findViewById(R.id.nextbtn);
-        mSkipBtn = rod.findViewById(R.id.skipbtn);
+        mNextBtn = findViewById(R.id.nextbtn);
+        mSkipBtn = findViewById(R.id.skipbtn);
 
         mNextBtn.setOnClickListener(this);
         mSkipBtn.setOnClickListener(this);
 
-        sliderAdapter = new OnboardingSliderAdapter(getContext());
+        sliderAdapter = new OnboardingSliderAdapter(getBaseContext());
         mSlideViewPager.setAdapter(sliderAdapter);
 
         addDotsIndicator(0);
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
+        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
 
-
-        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(getActivity(), getString(R.string.new_visitor_pref), "true"));
-
-        return rod;
     }
 
 
@@ -67,7 +64,7 @@ public class Onboarding extends Fragment implements View.OnClickListener {
         mDotLayout.removeAllViews();
 
         for (int i = 0; i < NUM_OF_DOTS; i++){
-            mDots[i] = new TextView(getContext());
+            mDots[i] = new TextView(getBaseContext());
             mDots[i].setText(Html.fromHtml("&#8226;"));
 
 
@@ -102,19 +99,20 @@ public class Onboarding extends Fragment implements View.OnClickListener {
 
     private void launchAcitivity(){
         Intent intent;
+        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         if (!isHearableConnected())
-            intent = new Intent(getContext(), BluetoothPairing.class);
-        else if (newVisitor){
-            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(getActivity()), getString(R.string.new_visitor_pref), "false");
-            intent = new Intent(getActivity(), HearingTest.class);
+            intent = new Intent(getBaseContext(), BluetoothPairing.class);
+        else if (newVisitor || currentAudiogramId == 0){
+            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
+            intent = new Intent(this, HearingTest.class);
         }
         else{
-            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(getActivity()), getString(R.string.new_visitor_pref), "false");
-            intent = new Intent(getActivity(), HearingProfile.class);
+            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
+            intent = new Intent(this, HearingProfile.class);
         }
 
         startActivity(intent);
-        Objects.requireNonNull(getActivity()).finish();
+        Objects.requireNonNull(this).finish();
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {

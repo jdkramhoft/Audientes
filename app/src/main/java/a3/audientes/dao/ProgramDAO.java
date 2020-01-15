@@ -2,26 +2,19 @@ package a3.audientes.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import a3.audientes.dto.Program;
 import a3.audientes.view.adapter.ProgramAdapter;
 
 public class ProgramDAO {
-    // static variable single_instance of type Singleton
     private static ProgramDAO single_instance = null;
-
     private List<Program> programList = new ArrayList<>();
     public ProgramAdapter programadapter;
 
-
-    // private constructor restricted to this class itself
     private ProgramDAO() { }
 
-    // static method to create instance of Singleton class
     public static ProgramDAO getInstance() {
         if (single_instance == null)
             single_instance = new ProgramDAO();
-
         return single_instance;
     }
 
@@ -71,39 +64,6 @@ public class ProgramDAO {
     }
 
 
-    public Program getProgram(int id){
-
-        Program temp = null;
-
-        for(int i = 0; i < programList.size(); i++){
-            if(id == programList.get(i).getId()){
-                temp = programList.get(i);
-            }
-        }
-        return temp;
-    }
-
-
-
-    public List<Program> getProgramList() {
-        return programList;
-    }
-
-    public void setProgramList(List<Program> programList) {
-        this.programList = programList;
-    }
-
-    public int getNextId(){
-        if(programList.size()==0){
-            return 0;
-        }
-        return programList.get(programList.size()-1).getId()+ 1;
-    }
-
-    public void setAdapter(ProgramAdapter programadapter){
-        this.programadapter = programadapter;
-    }
-
     public int defaultLevel(int level, int program) {
         int max = 3000;
         int diffents = (level-5)*100;
@@ -120,4 +80,38 @@ public class ProgramDAO {
                 return max/2;
         }
     }
+
+    public Program getProgram(int id){
+        Program temp = null;
+        for(int i = 0; i < programList.size(); i++){
+            if(id == programList.get(i).getId()){
+                temp = programList.get(i);
+            }
+        }
+        return temp;
+    }
+
+    public int getNextId(){
+        if(programList.size()==0){
+            return 0;
+        }
+        return programList.get(programList.size()-1).getId()+ 1;
+    }
+
+    // Getters and setters
+
+    public List<Program> getProgramList() {
+        return programList;
+    }
+
+    public void setProgramList(List<Program> programList) {
+        this.programList = programList;
+    }
+
+    public void setAdapter(ProgramAdapter programadapter){
+        this.programadapter = programadapter;
+    }
+
+
+
 }

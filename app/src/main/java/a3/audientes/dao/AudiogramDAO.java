@@ -2,7 +2,6 @@ package a3.audientes.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import a3.audientes.dto.Audiogram;
 
 public class AudiogramDAO {
@@ -16,20 +15,11 @@ public class AudiogramDAO {
     public static AudiogramDAO getInstance() {
         if (single_instance == null)
             single_instance = new AudiogramDAO();
-
         return single_instance;
     }
 
     public void addAudiogram(Audiogram audiogram){
         audiograms.add(audiogram);
-    }
-
-    public List<Audiogram> getAudiograms(){
-        return audiograms;
-    }
-
-    public void setAudiograms(List<Audiogram> audiograms) {
-        this.audiograms = audiograms;
     }
 
     public void resetAudiogram(){
@@ -61,6 +51,7 @@ public class AudiogramDAO {
     }
 
 
+    // Getters and setters
 
     public Audiogram getCurrentAudiogram() {
         return currentAudiogram;
@@ -68,5 +59,14 @@ public class AudiogramDAO {
 
     public void setCurrentAudiogram(Audiogram currentAudiogram) {
         this.currentAudiogram = currentAudiogram;
+    }
+
+
+    public List<Audiogram> getAudiograms(){
+        return audiograms;
+    }
+
+    public void setAudiograms(List<Audiogram> audiograms) {
+        this.audiograms = audiograms;
     }
 }

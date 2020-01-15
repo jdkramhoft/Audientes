@@ -44,7 +44,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.layout_edit_program);
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
-
         // Setting up Equalizer
         musicTrack = MediaPlayer.create(this, R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());

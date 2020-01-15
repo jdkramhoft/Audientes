@@ -1,16 +1,10 @@
 package a3.audientes.typeconverters;
 
-
 import androidx.room.TypeConverter;
-
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-
 import java.lang.reflect.Type;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class AudiogramConverter {
 
@@ -23,7 +17,6 @@ public class AudiogramConverter {
     @TypeConverter
     public static String fromArrayList(ArrayList<Integer> list) {
         Gson gson = new Gson();
-        String json = gson.toJson(list);
-        return json;
+        return gson.toJson(list);
     }
 }

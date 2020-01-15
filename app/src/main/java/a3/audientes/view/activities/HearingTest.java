@@ -8,6 +8,8 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -33,7 +35,7 @@ import a3.audientes.utils.SharedPrefUtil;
 import a3.audientes.utils.animation.AnimBtnUtil;
 
 
-public class HearingTest extends Fragment implements View.OnClickListener {
+public class HearingTest extends AppCompatActivity implements View.OnClickListener {
 
     private int testIndex = 0;
     private int currentIndex = 1;
@@ -48,16 +50,11 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     public static final int TEST_OKAY = 13;
     public static final int TEST_NOT_COMPLETE = 37;
     // Sound
-   SoundDAO soundDAO = SoundDAO.getInstance();
+    SoundDAO soundDAO = SoundDAO.getInstance();
 
     Handler handler = new Handler();
 
     public HearingTest() {}
-
-    public static HearingTest newInstance(String param1, String param2) {
-        HearingTest fragment = new HearingTest();
-        return fragment;
-    }
 
     @Override
     public void onResume() {
@@ -68,21 +65,14 @@ public class HearingTest extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.hearing_test);
         audiogramDAO.resetAudiogram();
         audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
+        testButton = findViewById(R.id.hearing_button);
+        testButton.setOnClickListener(this);
         startTest(testIndex);
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rod =  inflater.inflate(R.layout.hearing_test, container, false);
-        testButton = rod.findViewById(R.id.hearing_button);
-        testButton.setOnClickListener(this);
-        return rod;
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -102,18 +92,18 @@ public class HearingTest extends Fragment implements View.OnClickListener {
             audiogramDAO.getCurrentAudiogram().setDate(new Date());
             audiogramViewModel.Insert(audiogramDAO.getCurrentAudiogram());
             audiogramDAO.saveCurrentAudiogram();
-            SharedPrefUtil.saveSharedSetting(getContext(),"currentAudiogram", Integer.toString(audiogramDAO.getCurrentAudiogram().getId()));
+            SharedPrefUtil.saveSharedSetting(getBaseContext(),"currentAudiogram", Integer.toString(audiogramDAO.getCurrentAudiogram().getId()));
             updateDefualtPrograms(audiogramDAO.getCurrentAudiogram());
-            Activity activity = Objects.requireNonNull(getActivity());
+            Activity activity = Objects.requireNonNull(this);
             activity.setResult(TEST_OKAY, null);
-            Intent i = new Intent(getContext(), HearingProfile.class);
+            Intent i = new Intent(getBaseContext(), HearingProfile.class);
             i.putExtra("ARG_PAGE", 1);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             activity.finish();
         }
         else{
-            AnimBtnUtil.bounce(v, getActivity());
+            AnimBtnUtil.bounce(v, this);
             System.out.println("Index: "+currentIndex);
             System.out.println("Hz: "+currentHz);
             audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
@@ -136,8 +126,8 @@ public class HearingTest extends Fragment implements View.OnClickListener {
 
 
     private void playSound(Sound sound, int volume){
-        if (getActivity() == null) return;
-        AudioManager audioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
+        AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+        assert audioManager != null;
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
 
         final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,

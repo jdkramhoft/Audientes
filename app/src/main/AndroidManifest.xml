@@ -21,32 +21,39 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:configChanges="locale">
-        <activity
-            android:name=".view.activities.EditProgram"
-            android:theme="@style/AppTheme.ActionBar.Dark"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".view.activities.Launcher"
+
+        <activity android:name=".view.activities.SplashScreen"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.activities.AudiogramHistory"
             android:screenOrientation="portrait">
-
         </activity>
+
+        <activity
+            android:name=".view.activities.EditProgram"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".view.activities.Onboarding"
+            android:theme="@style/AppTheme.ActionBar.Dark"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".view.activities.HearingProfile"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".view.activities.Language"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"
             android:configChanges="locale"
             />
+
         <activity android:name=".view.activities.StartHearingTest"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>
@@ -54,6 +61,7 @@
         <activity android:name=".view.activities.HearingTest"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".view.activities.BluetoothPairing"
             android:theme="@style/AppTheme.ActionBar.Dark"
             android:screenOrientation="portrait"/>

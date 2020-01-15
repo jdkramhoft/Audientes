@@ -4,15 +4,8 @@ package a3.audientes.view.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-
 import java.util.Objects;
 
 import a3.audientes.R;
@@ -22,7 +15,7 @@ import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
 
-public final class SplashScreen extends Fragment {
+public final class SplashScreen extends AppCompatActivity {
 
     private final Handler handler = new Handler();
     private ProgramViewModel programviewmodel;
@@ -32,30 +25,10 @@ public final class SplashScreen extends Fragment {
     private boolean newVisitor;
     private int currentAudiogramId;
 
-    private final Runnable splash = () -> {
-        if (getActivity()==null) return;
-        assert getFragmentManager() != null;
-
-        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(getActivity(), getString(R.string.new_visitor_pref), "true"));
-        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0"));
-        System.out.println("Current: "+currentAudiogramId);
-        System.out.println(newVisitor);
-        if (newVisitor || currentAudiogramId == 0){
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.emptyFrame, new Onboarding() )
-                    .addToBackStack(null)
-                    .commit();
-        }
-        else if (!isHearableConnected()){
-            Intent intent = new Intent(getContext(), BluetoothPairing.class);
-            startActivity(intent);
-            Objects.requireNonNull(getActivity()).finish();
-        }
-    };
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash_screen);
 
         if (savedInstanceState == null){
             // TODO: only onboarding on first visit
@@ -73,14 +46,31 @@ public final class SplashScreen extends Fragment {
 
             System.out.println("Audiograms in db: "+audiograms.size());
         });
-
-
-        return i.inflate(R.layout.splash_screen, container, false);
     }
 
     private boolean isHearableConnected() {
         // TODO: somehow check if the correct device is already connected
         return false;
     }
+
+    private final Runnable splash = () -> {
+        if (this==null) return;
+        assert getFragmentManager() != null;
+
+        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
+        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        System.out.println("Current: "+currentAudiogramId);
+        System.out.println(newVisitor);
+        if (newVisitor || currentAudiogramId == 0){
+            Intent intent = new Intent(this, Onboarding.class);
+            startActivity(intent);
+            Objects.requireNonNull(this).finish();
+        }
+        else if (!isHearableConnected()){
+            Intent intent = new Intent(this, BluetoothPairing.class);
+            startActivity(intent);
+            Objects.requireNonNull(this).finish();
+        }
+    };
 
 }

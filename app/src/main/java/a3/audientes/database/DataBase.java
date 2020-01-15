@@ -2,7 +2,6 @@ package a3.audientes.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -40,18 +39,15 @@ public abstract class DataBase extends RoomDatabase {
                     fallbackToDestructiveMigration()
                     .addCallback(roomCallBack)
                     .build();
-
         }
         return instance;
     }
 
     private static RoomDatabase.Callback roomCallBack = new RoomDatabase.Callback(){
-
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             new CreateDefualtProgramsAsyncTask(instance).execute();
-            //new CreateDefualtAudiogramAsyncTask(instance).execute();
         }
     };
 
@@ -68,27 +64,6 @@ public abstract class DataBase extends RoomDatabase {
             DAO.insertProgram(new Program(home, 1500,1500,1500,1500,1500,2, false));
             DAO.insertProgram(new Program(loud, 2000,2000,2000,2000,2000,2, false));
             DAO.insertProgram(new Program(windy, 3000,3000,3000,3000,3000,2, false));
-            return null;
-        }
-    }
-
-    private static class CreateDefualtAudiogramAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        private DAO DAO;
-        private CreateDefualtAudiogramAsyncTask(DataBase db){
-            DAO = db.dao();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            Audiogram newAudiogram = new Audiogram();
-            newAudiogram.addIndex(new int[]{500,5});
-            newAudiogram.addIndex(new int[]{1000,4});
-            newAudiogram.addIndex(new int[]{2000,6});
-            newAudiogram.addIndex(new int[]{5000,4});
-            newAudiogram.addIndex(new int[]{10000,5});
-            newAudiogram.setDate(new Date());
-            DAO.insertAudiogram(newAudiogram);
             return null;
         }
     }
