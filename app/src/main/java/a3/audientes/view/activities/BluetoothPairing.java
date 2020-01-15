@@ -41,6 +41,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     private Button searchConnectButton;
     private boolean newVisitor;
+    private boolean hasSearched = false;
     OnClickListener clicker = this;
     BluetoothDeviceListAdapter adapter;
     private int currentAudiogramId;
@@ -98,14 +99,11 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         lvNewDevices = findViewById(R.id.lvNewDevices);
         bluetoothDevices = new ArrayList<>();
 
-
-
         adapter = new BluetoothDeviceListAdapter(bluetoothDevices, this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         lvNewDevices.setLayoutManager(mLayoutManager);
         lvNewDevices.setItemAnimator(new DefaultItemAnimator());
         lvNewDevices.setAdapter(adapter);
-
 
         searchConnectButton = findViewById(R.id.connectToDevice);
         searchConnectButton.setOnClickListener(this);
@@ -116,12 +114,11 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         registerReceiver(broadcastReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
 
         newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
-
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if (bluetoothAdapter == null) {
             //noBluetoothSupport();
-            enableBluetooth(); // TODO: remove before submission
+            enableBluetooth();
         }
         else if (!bluetoothAdapter.isEnabled())
             enableBluetooth();
@@ -129,10 +126,9 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void discover() {
-        System.out.println("Looking for bluetooth devices");
-
-        if(bluetoothAdapter.isDiscovering())
+        if(bluetoothAdapter.isDiscovering()){
             bluetoothAdapter.cancelDiscovery();
+        }
 
         int permission = PackageManager.PERMISSION_GRANTED;
         permission += checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -145,8 +141,6 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         }
 
         bluetoothAdapter.startDiscovery();
-
-
     }
 
     private void enableBluetooth() {
@@ -156,31 +150,8 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enableBTIntent);
         }
-
-        /*
-        AlertDialog.Builder builderbluetooth = new AlertDialog.Builder(this);
-        View bluetoothView = getLayoutInflater().inflate(R.layout.custom_popup_connect_bluetooth, null);
-        Button buttonbluetooth =  bluetoothView.findViewById(R.id.button1);
-        builderbluetooth.setView(bluetoothView);
-        AlertDialog bluetoothDialog = builderbluetooth.create();
-
-        buttonbluetooth.setOnClickListener(v12 -> {
-            if(bluetoothAdapter == null){
-                System.out.println("Bluetooth not supported");
-            } else {
-                Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivity(enableBTIntent);
-            }
-            bluetoothDialog.dismiss();
-        });
-        bluetoothDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        bluetoothDialog.show();
-         */
     }
 
-    //TODO -- ???
-
-    private boolean hasSearched = false;
 
     @Override
     public void onClick(View v) {

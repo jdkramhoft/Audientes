@@ -25,58 +25,8 @@ public class Audiogram implements Comparable<Audiogram> {
     @TypeConverters(AudiogramTimeConverter.class)
     private Date date;
 
+
     public Audiogram() {}
-
-    public void addIndex(int[] xy){
-        x.add(xy[0]);
-        y.add(xy[1]);
-    }
-
-    public ArrayList<int[]> getGraf(){
-        ArrayList<int[]> temp = new ArrayList<>();
-        for(int i = 0; i < x.size(); i++){
-            int[] xy = {x.get(i), y.get(i)};
-            temp.add(xy);
-        }
-        return temp;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public ArrayList<Integer> getX() {
-        return x;
-    }
-
-    public void setX(ArrayList<Integer> x) {
-        this.x = x;
-    }
-
-    public ArrayList<Integer> getY() {
-        return y;
-    }
-
-    public void setY(ArrayList<Integer> y) {
-        this.y = y;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public String getDateString() {
-        DateFormat x = SimpleDateFormat.getDateInstance();
-        return x.format(date);
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     @Override
     public boolean equals(@Nullable Object o) {
@@ -108,4 +58,58 @@ public class Audiogram implements Comparable<Audiogram> {
     public int compareTo(Audiogram o) {
         return this.date.compareTo(o.date) > 0 ? -1 : 1 ;
     }
+
+    // Getters and setters
+
+    public ArrayList<int[]> getGraf(){
+        ArrayList<int[]> temp = new ArrayList<>();
+        for(int i = 0; i < x.size(); i++){
+            int[] xy = {x.get(i), y.get(i)};
+            temp.add(xy);
+        }
+        return temp;
+    }
+
+    public void addIndex(int[] xy){
+        x.add(xy[0]);
+        y.add(xy[1]);
+    }
+
+    public String getDateString() {
+        DateFormat x = SimpleDateFormat.getDateInstance();
+        return x.format(date);
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<Integer> getX() {
+        return x;
+    }
+
+    public void setX(ArrayList<Integer> x) {
+        this.x = x;
+    }
+
+    public ArrayList<Integer> getY() {
+        return y;
+    }
+
+    public void setY(ArrayList<Integer> y) {
+        this.y = y;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
 }
