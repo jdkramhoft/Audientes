@@ -64,7 +64,7 @@
     <string name="hearing_test">Høretest</string>
     <string name="take_new_test">Tag ny høretest</string>
     <string name="active_test">Aktiv test</string>
-    <string name="audiogram_n_archive">Audiogram   arkiv</string>
+    <string name="audiogram_n_archive">Arkiv</string>
     <string name="newest_hearing_test">Nyeste høretest:</string>
     <string name="selected_audiogram">Valgte audiogram</string>
 </resources>
