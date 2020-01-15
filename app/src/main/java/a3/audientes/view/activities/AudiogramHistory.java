@@ -42,7 +42,7 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
         ProgramDAO programDAO = ProgramDAO.getInstance();
         ProgramViewModel programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
 
-        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramDAO, programViewModel, programDAO));
+        recyclerView.setAdapter(new AudiogramAdapter(audiogramList, fragmentManager, audiogramDAO, programViewModel, programDAO, getBaseContext()));
     }
 
 

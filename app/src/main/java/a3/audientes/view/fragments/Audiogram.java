@@ -27,6 +27,7 @@ import com.github.mikephil.charting.utils.EntryXComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
@@ -60,17 +61,20 @@ public class Audiogram extends Fragment {
             Color.rgb(190, 195, 233)    // purple
 
     };
+    static Context context1;
+    public Audiogram() {
 
-    public Audiogram() { }
+    }
 
-    public static Audiogram newInstance() {
+    public static Audiogram newInstance(Context context) {
+        context1 = context;
         return new Audiogram();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RIGHT_EAR_LABEL = getActivity().getString(R.string.randlear);
+        RIGHT_EAR_LABEL = Objects.requireNonNull(getActivity()).getString(R.string.randlear);
     }
 
     @Override
@@ -120,7 +124,7 @@ public class Audiogram extends Fragment {
     }
 
     public void drawAudiogram(List<int[]> left, List<int[]> right, View v){
-
+        RIGHT_EAR_LABEL = context1.getString(R.string.randlear);
         LineChart chart = v.findViewById(R.id.chart);
         chart.getDescription().setEnabled(false);
         chart.setTouchEnabled(false);
@@ -176,6 +180,7 @@ public class Audiogram extends Fragment {
         legend.setDrawInside(false);
         legend.setTextColor(colors[2]);
         legend.setTextSize(15f);
+
 
         // data
         List<ILineDataSet> data_lines = new ArrayList<>();
