@@ -1,5 +1,6 @@
 package a3.audientes.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,9 +27,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == hearing_button) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.start_hearing_test_framelayout, new HearingTest())
-                    .addToBackStack(null).commit();
+            startActivity(new Intent(this, HearingTest.class));
         }
 
     }
