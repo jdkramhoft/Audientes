@@ -4,11 +4,14 @@ package a3.audientes.view.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,7 +20,10 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.shuhart.stepview.StepView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +51,8 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     private ProgramViewModel programViewModel;
     private AudiogramViewModel audiogramViewModel;
     private ImageButton testButton;
+    private StepView stepView;
+    private final int ONE_SECOND = 1000;
 
     public static final int HEARING_TEST = 1;
     public static final int TEST_OKAY = 13;
@@ -63,6 +71,13 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     }
 
     @Override
+    public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
+        HearingTest.this.finish();
+    }
+
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hearing_test);
@@ -72,6 +87,22 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         testButton = findViewById(R.id.hearing_button);
         testButton.setOnClickListener(this);
         startTest(testIndex);
+
+        stepView = findViewById(R.id.step_view);
+
+
+        stepView.getState()
+                .animationType(StepView.ANIMATION_LINE)
+                .steps(new ArrayList<String>() {{
+                    add("Low+");
+                    add("Low");
+                    add("Medium");
+                    add("High");
+                    add("High+");
+                }})
+                .stepsNumber(5)
+                .animationDuration(ONE_SECOND)
+                .commit();
     }
 
     @Override
@@ -79,14 +110,12 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         testIndex++;
         testButton.setEnabled(false);
         handler.removeCallbacksAndMessages(null);
-        handler.postDelayed(() -> {
-            testButton.setEnabled(true);
-        }, 1000);
+        handler.postDelayed(() -> testButton.setEnabled(true), ONE_SECOND);
+        stepView.go(testIndex, true);
+
 
         if (testIndex == soundDAO.getSounds().size()){
-            System.out.println("done");
-            System.out.println("Index: "+currentIndex);
-            System.out.println("Hz: "+currentHz);
+            stepView.done(true);
             audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             audiogramDAO.getCurrentAudiogram().setId(audiogramDAO.getNextId());
             audiogramDAO.getCurrentAudiogram().setDate(new Date());
@@ -104,8 +133,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         }
         else{
             AnimBtnUtil.bounce(v, this);
-            System.out.println("Index: "+currentIndex);
-            System.out.println("Hz: "+currentHz);
+
             audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             startTest(testIndex);
         }
@@ -119,7 +147,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
                 currentIndex = volume;
                 currentHz = soundDAO.getSounds().get(testIndex).getFreqOfTone();
                 playSound(soundDAO.getSounds().get(testIndex), volume);
-            }, 1000 * i);
+            }, ONE_SECOND * i);
         }
     }
 

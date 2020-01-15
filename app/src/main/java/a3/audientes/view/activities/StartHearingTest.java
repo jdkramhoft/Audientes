@@ -35,6 +35,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
             try {
                 start();
+                System.out.println("MediaRecorder: jaaaaaa");
                 System.out.println(getAmplitude());
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable(){
