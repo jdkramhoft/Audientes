@@ -2,6 +2,8 @@ package a3.audientes.view.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,13 +33,14 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
     private FragmentManager fragmentManager;
     private ProgramDAO programDAO;
     private ProgramViewModel programViewModel;
-
-    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO) {
+    Context context;
+    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO, Context context) {
         this.audiogramList = audiogramList;
         this.fragmentManager = fragmentManager;
         this.audiogramDAO = audiogramDAO;
         this.programDAO = programDAO;
         this.programViewModel = programViewModel;
+        this.context = context;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -59,6 +62,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.audiogram_card, parent, false);
+
         return new a3.audientes.view.adapter.AudiogramAdapter.MyViewHolder(itemView);
     }
 
@@ -90,7 +94,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
         holder.date.setText(audiogram.getDateString());
 
-        a3.audientes.view.fragments.Audiogram fragment = a3.audientes.view.fragments.Audiogram.newInstance();
+        a3.audientes.view.fragments.Audiogram fragment = a3.audientes.view.fragments.Audiogram.newInstance(context);
         fragment.drawAudiogram(audiogram.getGraf(), audiogram.getGraf(), holder.chart);
     }
 
