@@ -52,7 +52,7 @@ public class Audiogram extends Fragment {
     private int[] freqs = {};
     private View v;
 
-    private final String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "Right & Left Ear";
+    private String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "";
 
     private final int[] colors = new int[] {
             Color.rgb(30, 176, 97),     // green
@@ -70,6 +70,7 @@ public class Audiogram extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RIGHT_EAR_LABEL = getActivity().getString(R.string.randlear);
     }
 
     @Override

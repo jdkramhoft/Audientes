@@ -30,7 +30,7 @@
         android:gravity="center"
         android:textSize="16sp"
 
-        android:text="Press button when you hear a sound"
+        android:text="@string/press_button_when_you_hear_a_sound"
         android:textColor="#BEC3E9"
         app:layout_constraintBottom_toTopOf="@+id/hearing_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:layout_marginBottom="56dp"
-        android:text="Hearing Test"
+        android:text="@string/hearing_test"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/running_test_text"
