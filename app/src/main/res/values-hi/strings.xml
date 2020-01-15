@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">Audientes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="audioGram_left">The air conduction results for the left ear are marked with a blue... "X"</string>
+    <string name="audioGram_right">The air conduction results for the right ear are marked with a red...     "O"</string>
+    <string name="enabel_bluetooth">This app requires that bluetooth is enabled, to connect your device to the Audientes hearing aid</string>
+    <string name="audientes">Audientes</string>
+    <string name="bottom_sheet_peek">peek</string>
+    <string name="bottom_sheet_content">content</string>
+    <string name="cancel">रद्द करना</string>
+    <string name="alert_dialog_ok">ठीक है</string>
+    <string name="alert_dialog_two_buttons_title">Title man</string>
+    <string name="BoxedVertical_defaultImage">"@drawable/xml_fg_volumelevel"</string>
+    <string name="BoxedVertical_minImage">"@drawable/xml_fg_volumelevel"</string>
+    <string name="BoxedVertical_maxImage">"@drawable/xml_fg_volumelevel"</string>
+
+    <string name="plus">+</string>
+    <string name="connect_device">डिवाइस कनेक्ट करें</string>
+    <string name="home_btn">घर</string>
+    <string name="loud_btn">जोर</string>
+    <string name="quiet_btn">शांत</string>
+    <string name="new_visitor_pref">newVisitor</string>
+    <string name="search_for_devices">उपकरणों के लिए खोजें</string>
+    <string name="cntnue">जारी रखें</string>
+    <string name="select_lan">अपनी भाषा का चयन करें</string>
+    <string name="programs">कार्यक्रम</string>
+    <string name="pair">युग्मन उपकरण ...</string>
+    <string name="lowplus">कम +</string>
+    <string name="low">कम </string>
+    <string name="medium">मध्यम</string>
+    <string name="high">उच्च </string>
+    <string name="highplus">उच्च +</string>
+    <string name="minchar">न्यूनतम 1 वर्ण</string>
+    <string name="maxchar">अधिकतम 5 वर्ण</string>
+    <string name="searchdevice">उपकरणों के लिए खोज</string>
+    <string name="next">आगे</string>
+    <string name="start">शुरू</string>
+    <string name="randlear">दायां और बायां कान</string>
+    <string name="audiogram">श्रवणलेख</string>
+    <string name="select">चुनते हैं</string>
+    <string name="wanttodelete">क्या आप वाकई इस कार्यक्रम को हटाना चाहते हैं?</string>
+    <string name="delete_program">कार्यक्रम हटाएँ</string>
+    <string name="are_you_sure">क्या आपको यकीन है?</string>
+    <string name="changes_made_will_not_be_saved">किए गए परिवर्तन सहेजे नहीं जाएंगे!</string>
+    <string name="yes">हाँ</string>
+    <string name="hearing_profile">हियरिंग प्रोफाइल</string>
+    <string name="press_button_when_you_hear_a_sound">ध्वनि सुनते ही बटन दबाएं</string>
+    <string name="searching_for_devices">उपकरणों की खोज की जा रही है ...</string>
+    <string name="settings">समायोजन</string>
+    <string name="name_of_program">कार्यक्रम का नाम</string>
+    <string name="save_changes">परिवर्तनों को सुरक्षित करें</string>
+    <string name="confirm">पुष्टि करें</string>
+    <string name="left">एल</string>
+    <string name="middle">एलआर</string>
+    <string name="shortR">आर</string>
+    <string name="skip">छोड़ें</string>
+    <string name="test_will_take_5_minutes_npress_button_to_start">टेस्ट शुरू होने में 5 मिनट का प्रेस बटन लगेगा</string>
+    <string name="hearing_test">कान कि जाँच</string>
+    <string name="take_new_test">नया टेस्ट लें</string>
+    <string name="active_test">सक्रिय परीक्षण</string>
+    <string name="audiogram_n_archive">ऑडीोग्राम संग्रह</string>
+    <string name="newest_hearing_test">नवीनतम सुनवाई परीक्षण:</string>
+    <string name="selected_audiogram">चयनित ऑडियोग्राम</string>
+    <string name="windy">तूफानी</string>
+</resources>

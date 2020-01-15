@@ -125,15 +125,15 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
             if (firstPage){
                 mNextBtn.setEnabled(true);
-                mNextBtn.setText("Next");
+                mNextBtn.setText(R.string.next);
             }
             else if (lastPage){
                 mNextBtn.setEnabled(true);
-                mNextBtn.setText("Start");
+                mNextBtn.setText(R.string.start);
             }
             else {
                 mNextBtn.setEnabled(true);
-                mNextBtn.setText("Next");
+                mNextBtn.setText(R.string.next);
             }
         }
 

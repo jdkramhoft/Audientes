@@ -28,14 +28,16 @@ import a3.audientes.view.fragments.Tab2;
 
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
 
-    private final String TAB_1_TITLE = "Programs";
-    private final String TAB_2_TITLE = "Hearing Test";
+    private String TAB_1_TITLE;
+    private String TAB_2_TITLE;
     private BottomSheetBehavior bottomSheetBehavior;
     View speaker, v;
     ImageView layoutShader;
     AppCompatActivity act = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TAB_1_TITLE = getString(R.string.programs);
+        TAB_2_TITLE = getString(R.string.hearing_test);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setStatusBarTrans();
@@ -45,7 +47,7 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ViewPager viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
+        viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), getBaseContext()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         int page = getIntent().getIntExtra("ARG_PAGE", 0);
         viewPager.setCurrentItem(page);

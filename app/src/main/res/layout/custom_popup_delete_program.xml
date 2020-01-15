@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete program"
+        android:text="@string/delete_program"
         android:gravity="center"
         android:textColor="@color/darkerOrange"
         android:textSize="22sp"
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure that you want to delete this program?"
+        android:text="@string/wanttodelete"
         android:gravity="center"
         android:textColor="@color/lightPurple"
         android:textSize="22sp"
@@ -48,7 +48,7 @@
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="@color/darkerOrange"
             android:textSize="22sp"
             android:background="@drawable/custom_popup_buttom_left"/>
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/custom_popup_buttom_right"
-            android:text="Yes"
+            android:text="@string/yes"
             android:textColor="@color/lightGreen"
             android:textSize="22sp" />
 

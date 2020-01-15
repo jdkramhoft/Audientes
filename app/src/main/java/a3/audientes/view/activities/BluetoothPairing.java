@@ -171,7 +171,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             bluetoothDevices.get(adapter.getPosition(v)).createBond();
 
             ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Pairing device...");
+            progressDialog.setTitle(getBaseContext().getString(R.string.pair));
             progressDialog.show();
             handler.postDelayed(progressDialog::dismiss, 3000);
 
@@ -192,7 +192,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         if(bluetoothAdapter == null)
             return;
         ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setTitle("Searching for devices");
+        dialog.setTitle(getString(R.string.searchdevice));
         dialog.show();
         discover();
         handler.postDelayed(dialog::dismiss, 5000);

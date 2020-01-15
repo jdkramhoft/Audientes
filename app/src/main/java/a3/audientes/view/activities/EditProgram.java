@@ -25,6 +25,8 @@ import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
 
+import static a3.audientes.R.string.low;
+
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt, name;
     private SeekBar low_plus, low, medium, high, high_plus;
@@ -74,11 +76,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
         high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
 
-        low_plus_txt.setText("low+");
-        low_txt.setText("low");
-        medium_txt.setText("medium");
-        high_txt.setText("high");
-        high_plus_txt.setText("high+");
+        low_plus_txt.setText(R.string.lowplus);
+        low_txt.setText(R.string.low);
+        medium_txt.setText(R.string.medium);
+        high_txt.setText(R.string.high);
+        high_plus_txt.setText(R.string.highplus);
 
 
         low_plus = findViewById(R.id.low_plus).findViewById(R.id.seekbar);
@@ -221,12 +223,12 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
             String nameInput = name.getText().toString();
             if (nameInput.length() == 0) {
                 System.out.println("Min 1 characters");
-                name.setError("Min 1 characters");
+                name.setError(getString(R.string.minchar));
                 return;
             }
             if (nameInput.length() > 5) {
                 System.out.println("Max 5 characters");
-                name.setError("Max 5 characters");
+                name.setError(getString(R.string.maxchar));
                 return;
             }
 
