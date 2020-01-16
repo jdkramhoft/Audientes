@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import a3.audientes.R;
 import a3.audientes.view.adapter.OnboardingSliderAdapter;
@@ -149,11 +151,17 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
     private boolean isHearableConnected() {
         BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
-        for (BluetoothDevice e: manager.getAdapter().getBondedDevices()) {
-            if(isConnected(e)){
-                return true;
+
+        BluetoothAdapter a = manager.getAdapter();
+
+        if (a != null){
+            for (BluetoothDevice e: a.getBondedDevices()) {
+                if(isConnected(e)){
+                    return true;
+                }
             }
         }
+
         return false;
     }
 
