@@ -90,6 +90,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     @Override
     public void onClick(View v) {
+        List<Program> list = programDAO.getProgramList();
         if (v == floatingActionButton){
             Intent intent = new Intent(getActivity(), EditProgram.class);
             intent.putExtra("new", true);
