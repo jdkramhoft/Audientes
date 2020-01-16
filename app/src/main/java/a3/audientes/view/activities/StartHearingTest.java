@@ -1,8 +1,6 @@
 package a3.audientes.view.activities;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +8,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 
@@ -24,7 +21,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_hearing_test);
+        setContentView(R.layout.hearing_test_start);
         
         hearing_button = findViewById(R.id.hearing_button);
         hearing_button.setOnClickListener(this);

@@ -47,7 +47,7 @@ public class LanguageAdapter extends Adapter<LanguageAdapter.MyViewHolder> {
     @Override @NonNull
     public LanguageAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView;
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout_language, parent, false) ;
+        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_select_device_card, parent, false) ;
 
         itemView.setOnClickListener(onClick);
         return new LanguageAdapter.MyViewHolder(itemView);

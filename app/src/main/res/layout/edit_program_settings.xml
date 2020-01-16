@@ -90,35 +90,35 @@
 
         <include
             android:id="@+id/low"
-            layout="@layout/layout_seekbar"
+            layout="@layout/edit_program_seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <include
             android:id="@+id/low_plus"
-            layout="@layout/layout_seekbar"
+            layout="@layout/edit_program_seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <include
             android:id="@+id/medium"
-            layout="@layout/layout_seekbar"
+            layout="@layout/edit_program_seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <include
             android:id="@+id/high"
-            layout="@layout/layout_seekbar"
+            layout="@layout/edit_program_seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <include
             android:id="@+id/high_plus"
-            layout="@layout/layout_seekbar"
+            layout="@layout/edit_program_seekbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />

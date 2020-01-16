@@ -29,7 +29,7 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_audiogram_history);
+        setContentView(R.layout.audiogram_history);
         action_btn = findViewById(R.id.action_button_1);
 
         RecyclerView recyclerView = findViewById(R.id.audiogram_history_recycler);

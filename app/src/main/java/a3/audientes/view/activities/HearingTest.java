@@ -13,13 +13,11 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -119,7 +117,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             stepView.done(true);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.custom_hearing_test_ended, null);
+            View dialogView = inflater.inflate(R.layout.custom_popup_hearing_test_ended, null);
             Button button1 = dialogView.findViewById(R.id.button1);
             builder.setView(dialogView);
             AlertDialog dialog = builder.create();
