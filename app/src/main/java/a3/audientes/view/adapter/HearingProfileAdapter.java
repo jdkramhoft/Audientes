@@ -18,7 +18,7 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
     Context context;
 
     public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs, Context context) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.context = context;
         this.numOfTabs = NumberOfTabs;
     }
