@@ -19,6 +19,7 @@ import a3.audientes.utils.SharedPrefUtil;
 
 public final class SplashScreen extends AppCompatActivity {
 
+    public static final int SPLASH_TIME = 2500;
     private final Handler handler = new Handler();
     private ProgramDAO programDAO = ProgramDAO.getInstance();
     private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
@@ -30,7 +31,7 @@ public final class SplashScreen extends AppCompatActivity {
 
         if (savedInstanceState == null){
             // TODO: only onboarding on first visit
-            handler.postDelayed(splash, 2500);
+            handler.postDelayed(splash, SPLASH_TIME);
         }
 
 
