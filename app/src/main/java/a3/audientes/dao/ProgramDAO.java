@@ -28,6 +28,7 @@ public class ProgramDAO {
             if(program.getId() == programList.get(i).getId()){
                 programList.remove(i);
                 programadapter.notifyItemRemoved(i);
+                return;
             }
         }
     }
