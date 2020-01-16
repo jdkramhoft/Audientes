@@ -206,16 +206,17 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     }
 
     public void deletePopup(View v, int programid){
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.Theme_Dialog);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_popup_delete_program, null);
-        Button button1 = dialogView.findViewById(R.id.button1);
-        Button button2 = dialogView.findViewById(R.id.button2);
+        Button doNothingBtn = dialogView.findViewById(R.id.button1);
+        Button deleteBtn = dialogView.findViewById(R.id.button2);
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
 
-        button1.setOnClickListener(v12 -> dialog.dismiss());
-        button2.setOnClickListener(v1 -> {
+
+        doNothingBtn.setOnClickListener(v12 -> dialog.dismiss());
+        deleteBtn.setOnClickListener(v1 -> {
             Program currentProgram = programDAO.getProgram(programid);
             programDAO.deleteProgram(currentProgram);
             programViewModel.Delete(currentProgram);

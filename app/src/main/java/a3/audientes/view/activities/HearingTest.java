@@ -115,7 +115,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         if (testIndex == soundDAO.getSounds().size()){
 
             stepView.done(true);
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Dialog);
             LayoutInflater inflater = this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custom_popup_hearing_test_ended, null);
             Button okay = dialogView.findViewById(R.id.okay);

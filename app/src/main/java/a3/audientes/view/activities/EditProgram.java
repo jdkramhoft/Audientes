@@ -188,7 +188,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if(extras.getBoolean("edit")){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Dialog);
                 LayoutInflater inflater = this.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
                 Button button1 = dialogView.findViewById(R.id.button1);
@@ -196,9 +196,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 builder.setView(dialogView);
                 AlertDialog dialog = builder.create();
 
-                button1.setOnClickListener(v12 ->{
-                    dialog.dismiss();
-                });
+                button1.setOnClickListener(v12 -> dialog.dismiss());
                 button2.setOnClickListener(v1 -> {
                     dialog.cancel();
                     musicTrack.stop();

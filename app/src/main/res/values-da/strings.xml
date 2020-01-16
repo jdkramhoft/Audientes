@@ -45,7 +45,7 @@
     <string name="select">Vælg</string>
     <string name="wantToDelete">Vil du virkelig slette dette program?</string>
     <string name="delete_program">Slet Program</string>
-    <string name="are_you_sure">Er du sikker?</string>
+    <string name="are_you_sure">Forlad uden at gemme?</string>
     <string name="changes_made_will_not_be_saved">Ændringer vil ikke gemmes!</string>
     <string name="yes">Ja</string>
     <string name="hearing_profile">Høreprofil</string>

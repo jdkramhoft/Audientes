@@ -24,4 +24,13 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
+
+
+    <style name="Theme_Dialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">65%</item>     <!-- landscape -->
+        <item name="android:windowMinWidthMinor">65%</item>     <!-- portrait -->
+    </style>
+
+
+
 </resources>
