@@ -51,8 +51,6 @@ public class AudiogramDAO {
     }
 
 
-    // Getters and setters
-
     public Audiogram getCurrentAudiogram() {
         return currentAudiogram;
     }
