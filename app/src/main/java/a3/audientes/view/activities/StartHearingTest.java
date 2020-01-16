@@ -19,7 +19,7 @@ import a3.audientes.R;
 
 public class StartHearingTest extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton hearing_button;
+    private ImageButton hearing_button;
     private MediaRecorder mRecorder;
     private double audioVolume;
     private TextView dbDisplay;
