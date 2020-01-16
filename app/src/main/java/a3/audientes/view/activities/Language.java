@@ -32,7 +32,7 @@ public class Language extends AppCompatActivity implements View.OnClickListener 
         for(Locale l:locales) {
             if(localcountries.size()>0){
                 if(!l.getDisplayLanguage().equals(localcountries.get(localcountries.size()-1).getDisplayLanguage())){
-                    if(!l.getDisplayLanguage().toString().equals(Locale.getDefault().getDisplayLanguage().toString())){
+                    if(!l.getDisplayLanguage().equals(Locale.getDefault().getDisplayLanguage())){
                         localcountries.add(l);
 
                     }

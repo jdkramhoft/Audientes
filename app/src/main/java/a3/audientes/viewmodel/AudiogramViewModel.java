@@ -11,12 +11,12 @@ import a3.audientes.dto.Audiogram;
 public class AudiogramViewModel extends AndroidViewModel {
 
     private Repository repository;
-    private LiveData<List<Audiogram>> allAudiograms;
+    private LiveData<List<Audiogram>> audiogramList;
 
     public AudiogramViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
-        allAudiograms = repository.getAllAudiogram();
+        audiogramList = repository.getAllAudiogram();
     }
 
     public void Insert(Audiogram audiogram){
@@ -32,6 +32,6 @@ public class AudiogramViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Audiogram >> getAllAudiogram(){
-        return allAudiograms;
+        return audiogramList;
     }
 }

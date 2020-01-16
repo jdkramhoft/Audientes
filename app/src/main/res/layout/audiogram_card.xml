@@ -75,7 +75,7 @@
             </com.airbnb.lottie.LottieAnimationView>
 
             <TextView
-                android:id="@+id/textview_1"
+                android:id="@+id/textView_1"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

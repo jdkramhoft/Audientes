@@ -18,7 +18,7 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
     Context context;
 
     public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs, Context context) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.context = context;
         this.numOfTabs = NumberOfTabs;
     }
@@ -43,10 +43,10 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0: return context.getString(R.string.programs);
-            //case 1: return "Tab 2";
-            default: return context.getString(R.string.hearing_test);
-        }
+        if (position == 0)
+            return context.getString(R.string.programs);
+        if (position == 1)
+            return context.getString(R.string.hearing_test);
+        throw new IllegalArgumentException();
     }
 }

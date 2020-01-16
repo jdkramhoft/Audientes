@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +32,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import android.view.View;
+
 import a3.audientes.R;
 import a3.audientes.view.adapter.BluetoothDeviceListAdapter;
 import a3.audientes.utils.SharedPrefUtil;
@@ -37,14 +42,14 @@ import a3.audientes.utils.SharedPrefUtil;
 public class BluetoothPairing extends AppCompatActivity implements OnClickListener {
 
     private BluetoothAdapter bluetoothAdapter;
-    private RecyclerView lvNewDevices;
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     private Button searchConnectButton;
+    private ImageView loadingbar;
+    private TextView textView2;
     private boolean newVisitor;
     private boolean hasSearched = false;
     OnClickListener clicker = this;
     BluetoothDeviceListAdapter adapter;
-    private int currentAudiogramId;
 
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -96,7 +101,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_pairing);
 
-        lvNewDevices = findViewById(R.id.lvNewDevices);
+        RecyclerView lvNewDevices = findViewById(R.id.lvNewDevices);
         bluetoothDevices = new ArrayList<>();
 
         adapter = new BluetoothDeviceListAdapter(bluetoothDevices, this);
@@ -107,6 +112,15 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
 
         searchConnectButton = findViewById(R.id.connectToDevice);
         searchConnectButton.setOnClickListener(this);
+
+        loadingbar = findViewById(R.id.loadingbar);
+        textView2 = findViewById(R.id.textView2);
+
+        ImageView anim = (ImageView) this.findViewById(R.id.loadingbar);
+        anim.setBackgroundResource(R.drawable.hearable_animation);
+        AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
+        animAnimation.start();
+
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -156,6 +170,13 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
+
+            loadingbar = findViewById(R.id.loadingbar);
+            loadingbar.setVisibility(View.INVISIBLE);
+            textView2 = findViewById(R.id.textView2);
+            textView2.setVisibility(View.INVISIBLE);
+
+
             if(!hasSearched){
                 search();
                 hasSearched = true;
@@ -175,7 +196,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             progressDialog.show();
             handler.postDelayed(progressDialog::dismiss, 3000);
 
-            //Stackoverflow code snippet
+            //StackOverflow code snippet
             final Intent intent = new Intent(Intent.ACTION_MAIN, null);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             final ComponentName cn = new ComponentName("com.android.settings",
@@ -203,7 +224,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     private void navigate() {
         SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
         // TODO: newVisitor && check DB for audiogram
-        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         if (newVisitor || currentAudiogramId == 0){
             Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
             startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);

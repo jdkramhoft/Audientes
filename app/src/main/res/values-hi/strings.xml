@@ -41,14 +41,14 @@
     <string name="randlear">दायां और बायां कान</string>
     <string name="audiogram">श्रवणलेख</string>
     <string name="select">चुनते हैं</string>
-    <string name="wanttodelete">क्या आप वाकई इस कार्यक्रम को हटाना चाहते हैं?</string>
+    <string name="wantToDelete">क्या आप वाकई इस कार्यक्रम को हटाना चाहते हैं?</string>
     <string name="delete_program">कार्यक्रम हटाएँ</string>
     <string name="are_you_sure">क्या आपको यकीन है?</string>
     <string name="changes_made_will_not_be_saved">किए गए परिवर्तन सहेजे नहीं जाएंगे!</string>
     <string name="yes">हाँ</string>
     <string name="hearing_profile">हियरिंग प्रोफाइल</string>
     <string name="press_button_when_you_hear_a_sound">ध्वनि सुनते ही बटन दबाएं</string>
-    <string name="searching_for_devices">उपकरणों की खोज की जा रही है ...</string>
+    <string name="searching_for_devices">Audientes Hearable...</string>
     <string name="settings">समायोजन</string>
     <string name="name_of_program">कार्यक्रम का नाम</string>
     <string name="save_changes">परिवर्तनों को सुरक्षित करें</string>

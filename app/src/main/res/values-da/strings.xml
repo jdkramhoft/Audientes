@@ -43,14 +43,14 @@
     <string name="randlear">Højre &amp; venstre øre</string>
     <string name="audiogram">Audiogram</string>
     <string name="select">Vælg</string>
-    <string name="wanttodelete">Vil du virkelig slette dette program?</string>
+    <string name="wantToDelete">Vil du virkelig slette dette program?</string>
     <string name="delete_program">Slet Program</string>
     <string name="are_you_sure">Er du sikker?</string>
     <string name="changes_made_will_not_be_saved">Ændringer vil ikke gemmes!</string>
     <string name="yes">Ja</string>
     <string name="hearing_profile">Høreprofil</string>
     <string name="press_button_when_you_hear_a_sound">Tryk på knappen når du hører en lyd</string>
-    <string name="searching_for_devices">Søger...</string>
+    <string name="searching_for_devices">Audientes Hearable...</string>
     <string name="settings">Opsætning</string>
     <string name="name_of_program">Program navn</string>
     <string name="save_changes">Gem ændringer</string>

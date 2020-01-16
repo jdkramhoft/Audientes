@@ -2,7 +2,6 @@ package a3.audientes.view.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,13 +29,11 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     private final AudiogramDAO audiogramDAO;
     private List<a3.audientes.dto.Audiogram> audiogramList;
-    private FragmentManager fragmentManager;
     private ProgramDAO programDAO;
     private ProgramViewModel programViewModel;
     Context context;
-    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO, Context context) {
+    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO, Context context) {
         this.audiogramList = audiogramList;
-        this.fragmentManager = fragmentManager;
         this.audiogramDAO = audiogramDAO;
         this.programDAO = programDAO;
         this.programViewModel = programViewModel;
@@ -53,7 +50,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             date = view.findViewById(R.id.subtitle_text);
             title = view.findViewById(R.id.title_text);
             anim = view.findViewById(R.id.action_button_1);
-            apply = view.findViewById(R.id.textview_1);
+            apply = view.findViewById(R.id.textView_1);
             chart = view.findViewById(R.id.chart);
         }
     }
@@ -76,7 +73,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             holder.anim.playAnimation();
             audiogramDAO.setCurrentAudiogram(audiogramList.get(position));
             SharedPrefUtil.saveSharedSetting(holder.itemView.getContext(),"currentAudiogram", Integer.toString(audiogramList.get(position).getId()));
-            updateDefualtPrograms(audiogram);
+            updateDefaultPrograms(audiogram);
         });
 
         holder.anim.addAnimatorListener(new AnimatorListenerAdapter() {
@@ -95,7 +92,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
         holder.date.setText(audiogram.getDateString());
 
         a3.audientes.view.fragments.Audiogram fragment = a3.audientes.view.fragments.Audiogram.newInstance(context);
-        fragment.drawAudiogram(audiogram.getGraf(), audiogram.getGraf(), holder.chart);
+        fragment.drawAudiogram(audiogram.getGraph(), audiogram.getGraph(), holder.chart);
     }
 
     @Override
@@ -105,13 +102,13 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     private void updateLayout(boolean isSelected, MyViewHolder holder){
         if (isSelected){
-            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.lightGreen));
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.lightGreen, null));
             holder.apply.setEnabled(false);
             holder.apply.setClickable(false);
             holder.apply.setVisibility(View.INVISIBLE);
         }
         else {
-            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.white));
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.white, null));
             holder.apply.setEnabled(true);
             holder.apply.setClickable(true);
             holder.apply.setVisibility(View.VISIBLE);
@@ -119,7 +116,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     }
 
-    private void updateDefualtPrograms(Audiogram audiogram){
+    private void updateDefaultPrograms(Audiogram audiogram){
         for(int i = 1; i <= 4; i++){
             Program program = programDAO.getProgram(i);
             System.out.println(program.getId());
