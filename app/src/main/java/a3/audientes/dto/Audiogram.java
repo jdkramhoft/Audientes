@@ -1,5 +1,6 @@
 package a3.audientes.dto;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -44,6 +45,7 @@ public class Audiogram implements Comparable<Audiogram> {
     }
 
 
+    @NonNull
     @Override
     public String toString() {
         return "Audiogram{" +

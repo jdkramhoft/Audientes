@@ -14,22 +14,20 @@ import a3.audientes.R;
 
 public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDeviceListAdapter.MyViewHolder> {
 
-    private final List<BluetoothDevice> deviceList;
+    private final List<BluetoothDevice> devicelist;
     private final View.OnClickListener onClick;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
-        private int id;
         public MyViewHolder(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.Title);
-            id = view.getId();
         }
     }
 
     public BluetoothDeviceListAdapter(@NonNull List<BluetoothDevice> programList, @Nullable View.OnClickListener onClick) {
-        this.deviceList = programList;
+        this.devicelist = programList;
         this.onClick = onClick;
 
     }
@@ -46,22 +44,23 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
 
     @Override
     public int getItemViewType(int position) {
-        return deviceList.get(position).getType();
+        return devicelist.get(position).getType();
     }
 
     @Override
     public void onBindViewHolder(@NonNull BluetoothDeviceListAdapter.MyViewHolder holder, int position) {
 
-        BluetoothDevice program = deviceList.get(position);
-        if(program.getName().length()>8){
-            ((ImageView)holder.itemView.findViewById(R.id.imagee1)).setImageResource(R.drawable.icon_bigfatredx);
+        BluetoothDevice program = devicelist.get(position);
+        if(!(program.getName().equals("Mi Phone"))){
+            ((ImageView)holder.itemView.findViewById(R.id.imagee1)).setImageResource(R.drawable.bluetooth_icon_not_connectable);
+            //((TextView)holder.itemView.findViewById(R.id.Title)).setTextColor(-12303292);
         }
         holder.title.setText(program.getName());
     }
 
     @Override
     public int getItemCount() {
-        return deviceList.size();
+        return devicelist.size();
     }
 
     public BluetoothDeviceListAdapter get(){
@@ -69,8 +68,8 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
     }
     public int getPosition(View v){
         String deviceName = ((TextView)v.findViewById(R.id.Title)).getText().toString();
-        for (int i = 0; i < deviceList.size(); i++) {
-            if(deviceList.get(i).getName().equals(deviceName)){
+        for (int i = 0; i < devicelist.size(); i++) {
+            if(devicelist.get(i).getName().equals(deviceName)){
                 return i;
             }
         }

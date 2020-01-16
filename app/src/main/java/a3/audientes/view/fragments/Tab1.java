@@ -42,8 +42,6 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     private List<Program> programList = new ArrayList<>();
     private FloatingActionButton floatingActionButton;
     private ProgramViewModel programViewModel;
-    private MediaPlayer musicTrack;
-    private ProgramAdapter adapter;
     private int currentProgramId;
     private Equalizer trackEq;
 
@@ -69,7 +67,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         programList = programDAO.getProgramList();
         currentProgramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentProgram", "1"));
 
-        musicTrack = MediaPlayer.create(getContext(), R.raw.song);
+        MediaPlayer musicTrack = MediaPlayer.create(getContext(), R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
         trackEq.setEnabled(true);
         changeEqualizer(currentProgramId);
@@ -146,7 +144,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
-        adapter = new ProgramAdapter(programList, this, this, getActivity(), currentProgramId);
+        ProgramAdapter adapter = new ProgramAdapter(programList, this, this, getActivity(), currentProgramId);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -168,7 +166,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         // set all programs to not selected
         for(int i = 0; i < v.getChildCount(); i++){
             LinearLayout temp = (LinearLayout)v.getChildAt(i);
-            ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white));
+            ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white,null));
             ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
         }
 
@@ -178,7 +176,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             TextView view = temp.findViewById(R.id.hiddenId);
             int tempId = Integer.parseInt(view.getText().toString());
             if(tempId == id){
-                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor));
+                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor, null));
                 ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
             }
         }

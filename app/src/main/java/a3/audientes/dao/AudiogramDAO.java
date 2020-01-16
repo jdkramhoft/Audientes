@@ -7,7 +7,7 @@ import a3.audientes.dto.Audiogram;
 public class AudiogramDAO {
 
     private static AudiogramDAO single_instance = null;
-    private List<Audiogram> audiogramList = new ArrayList<>();
+    private List<Audiogram> audiograms = new ArrayList<>();
     private Audiogram currentAudiogram;
 
     private AudiogramDAO(){}
@@ -19,17 +19,18 @@ public class AudiogramDAO {
     }
 
     public void addAudiogram(Audiogram audiogram){
-        audiogramList.add(audiogram);
+        audiograms.add(audiogram);
     }
 
     public void resetAudiogram(){
         currentAudiogram = new Audiogram();
     }
 
+    // We could binary search
     public void setCurrent(int id){
-        for(int i = 0; i < audiogramList.size(); i++){
-            if(id == audiogramList.get(i).getId()){
-                currentAudiogram = audiogramList.get(i);
+        for(int i = 0; i < audiograms.size(); i++){
+            if(id == audiograms.get(i).getId()){
+                currentAudiogram = audiograms.get(i);
             }
         }
     }
@@ -39,19 +40,16 @@ public class AudiogramDAO {
     }
 
     public void saveCurrentAudiogram(){
-        audiogramList.add(currentAudiogram);
+        audiograms.add(currentAudiogram);
     }
 
     public int getNextId(){
-        if(audiogramList.size() == 0){
+        if(audiograms.size() == 0)
             return 1;
-        }else{
-            return audiogramList.get(audiogramList.size()-1).getId()+ 1;
-        }
+        int largestID = audiograms.get(audiograms.size()-1).getId();
+        return largestID + 1;
     }
 
-
-    // Getters and setters
 
     public Audiogram getCurrentAudiogram() {
         return currentAudiogram;
@@ -62,11 +60,11 @@ public class AudiogramDAO {
     }
 
 
-    public List<Audiogram> getAudiogramList(){
-        return audiogramList;
+    public List<Audiogram> getAudiograms(){
+        return audiograms;
     }
 
-    public void setAudiogramList(List<Audiogram> audiogramList) {
-        this.audiogramList = audiogramList;
+    public void setAudiograms(List<Audiogram> audiograms) {
+        this.audiograms = audiograms;
     }
 }

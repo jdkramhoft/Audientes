@@ -26,7 +26,8 @@ import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt, name;
+
+    private TextView name;
     private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;
     private int programId;
@@ -68,11 +69,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         }
 
 
-        low_plus_txt = findViewById(R.id.low_plus).findViewById(R.id.seekbar_text);
-        low_txt = findViewById(R.id.low).findViewById(R.id.seekbar_text);
-        medium_txt = findViewById(R.id.medium).findViewById(R.id.seekbar_text);
-        high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
-        high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
+        TextView low_plus_txt = findViewById(R.id.low_plus).findViewById(R.id.seekbar_text);
+        TextView low_txt = findViewById(R.id.low).findViewById(R.id.seekbar_text);
+        TextView medium_txt = findViewById(R.id.medium).findViewById(R.id.seekbar_text);
+        TextView high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
+        TextView high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
 
         low_plus_txt.setText(R.string.lowplus);
         low_txt.setText(R.string.low);
@@ -121,11 +122,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if(extras.getBoolean("new") == false){
+            if(!extras.getBoolean("new")){
                 programId = Integer.parseInt(extras.getString("id"));
                 updateSliders(programDAO.getProgram(programId));
 
-                if(extras.getBoolean("edit") == false){
+                if(!extras.getBoolean("edit")){
                     low_plus.setEnabled(false);
                     low.setEnabled(false);
                     medium.setEnabled(false);
@@ -156,11 +157,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         musicTrack.start();
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if(extras.getBoolean("new") == false){
+            if(!extras.getBoolean("new")){
                 programId = Integer.parseInt(extras.getString("id"));
                 updateSliders(programDAO.getProgram(programId));
 
-                if(extras.getBoolean("edit") == false){
+                if(!extras.getBoolean("edit")){
                     low_plus.setEnabled(false);
                     low.setEnabled(false);
                     medium.setEnabled(false);
@@ -186,7 +187,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            if(extras.getBoolean("edit") == true){
+            if(extras.getBoolean("edit")){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 LayoutInflater inflater = this.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.custom_popup_edit_program, null);
@@ -243,7 +244,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                         true
                 );
 
-                if(extras.getBoolean("new") == false){
+                if(!extras.getBoolean("new")){
                     newProgram.setId(programId);
                     System.out.println(programId);
                     programDAO.update(newProgram);

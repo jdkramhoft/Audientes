@@ -19,19 +19,14 @@ import a3.audientes.R;
 
 public class StartHearingTest extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton hearing_button;
+    private ImageButton hearing_button;
     private MediaRecorder mRecorder;
     private double audioVolume;
     private TextView dbDisplay;
     private Thread runner;
-    private TelephonyManager tm;
     private String networkOperator;
 
-    final Runnable updater = new Runnable(){
-        public void run(){
-            updateDbDisplay();
-        }
-    };
+    final Runnable updater = this::updateDbDisplay;
 
     final Handler handler = new Handler();
 
@@ -65,7 +60,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         }
 
         // Checking if code is running on emulator.
-        tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         networkOperator = tm.getNetworkOperatorName();
 
         if ("Android".equals(networkOperator)) {

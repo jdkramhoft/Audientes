@@ -2,7 +2,6 @@ package a3.audientes.dto;
 
 public class Sound {
 
-    private int duration;
     private int sampleRate;
     private double freqOfTone;
     private int numSamples;
@@ -11,9 +10,8 @@ public class Sound {
 
     public Sound(double freqOfTone, int duration, int sampleRate) {
         this.freqOfTone = freqOfTone;
-        this.duration = duration;
         this.sampleRate = sampleRate;
-        this.numSamples = this.duration * this.sampleRate;
+        this.numSamples = duration * this.sampleRate;
         this.sample = new double[this.numSamples];
         this.generatedSnd = new byte[2 * this.numSamples];
         genTone();

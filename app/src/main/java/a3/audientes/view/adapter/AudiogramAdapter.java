@@ -29,13 +29,11 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     private final AudiogramDAO audiogramDAO;
     private List<a3.audientes.dto.Audiogram> audiogramList;
-    private FragmentManager fragmentManager;
     private ProgramDAO programDAO;
     private ProgramViewModel programViewModel;
     Context context;
-    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, FragmentManager fragmentManager, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO, Context context) {
+    public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO, Context context) {
         this.audiogramList = audiogramList;
-        this.fragmentManager = fragmentManager;
         this.audiogramDAO = audiogramDAO;
         this.programDAO = programDAO;
         this.programViewModel = programViewModel;
@@ -104,13 +102,13 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     private void updateLayout(boolean isSelected, MyViewHolder holder){
         if (isSelected){
-            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.lightGreen));
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.lightGreen, null));
             holder.apply.setEnabled(false);
             holder.apply.setClickable(false);
             holder.apply.setVisibility(View.INVISIBLE);
         }
         else {
-            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.white));
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.white, null));
             holder.apply.setEnabled(true);
             holder.apply.setClickable(true);
             holder.apply.setVisibility(View.VISIBLE);

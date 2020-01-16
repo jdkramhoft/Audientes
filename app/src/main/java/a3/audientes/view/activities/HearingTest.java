@@ -118,11 +118,11 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             LayoutInflater inflater = this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custom_popup_hearing_test_ended, null);
-            Button button1 = dialogView.findViewById(R.id.button1);
+            Button okay = dialogView.findViewById(R.id.okay);
             builder.setView(dialogView);
             AlertDialog dialog = builder.create();
 
-            button1.setOnClickListener(v12 -> {
+            okay.setOnClickListener(v12 -> {
                 dialog.dismiss();
 
                 audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
