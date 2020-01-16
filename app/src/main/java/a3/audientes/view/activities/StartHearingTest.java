@@ -24,6 +24,8 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     private double audioVolume;
     private TextView dbDisplay;
     private Thread runner;
+    private TelephonyManager tm;
+    private String networkOperator;
 
     final Runnable updater = this::updateDbDisplay;
 
@@ -58,7 +60,27 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             runner.start();
         }
 
+        // Checking if code is running on emulator.
+        tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        networkOperator = tm.getNetworkOperatorName();
 
+        if ("Android".equals(networkOperator)) {
+            System.out.println("Emulator");
+            audioVolume = getNoiseLevel(3000);
+            System.out.println(audioVolume);
+        }else{
+            System.out.println("Mobil");
+            mRecorder = new MediaRecorder();
+            try {
+                start();
+                System.out.println("MediaRecorder current volume: "+mRecorder.getMaxAmplitude());
+                audioVolume = getNoiseLevel(mRecorder.getMaxAmplitude());
+                System.out.println(audioVolume);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
     }
@@ -99,26 +121,15 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     public void updateDbDisplay(){
 
-        // Checking if code is running on emulator.
-        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        String networkOperator = tm.getNetworkOperatorName();
-
         if ("Android".equals(networkOperator)) {
             System.out.println("Emulator");
             audioVolume = getNoiseLevel(3000);
             System.out.println(audioVolume);
         }else{
             System.out.println("Mobil");
-            mRecorder = new MediaRecorder();
-            try {
-                start();
-                System.out.println("MediaRecorder current volume: "+mRecorder.getMaxAmplitude());
-                audioVolume = getNoiseLevel(mRecorder.getMaxAmplitude());
-                System.out.println(audioVolume);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+            System.out.println("MediaRecorder current volume: "+mRecorder.getMaxAmplitude());
+            audioVolume = getNoiseLevel(mRecorder.getMaxAmplitude());
+            System.out.println(audioVolume);
         }
 
         dbDisplay.setText(Double.toString(audioVolume) + " dB");
