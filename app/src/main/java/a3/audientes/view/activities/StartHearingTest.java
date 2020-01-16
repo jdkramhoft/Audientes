@@ -5,17 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import java.io.IOException;
 
 import a3.audientes.R;
@@ -39,7 +36,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_hearing_test);
+        setContentView(R.layout.hearing_test_start);
         hearing_button = findViewById(R.id.hearing_button);
         hearing_button.setOnClickListener(this);
         dbDisplay = findViewById(R.id.volume);
