@@ -103,13 +103,13 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     private void updateLayout(boolean isSelected, MyViewHolder holder){
         if (isSelected){
-            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.lightGreen));
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.lightGreen, null));
             holder.apply.setEnabled(false);
             holder.apply.setClickable(false);
             holder.apply.setVisibility(View.INVISIBLE);
         }
         else {
-            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.white));
+            holder.title.setTextColor(holder.itemView.getResources().getColor(R.color.white, null));
             holder.apply.setEnabled(true);
             holder.apply.setClickable(true);
             holder.apply.setVisibility(View.VISIBLE);
