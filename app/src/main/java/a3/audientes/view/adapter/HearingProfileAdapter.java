@@ -43,10 +43,10 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0: return context.getString(R.string.programs);
-            //case 1: return "Tab 2";
-            default: return context.getString(R.string.hearing_test);
-        }
+        if (position == 0)
+            return context.getString(R.string.programs);
+        if (position == 1)
+            return context.getString(R.string.hearing_test);
+        throw new IllegalArgumentException();
     }
 }

@@ -67,13 +67,13 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
 
             mDots[i].setTextSize(50);
-            mDots[i].setTextColor(getResources().getColor(R.color.transparentWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.transparentWhite, null));
 
             mDotLayout.addView(mDots[i]);
         }
 
         if (mDots.length > 0){
-            mDots[position].setTextColor(getResources().getColor(R.color.darkerOrange));
+            mDots[position].setTextColor(getResources().getColor(R.color.darkerOrange, null));
         }
     }
 

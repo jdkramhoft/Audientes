@@ -87,8 +87,8 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
 
         if(currentProgramId == holder.id ){
             View itemView = holder.itemView;
-            ((TextView)itemView.findViewById(R.id.programName)).setTextColor(mcontext.getResources().getColor(R.color.textColor));
-            ((ImageView)itemView.findViewById(R.id.program_bg_id)).setImageDrawable(mcontext.getResources().getDrawable(R.drawable.xml_program_selected));
+            ((TextView)itemView.findViewById(R.id.programName)).setTextColor(mcontext.getResources().getColor(R.color.textColor,null));
+            ((ImageView)itemView.findViewById(R.id.program_bg_id)).setImageDrawable(mcontext.getResources().getDrawable(R.drawable.xml_program_selected,null));
         }
     }
 

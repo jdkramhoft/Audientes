@@ -166,7 +166,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         // set all programs to not selected
         for(int i = 0; i < v.getChildCount(); i++){
             LinearLayout temp = (LinearLayout)v.getChildAt(i);
-            ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white));
+            ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white,null));
             ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
         }
 
@@ -176,7 +176,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             TextView view = temp.findViewById(R.id.hiddenId);
             int tempId = Integer.parseInt(view.getText().toString());
             if(tempId == id){
-                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor));
+                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor, null));
                 ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
             }
         }

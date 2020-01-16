@@ -15,7 +15,7 @@ public class SoundDAO {
         sounds.add(new Sound(2000,1,8000));
         sounds.add(new Sound(5000,1,8000));
         sounds.add(new Sound(10000,1,8000));
-    };
+    }
 
     public static SoundDAO getInstance() {
         if (single_instance == null){
