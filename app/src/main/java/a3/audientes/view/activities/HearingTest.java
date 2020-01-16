@@ -92,8 +92,8 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         stepView.getState()
                 .animationType(StepView.ANIMATION_LINE)
                 .steps(new ArrayList<String>() {{
-                    add("Low+");
                     add("Low");
+                    add("Low+");
                     add("Medium");
                     add("High");
                     add("High+");
