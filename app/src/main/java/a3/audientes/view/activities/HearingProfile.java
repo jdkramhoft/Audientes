@@ -1,11 +1,7 @@
 package a3.audientes.view.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 
 import android.os.Build;
@@ -14,9 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,27 +20,24 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Objects;
-
 import a3.audientes.R;
-import a3.audientes.bluetooth.BluetoothPairingActivity;
 import a3.audientes.view.adapter.HearingProfileAdapter;
 import a3.audientes.view.fragments.Audiogram;
 import a3.audientes.view.fragments.Tab1;
 import a3.audientes.view.fragments.Tab2;
-import a3.audientes.model.PopupManager;
-import utils.SharedPrefUtil;
 
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
 
-    private final String TAB_1_TITLE = "Programs";
-    private final String TAB_2_TITLE = "Hearing Test";
+    private String TAB_1_TITLE;
+    private String TAB_2_TITLE;
     private BottomSheetBehavior bottomSheetBehavior;
     View speaker, v;
     ImageView layoutShader;
     AppCompatActivity act = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TAB_1_TITLE = getString(R.string.programs);
+        TAB_2_TITLE = getString(R.string.hearing_test);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setStatusBarTrans();
@@ -57,7 +47,7 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ViewPager viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
+        viewPager.setAdapter(new HearingProfileAdapter(getSupportFragmentManager(), tabLayout.getTabCount(), getBaseContext()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         int page = getIntent().getIntExtra("ARG_PAGE", 0);
         viewPager.setCurrentItem(page);

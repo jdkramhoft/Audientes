@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import a3.audientes.R;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
-import utils.SharedPrefUtil;
+import a3.audientes.dto.Program;
+import a3.audientes.dao.ProgramDAO;
+import a3.audientes.utils.SharedPrefUtil;
 
 
 public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapter.ProgramAdapter.MyViewHolder> {
@@ -48,7 +48,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
         this.mactivity = mactivity;
         this.currentProgramId = currentProgramId;
         mcontext= mactivity.getBaseContext();
-        ProgramManager.getInstance().setAdapter(this);
+        ProgramDAO.getInstance().setAdapter(this);
     }
 
     @Override @NonNull

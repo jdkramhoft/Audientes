@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Audientes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="audioGram_left">The air conduction results for the left ear are marked with a blue... "X"</string>
+    <string name="audioGram_right">The air conduction results for the right ear are marked with a red...     "O"</string>
+    <string name="enabel_bluetooth">Denne app kræver bluetooth for at forbinde til Audientes høreapperat </string>
+    <string name="audientes">Audientes</string>
+    <string name="bottom_sheet_peek">peek</string>
+    <string name="bottom_sheet_content">Indhold</string>
+    <string name="cancel">Fortryd</string>
+    <string name="alert_dialog_ok">Ok</string>
+    <string name="alert_dialog_two_buttons_title">Title man</string>
+    <string name="BoxedVertical_defaultImage">"@drawable/xml_fg_volumelevel"</string>
+    <string name="BoxedVertical_minImage">"@drawable/xml_fg_volumelevel"</string>
+    <string name="BoxedVertical_maxImage">"@drawable/xml_fg_volumelevel"</string>
+
+
+    <string name="plus">+</string>
+    <string name="connect_device">Forbind enhed</string>
+    <string name="home_btn">Hjemme</string>
+    <string name="windy">Blæsene</string>
+    <string name="loud_btn">Larm</string>
+    <string name="quiet_btn">Stille</string>
+    <string name="new_visitor_pref">newVisitor</string>
+    <string name="search_for_devices">Søg efter enheder</string>
+    <string name="cntnue">Fortsæt</string>
+    <string name="select_lan">Vælg dit sprog</string>
+    <string name="programs">Programmer</string>
+    <string name="pair">Parrer enheder…</string>
+    <string name="lowplus">lav+</string>
+    <string name="low">lav</string>
+    <string name="medium">mellem</string>
+    <string name="high">høj</string>
+    <string name="highplus">høj+</string>
+    <string name="minchar">Min 1 karakter</string>
+    <string name="maxchar">Max 5 karaterer</string>
+    <string name="searchdevice">Søger efter enheder</string>
+    <string name="next">Næste</string>
+    <string name="start">Begynd</string>
+    <string name="randlear">Højre &amp; venstre øre</string>
+    <string name="audiogram">Audiogram</string>
+    <string name="select">Vælg</string>
+    <string name="wanttodelete">Vil du virkelig slette dette program?</string>
+    <string name="delete_program">Slet Program</string>
+    <string name="are_you_sure">Er du sikker?</string>
+    <string name="changes_made_will_not_be_saved">Ændringer vil ikke gemmes!</string>
+    <string name="yes">Ja</string>
+    <string name="hearing_profile">Høreprofil</string>
+    <string name="press_button_when_you_hear_a_sound">Tryk på knappen når du hører en lyd</string>
+    <string name="searching_for_devices">Søger...</string>
+    <string name="settings">Opsætning</string>
+    <string name="name_of_program">Program navn</string>
+    <string name="save_changes">Gem ændringer</string>
+    <string name="confirm">Bekræft</string>
+    <string name="left">L</string>
+    <string name="middle">LR</string>
+    <string name="shortR">R</string>
+    <string name="ShortR">R</string>
+    <string name="skip">Skip</string>
+    <string name="test_will_take_5_minutes_npress_button_to_start">Testen tager cirka 5 min. Tryk på knappen for at starte</string>
+    <string name="hearing_test">Høretest</string>
+    <string name="take_new_test">Tag ny høretest</string>
+    <string name="active_test">Aktiv test</string>
+    <string name="audiogram_n_archive">Arkiv</string>
+    <string name="newest_hearing_test">Nyeste høretest:</string>
+    <string name="selected_audiogram">Valgte audiogram</string>
+</resources>

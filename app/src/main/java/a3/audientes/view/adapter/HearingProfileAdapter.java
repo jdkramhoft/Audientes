@@ -1,9 +1,12 @@
 package a3.audientes.view.adapter;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import a3.audientes.R;
 import a3.audientes.view.fragments.Audiogram;
 import a3.audientes.view.fragments.Tab1;
 import a3.audientes.view.fragments.Tab2;
@@ -12,9 +15,11 @@ import a3.audientes.view.fragments.Tab2;
 public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs;
+    Context context;
 
-    public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs) {
+    public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs, Context context) {
         super(fm);
+        this.context = context;
         this.numOfTabs = NumberOfTabs;
     }
 
@@ -24,7 +29,7 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return Tab1.newInstance();
             case 1:
-                Audiogram audiogram = Audiogram.newInstance();
+                Audiogram audiogram = Audiogram.newInstance(context);
                 return Tab2.newInstance(audiogram);
             default:
                 return null;
@@ -36,11 +41,12 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
         return numOfTabs;
     }
 
-    @Override    public CharSequence getPageTitle(int position) {
+    @Override
+    public CharSequence getPageTitle(int position) {
         switch (position){
-            case 0: return "Programs";
+            case 0: return context.getString(R.string.programs);
             //case 1: return "Tab 2";
-            default: return "Hearing Test";
+            default: return context.getString(R.string.hearing_test);
         }
     }
 }

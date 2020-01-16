@@ -10,8 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.media.audiofx.Equalizer;
-import android.media.audiofx.Equalizer.OnParameterChangeListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,21 +18,21 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import a3.audientes.R;
-import a3.audientes.model.AudiogramManager;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
+import a3.audientes.dto.Program;
+import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
+import a3.audientes.utils.SharedPrefUtil;
+
+import static a3.audientes.R.string.low;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt, name;
     private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;
     private int programId;
-    private ProgramManager programManager = ProgramManager.getInstance();
+    private ProgramDAO programDAO = ProgramDAO.getInstance();
     private ProgramViewModel programViewModel;
     private Equalizer trackEq;
     private MediaPlayer musicTrack;
@@ -46,7 +44,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.layout_edit_program);
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
-
         // Setting up Equalizer
         musicTrack = MediaPlayer.create(this, R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
@@ -79,11 +76,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
         high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
 
-        low_plus_txt.setText("low+");
-        low_txt.setText("low");
-        medium_txt.setText("medium");
-        high_txt.setText("high");
-        high_plus_txt.setText("high+");
+        low_plus_txt.setText(R.string.lowplus);
+        low_txt.setText(R.string.low);
+        medium_txt.setText(R.string.medium);
+        high_txt.setText(R.string.high);
+        high_plus_txt.setText(R.string.highplus);
 
 
         low_plus = findViewById(R.id.low_plus).findViewById(R.id.seekbar);
@@ -128,7 +125,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         if (extras != null) {
             if(extras.getBoolean("new") == false){
                 programId = Integer.parseInt(extras.getString("id"));
-                updateSliders(programManager.getProgram(programId));
+                updateSliders(programDAO.getProgram(programId));
 
                 if(extras.getBoolean("edit") == false){
                     low_plus.setEnabled(false);
@@ -163,7 +160,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         if (extras != null) {
             if(extras.getBoolean("new") == false){
                 programId = Integer.parseInt(extras.getString("id"));
-                updateSliders(programManager.getProgram(programId));
+                updateSliders(programDAO.getProgram(programId));
 
                 if(extras.getBoolean("edit") == false){
                     low_plus.setEnabled(false);
@@ -190,7 +187,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     public void onBackPressed() {
 
         Bundle extras = getIntent().getExtras();
-        musicTrack.stop();
         if (extras != null) {
             if(extras.getBoolean("edit") == true){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -206,11 +202,13 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 });
                 button2.setOnClickListener(v1 -> {
                     dialog.cancel();
+                    musicTrack.stop();
                     EditProgram.this.finish();
                 });
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }else{
+                musicTrack.stop();
                 EditProgram.this.finish();
             }
         }
@@ -225,12 +223,12 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
             String nameInput = name.getText().toString();
             if (nameInput.length() == 0) {
                 System.out.println("Min 1 characters");
-                name.setError("Min 1 characters");
+                name.setError(getString(R.string.minchar));
                 return;
             }
             if (nameInput.length() > 5) {
                 System.out.println("Max 5 characters");
-                name.setError("Max 5 characters");
+                name.setError(getString(R.string.maxchar));
                 return;
             }
 
@@ -250,18 +248,18 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 if(extras.getBoolean("new") == false){
                     newProgram.setId(programId);
                     System.out.println(programId);
-                    programManager.update(newProgram);
+                    programDAO.update(newProgram);
                     programViewModel.Update(newProgram);
                 }else{
-                    int nextindex = programManager.getNextId();
+                    int nextindex = programDAO.getNextId();
                     newProgram.setId(nextindex);
-                    programManager.addProgram(newProgram);
+                    programDAO.addProgram(newProgram);
                     programViewModel.Insert(newProgram);
-                    programManager.programadapter.notifyItemInserted(nextindex);
+                    programDAO.programadapter.notifyItemInserted(nextindex);
                     SharedPrefUtil.saveSharedSetting(this,"currentProgram", Integer.toString(nextindex));
                 }
             }
-
+            musicTrack.stop();
             Intent intent = new Intent(EditProgram.this, HearingProfile.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             EditProgram.this.finish();

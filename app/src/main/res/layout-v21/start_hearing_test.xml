@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
-    tools:context=".view.fragments.HearingTest">
+    tools:context=".view.activities.HearingTest">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageButton
@@ -27,7 +27,8 @@
         android:layout_height="55dp"
         android:layout_marginBottom="74dp"
         android:gravity="center"
-        android:text="Test will take 5 minutes\nPress button to start"
+        android:textSize="16sp"
+        android:text="@string/test_will_take_5_minutes_npress_button_to_start"
         android:textColor="#BEC3E9"
         app:layout_constraintBottom_toTopOf="@+id/hearing_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,13 +41,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:layout_marginBottom="56dp"
-        android:text="Hearing Test"
+        android:text="@string/hearing_test"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/running_test_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

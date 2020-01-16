@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -28,10 +27,11 @@ import com.github.mikephil.charting.utils.EntryXComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import a3.audientes.R;
-import a3.audientes.model.AudiogramManager;
-import utils.SharedPrefUtil;
+import a3.audientes.dao.AudiogramDAO;
+import a3.audientes.utils.SharedPrefUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +42,7 @@ import utils.SharedPrefUtil;
  * create an instance of this fragment.
  */
 public class Audiogram extends Fragment {
-    private AudiogramManager audiogramManager = AudiogramManager.getInstance();
+    private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
 
     // TODO: Rename and change types of parameters
     private OnFragmentInteractionListener mListener;
@@ -53,7 +53,7 @@ public class Audiogram extends Fragment {
     private int[] freqs = {};
     private View v;
 
-    private final String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "Right and left Ear";
+    private String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "";
 
     private final int[] colors = new int[] {
             Color.rgb(30, 176, 97),     // green
@@ -61,34 +61,38 @@ public class Audiogram extends Fragment {
             Color.rgb(190, 195, 233)    // purple
 
     };
+    static Context context1;
+    public Audiogram() {
 
-    public Audiogram() { }
+    }
 
-    public static Audiogram newInstance() {
+    public static Audiogram newInstance(Context context) {
+        context1 = context;
         return new Audiogram();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RIGHT_EAR_LABEL = Objects.requireNonNull(getActivity()).getString(R.string.randlear);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
-        left = audiogramManager.getCurrentAudiogram().getGraf();
-        right = audiogramManager.getCurrentAudiogram().getGraf();
+        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        left = audiogramDAO.getCurrentAudiogram().getGraf();
+        right = audiogramDAO.getCurrentAudiogram().getGraf();
         return inflater.inflate(R.layout.audiogram, container, false);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        audiogramManager.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
-        left = audiogramManager.getCurrentAudiogram().getGraf();
-        right = audiogramManager.getCurrentAudiogram().getGraf();
+        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        left = audiogramDAO.getCurrentAudiogram().getGraf();
+        right = audiogramDAO.getCurrentAudiogram().getGraf();
         drawAudiogram(left, right, v);
     }
 
@@ -120,7 +124,7 @@ public class Audiogram extends Fragment {
     }
 
     public void drawAudiogram(List<int[]> left, List<int[]> right, View v){
-
+        RIGHT_EAR_LABEL = context1.getString(R.string.randlear);
         LineChart chart = v.findViewById(R.id.chart);
         chart.getDescription().setEnabled(false);
         chart.setTouchEnabled(false);
@@ -176,6 +180,7 @@ public class Audiogram extends Fragment {
         legend.setDrawInside(false);
         legend.setTextColor(colors[2]);
         legend.setTextSize(15f);
+
 
         // data
         List<ILineDataSet> data_lines = new ArrayList<>();

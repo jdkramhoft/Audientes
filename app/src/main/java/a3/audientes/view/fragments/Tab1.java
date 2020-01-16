@@ -1,6 +1,5 @@
 package a3.audientes.view.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -32,26 +31,23 @@ import java.util.List;
 import a3.audientes.view.activities.EditProgram;
 import a3.audientes.R;
 import a3.audientes.view.adapter.ProgramAdapter;
-import a3.audientes.model.Program;
-import a3.audientes.model.ProgramManager;
+import a3.audientes.dto.Program;
+import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.ProgramViewModel;
-import utils.SharedPrefUtil;
-import utils.animation.AnimBtnUtil;
+import a3.audientes.utils.SharedPrefUtil;
+import a3.audientes.utils.animation.AnimBtnUtil;
 
 public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongClickListener {
-    private View addBtn, mbtn1, mbtn2, mbtn3, mbtn4, prevProgram;
-    private FloatingActionButton newCustomProgram;
+    private ProgramDAO programDAO = ProgramDAO.getInstance();
     private List<Program> programList = new ArrayList<>();
-    private ProgramAdapter adapter;
-    private ProgramViewModel programviewmodel;
-    private ProgramManager programManager = ProgramManager.getInstance();
-    private Equalizer trackEq;
+    private FloatingActionButton floatingActionButton;
+    private ProgramViewModel programViewModel;
     private MediaPlayer musicTrack;
+    private ProgramAdapter adapter;
     private int currentProgramId;
+    private Equalizer trackEq;
 
-    public Tab1() {
-        // Required empty public constructor
-    }
+    public Tab1() { }
 
     public static Fragment newInstance() {
         return new Tab1();
@@ -64,56 +60,45 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rod = inflater.inflate(R.layout.tab1, container, false);
 
-        programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
-        programList = programManager.getProgramList();
+        floatingActionButton = rod.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(this);
 
-        View rod = inflater.inflate(R.layout.fragment_tab1, container, false);
-
-        newCustomProgram = rod.findViewById(R.id.fab);
-        newCustomProgram.setOnClickListener(this);
-
+        programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
+        programList = programDAO.getProgramList();
         currentProgramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentProgram", "1"));
-        setupRecyclerView(rod);
 
         musicTrack = MediaPlayer.create(getContext(), R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
         trackEq.setEnabled(true);
         changeEqualizer(currentProgramId);
+
+        setupRecyclerView(rod);
+
         return rod;
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
-        programList = programManager.getProgramList();
-
-        for(int i = 0; i < programList.size(); i++){
-            System.out.println(programList.get(i).getName());
-        }
+        programList = programDAO.getProgramList();
         currentProgramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentProgram", "1"));
-        System.out.println(currentProgramId);
         changeEqualizer(currentProgramId);
-        selecedProgram(currentProgramId);
+        selectProgram(currentProgramId);
     }
 
     @Override
     public void onClick(View v) {
-
-        if (v == newCustomProgram){
-            System.out.println("Create short");
+        if (v == floatingActionButton){
             Intent intent = new Intent(getActivity(), EditProgram.class);
             intent.putExtra("new", true);
             intent.putExtra("edit", true);
             startActivity(intent);
-
-
         }
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
             TextView currentId = view.findViewById(R.id.hiddenId);
-            System.out.println("Delete short");
             deletePopup(v, Integer.parseInt(currentId.getText().toString()));
         }else {
             updateLayout(v);
@@ -123,45 +108,40 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     @Override
     public boolean onLongClick(View v) {
-
-
-        if (v == newCustomProgram){
+        if (v == floatingActionButton){
             Intent intent = new Intent(getActivity(), EditProgram.class);
             intent.putExtra("new", true);
             intent.putExtra("edit", true);
             startActivity(intent);
         }
-
-        if (v.getId() == R.id.canceltext){
+        else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
             TextView currentId = view.findViewById(R.id.hiddenId);
-            System.out.println("Delete long");
             deletePopup(v, Integer.parseInt(currentId.getText().toString()));
-        }else{
+        }
+        else {
+            // program is long clicked
             AnimBtnUtil.bounceSlow(v, getActivity());
-            TextView currentId = v.findViewById(R.id.hiddenId);
-            System.out.println(currentId.getText().toString());
-            System.out.println("edit long");
 
             Intent intent = new Intent(getActivity(), EditProgram.class);
             intent.putExtra("new", false);
 
-            // Check if default program is selected... id 1,2,3 are default
-            if(currentId.getText().toString().equals("1")
-            || currentId.getText().toString().equals("2")
-            || currentId.getText().toString().equals("3")
-            || currentId.getText().toString().equals("4")){
+            // Check if default program is selected
+            TextView currentId = v.findViewById(R.id.hiddenId);
+            if(programIsDefault(currentId)){
                 intent.putExtra("id", currentId.getText().toString());
                 intent.putExtra("edit", false);
-            }else{
+            }
+            else {
                 intent.putExtra("id", currentId.getText().toString());
                 intent.putExtra("edit", true);
             }
+
             startActivity(intent);
         }
+
         return true;
     }
-
 
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
@@ -173,8 +153,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     }
 
     public void changeEqualizer(int id){
-        Program currentProgram = programManager.getProgram(id);
-        // Set Equalizer bands
+        Program currentProgram = programDAO.getProgram(id);
         trackEq.setBandLevel((short)0, (short)(currentProgram.getLow()-1500));
         trackEq.setBandLevel((short)1, (short)(currentProgram.getLow_plus()-1500));
         trackEq.setBandLevel((short)2, (short)(currentProgram.getMiddle()-1500));
@@ -182,22 +161,19 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         trackEq.setBandLevel((short)4, (short)(currentProgram.getHigh_plus()-1500));
     }
 
-    private void selecedProgram(int id){
+    private void selectProgram(int id){
         RecyclerView v = this.getView().findViewById(R.id.programRecycler);
-        ArrayList<LinearLayout> rootView = new ArrayList<LinearLayout>();
-        System.out.println(v.toString());
-        System.out.println("Child elements: "+v.getChildCount());
 
-        // Reset loop
+        // set all programs to not selected
         for(int i = 0; i < v.getChildCount(); i++){
             LinearLayout temp = (LinearLayout)v.getChildAt(i);
             ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white));
             ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
         }
 
+        // find selected program
         for(int i = 0; i < v.getChildCount(); i++){
             LinearLayout temp = (LinearLayout)v.getChildAt(i);
-            System.out.println(temp.toString());
             TextView view = temp.findViewById(R.id.hiddenId);
             int tempId = Integer.parseInt(view.getText().toString());
             if(tempId == id){
@@ -205,17 +181,14 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
                 ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
             }
         }
-
     }
-
 
     private void updateLayout(View v) {
         // Change Equalizer
         currentProgramId = getID(v);
-        System.out.println("Current program: "+currentProgramId);
         SharedPrefUtil.saveSharedSetting(getContext(),"currentProgram", Integer.toString(currentProgramId));
         changeEqualizer(currentProgramId);
-        selecedProgram(currentProgramId);
+        selectProgram(currentProgramId);
     }
 
     private boolean programIsDefault(View v) {
@@ -226,12 +199,10 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     private int getID(View v) {
         TextView view = v.findViewById(R.id.hiddenId);
-        int id = Integer.parseInt(view.getText().toString());
-        return id;
+        return Integer.parseInt(view.getText().toString());
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onTab1Interaction(Uri uri);
     }
 
@@ -246,17 +217,14 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
         button1.setOnClickListener(v12 -> dialog.dismiss());
         button2.setOnClickListener(v1 -> {
-            System.out.println("Delete program");
-            Program currentProgram = programManager.getProgram(programid);
-            programManager.deleteProgram(currentProgram);
-            programviewmodel.Delete(currentProgram);
+            Program currentProgram = programDAO.getProgram(programid);
+            programDAO.deleteProgram(currentProgram);
+            programViewModel.Delete(currentProgram);
 
-            System.out.println("current "+currentProgramId);
-            System.out.println("program to delete "+programid);
             if(currentProgramId == programid){
                 currentProgramId = 1;
                 SharedPrefUtil.saveSharedSetting(getContext(),"currentProgram", Integer.toString(currentProgramId));
-                selecedProgram(currentProgramId);
+                selectProgram(currentProgramId);
                 changeEqualizer(currentProgramId);
             }
 
@@ -265,5 +233,4 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
-
 }
