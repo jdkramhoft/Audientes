@@ -68,16 +68,17 @@ public final class SplashScreen extends AppCompatActivity {
         currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         System.out.println("Current: "+currentAudiogramId);
         System.out.println(newVisitor);
+
+        Intent nextActivity;
         if (newVisitor || currentAudiogramId == 0){
-            Intent intent = new Intent(this, Onboarding.class);
-            startActivity(intent);
-            Objects.requireNonNull(this).finish();
+            nextActivity = new Intent(this, Onboarding.class);
+        } else if (!isHearableConnected()){
+            nextActivity = new Intent(this, BluetoothPairing.class);
+        } else {
+            nextActivity = new Intent(this, HearingProfile.class);
         }
-        else if (!isHearableConnected()){
-            Intent intent = new Intent(this, BluetoothPairing.class);
-            startActivity(intent);
-            Objects.requireNonNull(this).finish();
-        }
+        startActivity(nextActivity);
+        finish();
     };
 
 }
