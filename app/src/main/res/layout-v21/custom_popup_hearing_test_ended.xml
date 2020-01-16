@@ -44,11 +44,11 @@
         android:layout_marginBottom="10sp">
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/okay"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="okay"
+            android:text="@string/okay"
             android:textSize="22sp"
             android:textColor="@color/white"
             android:background="@drawable/custom_popup_buttom_right"/>

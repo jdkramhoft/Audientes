@@ -1,11 +1,14 @@
 package a3.audientes.view.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.net.Uri;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -22,20 +25,30 @@ import com.google.android.material.tabs.TabLayout;
 
 import a3.audientes.R;
 import a3.audientes.view.adapter.HearingProfileAdapter;
+import a3.audientes.view.custom.VolumeSlider;
 import a3.audientes.view.fragments.Audiogram;
 import a3.audientes.view.fragments.Tab1;
 import a3.audientes.view.fragments.Tab2;
 
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
-
+    private int newRange, oldRange, max, min;
+    private int state;
+    private AudioManager audioManager;
+    private String TAB_1_TITLE;
+    private String TAB_2_TITLE;
     private BottomSheetBehavior bottomSheetBehavior;
-    View speaker, v;
-    ImageView layoutShader;
-    AppCompatActivity act = this;
+    private View speaker, v;
+    private ImageView layoutShader;
+    private AppCompatActivity act = this;
+    private boolean flag = true;
+    private VolumeSlider middleMan;
+    private final Handler handler = new Handler();
+    private Runnable r;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String TAB_1_TITLE = getString(R.string.programs);
-        String TAB_2_TITLE = getString(R.string.hearing_test);
+        TAB_1_TITLE = getString(R.string.programs);
+        TAB_2_TITLE = getString(R.string.hearing_test);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setStatusBarTrans();
@@ -52,36 +65,30 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
 
         v = findViewById(R.id.sheet_volume);
         v.setOnClickListener(this);
+        middleMan = findViewById(R.id.boxedM);
+
+        max = middleMan.getMax();
+        min = middleMan.getMin();
+        newRange = max - min;
+        oldRange = middleMan.getSoundMax() - middleMan.getMin();
+
+        r = this::setOnVolumeChangeListener;
 
         layoutShader = findViewById(R.id.hearingProfileShader);
 
         bottomSheetBehavior = BottomSheetBehavior.from(v);
-        // set callback for changes
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 // Called every time when the bottom sheet changes its state.
-                /*
-                System.out.println(newState);
-                if (newState == BottomSheetBehavior.STATE_EXPANDED){
-                    v.setAlpha(0);
-
-                    layoutShader.setImageBitmap(SharedPrefUtil.takeScreenShot(act));
-                    v.setAlpha(1);
-
+                state = newState;
+                if (BottomSheetBehavior.STATE_SETTLING == newState){
+                    handler.post(r);
                 }
-
-                View speaker = bottomSheet.findViewById(R.id.speakerIcon);
-                Animation myAnim = AnimationUtils.loadAnimation(getBaseContext(), R.anim.rotate);
-                speaker.startAnimation(myAnim);
-*/
-
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                System.out.println("slide " +slideOffset);
                 speaker = bottomSheet.findViewById(R.id.speakerIcon);
                 speaker.setRotation(slideOffset*180);
             }
@@ -103,6 +110,21 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         });
 
 
+    }
+
+    private void setOnVolumeChangeListener() {
+
+        if (BottomSheetBehavior.STATE_COLLAPSED == state) {
+            handler.removeCallbacksAndMessages(null);
+        }
+        else if (!middleMan.isBeingTouched()){
+            audioManager = (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+            int streamVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            int soundValue = (((streamVolume - min) * newRange) / oldRange);
+            int xx = soundValue > max ? max/2 : soundValue;
+            middleMan.setValue(xx);
+        }
+        handler.postDelayed(r, 100);
     }
 
     @Override
@@ -132,12 +154,12 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     public void setBorder(View v) {
         int val = Integer.valueOf(v.getTag().toString());
         //bv.setCornerRadius(val);
-        Toast.makeText(HearingProfile.this, "New corner radius is " + val, Toast.LENGTH_SHORT).show();
+        Toast.makeText(HearingProfile.this, "New corner radius is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
     }
     public void setMax(View v) {
         int val = Integer.valueOf(v.getTag().toString());
         //bv.setMax(val);
-        Toast.makeText(HearingProfile.this, "New max value is " + val, Toast.LENGTH_SHORT).show();
+        Toast.makeText(HearingProfile.this, "New max value is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
     }
     //TODO HALP IT WONT BE TRANSPARTEN
 

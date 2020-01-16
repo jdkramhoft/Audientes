@@ -102,6 +102,7 @@ public class VolumeSlider extends View{
     private Rect dRect = new Rect();
     private boolean firstRun = true;
     private AudioManager audioManager;
+    private boolean beingTouched;
 
     public VolumeSlider(Context context) {
         super(context);
@@ -115,7 +116,6 @@ public class VolumeSlider extends View{
     }
 
     private void init(Context context, AttributeSet attrs) {
-        System.out.println("INIT");
         float density = getResources().getDisplayMetrics().density;
 
         // Defaults, may need to link this into theme settings
@@ -127,8 +127,6 @@ public class VolumeSlider extends View{
 
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         int streamVolume= audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        System.out.println("streamVolume"+streamVolume);
-
         int newRange = mMax - mMin;
         int oldRange = (SOUND_MAX - SOUND_MIN);
         int soundValue = (((streamVolume - mMin) * newRange) / oldRange);
@@ -295,8 +293,10 @@ public class VolumeSlider extends View{
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    if (mOnValuesChangeListener != null)
+                    if (mOnValuesChangeListener != null){
                         mOnValuesChangeListener.onStopTrackingTouch(this);
+                    }
+                    beingTouched = false;
                     setPressed(false);
                     this.getParent().requestDisallowInterceptTouchEvent(false);
                     break;
@@ -312,13 +312,11 @@ public class VolumeSlider extends View{
      * @param event MotionEvent
      */
     private void updateOnTouch(MotionEvent event) {
+        beingTouched = true;
         setPressed(true);
         double mTouch = convertTouchEventPoint(event.getY());
         int progress = (int) Math.round(mTouch);
         updateProgress(progress);
-
-
-
     }
 
     private double convertTouchEventPoint(float yPos) {
@@ -428,6 +426,18 @@ public class VolumeSlider extends View{
         return mMax;
     }
 
+    public int getMin(){
+        return mMin;
+    }
+
+    public int getSoundMax(){
+        return SOUND_MAX;
+    }
+
+    public int getSoundMin(){
+        return SOUND_MIN;
+    }
+
     public void setMax(int mMax) {
         if (mMax <= mMin)
             throw new IllegalArgumentException("Max should not be less than zero");
@@ -472,5 +482,13 @@ public class VolumeSlider extends View{
 
     public void setOnBoxedPointsChangeListener(OnValuesChangeListener onValuesChangeListener) {
         mOnValuesChangeListener = onValuesChangeListener;
+    }
+
+    public boolean isBeingTouched() {
+        return beingTouched;
+    }
+
+    public void setBeingTouched(boolean beingTouched) {
+        this.beingTouched = beingTouched;
     }
 }
