@@ -20,11 +20,9 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
-        private int id;
         public MyViewHolder(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.Title);
-            id = view.getId();
         }
     }
 
