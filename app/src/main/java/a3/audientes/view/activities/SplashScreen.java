@@ -62,7 +62,6 @@ public final class SplashScreen extends AppCompatActivity {
     }
 
     private final Runnable splash = () -> {
-        if (this==null) return;
         assert getFragmentManager() != null;
 
         newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
