@@ -25,11 +25,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     private TextView dbDisplay;
     private Thread runner;
 
-    final Runnable updater = new Runnable(){
-        public void run(){
-            updateDbDisplay();
-        };
-    };
+    final Runnable updater = this::updateDbDisplay;
 
     final Handler handler = new Handler();
 
