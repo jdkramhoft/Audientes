@@ -42,7 +42,7 @@ public final class SplashScreen extends AppCompatActivity {
         });
         AudiogramViewModel audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
         audiogramViewModel.getAllAudiogram().observe(this, audiograms -> {
-            audiogramDAO.setAudiogramList(audiograms);
+            audiogramDAO.setAudiograms(audiograms);
 
             System.out.println("Audiograms in db: "+audiograms.size());
         });
