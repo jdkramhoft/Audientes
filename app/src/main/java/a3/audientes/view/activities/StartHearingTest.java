@@ -30,7 +30,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     final Runnable updater = new Runnable(){
         public void run(){
             updateDbDisplay();
-        };
+        }
     };
 
     final Handler handler = new Handler();
@@ -56,7 +56,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
                     {
                         try {
                             Thread.sleep(1000);
-                        } catch (InterruptedException e) { };
+                        } catch (InterruptedException e) { }
                         handler.post(updater);
                     }
                 }
@@ -136,7 +136,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             System.out.println(audioVolume);
         }
 
-        dbDisplay.setText(Double.toString(audioVolume) + " dB");
+        dbDisplay.setText(audioVolume + " dB");
     }
 
 }

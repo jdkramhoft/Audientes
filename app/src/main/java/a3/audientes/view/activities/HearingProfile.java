@@ -154,12 +154,12 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     public void setBorder(View v) {
         int val = Integer.valueOf(v.getTag().toString());
         //bv.setCornerRadius(val);
-        Toast.makeText(HearingProfile.this, "New corner radius is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
+        Toast.makeText(HearingProfile.this, "New corner radius is " + val, Toast.LENGTH_SHORT).show();
     }
     public void setMax(View v) {
         int val = Integer.valueOf(v.getTag().toString());
         //bv.setMax(val);
-        Toast.makeText(HearingProfile.this, "New max value is " + String.valueOf(val), Toast.LENGTH_SHORT).show();
+        Toast.makeText(HearingProfile.this, "New max value is " + val, Toast.LENGTH_SHORT).show();
     }
     //TODO HALP IT WONT BE TRANSPARTEN
 

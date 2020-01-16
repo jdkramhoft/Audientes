@@ -7,7 +7,7 @@ public class Sound {
     private double freqOfTone;
     private int numSamples;
     private double[] sample;
-    private byte generatedSnd[];
+    private byte[] generatedSnd;
 
     public Sound(double freqOfTone, int duration, int sampleRate) {
         this.freqOfTone = freqOfTone;
