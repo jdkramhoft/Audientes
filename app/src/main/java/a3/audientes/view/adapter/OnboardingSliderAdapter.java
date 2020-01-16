@@ -21,7 +21,6 @@ import a3.audientes.R;
 public class OnboardingSliderAdapter extends PagerAdapter {
 
     private Context context;
-    private LayoutInflater layoutInflater;
 
     private int[] slide_images = {
             R.drawable.boarding_image_handshake,
@@ -64,7 +63,7 @@ public class OnboardingSliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.onboarding_slider, container, false);
 
         ImageView slideImageView = view.findViewById(R.id.slide_image);

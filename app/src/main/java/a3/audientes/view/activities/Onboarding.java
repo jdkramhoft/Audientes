@@ -26,13 +26,11 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
-    private OnboardingSliderAdapter sliderAdapter;
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 5;
+    private static final int NUM_OF_DOTS = 5;
     private boolean newVisitor;
-    private int currentAudiogramId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,7 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         mNextBtn.setOnClickListener(this);
         mSkipBtn.setOnClickListener(this);
 
-        sliderAdapter = new OnboardingSliderAdapter(getBaseContext());
+        OnboardingSliderAdapter sliderAdapter = new OnboardingSliderAdapter(getBaseContext());
         mSlideViewPager.setAdapter(sliderAdapter);
 
         addDotsIndicator(0);
@@ -99,7 +97,7 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
     private void launchAcitivity(){
         Intent intent;
-        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         if (!isHearableConnected())
             intent = new Intent(getBaseContext(), BluetoothPairing.class);
         else if (newVisitor || currentAudiogramId == 0){

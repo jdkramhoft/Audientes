@@ -37,14 +37,12 @@ import a3.audientes.utils.SharedPrefUtil;
 public class BluetoothPairing extends AppCompatActivity implements OnClickListener {
 
     private BluetoothAdapter bluetoothAdapter;
-    private RecyclerView lvNewDevices;
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     private Button searchConnectButton;
     private boolean newVisitor;
     private boolean hasSearched = false;
     OnClickListener clicker = this;
     BluetoothDeviceListAdapter adapter;
-    private int currentAudiogramId;
 
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -96,7 +94,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_pairing);
 
-        lvNewDevices = findViewById(R.id.lvNewDevices);
+        RecyclerView lvNewDevices = findViewById(R.id.lvNewDevices);
         bluetoothDevices = new ArrayList<>();
 
         adapter = new BluetoothDeviceListAdapter(bluetoothDevices, this);
@@ -203,7 +201,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     private void navigate() {
         SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
         // TODO: newVisitor && check DB for audiogram
-        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         if (newVisitor || currentAudiogramId == 0){
             Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
             startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);

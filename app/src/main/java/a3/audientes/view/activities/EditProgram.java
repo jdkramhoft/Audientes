@@ -26,7 +26,8 @@ import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
-    private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt, name;
+
+    private TextView name;
     private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;
     private int programId;
@@ -68,11 +69,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         }
 
 
-        low_plus_txt = findViewById(R.id.low_plus).findViewById(R.id.seekbar_text);
-        low_txt = findViewById(R.id.low).findViewById(R.id.seekbar_text);
-        medium_txt = findViewById(R.id.medium).findViewById(R.id.seekbar_text);
-        high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
-        high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
+        TextView low_plus_txt = findViewById(R.id.low_plus).findViewById(R.id.seekbar_text);
+        TextView low_txt = findViewById(R.id.low).findViewById(R.id.seekbar_text);
+        TextView medium_txt = findViewById(R.id.medium).findViewById(R.id.seekbar_text);
+        TextView high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
+        TextView high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
 
         low_plus_txt.setText(R.string.lowplus);
         low_txt.setText(R.string.low);

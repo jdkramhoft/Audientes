@@ -23,12 +23,8 @@ import a3.audientes.utils.SharedPrefUtil;
 public final class SplashScreen extends AppCompatActivity {
 
     private final Handler handler = new Handler();
-    private ProgramViewModel programviewmodel;
-    private AudiogramViewModel audiogramViewModel;
     private ProgramDAO programDAO = ProgramDAO.getInstance();
     private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
-    private boolean newVisitor;
-    private int currentAudiogramId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +37,13 @@ public final class SplashScreen extends AppCompatActivity {
         }
 
 
-        programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
+        ProgramViewModel programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programviewmodel.getAllPrograms().observe(this, programs -> {
             System.out.println(programs.size());
             setDefaultNames(programs);
             programDAO.setProgramList(programs);
         });
-        audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
+        AudiogramViewModel audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
         audiogramViewModel.getAllAudiogram().observe(this, audiograms -> {
             audiogramDAO.setAudiograms(audiograms);
 
@@ -67,9 +63,9 @@ public final class SplashScreen extends AppCompatActivity {
     private final Runnable splash = () -> {
         assert getFragmentManager() != null;
 
-        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
-        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
-        System.out.println("Current: "+currentAudiogramId);
+        boolean newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        System.out.println("Current: "+ currentAudiogramId);
         System.out.println(newVisitor);
 
         Intent nextActivity;

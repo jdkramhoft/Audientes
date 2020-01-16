@@ -24,7 +24,6 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     private double audioVolume;
     private TextView dbDisplay;
     private Thread runner;
-    private TelephonyManager tm;
     private String networkOperator;
 
     final Runnable updater = this::updateDbDisplay;
@@ -61,7 +60,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         }
 
         // Checking if code is running on emulator.
-        tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         networkOperator = tm.getNetworkOperatorName();
 
         if ("Android".equals(networkOperator)) {

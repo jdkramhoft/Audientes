@@ -28,16 +28,14 @@ import a3.audientes.view.fragments.Tab2;
 
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
 
-    private String TAB_1_TITLE;
-    private String TAB_2_TITLE;
     private BottomSheetBehavior bottomSheetBehavior;
     View speaker, v;
     ImageView layoutShader;
     AppCompatActivity act = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TAB_1_TITLE = getString(R.string.programs);
-        TAB_2_TITLE = getString(R.string.hearing_test);
+        String TAB_1_TITLE = getString(R.string.programs);
+        String TAB_2_TITLE = getString(R.string.hearing_test);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setStatusBarTrans();
