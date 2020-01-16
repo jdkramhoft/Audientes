@@ -99,8 +99,6 @@ public class ProgramDAO {
         return programList.get(programList.size()-1).getId()+ 1;
     }
 
-    // Getters and setters
-
     public List<Program> getProgramList() {
         return programList;
     }

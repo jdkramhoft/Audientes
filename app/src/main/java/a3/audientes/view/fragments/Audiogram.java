@@ -75,6 +75,7 @@ public class Audiogram extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         RIGHT_EAR_LABEL = Objects.requireNonNull(getActivity()).getString(R.string.randlear);
+        LEFT_EAR_LABEL = Objects.requireNonNull(getActivity()).getString(R.string.randlear);
     }
 
     @Override
