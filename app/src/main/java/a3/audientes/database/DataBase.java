@@ -15,24 +15,14 @@ import a3.audientes.dto.Audiogram;
 import a3.audientes.dto.Program;
 
 
-@Database(entities = {Program.class, Audiogram.class}, version = 1)
+@Database(entities = {Program.class, Audiogram.class}, version = 2)
 public abstract class DataBase extends RoomDatabase {
 
     private static DataBase instance;
-    static String quiet;
-    static String home;
-    static String loud;
-    static String windy;
-    Context context;
+    private static final String EMPTY = "";
     public abstract DAO dao();
 
-
     public static synchronized DataBase getInstance(Context context){
-        quiet = context.getString(R.string.quiet_btn);
-        home = context.getString(R.string.home_btn);
-        loud = context.getString(R.string.loud_btn);
-        windy = context.getString(R.string.windy);
-
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     DataBase.class, "database").
@@ -60,10 +50,10 @@ public abstract class DataBase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            DAO.insertProgram(new Program( quiet, 1000,1000,1000,1000,1000,2, false));
-            DAO.insertProgram(new Program(home, 1500,1500,1500,1500,1500,2, false));
-            DAO.insertProgram(new Program(loud, 2000,2000,2000,2000,2000,2, false));
-            DAO.insertProgram(new Program(windy, 3000,3000,3000,3000,3000,2, false));
+            DAO.insertProgram(new Program(EMPTY, 1000,1000,1000,1000,1000,2, false));
+            DAO.insertProgram(new Program(EMPTY, 1500,1500,1500,1500,1500,2, false));
+            DAO.insertProgram(new Program(EMPTY, 2000,2000,2000,2000,2000,2, false));
+            DAO.insertProgram(new Program(EMPTY, 3000,3000,3000,3000,3000,2, false));
             return null;
         }
     }
