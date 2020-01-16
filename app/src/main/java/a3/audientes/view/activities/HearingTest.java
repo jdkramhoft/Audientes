@@ -147,7 +147,6 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             dialog.show();
 
 
-
         }
         else{
             AnimBtnUtil.bounce(v, this);
