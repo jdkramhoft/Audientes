@@ -66,4 +66,8 @@
     <string name="newest_hearing_test">Newest hearing test:</string>
     <string name="selected_audiogram">Selected audiogram</string>
     <string name="windy">Windy</string>
+
+    <string name="test_finished">Test Finished</string>
+    <string name="test_finished_text">Your hearing test is now finished. You will be able to see the result graph on the ‘Hearing Test’ screen, and the sound will be configured.</string>
+    <string name="okay">Okay</string>
 </resources>

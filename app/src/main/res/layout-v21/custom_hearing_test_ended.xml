@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Test Finished"
+        android:text="@string/test_finished"
         android:gravity="center"
         android:textColor="@color/lightGreen"
         android:textSize="25sp"
@@ -22,7 +22,7 @@
         android:layout_marginRight="50sp"
         android:layout_marginBottom="10sp"
         android:gravity="center"
-        android:text="Your hearing test is now finished. You will be able to see the result graph on the ‘Hearing Test’ screen, and the sound will be configured."
+        android:text="@string/test_finished_text"
         android:textColor="@color/lightPurple"
         android:textSize="22sp" />
 

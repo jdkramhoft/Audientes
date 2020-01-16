@@ -67,4 +67,8 @@
     <string name="audiogram_n_archive">Arkiv</string>
     <string name="newest_hearing_test">Nyeste høretest:</string>
     <string name="selected_audiogram">Valgte audiogram</string>
+
+    <string name="test_finished">Test Færdig</string>
+    <string name="test_finished_text">Din høretest er nu færdig. Du er nu i stand til at se resultat grafen på Høretest siden, og lyden vil nu blive konfigureret.</string>
+    <string name="okay">Okay</string>
 </resources>

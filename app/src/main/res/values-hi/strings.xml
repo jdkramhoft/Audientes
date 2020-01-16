@@ -65,4 +65,9 @@
     <string name="newest_hearing_test">नवीनतम सुनवाई परीक्षण:</string>
     <string name="selected_audiogram">चयनित ऑडियोग्राम</string>
     <string name="windy">तूफानी</string>
+
+    <string name="test_finished">परीक्षण समाप्त हुआ</string>
+    <string name="test_finished_text">अब आपका सुनने का परीक्षण समाप्त हो गया है।. आप देख पाएंगे परिणाम ग्राफ पर कान कि जाँच स्क्रीन, तथा ध्वनि कॉन्फ़िगर किया जाएगा.</string>
+    <string name="okay">ठीक है</string>
+
 </resources>
