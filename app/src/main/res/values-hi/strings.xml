@@ -48,7 +48,7 @@
     <string name="yes">हाँ</string>
     <string name="hearing_profile">हियरिंग प्रोफाइल</string>
     <string name="press_button_when_you_hear_a_sound">ध्वनि सुनते ही बटन दबाएं</string>
-    <string name="searching_for_devices">उपकरणों की खोज की जा रही है ...</string>
+    <string name="searching_for_devices">Audientes Hearable...</string>
     <string name="settings">समायोजन</string>
     <string name="name_of_program">कार्यक्रम का नाम</string>
     <string name="save_changes">परिवर्तनों को सुरक्षित करें</string>

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +31,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import android.view.View;
 
 import a3.audientes.R;
 import a3.audientes.view.adapter.BluetoothDeviceListAdapter;
@@ -39,6 +44,8 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     private BluetoothAdapter bluetoothAdapter;
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     private Button searchConnectButton;
+    private ImageView loadingbar;
+    private TextView textView2;
     private boolean newVisitor;
     private boolean hasSearched = false;
     OnClickListener clicker = this;
@@ -106,6 +113,15 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         searchConnectButton = findViewById(R.id.connectToDevice);
         searchConnectButton.setOnClickListener(this);
 
+        loadingbar = findViewById(R.id.loadingbar);
+        textView2 = findViewById(R.id.textView2);
+
+        ImageView anim = (ImageView) this.findViewById(R.id.loadingbar);
+        anim.setBackgroundResource(R.drawable.hearable_animation);
+        AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
+        animAnimation.start();
+
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         registerReceiver(broadcastReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
@@ -154,6 +170,13 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
+
+            loadingbar = findViewById(R.id.loadingbar);
+            loadingbar.setVisibility(View.INVISIBLE);
+            textView2 = findViewById(R.id.textView2);
+            textView2.setVisibility(View.INVISIBLE);
+
+
             if(!hasSearched){
                 search();
                 hasSearched = true;
