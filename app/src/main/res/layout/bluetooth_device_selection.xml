@@ -37,15 +37,15 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:elevation="5dp"
-        android:scaleX="0.6"
-        android:scaleY="0.6"
+        android:scaleX="1"
+        android:scaleY="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.55"
-        app:srcCompat="@drawable/icon_hearable" />
+        app:srcCompat="@drawable/bluetooth_icon_connectable_1" />
 
 
     <TextView
