@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.util.List;
-import java.util.Objects;
 
 import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
@@ -76,7 +74,21 @@ public final class SplashScreen extends AppCompatActivity {
         currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         System.out.println("Current: "+currentAudiogramId);
         System.out.println(newVisitor);
+        setDefaultNames();
 
+        Intent nextActivity;
+        if (newVisitor || currentAudiogramId == 0){
+            nextActivity = new Intent(this, Onboarding.class);
+        } else if (!isHearableConnected()){
+            nextActivity = new Intent(this, BluetoothPairing.class);
+        } else {
+            nextActivity = new Intent(this, HearingProfile.class);
+        }
+        startActivity(nextActivity);
+        finish();
+    };
+
+    private void setDefaultNames() {
         List<Program> programList = programDAO.getProgramList();
         if(programList != null){
             String defaultName1 = getString(R.string.quiet_btn);
@@ -92,17 +104,6 @@ public final class SplashScreen extends AppCompatActivity {
         for(Program program : programList){
             programviewmodel.Update(program);
         }
-
-        Intent nextActivity;
-        if (newVisitor || currentAudiogramId == 0){
-            nextActivity = new Intent(this, Onboarding.class);
-        } else if (!isHearableConnected()){
-            nextActivity = new Intent(this, BluetoothPairing.class);
-        } else {
-            nextActivity = new Intent(this, HearingProfile.class);
-        }
-        startActivity(nextActivity);
-        finish();
-    };
+    }
 
 }
