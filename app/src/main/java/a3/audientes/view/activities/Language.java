@@ -3,11 +3,8 @@ package a3.audientes.view.activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 
@@ -28,7 +25,7 @@ public class Language extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_selectlanguage);
+        setContentView(R.layout.language_selection);
         Locale[] locales = Locale.getAvailableLocales();
 
         localcountries= new ArrayList<>();

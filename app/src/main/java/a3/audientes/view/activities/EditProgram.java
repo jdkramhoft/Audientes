@@ -25,8 +25,6 @@ import a3.audientes.dao.ProgramDAO;
 import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
 
-import static a3.audientes.R.string.low;
-
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
     private TextView low_plus_txt, low_txt, medium_txt, high_txt, high_plus_txt, name;
     private SeekBar low_plus, low, medium, high, high_plus;
@@ -41,7 +39,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_edit_program);
+        setContentView(R.layout.edit_program_settings);
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         // Setting up Equalizer
