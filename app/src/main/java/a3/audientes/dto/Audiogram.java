@@ -61,7 +61,7 @@ public class Audiogram implements Comparable<Audiogram> {
 
     // Getters and setters
 
-    public ArrayList<int[]> getGraf(){
+    public ArrayList<int[]> getGraph(){
         ArrayList<int[]> temp = new ArrayList<>();
         for(int i = 0; i < x.size(); i++){
             int[] xy = {x.get(i), y.get(i)};

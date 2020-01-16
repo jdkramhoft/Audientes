@@ -41,7 +41,7 @@
     <string name="randlear">दायां और बायां कान</string>
     <string name="audiogram">श्रवणलेख</string>
     <string name="select">चुनते हैं</string>
-    <string name="wanttodelete">क्या आप वाकई इस कार्यक्रम को हटाना चाहते हैं?</string>
+    <string name="wantToDelete">क्या आप वाकई इस कार्यक्रम को हटाना चाहते हैं?</string>
     <string name="delete_program">कार्यक्रम हटाएँ</string>
     <string name="are_you_sure">क्या आपको यकीन है?</string>
     <string name="changes_made_will_not_be_saved">किए गए परिवर्तन सहेजे नहीं जाएंगे!</string>

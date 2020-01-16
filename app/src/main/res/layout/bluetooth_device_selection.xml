@@ -28,7 +28,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/icon_circle" />
+        app:srcCompat="@drawable/icon_circle"
+        android:contentDescription="@string/hearable_icon"/>
 
     <ImageView
         android:id="@+id/imagee1"
@@ -45,7 +46,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.55"
-        app:srcCompat="@drawable/icon_hearable" />
+        app:srcCompat="@drawable/icon_hearable"
+        android:contentDescription="@string/icon_container"/>
 
 
     <TextView

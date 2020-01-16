@@ -7,7 +7,7 @@ import a3.audientes.dto.Audiogram;
 public class AudiogramDAO {
 
     private static AudiogramDAO single_instance = null;
-    private List<Audiogram> audiograms = new ArrayList<>();
+    private List<Audiogram> audiogramList = new ArrayList<>();
     private Audiogram currentAudiogram;
 
     private AudiogramDAO(){}
@@ -19,7 +19,7 @@ public class AudiogramDAO {
     }
 
     public void addAudiogram(Audiogram audiogram){
-        audiograms.add(audiogram);
+        audiogramList.add(audiogram);
     }
 
     public void resetAudiogram(){
@@ -27,9 +27,9 @@ public class AudiogramDAO {
     }
 
     public void setCurrent(int id){
-        for(int i = 0; i < audiograms.size(); i++){
-            if(id == audiograms.get(i).getId()){
-                currentAudiogram = audiograms.get(i);
+        for(int i = 0; i < audiogramList.size(); i++){
+            if(id == audiogramList.get(i).getId()){
+                currentAudiogram = audiogramList.get(i);
             }
         }
     }
@@ -39,14 +39,14 @@ public class AudiogramDAO {
     }
 
     public void saveCurrentAudiogram(){
-        audiograms.add(currentAudiogram);
+        audiogramList.add(currentAudiogram);
     }
 
     public int getNextId(){
-        if(audiograms.size() == 0){
+        if(audiogramList.size() == 0){
             return 1;
         }else{
-            return audiograms.get(audiograms.size()-1).getId()+ 1;
+            return audiogramList.get(audiogramList.size()-1).getId()+ 1;
         }
     }
 
@@ -62,11 +62,11 @@ public class AudiogramDAO {
     }
 
 
-    public List<Audiogram> getAudiograms(){
-        return audiograms;
+    public List<Audiogram> getAudiogramList(){
+        return audiogramList;
     }
 
-    public void setAudiograms(List<Audiogram> audiograms) {
-        this.audiograms = audiograms;
+    public void setAudiogramList(List<Audiogram> audiogramList) {
+        this.audiogramList = audiogramList;
     }
 }

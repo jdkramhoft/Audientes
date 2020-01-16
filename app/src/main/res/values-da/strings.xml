@@ -43,7 +43,7 @@
     <string name="randlear">Højre &amp; venstre øre</string>
     <string name="audiogram">Audiogram</string>
     <string name="select">Vælg</string>
-    <string name="wanttodelete">Vil du virkelig slette dette program?</string>
+    <string name="wantToDelete">Vil du virkelig slette dette program?</string>
     <string name="delete_program">Slet Program</string>
     <string name="are_you_sure">Er du sikker?</string>
     <string name="changes_made_will_not_be_saved">Ændringer vil ikke gemmes!</string>

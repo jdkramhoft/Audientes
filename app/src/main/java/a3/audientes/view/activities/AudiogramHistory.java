@@ -34,7 +34,7 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
 
         RecyclerView recyclerView = findViewById(R.id.audiogram_history_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Audiogram> audiogramList = new ArrayList<>(audiogramDAO.getAudiograms());
+        List<Audiogram> audiogramList = new ArrayList<>(audiogramDAO.getAudiogramList());
 
         Collections.sort(audiogramList);
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -51,7 +51,7 @@
             android:text="@string/cancel"
             android:textColor="@color/darkerOrange"
             android:textSize="22sp"
-            android:background="@drawable/custom_popup_buttom_left"/>
+            android:background="@drawable/custom_popup_btn_left"/>
 
         <Button
             android:id="@+id/button2"
@@ -61,7 +61,7 @@
             android:text="@string/yes"
             android:textSize="22sp"
             android:textColor="@color/lightGreen"
-            android:background="@drawable/custom_popup_buttom_right"/>
+            android:background="@drawable/custom_popup_btn_right"/>
 
     </LinearLayout>
 

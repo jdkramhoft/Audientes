@@ -81,11 +81,11 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         high_plus_txt.setText(R.string.highplus);
 
 
-        low_plus = findViewById(R.id.low_plus).findViewById(R.id.seekbar);
-        low = findViewById(R.id.low).findViewById(R.id.seekbar);
-        medium = findViewById(R.id.medium).findViewById(R.id.seekbar);
-        high = findViewById(R.id.high).findViewById(R.id.seekbar);
-        high_plus = findViewById(R.id.high_plus).findViewById(R.id.seekbar);
+        low_plus = findViewById(R.id.low_plus).findViewById(R.id.seekBar);
+        low = findViewById(R.id.low).findViewById(R.id.seekBar);
+        medium = findViewById(R.id.medium).findViewById(R.id.seekBar);
+        high = findViewById(R.id.high).findViewById(R.id.seekBar);
+        high_plus = findViewById(R.id.high_plus).findViewById(R.id.seekBar);
 
         low_plus.setMax(mMaxLevel - mMinLevel);
         low.setMax(mMaxLevel - mMinLevel);

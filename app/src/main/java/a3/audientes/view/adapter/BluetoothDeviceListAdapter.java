@@ -14,7 +14,7 @@ import a3.audientes.R;
 
 public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDeviceListAdapter.MyViewHolder> {
 
-    private final List<BluetoothDevice> devicelist;
+    private final List<BluetoothDevice> deviceList;
     private final View.OnClickListener onClick;
 
 
@@ -29,7 +29,7 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
     }
 
     public BluetoothDeviceListAdapter(@NonNull List<BluetoothDevice> programList, @Nullable View.OnClickListener onClick) {
-        this.devicelist = programList;
+        this.deviceList = programList;
         this.onClick = onClick;
 
     }
@@ -46,13 +46,13 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
 
     @Override
     public int getItemViewType(int position) {
-        return devicelist.get(position).getType();
+        return deviceList.get(position).getType();
     }
 
     @Override
     public void onBindViewHolder(@NonNull BluetoothDeviceListAdapter.MyViewHolder holder, int position) {
 
-        BluetoothDevice program = devicelist.get(position);
+        BluetoothDevice program = deviceList.get(position);
         if(program.getName().length()>8){
             ((ImageView)holder.itemView.findViewById(R.id.imagee1)).setImageResource(R.drawable.icon_bigfatredx);
         }
@@ -61,7 +61,7 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
 
     @Override
     public int getItemCount() {
-        return devicelist.size();
+        return deviceList.size();
     }
 
     public BluetoothDeviceListAdapter get(){
@@ -69,8 +69,8 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
     }
     public int getPosition(View v){
         String deviceName = ((TextView)v.findViewById(R.id.Title)).getText().toString();
-        for (int i = 0; i < devicelist.size(); i++) {
-            if(devicelist.get(i).getName().equals(deviceName)){
+        for (int i = 0; i < deviceList.size(); i++) {
+            if(deviceList.get(i).getName().equals(deviceName)){
                 return i;
             }
         }

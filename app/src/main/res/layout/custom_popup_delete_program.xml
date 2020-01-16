@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/wanttodelete"
+        android:text="@string/wantToDelete"
         android:gravity="center"
         android:textColor="@color/lightPurple"
         android:textSize="22sp"
@@ -51,14 +51,14 @@
             android:text="@string/cancel"
             android:textColor="@color/darkerOrange"
             android:textSize="22sp"
-            android:background="@drawable/custom_popup_buttom_left"/>
+            android:background="@drawable/custom_popup_btn_left"/>
 
         <Button
             android:id="@+id/button2"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/custom_popup_buttom_right"
+            android:background="@drawable/custom_popup_btn_right"
             android:text="@string/yes"
             android:textColor="@color/lightGreen"
             android:textSize="22sp" />

@@ -1,13 +1,10 @@
 package a3.audientes.view.activities;
 
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.util.List;
@@ -48,7 +45,7 @@ public final class SplashScreen extends AppCompatActivity {
         });
         audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
         audiogramViewModel.getAllAudiogram().observe(this, audiograms -> {
-            audiogramDAO.setAudiograms(audiograms);
+            audiogramDAO.setAudiogramList(audiograms);
 
             System.out.println("Audiograms in db: "+audiograms.size());
         });

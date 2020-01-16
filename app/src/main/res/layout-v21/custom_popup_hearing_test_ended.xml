@@ -51,7 +51,7 @@
             android:text="okay"
             android:textSize="22sp"
             android:textColor="@color/white"
-            android:background="@drawable/custom_popup_buttom_right"/>
+            android:background="@drawable/custom_popup_btn_right"/>
 
     </LinearLayout>
 

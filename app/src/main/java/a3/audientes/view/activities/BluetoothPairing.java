@@ -175,7 +175,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             progressDialog.show();
             handler.postDelayed(progressDialog::dismiss, 3000);
 
-            //Stackoverflow code snippet
+            //StackOverflow code snippet
             final Intent intent = new Intent(Intent.ACTION_MAIN, null);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
             final ComponentName cn = new ComponentName("com.android.settings",

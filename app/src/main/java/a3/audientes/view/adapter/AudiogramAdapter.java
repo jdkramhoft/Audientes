@@ -2,7 +2,6 @@ package a3.audientes.view.adapter;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +52,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             date = view.findViewById(R.id.subtitle_text);
             title = view.findViewById(R.id.title_text);
             anim = view.findViewById(R.id.action_button_1);
-            apply = view.findViewById(R.id.textview_1);
+            apply = view.findViewById(R.id.textView_1);
             chart = view.findViewById(R.id.chart);
         }
     }
@@ -76,7 +75,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             holder.anim.playAnimation();
             audiogramDAO.setCurrentAudiogram(audiogramList.get(position));
             SharedPrefUtil.saveSharedSetting(holder.itemView.getContext(),"currentAudiogram", Integer.toString(audiogramList.get(position).getId()));
-            updateDefualtPrograms(audiogram);
+            updateDefaultPrograms(audiogram);
         });
 
         holder.anim.addAnimatorListener(new AnimatorListenerAdapter() {
@@ -95,7 +94,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
         holder.date.setText(audiogram.getDateString());
 
         a3.audientes.view.fragments.Audiogram fragment = a3.audientes.view.fragments.Audiogram.newInstance(context);
-        fragment.drawAudiogram(audiogram.getGraf(), audiogram.getGraf(), holder.chart);
+        fragment.drawAudiogram(audiogram.getGraph(), audiogram.getGraph(), holder.chart);
     }
 
     @Override
@@ -119,7 +118,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
 
     }
 
-    private void updateDefualtPrograms(Audiogram audiogram){
+    private void updateDefaultPrograms(Audiogram audiogram){
         for(int i = 1; i <= 4; i++){
             Program program = programDAO.getProgram(i);
             System.out.println(program.getId());

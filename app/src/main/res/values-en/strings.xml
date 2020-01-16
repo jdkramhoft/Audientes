@@ -41,7 +41,7 @@
     <string name="randlear">Right &amp; Left Ear</string>
     <string name="audiogram">Audiogram</string>
     <string name="select">Select</string>
-    <string name="wanttodelete">Are you sure that you want to delete this program?</string>
+    <string name="wantToDelete">Are you sure that you want to delete this program?</string>
     <string name="delete_program">Delete program</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="changes_made_will_not_be_saved">Changes made will not be saved!</string>
