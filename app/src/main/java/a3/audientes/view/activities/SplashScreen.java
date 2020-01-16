@@ -2,6 +2,7 @@ package a3.audientes.view.activities;
 
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothProfile;
@@ -78,10 +79,13 @@ public final class SplashScreen extends AppCompatActivity {
         BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
 
         List<BluetoothDevice> connected = new ArrayList<>();
+        BluetoothAdapter adapter = manager.getAdapter();
 
-        for (BluetoothDevice e: manager.getAdapter().getBondedDevices()) {
-            if(isConnected(e)){
-                return true;
+        if (adapter != null){
+            for (BluetoothDevice e: adapter.getBondedDevices()) {
+                if(isConnected(e)){
+                    return true;
+                }
             }
         }
         return false;
