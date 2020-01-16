@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
+
+import java.util.List;
 import java.util.Objects;
 
 import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
 import a3.audientes.dao.ProgramDAO;
+import a3.audientes.dto.Program;
 import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
@@ -35,7 +39,7 @@ public final class SplashScreen extends AppCompatActivity {
 
         if (savedInstanceState == null){
             // TODO: only onboarding on first visit
-            handler.postDelayed(splash, 2000);
+            handler.postDelayed(splash, 2500);
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
@@ -54,6 +58,10 @@ public final class SplashScreen extends AppCompatActivity {
 
             System.out.println("Audiograms in db: "+audiograms.size());
         });
+
+
+
+
     }
 
     private boolean isHearableConnected() {
@@ -68,6 +76,22 @@ public final class SplashScreen extends AppCompatActivity {
         currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         System.out.println("Current: "+currentAudiogramId);
         System.out.println(newVisitor);
+
+        List<Program> programList = programDAO.getProgramList();
+        if(programList != null){
+            String defaultName1 = getString(R.string.quiet_btn);
+            String defaultName2 = getString(R.string.loud_btn);
+            String defaultName3 = getString(R.string.home_btn);
+            String defaultName4 = getString(R.string.windy);
+            programList.get(0).setName(defaultName1);
+            programList.get(1).setName(defaultName2);
+            programList.get(2).setName(defaultName3);
+            programList.get(3).setName(defaultName4);
+        }
+        assert programList != null;
+        for(Program program : programList){
+            programviewmodel.Update(program);
+        }
 
         Intent nextActivity;
         if (newVisitor || currentAudiogramId == 0){
