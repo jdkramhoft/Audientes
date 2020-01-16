@@ -40,10 +40,6 @@ public final class SplashScreen extends AppCompatActivity {
             handler.postDelayed(splash, 2500);
         }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
-                    0);
-        }
 
         programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programviewmodel.getAllPrograms().observe(this, programs -> {
