@@ -63,12 +63,15 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     // MediaRecorder
     public void start() throws IOException {
+        /*
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             mRecorder.setOutputFile("/dev/null");
             mRecorder.prepare();
             mRecorder.start();
+
+         */
     }
 
     public void stop() {
