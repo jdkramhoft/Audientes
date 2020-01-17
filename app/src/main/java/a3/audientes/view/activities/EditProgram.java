@@ -35,7 +35,6 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     private ProgramViewModel programViewModel;
     private Equalizer trackEq;
     private MediaPlayer musicTrack;
-    private int resumePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,111 +42,28 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.edit_program_settings);
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
-        // Setting up Equalizer
         musicTrack = MediaPlayer.create(this, R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
         trackEq.setEnabled(true);
-        int noPresets = trackEq.getNumberOfPresets();
-        System.out.println("Modes:"+noPresets);
-        short[] levelRange = trackEq.getBandLevelRange();
-        short mMinLevel = levelRange[0];
-        short mMaxLevel = levelRange[1];
-        System.out.println("Min:"+mMinLevel);
-        System.out.println("Max:"+mMaxLevel);
-        int bands = trackEq.getNumberOfBands();
-        System.out.println("Num of bands:"+bands);
 
-        int centerBand = trackEq.getCenterFreq((short)0);
-        System.out.println("Center:"+centerBand);
-
-        for(int i = 0; i < bands; i++){
+        for(int i = 0; i < trackEq.getNumberOfBands(); i++){
             trackEq.setBandLevel((short)i, (short)0);
-            int[] bandHz = trackEq.getBandFreqRange((short)i);
-            System.out.println("HZ band"+i+": "+bandHz[0]+" - "+bandHz[1]);
-            short bandLevel = trackEq.getBandLevel((short)i);
-            System.out.println("BandLevel: "+bandLevel+"\n");
         }
-
-
-        TextView low_plus_txt = findViewById(R.id.low_plus).findViewById(R.id.seekbar_text);
-        TextView low_txt = findViewById(R.id.low).findViewById(R.id.seekbar_text);
-        TextView medium_txt = findViewById(R.id.medium).findViewById(R.id.seekbar_text);
-        TextView high_txt = findViewById(R.id.high).findViewById(R.id.seekbar_text);
-        TextView high_plus_txt = findViewById(R.id.high_plus).findViewById(R.id.seekbar_text);
-
-        low_plus_txt.setText(R.string.lowplus);
-        low_txt.setText(R.string.low);
-        medium_txt.setText(R.string.medium);
-        high_txt.setText(R.string.high);
-        high_plus_txt.setText(R.string.highplus);
-
-
-        low_plus = findViewById(R.id.low_plus).findViewById(R.id.seekBar);
-        low = findViewById(R.id.low).findViewById(R.id.seekBar);
-        medium = findViewById(R.id.medium).findViewById(R.id.seekBar);
-        high = findViewById(R.id.high).findViewById(R.id.seekBar);
-        high_plus = findViewById(R.id.high_plus).findViewById(R.id.seekBar);
-
-        low_plus.setMax(mMaxLevel - mMinLevel);
-        low.setMax(mMaxLevel - mMinLevel);
-        medium.setMax(mMaxLevel - mMinLevel);
-        high.setMax(mMaxLevel - mMinLevel);
-        high_plus.setMax(mMaxLevel - mMinLevel);
-
-        low_plus.setProgress(mMaxLevel);
-        low.setProgress(mMaxLevel);
-        medium.setProgress(mMaxLevel);
-        high.setProgress(mMaxLevel);
-        high_plus.setProgress(mMaxLevel);
-
-        low_plus.setOnSeekBarChangeListener(this);
-        low.setOnSeekBarChangeListener(this);
-        medium.setOnSeekBarChangeListener(this);
-        high.setOnSeekBarChangeListener(this);
-        high_plus.setOnSeekBarChangeListener(this);
 
         save_btn_config = findViewById(R.id.save_btn_config);
         save_btn_config.setOnClickListener(this);
 
         name = findViewById(R.id.editText);
-        name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    in.hideSoftInputFromWindow(name.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
-                }
-                return false;
+        name.setOnEditorActionListener((v, actionId, event) -> {
+            if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(name.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
             }
+            return false;
         });
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if(!extras.getBoolean("new")){
-                programId = Integer.parseInt(extras.getString("id"));
-                updateSliders(programDAO.getProgram(programId));
-
-                if(!extras.getBoolean("edit")){
-                    low_plus.setEnabled(false);
-                    low.setEnabled(false);
-                    medium.setEnabled(false);
-                    high.setEnabled(false);
-                    high_plus.setEnabled(false);
-                    save_btn_config.setVisibility(View.INVISIBLE);
-                    name.setEnabled(false);
-                }else{
-                    low_plus.setEnabled(true);
-                    low.setEnabled(true);
-                    medium.setEnabled(true);
-                    high.setEnabled(true);
-                    high_plus.setEnabled(true);
-                    save_btn_config.setVisibility(View.VISIBLE);
-                    name.setEnabled(true);
-                }
-            }
-        }
-
-
-        // Start music
+        setupSliders();
+        updateLayout();
         musicTrack.start();
     }
 
@@ -155,36 +71,21 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
     public void onResume() {
         super.onResume();
         musicTrack.start();
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if(!extras.getBoolean("new")){
-                programId = Integer.parseInt(extras.getString("id"));
-                updateSliders(programDAO.getProgram(programId));
+        updateLayout();
+    }
 
-                if(!extras.getBoolean("edit")){
-                    low_plus.setEnabled(false);
-                    low.setEnabled(false);
-                    medium.setEnabled(false);
-                    high.setEnabled(false);
-                    high_plus.setEnabled(false);
-                    save_btn_config.setVisibility(View.INVISIBLE);
-                    name.setEnabled(false);
-                }else{
-                    low_plus.setEnabled(true);
-                    low.setEnabled(true);
-                    medium.setEnabled(true);
-                    high.setEnabled(true);
-                    high_plus.setEnabled(true);
-                    save_btn_config.setVisibility(View.VISIBLE);
-                    name.setEnabled(true);
-                }
-            }
-        }
+    private void setSliderBehaviour(boolean editDecider, int visibility) {
+        low_plus.setEnabled(editDecider);
+        low.setEnabled(editDecider);
+        medium.setEnabled(editDecider);
+        high.setEnabled(editDecider);
+        high_plus.setEnabled(editDecider);
+        name.setEnabled(editDecider);
+        save_btn_config.setVisibility(visibility);
     }
 
     @Override
     public void onBackPressed() {
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             if(extras.getBoolean("edit")){
@@ -211,20 +112,16 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-
     @Override
     public void onClick(View v) {
 
         if(v == save_btn_config){
-
             String nameInput = name.getText().toString();
             if (nameInput.length() == 0) {
-                System.out.println("Min 1 characters");
                 name.setError(getString(R.string.minchar));
                 return;
             }
             if (nameInput.length() > 5) {
-                System.out.println("Max 5 characters");
                 name.setError(getString(R.string.maxchar));
                 return;
             }
@@ -256,6 +153,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                     SharedPrefUtil.saveSharedSetting(this,"currentProgram", Integer.toString(nextindex));
                 }
             }
+
             musicTrack.stop();
             Intent intent = new Intent(EditProgram.this, HearingProfile.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -265,96 +163,45 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-
         if( seekBar.equals(low) ){
             trackEq.setBandLevel((short)0, (short)(progress - 1500));
-            short bandLevel = trackEq.getBandLevel((short)0);
-            System.out.println("BandLevel: 0 "+bandLevel);
-            //low_txt.setText("" + progress);
         }
-        if( seekBar.equals(low_plus) ){
+        else if( seekBar.equals(low_plus) ){
             trackEq.setBandLevel((short)1, (short)(progress - 1500));
-            short bandLevel = trackEq.getBandLevel((short)1);
-            System.out.println("BandLevel: 1 "+bandLevel);
-            //low_plus_txt.setText("" + progress);
         }
-        if( seekBar.equals(medium) ){
+        else if( seekBar.equals(medium) ){
             trackEq.setBandLevel((short)2, (short)(progress - 1500));
-            short bandLevel = trackEq.getBandLevel((short)2);
-            System.out.println("BandLevel: 2 "+bandLevel);
-            //medium_txt.setText("" + progress);
         }
-        if( seekBar.equals(high) ){
+        else if( seekBar.equals(high) ){
             trackEq.setBandLevel((short)3, (short)(progress - 1500));
-            short bandLevel = trackEq.getBandLevel((short)3);
-            System.out.println("BandLevel: 3 "+bandLevel);
-            //high_txt.setText("" + progress);
         }
-        if( seekBar.equals(high_plus) ){
+        else if( seekBar.equals(high_plus) ){
             trackEq.setBandLevel((short)4, (short)(progress - 1500));
-            short bandLevel = trackEq.getBandLevel((short)4);
-            System.out.println("BandLevel: 4 "+bandLevel);
-            //high_plus_txt.setText("" + progress);
         }
-
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        /*
-        if( seekBar.equals(low) ){
-            musicTrack.pause();
-            resumePosition = musicTrack.getCurrentPosition();
-        }
-        if( seekBar.equals(low_plus) ){
-            musicTrack.pause();
-            resumePosition = musicTrack.getCurrentPosition();
-        }
-        if( seekBar.equals(medium) ){
-            musicTrack.pause();
-            resumePosition = musicTrack.getCurrentPosition();
-        }
-        if( seekBar.equals(high) ){
-            musicTrack.pause();
-            resumePosition = musicTrack.getCurrentPosition();
-        }
-        if( seekBar.equals(high_plus) ){
-            musicTrack.pause();
-            resumePosition = musicTrack.getCurrentPosition();
-        }
-
-         */
-    }
+    public void onStartTrackingTouch(SeekBar seekBar) { }
 
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        /*
-        if( seekBar.equals(low) ){
-            musicTrack.seekTo(resumePosition);
-            musicTrack.start();
-        }
-        if( seekBar.equals(low_plus) ){
-            musicTrack.seekTo(resumePosition);
-            musicTrack.start();
-        }
-        if( seekBar.equals(medium) ){
-            musicTrack.seekTo(resumePosition);
-            musicTrack.start();
-        }
-        if( seekBar.equals(high) ){
-            musicTrack.seekTo(resumePosition);
-            musicTrack.start();
-        }
-        if( seekBar.equals(high_plus) ){
-            musicTrack.seekTo(resumePosition);
-            musicTrack.start();
-        }
-         */
+    public void onStopTrackingTouch(SeekBar seekBar) { }
 
+    private void updateLayout() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if(!extras.getBoolean("new")){
+                programId = Integer.parseInt(extras.getString("id"));
+                updateSliders(programDAO.getProgram(programId));
+
+                if(!extras.getBoolean("edit")){
+                    setSliderBehaviour(false, View.INVISIBLE);
+                }
+                else{
+                    setSliderBehaviour(true, View.VISIBLE);
+                }
+            }
+        }
     }
-
-
 
     public void updateSliders(Program program){
         name.setText(program.getName());
@@ -365,7 +212,44 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         high_plus.setProgress(program.getHigh_plus());
     }
 
+    private void setupSliders() {
+        View low_plus_view = findViewById(R.id.low_plus);
+        View low_view = findViewById(R.id.low);
+        View medium_view = findViewById(R.id.medium);
+        View high_view = findViewById(R.id.high);
+        View high_plus_view = findViewById(R.id.high_plus);
 
+        ((TextView) low_plus_view.findViewById(R.id.seekbar_text)).setText(R.string.lowplus);
+        ((TextView) low_view.findViewById(R.id.seekbar_text)).setText(R.string.low);
+        ((TextView) medium_view.findViewById(R.id.seekbar_text)).setText(R.string.medium);
+        ((TextView) high_view.findViewById(R.id.seekbar_text)).setText(R.string.high);
+        ((TextView) high_plus_view.findViewById(R.id.seekbar_text)).setText(R.string.highplus);
 
+        low_plus = low_plus_view.findViewById(R.id.seekBar);
+        low = low_view.findViewById(R.id.seekBar);
+        medium = medium_view.findViewById(R.id.seekBar);
+        high = high_view.findViewById(R.id.seekBar);
+        high_plus = high_plus_view.findViewById(R.id.seekBar);
+        low_plus.setOnSeekBarChangeListener(this);
+        low.setOnSeekBarChangeListener(this);
+        medium.setOnSeekBarChangeListener(this);
+        high.setOnSeekBarChangeListener(this);
+        high_plus.setOnSeekBarChangeListener(this);
 
+        short[] levelRange = trackEq.getBandLevelRange();
+        short mMinLevel = levelRange[0];
+        short mMaxLevel = levelRange[1];
+
+        low_plus.setMax(mMaxLevel - mMinLevel);
+        low.setMax(mMaxLevel - mMinLevel);
+        medium.setMax(mMaxLevel - mMinLevel);
+        high.setMax(mMaxLevel - mMinLevel);
+        high_plus.setMax(mMaxLevel - mMinLevel);
+
+        low_plus.setProgress(mMaxLevel);
+        low.setProgress(mMaxLevel);
+        medium.setProgress(mMaxLevel);
+        high.setProgress(mMaxLevel);
+        high_plus.setProgress(mMaxLevel);
+    }
 }
