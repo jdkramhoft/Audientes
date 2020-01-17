@@ -45,4 +45,12 @@
     <color name="color_text">@android:color/black</color>
     <color name="color_progress">#F38888</color>
     <color name="color_background">#4b4b4b</color>
+
+    <!-- Char colors  -->
+    <color name="green">#00ff00</color>
+    <color name="yellow">#ffff00</color>
+    <color name="red">#ff0000</color>
+    <color name="line">#FEFEFE</color>
+    <color name="border">#FEFEFE</color>
+    <color name="hole">#00000000</color>
 </resources>
