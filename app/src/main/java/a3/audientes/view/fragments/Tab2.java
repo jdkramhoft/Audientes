@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Objects;
+
 import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
 import a3.audientes.view.activities.AudiogramHistory;
@@ -88,9 +91,11 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         if (v == take_new_test_btn){
             Intent intent = new Intent(getActivity(), StartHearingTest.class);
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         else if (v == audiogram_history_btn){
             startActivity(new Intent(getContext(), AudiogramHistory.class));
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 

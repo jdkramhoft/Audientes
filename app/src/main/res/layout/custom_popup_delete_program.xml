@@ -2,30 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_gravity="center"
     android:background="@drawable/custom_popup"
-    android:layout_margin="64sp">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16sp"
+        android:gravity="center"
         android:text="@string/delete_program"
-        android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        android:layout_margin="16sp"/>
+        android:textSize="22sp" />
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/wantToDelete"
-        android:gravity="center"
-        android:textColor="@color/lightPurple"
-        android:textSize="18sp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="10sp"
-       />
+        android:gravity="center"
+        android:text="@string/wantToDelete"
+        android:textColor="@color/lightPurple"
+        android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
@@ -39,24 +39,24 @@
 
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50sp"
-        android:layout_marginBottom="10sp">
+        android:layout_marginBottom="10sp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/custom_popup_btn_left"
             android:text="@string/cancel"
             android:textColor="@color/darkerOrange"
-            android:textSize="22sp"
-            android:background="@drawable/custom_popup_btn_left"/>
+            android:textSize="22sp" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/custom_popup_btn_right"
@@ -66,7 +66,6 @@
             android:textSize="22sp" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>

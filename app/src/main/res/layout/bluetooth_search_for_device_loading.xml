@@ -11,14 +11,15 @@
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="400dp"
+        android:layout_marginEnd="1dp"
+        android:contentDescription="@string/icon_shader"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/loadingBar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/loadingBar"
         app:layout_constraintTop_toTopOf="@+id/guideline16"
-        app:layout_constraintVertical_bias="0.54"
-        app:srcCompat="@drawable/xml_bg_gradient"
-        android:contentDescription="@string/icon_shader"/>
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/xml_bg_gradient" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
@@ -32,21 +33,20 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/icon_hearable"
+        android:contentDescription="@string/hearable_icon"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline15"
-        app:layout_constraintTop_toTopOf="@+id/guideline16"
-        android:contentDescription="@string/hearable_icon"
-        />
+        app:layout_constraintTop_toTopOf="@+id/guideline16" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.41" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"

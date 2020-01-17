@@ -119,6 +119,7 @@ public final class SplashScreen extends AppCompatActivity {
             nextActivity = new Intent(this, BluetoothPairing.class);
         }
         startActivity(nextActivity);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     };
 

@@ -138,6 +138,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
                 i.putExtra("ARG_PAGE", 1);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 activity.finish();
 
             });

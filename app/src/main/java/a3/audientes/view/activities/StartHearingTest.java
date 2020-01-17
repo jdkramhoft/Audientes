@@ -88,6 +88,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v == hearing_button) {
             startActivity(new Intent(this, HearingTest.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
