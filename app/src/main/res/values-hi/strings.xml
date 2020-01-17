@@ -70,4 +70,14 @@
     <string name="test_finished_text">अब आपका सुनने का परीक्षण समाप्त हो गया है।. आप देख पाएंगे परिणाम ग्राफ पर कान कि जाँच स्क्रीन, तथा ध्वनि कॉन्फ़िगर किया जाएगा.</string>
     <string name="okay">ठीक है</string>
 
+    <string name="hearable_icon">भारी आइकन</string>
+    <string name="icon_container">आइकन कंटेनर</string>
+    <string name="icon_shader">आइकन shader</string>
+    <string name="underline_edit_program">कार्यक्रम को रेखांकित करें</string>
+    <string name="heard_noise_button">सुना शोर बटन</string>
+    <string name="start_hearing_test_btn">श्रवण परीक्षण btn शुरू करें</string>
+    <string name="confirm_language">भाषा की पुष्टि करें</string>
+    <string name="background_image">पृष्ठभूमि छवि</string>
+    <string name="speaker_icon">स्पीकर आइकन</string>
+
 </resources>

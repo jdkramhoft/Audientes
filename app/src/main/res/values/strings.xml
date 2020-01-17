@@ -17,7 +17,7 @@
     <string name="BoxedVertical_minImage">"@drawable/xml_fg_volumelevel"</string>
     <string name="BoxedVertical_maxImage">"@drawable/xml_fg_volumelevel"</string>
 
-    <string name="plus">+</string>
+    <string name="plus">x</string>
     <string name="connect_device">Connect Device</string>
     <string name="home_btn">Home</string>
     <string name="loud_btn">Loud</string>

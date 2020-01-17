@@ -17,7 +17,7 @@
     <string name="BoxedVertical_minImage">"@drawable/xml_fg_volumelevel"</string>
     <string name="BoxedVertical_maxImage">"@drawable/xml_fg_volumelevel"</string>
 
-    <string name="plus">+</string>
+    <string name="plus">x</string>
     <string name="connect_device">Connect Device</string>
     <string name="home_btn">Home</string>
     <string name="loud_btn">Loud</string>
@@ -70,4 +70,15 @@
     <string name="test_finished">Test complete</string>
     <string name="test_finished_text">Your hearing test is now finished. You will be able to see the result graph on the ‘Hearing Test’ screen, and the sound will be configured.</string>
     <string name="okay">Okay</string>
+
+    <string name="hearable_icon">hearable icon</string>
+    <string name="icon_container">icon container</string>
+    <string name="icon_shader">icon shader</string>
+    <string name="underline_edit_program">underline edit program</string>
+    <string name="heard_noise_button">Heard Noise button</string>
+    <string name="start_hearing_test_btn">start hearing test btn</string>
+    <string name="confirm_language">confirm language</string>
+    <string name="background_image">background image</string>
+    <string name="speaker_icon">speaker icon</string>
+
 </resources>
