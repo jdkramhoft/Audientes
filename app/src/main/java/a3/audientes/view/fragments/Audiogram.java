@@ -33,14 +33,6 @@ import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
 import a3.audientes.utils.SharedPrefUtil;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Audiogram.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Audiogram#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Audiogram extends Fragment {
     private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
 
@@ -74,8 +66,6 @@ public class Audiogram extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RIGHT_EAR_LABEL = Objects.requireNonNull(getActivity()).getString(R.string.randlear);
-        LEFT_EAR_LABEL = Objects.requireNonNull(getActivity()).getString(R.string.randlear);
     }
 
     @Override
