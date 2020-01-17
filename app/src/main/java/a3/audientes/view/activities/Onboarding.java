@@ -88,7 +88,6 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         boolean lastPage = mCurrentPage == mDots.length-1;
-
         if (v == mNextBtn){
             if (lastPage){
                 launchAcitivity();
@@ -115,7 +114,6 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
             SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
             intent = new Intent(this, HearingProfile.class);
         }
-
         startActivity(intent);
         Objects.requireNonNull(this).finish();
     }
@@ -124,10 +122,8 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onPageSelected(int i) {
             boolean firstPage = i == 0, lastPage = i == mDots.length-1;
-
             addDotsIndicator(i);
             mCurrentPage = i;
-
             if (firstPage){
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText(R.string.next);

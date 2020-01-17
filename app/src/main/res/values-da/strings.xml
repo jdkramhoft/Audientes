@@ -18,6 +18,7 @@
     <string name="BoxedVertical_maxImage">"@drawable/xml_fg_volumelevel"</string>
 
 
+
     <string name="plus">+</string>
     <string name="connect_device">Forbind enhed</string>
     <string name="home_btn">Hjemme</string>
