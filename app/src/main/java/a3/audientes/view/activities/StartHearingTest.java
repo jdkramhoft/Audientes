@@ -152,8 +152,6 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     @Override
     public void onResume(){
         super.onResume();
-
-
         if ("Android".equals(networkOperator)) {
             System.out.println("Emulator resume");
         }else{
