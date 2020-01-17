@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import android.view.View;
 
@@ -204,6 +205,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             intent.setComponent(cn);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 

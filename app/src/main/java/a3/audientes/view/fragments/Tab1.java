@@ -27,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import a3.audientes.view.activities.EditProgram;
 import a3.audientes.R;
@@ -94,6 +95,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             intent.putExtra("new", true);
             intent.putExtra("edit", true);
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
@@ -112,6 +114,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             intent.putExtra("new", true);
             intent.putExtra("edit", true);
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
@@ -137,6 +140,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             }
 
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
 
         return true;
