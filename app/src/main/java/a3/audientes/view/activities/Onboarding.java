@@ -71,11 +71,8 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         for (int i = 0; i < NUM_OF_DOTS; i++){
             mDots[i] = new TextView(getBaseContext());
             mDots[i].setText(Html.fromHtml("&#8226;"));
-
-
             mDots[i].setTextSize(50);
             mDots[i].setTextColor(getResources().getColor(R.color.transparentWhite, null));
-
             mDotLayout.addView(mDots[i]);
         }
 

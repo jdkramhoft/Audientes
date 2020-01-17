@@ -31,7 +31,8 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
     private List<a3.audientes.dto.Audiogram> audiogramList;
     private ProgramDAO programDAO;
     private ProgramViewModel programViewModel;
-    Context context;
+    private Context context;
+
     public AudiogramAdapter(@NonNull List<Audiogram> audiogramList, AudiogramDAO audiogramDAO, ProgramViewModel programViewModel, ProgramDAO programDAO, Context context) {
         this.audiogramList = audiogramList;
         this.audiogramDAO = audiogramDAO;

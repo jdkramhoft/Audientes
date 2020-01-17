@@ -66,11 +66,6 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         desc.setText(String.format("%s\n%s", getString(R.string.selected_audiogram), date));
     }
 
-    /**
-     * onViewCreated is called after onCreateView
-     * @param view
-     * @param savedInstanceState
-     */
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
