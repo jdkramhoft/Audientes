@@ -51,7 +51,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     private ImageButton testButton;
     private StepView stepView;
     private final int ONE_SECOND = 1000;
-
+    AlertDialog dialog;
     public static final int HEARING_TEST = 1;
     public static final int TEST_OKAY = 13;
     public static final int TEST_NOT_COMPLETE = 37;
@@ -105,55 +105,54 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        testIndex++;
-        testButton.setEnabled(false);
-        handler.removeCallbacksAndMessages(null);
-        handler.postDelayed(() -> testButton.setEnabled(true), ONE_SECOND);
-        stepView.go(testIndex, true);
 
+        if(v == testButton){
+            testIndex++;
+            testButton.setEnabled(false);
+            handler.removeCallbacksAndMessages(null);
+            if(testIndex != soundDAO.getSounds().size()){
+                handler.postDelayed(() -> testButton.setEnabled(true), ONE_SECOND);
+            }
+            stepView.go(testIndex, true);
 
-        if (testIndex == soundDAO.getSounds().size()){
-
-            stepView.done(true);
-            AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Dialog);
-            LayoutInflater inflater = this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.custom_popup_hearing_test_ended, null);
-            Button okay = dialogView.findViewById(R.id.okay);
-            builder.setView(dialogView);
-            AlertDialog dialog = builder.create();
-
-            okay.setOnClickListener(v12 -> {
-                dialog.dismiss();
-
+            if (testIndex == soundDAO.getSounds().size()){
+                testButton.setEnabled(false);
+                stepView.done(true);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Dialog);
+                LayoutInflater inflater = this.getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.custom_popup_hearing_test_ended, null);
+                Button okay = dialogView.findViewById(R.id.okay);
+                builder.setView(dialogView);
+                dialog = builder.create();
+                dialog.setCanceledOnTouchOutside(false);
+                dialog.setCancelable(false);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+                okay.setOnClickListener(v12 -> {
+                    dialog.cancel();
+                    audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
+                    audiogramDAO.getCurrentAudiogram().setId(audiogramDAO.getNextId());
+                    audiogramDAO.getCurrentAudiogram().setDate(new Date());
+                    audiogramViewModel.Insert(audiogramDAO.getCurrentAudiogram());
+                    audiogramDAO.saveCurrentAudiogram();
+                    SharedPrefUtil.saveSharedSetting(getBaseContext(),"currentAudiogram", Integer.toString(audiogramDAO.getCurrentAudiogram().getId()));
+                    updateDefualtPrograms(audiogramDAO.getCurrentAudiogram());
+                    Activity activity = Objects.requireNonNull(this);
+                    activity.setResult(TEST_OKAY, null);
+                    Intent i = new Intent(getBaseContext(), HearingProfile.class);
+                    i.putExtra("ARG_PAGE", 1);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    activity.finish();
+                });
+            }
+            else{
+                AnimBtnUtil.bounce(v, this);
                 audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
-                audiogramDAO.getCurrentAudiogram().setId(audiogramDAO.getNextId());
-                audiogramDAO.getCurrentAudiogram().setDate(new Date());
-                audiogramViewModel.Insert(audiogramDAO.getCurrentAudiogram());
-                audiogramDAO.saveCurrentAudiogram();
-                SharedPrefUtil.saveSharedSetting(getBaseContext(),"currentAudiogram", Integer.toString(audiogramDAO.getCurrentAudiogram().getId()));
-                updateDefualtPrograms(audiogramDAO.getCurrentAudiogram());
-                Activity activity = Objects.requireNonNull(this);
-                activity.setResult(TEST_OKAY, null);
-                Intent i = new Intent(getBaseContext(), HearingProfile.class);
-                i.putExtra("ARG_PAGE", 1);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                activity.finish();
-
-            });
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            dialog.show();
-
-
+                startTest(testIndex);
+            }
         }
-        else{
-            AnimBtnUtil.bounce(v, this);
-
-            audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
-            startTest(testIndex);
-        }
-
     }
 
     private void startTest(int testIndex){

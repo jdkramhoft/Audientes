@@ -107,6 +107,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             System.out.println("Chart is not displayed");
         }else{
             System.out.println("Mobil");
+            stop();
             mRecorder = new MediaRecorder();
             try {
                 start();
@@ -134,12 +135,12 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
                 runner = new Thread(){
                     public void run() {
                         while (runner != null) {
-                            if(!runThread){
-                                return;
-                            }
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) { };
+                            if(!runThread){
+                                return;
+                            }
                             handler.post(updater);
                         }
                     }
@@ -157,18 +158,25 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         }else{
             System.out.println("Mobil resume");
 
-            // Tread
             if (runner == null) {
+                stop();
+                mRecorder = new MediaRecorder();
+                try {
+                    start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                // Tread
                 runThread = true;
                 runner = new Thread(){
                     public void run() {
                         while (runner != null) {
-                            if(!runThread){
-                                return;
-                            }
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) { };
+                            if(!runThread){
+                                return;
+                            }
                             handler.post(updater);
                         }
                     }
@@ -179,6 +187,16 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(runner != null){
+            runThread = false;
+            runner = null;
+            stop();
+        }
+        StartHearingTest.this.finish();
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -186,10 +204,10 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             if(runner != null){
                 runThread = false;
                 runner = null;
+                stop();
             }
-
             startActivity(new Intent(this, HearingTest.class));
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
@@ -223,43 +241,45 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     public void updateDbDisplay(){
 
-        if ("Android".equals(networkOperator)) {
-            System.out.println("Emulator");
-            audioVolume = getNoiseLevel(3000);
-            System.out.println(audioVolume);
-        }else{
-            System.out.println("Mobil");
-            audioVolume = getNoiseLevel(mRecorder.getMaxAmplitude());
-            System.out.println(audioVolume);
-        }
+        if(runThread){
+            if ("Android".equals(networkOperator)) {
+                System.out.println("Emulator");
+                audioVolume = getNoiseLevel(3000);
+                System.out.println(audioVolume);
+            }else{
+                System.out.println("Mobil");
+                audioVolume = getNoiseLevel(mRecorder.getMaxAmplitude());
+                System.out.println(audioVolume);
+            }
 
-        if(((int)audioVolume) <= 80){
-            dbDisplay.setTextColor(colors[0]);
-            circleColors.add(colors[0]);
-        }else if(((int)audioVolume) >= 81 && ((int)audioVolume) <= 91){
-            dbDisplay.setTextColor(colors[1]);
-            circleColors.add(colors[1]);
-        }else{
-            dbDisplay.setTextColor(colors[2]);
-            circleColors.add(colors[2]);
-        }
+            if(((int)audioVolume) <= 80){
+                dbDisplay.setTextColor(colors[0]);
+                circleColors.add(colors[0]);
+            }else if(((int)audioVolume) >= 81 && ((int)audioVolume) <= 91){
+                dbDisplay.setTextColor(colors[1]);
+                circleColors.add(colors[1]);
+            }else{
+                dbDisplay.setTextColor(colors[2]);
+                circleColors.add(colors[2]);
+            }
 
-        lineIndex++;
-        entries.add(new Entry(lineIndex, (float)audioVolume));
-        if(entries.size() > 10){
-            entries.remove(0);
-            circleColors.remove(0);
+            lineIndex++;
+            entries.add(new Entry(lineIndex, (float)audioVolume));
+            if(entries.size() > 10){
+                entries.remove(0);
+                circleColors.remove(0);
+            }
+            LineDataSet dataSet = new LineDataSet(entries, "");
+            dataSet.setColor(colors[3]);
+            dataSet.setCircleHoleColor(colors[5]);
+            dataSet.setCircleColors(circleColors);
+            dataSet.setValueTextColor(colors[4]);
+            dataSet.setValueTextSize(0);
+            LineData lineData = new LineData(dataSet);
+            chart.setData(lineData);
+            chart.invalidate();
+            dbDisplay.setText(((int)audioVolume) + " dB");
         }
-        LineDataSet dataSet = new LineDataSet(entries, "");
-        dataSet.setColor(colors[3]);
-        dataSet.setCircleHoleColor(colors[5]);
-        dataSet.setCircleColors(circleColors);
-        dataSet.setValueTextColor(colors[4]);
-        dataSet.setValueTextSize(0);
-        LineData lineData = new LineData(dataSet);
-        chart.setData(lineData);
-        chart.invalidate();
-        dbDisplay.setText(((int)audioVolume) + " dB");
     }
 
 }

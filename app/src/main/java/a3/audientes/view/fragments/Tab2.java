@@ -90,6 +90,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v == take_new_test_btn){
             Intent intent = new Intent(getActivity(), StartHearingTest.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
