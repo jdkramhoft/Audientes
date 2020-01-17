@@ -26,6 +26,7 @@ public class AudiogramDAO {
         currentAudiogram = new Audiogram();
     }
 
+    // We could binary search
     public void setCurrent(int id){
         for(int i = 0; i < audiograms.size(); i++){
             if(id == audiograms.get(i).getId()){
@@ -43,15 +44,12 @@ public class AudiogramDAO {
     }
 
     public int getNextId(){
-        if(audiograms.size() == 0){
+        if(audiograms.size() == 0)
             return 1;
-        }else{
-            return audiograms.get(audiograms.size()-1).getId()+ 1;
-        }
+        int largestID = audiograms.get(audiograms.size()-1).getId();
+        return largestID + 1;
     }
 
-
-    // Getters and setters
 
     public Audiogram getCurrentAudiogram() {
         return currentAudiogram;

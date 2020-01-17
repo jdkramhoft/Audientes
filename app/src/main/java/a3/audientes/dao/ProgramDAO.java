@@ -28,6 +28,7 @@ public class ProgramDAO {
             if(program.getId() == programList.get(i).getId()){
                 programList.remove(i);
                 programadapter.notifyItemRemoved(i);
+                return;
             }
         }
     }
@@ -97,8 +98,6 @@ public class ProgramDAO {
         }
         return programList.get(programList.size()-1).getId()+ 1;
     }
-
-    // Getters and setters
 
     public List<Program> getProgramList() {
         return programList;

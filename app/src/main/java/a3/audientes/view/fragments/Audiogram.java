@@ -33,14 +33,6 @@ import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
 import a3.audientes.utils.SharedPrefUtil;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Audiogram.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Audiogram#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Audiogram extends Fragment {
     private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
 
@@ -50,7 +42,7 @@ public class Audiogram extends Fragment {
     private  List<int[]> right;
 
 
-    private int[] freqs = {};
+    private int[] frequencies = {};
     private View v;
 
     private String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "";
@@ -74,7 +66,7 @@ public class Audiogram extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RIGHT_EAR_LABEL = Objects.requireNonNull(getActivity()).getString(R.string.randlear);
+
     }
 
     @Override
@@ -82,8 +74,8 @@ public class Audiogram extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
-        left = audiogramDAO.getCurrentAudiogram().getGraf();
-        right = audiogramDAO.getCurrentAudiogram().getGraf();
+        left = audiogramDAO.getCurrentAudiogram().getGraph();
+        right = audiogramDAO.getCurrentAudiogram().getGraph();
         return inflater.inflate(R.layout.audiogram, container, false);
     }
 
@@ -91,8 +83,8 @@ public class Audiogram extends Fragment {
     public void onResume() {
         super.onResume();
         audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
-        left = audiogramDAO.getCurrentAudiogram().getGraf();
-        right = audiogramDAO.getCurrentAudiogram().getGraf();
+        left = audiogramDAO.getCurrentAudiogram().getGraph();
+        right = audiogramDAO.getCurrentAudiogram().getGraph();
         drawAudiogram(left, right, v);
     }
 
@@ -190,12 +182,12 @@ public class Audiogram extends Fragment {
         chart.setData(data);
     }
 
-    private List<Entry> makeEntries(List<int[]> graf){
+    private List<Entry> makeEntries(List<int[]> graph){
         int x = 0, y = 1;
         List<Entry> coordinates = new ArrayList<>();
 
-        for(int i = 0; i < graf.size(); i++){
-            coordinates.add(new Entry(graf.get(i)[x], graf.get(i)[y]));
+        for(int i = 0; i < graph.size(); i++){
+            coordinates.add(new Entry(graph.get(i)[x], graph.get(i)[y]));
         }
         Collections.sort(coordinates, new EntryXComparator());
 

@@ -34,7 +34,7 @@ import a3.audientes.R;
 
 public class StartHearingTest extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton hearing_button;
+    private ImageButton hearing_button;
     private MediaRecorder mRecorder;
     private double audioVolume;
     private TextView dbDisplay;
@@ -191,6 +191,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             }
 
             startActivity(new Intent(this, HearingTest.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 

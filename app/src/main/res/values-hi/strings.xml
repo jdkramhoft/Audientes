@@ -41,14 +41,14 @@
     <string name="randlear">दायां और बायां कान</string>
     <string name="audiogram">श्रवणलेख</string>
     <string name="select">चुनते हैं</string>
-    <string name="wanttodelete">क्या आप वाकई इस कार्यक्रम को हटाना चाहते हैं?</string>
+    <string name="wantToDelete">क्या आप वाकई इस कार्यक्रम को हटाना चाहते हैं?</string>
     <string name="delete_program">कार्यक्रम हटाएँ</string>
     <string name="are_you_sure">क्या आपको यकीन है?</string>
     <string name="changes_made_will_not_be_saved">किए गए परिवर्तन सहेजे नहीं जाएंगे!</string>
     <string name="yes">हाँ</string>
     <string name="hearing_profile">हियरिंग प्रोफाइल</string>
     <string name="press_button_when_you_hear_a_sound">ध्वनि सुनते ही बटन दबाएं</string>
-    <string name="searching_for_devices">उपकरणों की खोज की जा रही है ...</string>
+    <string name="searching_for_devices">अपने को चालू करें Audientes Hearable</string>
     <string name="settings">समायोजन</string>
     <string name="name_of_program">कार्यक्रम का नाम</string>
     <string name="save_changes">परिवर्तनों को सुरक्षित करें</string>
@@ -69,5 +69,15 @@
     <string name="test_finished">परीक्षण समाप्त हुआ</string>
     <string name="test_finished_text">अब आपका सुनने का परीक्षण समाप्त हो गया है।. आप देख पाएंगे परिणाम ग्राफ पर कान कि जाँच स्क्रीन, तथा ध्वनि कॉन्फ़िगर किया जाएगा.</string>
     <string name="okay">ठीक है</string>
+
+    <string name="hearable_icon">भारी आइकन</string>
+    <string name="icon_container">आइकन कंटेनर</string>
+    <string name="icon_shader">आइकन shader</string>
+    <string name="underline_edit_program">कार्यक्रम को रेखांकित करें</string>
+    <string name="heard_noise_button">सुना शोर बटन</string>
+    <string name="start_hearing_test_btn">श्रवण परीक्षण btn शुरू करें</string>
+    <string name="confirm_language">भाषा की पुष्टि करें</string>
+    <string name="background_image">पृष्ठभूमि छवि</string>
+    <string name="speaker_icon">स्पीकर आइकन</string>
 
 </resources>

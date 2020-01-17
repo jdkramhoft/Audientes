@@ -28,7 +28,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/icon_circle" />
+        app:srcCompat="@drawable/icon_circle"
+        android:contentDescription="@string/icon_shader" />
 
 
     <TextView

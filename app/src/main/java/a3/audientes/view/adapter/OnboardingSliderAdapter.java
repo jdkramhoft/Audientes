@@ -21,7 +21,6 @@ import a3.audientes.R;
 public class OnboardingSliderAdapter extends PagerAdapter {
 
     private Context context;
-    private LayoutInflater layoutInflater;
 
     private int[] slide_images = {
             R.drawable.boarding_image_handshake,
@@ -64,7 +63,7 @@ public class OnboardingSliderAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.onboarding_slider, container, false);
 
         ImageView slideImageView = view.findViewById(R.id.slide_image);
@@ -72,14 +71,14 @@ public class OnboardingSliderAdapter extends PagerAdapter {
         TextView slideDescription = view.findViewById(R.id.slide_desc);
 
         if (position == 3) {
-            ImageView anim = (ImageView) view.findViewById(R.id.slide_image);
+            ImageView anim = view.findViewById(R.id.slide_image);
             anim.setBackgroundResource(R.drawable.longclick_animation);
             AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
             animAnimation.start();
         }
 
         if (position == 4) {
-            ImageView anim = (ImageView) view.findViewById(R.id.slide_image);
+            ImageView anim = view.findViewById(R.id.slide_image);
             anim.setBackgroundResource(R.drawable.edit_program_animation);
             AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
             animAnimation.start();

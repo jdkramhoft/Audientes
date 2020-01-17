@@ -27,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import a3.audientes.view.activities.EditProgram;
 import a3.audientes.R;
@@ -42,8 +43,6 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     private List<Program> programList = new ArrayList<>();
     private FloatingActionButton floatingActionButton;
     private ProgramViewModel programViewModel;
-    private MediaPlayer musicTrack;
-    private ProgramAdapter adapter;
     private int currentProgramId;
     private Equalizer trackEq;
 
@@ -69,7 +68,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         programList = programDAO.getProgramList();
         currentProgramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentProgram", "1"));
 
-        musicTrack = MediaPlayer.create(getContext(), R.raw.song);
+        MediaPlayer musicTrack = MediaPlayer.create(getContext(), R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
         trackEq.setEnabled(true);
         changeEqualizer(currentProgramId);
@@ -96,6 +95,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             intent.putExtra("new", true);
             intent.putExtra("edit", true);
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
@@ -114,6 +114,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             intent.putExtra("new", true);
             intent.putExtra("edit", true);
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
@@ -139,6 +140,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             }
 
             startActivity(intent);
+            Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
 
         return true;
@@ -146,7 +148,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     public void setupRecyclerView(View rod){
         RecyclerView recyclerView = rod.findViewById(R.id.programRecycler);
-        adapter = new ProgramAdapter(programList, this, this, getActivity(), currentProgramId);
+        ProgramAdapter adapter = new ProgramAdapter(programList, this, this, getActivity(), currentProgramId);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -168,7 +170,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         // set all programs to not selected
         for(int i = 0; i < v.getChildCount(); i++){
             LinearLayout temp = (LinearLayout)v.getChildAt(i);
-            ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white));
+            ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white,null));
             ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
         }
 
@@ -178,7 +180,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             TextView view = temp.findViewById(R.id.hiddenId);
             int tempId = Integer.parseInt(view.getText().toString());
             if(tempId == id){
-                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor));
+                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor, null));
                 ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
             }
         }
@@ -208,16 +210,17 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     }
 
     public void deletePopup(View v, int programid){
-        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.Theme_Dialog);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_popup_delete_program, null);
-        Button button1 = dialogView.findViewById(R.id.button1);
-        Button button2 = dialogView.findViewById(R.id.button2);
+        Button doNothingBtn = dialogView.findViewById(R.id.button1);
+        Button deleteBtn = dialogView.findViewById(R.id.button2);
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
 
-        button1.setOnClickListener(v12 -> dialog.dismiss());
-        button2.setOnClickListener(v1 -> {
+
+        doNothingBtn.setOnClickListener(v12 -> dialog.dismiss());
+        deleteBtn.setOnClickListener(v1 -> {
             Program currentProgram = programDAO.getProgram(programid);
             programDAO.deleteProgram(currentProgram);
             programViewModel.Delete(currentProgram);

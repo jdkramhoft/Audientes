@@ -20,11 +20,9 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
-        private int id;
         public MyViewHolder(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.Title);
-            id = view.getId();
         }
     }
 
@@ -53,8 +51,9 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
     public void onBindViewHolder(@NonNull BluetoothDeviceListAdapter.MyViewHolder holder, int position) {
 
         BluetoothDevice program = devicelist.get(position);
-        if(program.getName().length()>8){
-            ((ImageView)holder.itemView.findViewById(R.id.imagee1)).setImageResource(R.drawable.icon_bigfatredx);
+        if(!(program.getName().equals("Mi Phone"))){
+            ((ImageView)holder.itemView.findViewById(R.id.imagee1)).setImageResource(R.drawable.bluetooth_icon_not_connectable);
+            //((TextView)holder.itemView.findViewById(R.id.Title)).setTextColor(-12303292);
         }
         holder.title.setText(program.getName());
     }

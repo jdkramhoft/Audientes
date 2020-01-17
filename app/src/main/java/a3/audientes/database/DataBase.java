@@ -8,9 +8,6 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.Date;
-
-import a3.audientes.R;
 import a3.audientes.dto.Audiogram;
 import a3.audientes.dto.Program;
 
@@ -37,14 +34,14 @@ public abstract class DataBase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new CreateDefualtProgramsAsyncTask(instance).execute();
+            new CreateDefaultProgramsAsyncTask(instance).execute();
         }
     };
 
-    private static class CreateDefualtProgramsAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class CreateDefaultProgramsAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private DAO DAO;
-        private CreateDefualtProgramsAsyncTask(DataBase db){
+        private CreateDefaultProgramsAsyncTask(DataBase db){
             DAO = db.dao();
         }
 

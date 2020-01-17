@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,7 +17,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import a3.audientes.R;
 import a3.audientes.view.adapter.OnboardingSliderAdapter;
@@ -26,13 +33,11 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
     private ViewPager mSlideViewPager;
     private LinearLayout mDotLayout;
-    private OnboardingSliderAdapter sliderAdapter;
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private final int NUM_OF_DOTS = 5;
+    private static final int NUM_OF_DOTS = 5;
     private boolean newVisitor;
-    private int currentAudiogramId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +53,7 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         mNextBtn.setOnClickListener(this);
         mSkipBtn.setOnClickListener(this);
 
-        sliderAdapter = new OnboardingSliderAdapter(getBaseContext());
+        OnboardingSliderAdapter sliderAdapter = new OnboardingSliderAdapter(getBaseContext());
         mSlideViewPager.setAdapter(sliderAdapter);
 
         addDotsIndicator(0);
@@ -69,13 +74,13 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
 
             mDots[i].setTextSize(50);
-            mDots[i].setTextColor(getResources().getColor(R.color.transparentWhite));
+            mDots[i].setTextColor(getResources().getColor(R.color.transparentWhite, null));
 
             mDotLayout.addView(mDots[i]);
         }
 
         if (mDots.length > 0){
-            mDots[position].setTextColor(getResources().getColor(R.color.darkerOrange));
+            mDots[position].setTextColor(getResources().getColor(R.color.darkerOrange, null));
         }
     }
 
@@ -83,7 +88,6 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         boolean lastPage = mCurrentPage == mDots.length-1;
-
         if (v == mNextBtn){
             if (lastPage){
                 launchAcitivity();
@@ -99,7 +103,7 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
     private void launchAcitivity(){
         Intent intent;
-        currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
         if (!isHearableConnected())
             intent = new Intent(getBaseContext(), BluetoothPairing.class);
         else if (newVisitor || currentAudiogramId == 0){
@@ -110,7 +114,6 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
             SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
             intent = new Intent(this, HearingProfile.class);
         }
-
         startActivity(intent);
         Objects.requireNonNull(this).finish();
     }
@@ -119,10 +122,8 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onPageSelected(int i) {
             boolean firstPage = i == 0, lastPage = i == mDots.length-1;
-
             addDotsIndicator(i);
             mCurrentPage = i;
-
             if (firstPage){
                 mNextBtn.setEnabled(true);
                 mNextBtn.setText(R.string.next);
@@ -145,7 +146,27 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
     };
 
     private boolean isHearableConnected() {
-        // TODO: somehow check if the correct device is already connected
+        BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+
+        BluetoothAdapter a = manager.getAdapter();
+
+        if (a != null){
+            for (BluetoothDevice e: a.getBondedDevices()) {
+                if(isConnected(e)){
+                    return true;
+                }
+            }
+        }
+
         return false;
+    }
+
+    public static boolean isConnected(BluetoothDevice device) {
+        try {
+            Method m = device.getClass().getMethod("isConnected", (Class[]) null);
+            return (boolean) m.invoke(device, (Object[]) null);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
     }
 }

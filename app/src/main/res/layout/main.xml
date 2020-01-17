@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/hearingProfileShader"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/icon_shader"
+        />
     <!-- include bottom sheet -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -103,7 +104,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/background_image" />
 
 
         <ImageView
@@ -116,7 +118,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline0"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.42000002" />
+            app:layout_constraintVertical_bias="0.42000002"
+            android:contentDescription="@string/speaker_icon" />
 
         <TextView
             android:id="@+id/textView3"
@@ -170,6 +173,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline6"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             app:libCornerRadius="30"
+            app:defaultValue="100"
             app:max="100"
             app:min="0"
             app:maxImage="@drawable/icon_ear_max"
@@ -212,6 +216,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline4"
             app:libCornerRadius="30"
+            app:defaultValue="100"
             app:max="100"
             app:min="0"
             app:maxImage="@drawable/icon_ear_right_max"

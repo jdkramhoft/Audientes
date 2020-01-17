@@ -21,27 +21,20 @@ public class LanguageAdapter extends Adapter<LanguageAdapter.MyViewHolder> {
 
     private List<Locale> localeList;
     private final View.OnClickListener onClick;
-    private Context mcontext;
-    private Activity mactivity;
-    private int currentProgramId;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
-        private ImageView flag;
 
         public MyViewHolder(@NonNull View view) {
             super(view);
             title = view.findViewById(R.id.Title);
-            flag = view.findViewById(R.id.imgViewFlag);
         }
     }
 
     public LanguageAdapter(@NonNull List<Locale> localeList, @Nullable View.OnClickListener onClick, Activity mactivity, int currentProgramId) {
         this.localeList = localeList;
         this.onClick = onClick;
-        this.mactivity = mactivity;
-        this.currentProgramId = currentProgramId;
-        mcontext= mactivity.getBaseContext();
+        Context mcontext = mactivity.getBaseContext();
     }
 
     @Override @NonNull
