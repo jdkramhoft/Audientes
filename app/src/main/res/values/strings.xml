@@ -68,7 +68,7 @@
     <string name="windy">Windy</string>
 
     <string name="test_finished">Test complete</string>
-    <string name="test_finished_text">Your hearing test is now finished. You will be able to see the result graph on the ‘Hearing Test’ screen, and the sound will be configured.</string>
+    <string name="test_finished_text"> You will be able to see the \n result graph on the ‘Hearing Test’ screen</string>
     <string name="okay">Okay</string>
     <string name="hearable_icon">hearable icon</string>
     <string name="icon_container">icon container</string>

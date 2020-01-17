@@ -2,18 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_gravity="center"
     android:background="@drawable/custom_popup"
-    android:layout_margin="16sp">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/test_finished"
+        android:layout_margin="22sp"
         android:gravity="center"
+        android:text="@string/test_finished"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        android:layout_margin="22sp"/>
+        android:textSize="25sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,34 +28,33 @@
         android:textSize="18sp" />
 
     <View
-        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/transparentWhite"
+        android:layout_gravity="center"
+        android:layout_marginLeft="50sp"
         android:layout_marginTop="10sp"
-        android:layout_marginBottom="10sp"
         android:layout_marginRight="50sp"
-        android:layout_marginLeft="50sp"/>
+        android:layout_marginBottom="10sp"
+        android:background="@color/transparentWhite" />
 
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50sp"
-        android:layout_marginBottom="10sp">
+        android:layout_marginBottom="10sp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/okay"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@drawable/custom_popup_btn_right"
             android:text="@string/okay"
-            android:textSize="22sp"
             android:textColor="@color/lightGreen"
-            android:background="@drawable/custom_popup_btn_right"/>
+            android:textSize="22sp" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
