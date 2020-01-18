@@ -10,59 +10,63 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
     <ImageButton
         android:id="@+id/hearing_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:background="#00FFFFFF"
+        android:contentDescription="@string/heard_noise_button"
         android:src="@drawable/xml_button_sound_ripple"
-        app:layout_constraintBottom_toTopOf="@+id/step_view"
+        app:layout_constraintBottom_toTopOf="@+id/guideline24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/running_test_text"
-        android:contentDescription="@string/heard_noise_button" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/running_test_text"
-        android:layout_width="322dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/press_button_when_you_hear_a_sound"
 
         android:textColor="#BEC3E9"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/hearing_button"
+        app:layout_constraintBottom_toTopOf="@+id/guideline23"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hearing_test_title" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/hearing_test_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="@string/hearing_test"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/running_test_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <com.shuhart.stepview.StepView
         android:id="@+id/step_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hearing_button"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline24"
         app:sv_animationType="Line"
         app:sv_doneCircleColor="@color/darkBlue"
         app:sv_doneCircleRadius="16dp"
@@ -78,6 +82,13 @@
         app:sv_stepNumberTextSize="16sp"
         app:sv_stepPadding="6dp"
         app:sv_stepViewStyle="@style/StepView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.27" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
