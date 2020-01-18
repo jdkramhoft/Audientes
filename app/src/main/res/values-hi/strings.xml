@@ -57,7 +57,7 @@
     <string name="middle">एलआर</string>
     <string name="shortR">आर</string>
     <string name="skip">छोड़ें</string>
-    <string name="test_will_take_5_minutes_npress_button_to_start">टेस्ट शुरू होने में 5 मिनट का प्रेस बटन लगेगा</string>
+    <string name="test_will_take_5_minutes_npress_button_to_start">टेस्ट शुरू होने में 5 मिनट\nका प्रेस बटन लगेगा</string>
     <string name="hearing_test">कान कि जाँच</string>
     <string name="take_new_test">नया टेस्ट लें</string>
     <string name="active_test">सक्रिय परीक्षण</string>

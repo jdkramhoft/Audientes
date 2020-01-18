@@ -36,7 +36,6 @@ import a3.audientes.utils.SharedPrefUtil;
 public class Audiogram extends Fragment {
     private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
 
-    // TODO: Rename and change types of parameters
     private OnFragmentInteractionListener mListener;
     private  List<int[]> left;
     private  List<int[]> right;

@@ -61,7 +61,7 @@
     <string name="shortR">R</string>
     <string name="ShortR">R</string>
     <string name="skip">Spring over</string>
-    <string name="test_will_take_5_minutes_npress_button_to_start">Testen tager cirka 5 min. Tryk på knappen for at starte</string>
+    <string name="test_will_take_5_minutes_npress_button_to_start">Testen tager cirka 5 min.\nTryk på knappen for at starte</string>
     <string name="hearing_test">Høretest</string>
     <string name="take_new_test">Tag ny høretest</string>
     <string name="active_test">Aktiv test</string>

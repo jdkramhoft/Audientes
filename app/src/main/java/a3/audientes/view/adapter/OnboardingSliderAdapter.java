@@ -71,26 +71,20 @@ public class OnboardingSliderAdapter extends PagerAdapter {
         TextView slideDescription = view.findViewById(R.id.slide_desc);
 
         if (position == 3) {
-            ImageView anim = view.findViewById(R.id.slide_image);
-            anim.setBackgroundResource(R.drawable.longclick_animation);
-            AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
+            slideImageView.setBackgroundResource(R.drawable.longclick_animation);
+            AnimationDrawable animAnimation = (AnimationDrawable) slideImageView.getBackground();
             animAnimation.start();
         }
-
-        if (position == 4) {
-            ImageView anim = view.findViewById(R.id.slide_image);
-            anim.setBackgroundResource(R.drawable.edit_program_animation);
-            AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
+        else if (position == 4) {
+            slideImageView.setBackgroundResource(R.drawable.edit_program_animation);
+            AnimationDrawable animAnimation = (AnimationDrawable) slideImageView.getBackground();
             animAnimation.start();
         }
+        else
+            slideImageView.setImageResource(slide_images[position]);
 
-
-
-        slideImageView.setImageResource(slide_images[position]);
         slideHeading.setText(slide_headings[position]);
         slideDescription.setText(slide_descs[position]);
-
-
         container.addView(view);
 
         return view;

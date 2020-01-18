@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,11 +49,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     List<Integer> circleColors;
     int[] colors;
     Boolean runThread;
-    final Runnable updater = new Runnable(){
-        public void run(){
-            updateDbDisplay();
-        };
-    };
+    final Runnable updater = this::updateDbDisplay;
 
     final Handler handler = new Handler();
 
@@ -59,13 +57,6 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hearing_test_start);
-        hearing_button = findViewById(R.id.hearing_button);
-        hearing_button.setOnClickListener(this);
-        dbDisplay = findViewById(R.id.volume);
-        chart = findViewById(R.id.chart);
-        chart.setVisibility(View.GONE);
-        dbDisplay.setVisibility(View.GONE);
-
         entries = new ArrayList<>();
         circleColors = new ArrayList<>();
         colors = new int[]{
@@ -77,19 +68,40 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
                 getResources().getColor(R.color.hole)
         };
 
-        // Styling of chart
-        chart.getDescription().setEnabled(false);
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setEnabled(false);
-        YAxis leftAxis = chart.getAxisLeft();
-        leftAxis.setDrawLabels(false);
-        YAxis rightAxis = chart.getAxisRight();
-        rightAxis.setDrawLabels(false);
-        chart.getAxisLeft().setDrawLimitLinesBehindData(true);
-        chart.setTouchEnabled(false);
-        chart.setDrawBorders(true);
-        chart.setBorderColor(colors[4]);
+        hearing_button = findViewById(R.id.hearing_button);
+        hearing_button.setOnClickListener(this);
+        dbDisplay = findViewById(R.id.volume);
+        dbDisplay.setVisibility(View.GONE);
         dbDisplay.setTextColor(colors[5]);
+
+        chart = findViewById(R.id.chart);
+        chart.setVisibility(View.GONE);
+        chart.getDescription().setEnabled(false);
+        chart.setTouchEnabled(false);
+        chart.setDrawBorders(false);
+        chart.setBorderColor(colors[4]);
+
+
+        // Styling of chart
+        XAxis xAxis = chart.getXAxis();
+        YAxis leftAxis = chart.getAxisLeft();
+        YAxis rightAxis = chart.getAxisRight();
+
+        xAxis.setEnabled(false);
+        leftAxis.setEnabled(false);
+        rightAxis.setEnabled(false);
+
+        xAxis.setDrawGridLines(false);
+        leftAxis.setDrawGridLines(false);
+
+        leftAxis.setDrawLabels(false);
+        rightAxis.setDrawLabels(false);
+
+
+        xAxis.setAvoidFirstLastClipping(true);
+        leftAxis.setDrawLimitLinesBehindData(true);
+
+
 
 
         // Android permission for RECORD_AUDIO popup
@@ -172,7 +184,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
                     public void run() {
                         while (runner != null) {
                             try {
-                                Thread.sleep(1000);
+                                Thread.sleep(200);
                             } catch (InterruptedException e) { };
                             if(!runThread){
                                 return;
@@ -194,7 +206,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             runner = null;
             stop();
         }
-        StartHearingTest.this.finish();
+        finish();
     }
 
 
@@ -275,6 +287,8 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             dataSet.setCircleColors(circleColors);
             dataSet.setValueTextColor(colors[4]);
             dataSet.setValueTextSize(0);
+            dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            dataSet.setCubicIntensity(0.2f);
             LineData lineData = new LineData(dataSet);
             chart.setData(lineData);
             chart.invalidate();

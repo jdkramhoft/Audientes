@@ -51,7 +51,6 @@ public final class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
 
         if (savedInstanceState == null){
-            // TODO: only onboarding on first visit
             handler.postDelayed(splash, SPLASH_TIME);
         }
 

@@ -20,8 +20,8 @@ import a3.audientes.R;
 import a3.audientes.view.adapter.LanguageAdapter;
 
 public class Language extends AppCompatActivity implements View.OnClickListener {
-    LanguageAdapter adapter;
-    ArrayList<Locale> localcountries;
+    private LanguageAdapter adapter;
+    private ArrayList<Locale> localcountries;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
