@@ -172,6 +172,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             LinearLayout temp = (LinearLayout)v.getChildAt(i);
             ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white,null));
             ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
+            ((ImageView)temp.findViewById(R.id.canceltext)).setImageDrawable(getResources().getDrawable(R.drawable.tab1_program_delete_icon));
         }
 
         // find selected program
@@ -180,8 +181,10 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             TextView view = temp.findViewById(R.id.hiddenId);
             int tempId = Integer.parseInt(view.getText().toString());
             if(tempId == id){
-                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.textColor, null));
+                ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.darkBlue, null));
                 ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
+                ((ImageView)temp.findViewById(R.id.canceltext)).setImageDrawable(null);
+                ((ImageView)temp.findViewById(R.id.canceltext)).setImageDrawable(getResources().getDrawable(R.drawable.tab1_program_delete_icon_pressed, null));
             }
         }
     }

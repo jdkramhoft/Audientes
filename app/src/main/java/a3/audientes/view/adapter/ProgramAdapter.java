@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -87,9 +88,10 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
 
         if(currentProgramId == holder.id ){
             View itemView = holder.itemView;
-            ((TextView)itemView.findViewById(R.id.programName)).setTextColor(mcontext.getResources().getColor(R.color.textColor,null));
+            ((TextView)itemView.findViewById(R.id.programName)).setTextColor(mcontext.getResources().getColor(R.color.darkBlue,null));
             ((ImageView)itemView.findViewById(R.id.program_bg_id)).setImageDrawable(mcontext.getResources().getDrawable(R.drawable.xml_program_selected,null));
-        }
+
+        }   
     }
 
     @Override

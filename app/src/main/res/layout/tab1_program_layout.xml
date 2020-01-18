@@ -53,21 +53,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <ImageView
             android:id="@+id/canceltext"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="18dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/tab1_program_delete_icon"
             android:clickable="true"
             android:gravity="center"
             android:password="false"
             android:phoneNumber="false"
-            android:text="@string/plus"
-            android:textColor="@color/darkBlue"
             android:textIsSelectable="false"
-            android:textSize="25sp"
+            android:textSize="10sp"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toStartOf="@+id/right"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.524"
             app:layout_constraintStart_toStartOf="@+id/left"
             app:layout_constraintTop_toTopOf="@+id/bot" />
 
@@ -80,12 +80,13 @@
 
         <TextView
             android:id="@+id/hiddenId"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
+            android:layout_width="59dp"
+            android:layout_height="54dp"
             android:text="21389012309123"
+            android:visibility="invisible"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toStartOf="@+id/right"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/left"
             app:layout_constraintTop_toTopOf="@+id/bot" />
 
