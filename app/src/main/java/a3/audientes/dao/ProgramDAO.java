@@ -44,7 +44,8 @@ public class ProgramDAO {
                 programList.get(i).setMiddle(program.getMiddle());
                 programList.get(i).setHigh(program.getHigh());
                 programList.get(i).setHigh_plus(program.getHigh_plus());
-                programadapter.notifyItemChanged(i);
+                if(programadapter != null)
+                    programadapter.notifyItemChanged(i);
             }
         }
     }
