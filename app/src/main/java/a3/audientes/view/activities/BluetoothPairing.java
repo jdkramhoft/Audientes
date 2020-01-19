@@ -145,6 +145,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             bluetoothAdapter.cancelDiscovery();
         }
 
+        /* TODO: why do we ask for location??
         int permission = PackageManager.PERMISSION_GRANTED;
         permission += checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
         permission += checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -154,6 +155,8 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             permissions[1] = Manifest.permission.ACCESS_COARSE_LOCATION;
             requestPermissions(permissions, 0);
         }
+
+         */
 
         bluetoothAdapter.startDiscovery();
     }

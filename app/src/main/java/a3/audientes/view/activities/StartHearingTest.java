@@ -4,10 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,18 +11,18 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.renderer.YAxisRenderer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,9 +31,9 @@ import java.util.List;
 import a3.audientes.R;
 
 public class StartHearingTest extends AppCompatActivity implements View.OnClickListener {
-
+    private final int MY_PERMISSIONS_RECORD_AUDIO = 1;
     private ImageButton hearing_button;
-    private MediaRecorder mRecorder;
+    private MediaRecorder mediaRecorder;
     private double audioVolume;
     private TextView dbDisplay;
     private Thread runner;
@@ -45,13 +41,12 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     private String networkOperator;
     private LineChart chart;
     private int lineIndex = 0;
-    List<Entry> entries;
-    List<Integer> circleColors;
-    int[] colors;
-    Boolean runThread;
-    final Runnable updater = this::updateDbDisplay;
-
-    final Handler handler = new Handler();
+    private List<Entry> entries;
+    private List<Integer> circleColors;
+    private int[] colors;
+    private Boolean runThread;
+    private final Runnable updater = this::updateDbDisplay;
+    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +65,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
         hearing_button = findViewById(R.id.hearing_button);
         hearing_button.setOnClickListener(this);
+
         dbDisplay = findViewById(R.id.volume);
         dbDisplay.setVisibility(View.GONE);
         dbDisplay.setTextColor(colors[5]);
@@ -97,74 +93,17 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         leftAxis.setDrawLabels(false);
         rightAxis.setDrawLabels(false);
 
-
         xAxis.setAvoidFirstLastClipping(true);
         leftAxis.setDrawLimitLinesBehindData(true);
 
-
-
-
-        // Android permission for RECORD_AUDIO popup
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},
-                    0);
-        }
-
-        // Checking if code is running on emulator.
-        tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        networkOperator = tm.getNetworkOperatorName();
-
-        if ("Android".equals(networkOperator)) {
-            System.out.println("Emulator");
-            System.out.println("Chart is not displayed");
-        }else{
-            System.out.println("Mobil");
-            stop();
-            mRecorder = new MediaRecorder();
-            try {
-                start();
-                System.out.println("MediaRecorder current volume: "+mRecorder.getMaxAmplitude());
-                audioVolume = getNoiseLevel(mRecorder.getMaxAmplitude());
-                System.out.println(audioVolume);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Display on init.
-            chart.setVisibility(View.VISIBLE);
-            dbDisplay.setVisibility(View.VISIBLE);
-            LineDataSet dataSet = new LineDataSet(entries, "");
-            chart.getLegend().setEnabled(false);
-            dataSet.setCircleHoleColor(colors[5]);
-            LineData lineData = new LineData(dataSet);
-            chart.setData(lineData);
-            chart.invalidate();
-
-            // Tread
-            if (runner == null) {
-                runThread = true;
-                runner = new Thread(){
-                    public void run() {
-                        while (runner != null) {
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) { };
-                            if(!runThread){
-                                return;
-                            }
-                            handler.post(updater);
-                        }
-                    }
-                };
-                runner.start();
-            }
-        }
+        requestAudioPermission();
     }
 
     @Override
     public void onResume(){
         super.onResume();
+
+        /* TODO: will crash app and delay UI.
         if ("Android".equals(networkOperator)) {
             System.out.println("Emulator resume");
         }else{
@@ -172,12 +111,9 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
             if (runner == null) {
                 stop();
-                mRecorder = new MediaRecorder();
-                try {
-                    start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                mediaRecorder = new MediaRecorder();
+                start();
+
                 // Tread
                 runThread = true;
                 runner = new Thread(){
@@ -196,63 +132,51 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
                 runner.start();
             }
         }
+         */
 
     }
 
     @Override
     public void onBackPressed() {
-        if(runner != null){
-            runThread = false;
-            runner = null;
-            stop();
-        }
+        stop();
         finish();
     }
 
+    @Override
+    public void onDestroy() {
+        stop();
+        super.onDestroy();
+    }
 
     @Override
     public void onClick(View v) {
         if (v == hearing_button) {
-            if(runner != null){
-                runThread = false;
-                runner = null;
-                stop();
-            }
+            stop();
             startActivity(new Intent(this, HearingTest.class));
             //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
-    // MediaRecorder
-    public void start() throws IOException {
-         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-         mRecorder.setOutputFile("/dev/null");
-         mRecorder.prepare();
-         mRecorder.start();
-    }
-
     public void stop() {
-        if (mRecorder != null) {
-            mRecorder.stop();
-            mRecorder.release();
-            mRecorder = null;
+        if(runner != null) {
+            runThread = false;
+            runner = null;
+        }
+        if (mediaRecorder != null) {
+            mediaRecorder.stop();
+            mediaRecorder.reset();
+            mediaRecorder.release();
+            mediaRecorder = null;
         }
     }
 
     public double getNoiseLevel(double volume) {
         System.out.println("MediaRecorder current volume: "+volume);
         double db = (20 * Math.log10(volume / 0.1));
-        if(db>0) {
-            return db;
-        } else {
-            return 0;
-        }
+        return db > 0 ? db : 0;
     }
 
     public void updateDbDisplay(){
-
         if(runThread){
             if ("Android".equals(networkOperator)) {
                 System.out.println("Emulator");
@@ -260,7 +184,7 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
                 System.out.println(audioVolume);
             }else{
                 System.out.println("Mobil");
-                audioVolume = getNoiseLevel(mRecorder.getMaxAmplitude());
+                audioVolume = getNoiseLevel(mediaRecorder.getMaxAmplitude());
                 System.out.println(audioVolume);
             }
 
@@ -296,4 +220,85 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    private void requestAudioPermission() {
+        boolean permissionIsGranted = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED;
+
+        if (permissionIsGranted){
+            tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+            networkOperator = tm.getNetworkOperatorName();
+            recordAudio();
+        }
+        else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    MY_PERMISSIONS_RECORD_AUDIO);
+        }
+    }
+
+    private void recordAudio() {
+        mediaRecorder = new MediaRecorder();
+        start();
+
+        System.out.println("MediaRecorder current volume: "+ mediaRecorder.getMaxAmplitude());
+        audioVolume = getNoiseLevel(mediaRecorder.getMaxAmplitude());
+        System.out.println(audioVolume);
+
+        // Display on init.
+        chart.setVisibility(View.VISIBLE);
+        dbDisplay.setVisibility(View.VISIBLE);
+        LineDataSet dataSet = new LineDataSet(entries, "");
+        chart.getLegend().setEnabled(false);
+        dataSet.setCircleHoleColor(colors[5]);
+        LineData lineData = new LineData(dataSet);
+        chart.setData(lineData);
+        chart.invalidate();
+
+        // Tread
+        if (runner == null) {
+            runThread = true;
+            runner = new Thread(){
+                public void run() {
+                    while (runner != null) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) { }
+                        if(!runThread){
+                            return;
+                        }
+                        handler.post(updater);
+                    }
+                }
+            };
+            runner.start();
+        }
+    }
+
+    // MediaRecorder
+    public void start(){
+        mediaRecorder = new MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mediaRecorder.setOutputFile("/dev/null");
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        try {
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+
+        if (requestCode == MY_PERMISSIONS_RECORD_AUDIO &&
+                grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            networkOperator = tm.getNetworkOperatorName();
+            recordAudio();
+        }
+    }
 }
