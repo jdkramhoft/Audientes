@@ -36,7 +36,7 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
     private TextView[] mDots;
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
-    private static final int NUM_OF_DOTS = 5;
+    private static final int NUM_OF_DOTS = 6;
     private boolean newVisitor;
 
     @Override
