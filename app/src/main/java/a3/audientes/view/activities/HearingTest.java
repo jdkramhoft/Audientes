@@ -53,6 +53,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     private StepView stepView;
     private final int ONE_SECOND = 1000;
     AlertDialog dialog;
+    private boolean runner = true;
     public static final int HEARING_TEST = 1;
     public static final int TEST_OKAY = 13;
     public static final int TEST_NOT_COMPLETE = 37;
@@ -86,10 +87,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         testButton = findViewById(R.id.hearing_button);
         testButton.setOnClickListener(this);
         startTest(testIndex);
-
         stepView = findViewById(R.id.step_view);
-
-
         stepView.getState()
                 .animationType(StepView.ANIMATION_LINE)
                 .steps(new ArrayList<String>() {{
@@ -107,7 +105,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
 
-        if(v == testButton){
+        if(runner){
             testIndex++;
             testButton.setEnabled(false);
             handler.removeCallbacksAndMessages(null);
@@ -117,7 +115,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             stepView.go(testIndex, true);
 
             if (testIndex == soundDAO.getSounds().size()){
-                testButton.setEnabled(false);
+                runner = false;
                 stepView.done(true);
                 AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Dialog);
                 LayoutInflater inflater = this.getLayoutInflater();
