@@ -99,47 +99,10 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         requestAudioPermission();
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-
-        /* TODO: will crash app and delay UI.
-        if ("Android".equals(networkOperator)) {
-            System.out.println("Emulator resume");
-        }else{
-            System.out.println("Mobil resume");
-
-            if (runner == null) {
-                stop();
-                mediaRecorder = new MediaRecorder();
-                start();
-
-                // Tread
-                runThread = true;
-                runner = new Thread(){
-                    public void run() {
-                        while (runner != null) {
-                            try {
-                                Thread.sleep(200);
-                            } catch (InterruptedException e) { };
-                            if(!runThread){
-                                return;
-                            }
-                            handler.post(updater);
-                        }
-                    }
-                };
-                runner.start();
-            }
-        }
-         */
-
-    }
 
     @Override
     public void onBackPressed() {
-        stop();
-        finish();
+        return;
     }
 
     @Override
@@ -152,8 +115,10 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v == hearing_button) {
             stop();
-            startActivity(new Intent(this, HearingTest.class));
-            //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            Intent intent = new Intent(this, HearingTest.class);
+            startActivity(intent);
+            StartHearingTest.this.finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
