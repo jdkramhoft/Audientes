@@ -16,7 +16,6 @@ import a3.audientes.dto.Program;
 public interface DAO {
 
     // Program
-
     @Insert
     void insertProgram(Program program);
 
@@ -33,7 +32,6 @@ public interface DAO {
     LiveData<List<Program>> getAllPrograms();
 
     // Audiogram
-
     @Insert
     void insertAudiogram(Audiogram audiogram);
 
