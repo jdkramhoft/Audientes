@@ -81,18 +81,18 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         boolean lastPage = mCurrentPage == mDots.length-1;
         if (v == mNextBtn){
             if (lastPage){
-                launchAcitivity();
+                launchActivity();
             }
             else {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
             }
         }
         else if (v == mSkipBtn){
-            launchAcitivity();
+            launchActivity();
         }
     }
 
-    private void launchAcitivity(){
+    private void launchActivity(){
         Intent intent;
         int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
         if (!isHearableConnected())
