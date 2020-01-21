@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -84,7 +83,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
         holder.title.setText(program.getName());
         holder.hiddenId.setText(String.valueOf(program.getId()));
         holder.id = program.getId();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(mactivity, "currentProgram", "1"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(mactivity, "currentProgram", "1"));
 
         if(currentProgramId == holder.id ){
             View itemView = holder.itemView;

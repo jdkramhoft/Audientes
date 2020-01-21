@@ -1,30 +1,20 @@
 package a3.audientes.view.activities;
 
 
-import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
-import android.bluetooth.BluetoothProfile;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.ParcelUuid;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import java.util.List;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
@@ -33,10 +23,6 @@ import a3.audientes.dto.Program;
 import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
-
-import static android.bluetooth.BluetoothProfile.GATT;
-import static android.bluetooth.BluetoothProfile.GATT_SERVER;
-import static android.bluetooth.BluetoothProfile.HEADSET;
 
 public final class SplashScreen extends AppCompatActivity {
 
@@ -104,8 +90,8 @@ public final class SplashScreen extends AppCompatActivity {
     private final Runnable splash = () -> {
         assert getFragmentManager() != null;
 
-        boolean newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
-        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        boolean newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
         System.out.println("Current: "+ currentAudiogramId);
         System.out.println(newVisitor);
 
