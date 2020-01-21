@@ -13,7 +13,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Handler;
@@ -54,6 +53,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     private final int ONE_SECOND = 1000;
     AlertDialog dialog;
     private boolean runner = true;
+    private final int NUM_OF_LEVELS = 5;
     public static final int HEARING_TEST = 1;
     public static final int TEST_OKAY = 13;
     public static final int TEST_NOT_COMPLETE = 37;
@@ -185,13 +185,31 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             Program program = programDAO.getProgram(i);
             System.out.println(program.getId());
             ArrayList<Integer> y = audiogram.getY();
-            program.setLow(programDAO.defaultLevel(y.get(0),i));
-            program.setLow_plus(programDAO.defaultLevel(y.get(1),i));
-            program.setMiddle(programDAO.defaultLevel(y.get(2),i));
-            program.setHigh(programDAO.defaultLevel(y.get(3),i));
-            program.setHigh_plus(programDAO.defaultLevel(y.get(4),i));
+            if (y.size() < 5){
+                program.setLow(5);
+                program.setLow_plus(5);
+                program.setMiddle(5);
+                program.setHigh(5);
+                program.setHigh_plus(5);
+            }
+            else {
+                program.setLow(programDAO.defaultLevel(y.get(0),i));
+                program.setLow_plus(programDAO.defaultLevel(y.get(1),i));
+                program.setMiddle(programDAO.defaultLevel(y.get(2),i));
+                program.setHigh(programDAO.defaultLevel(y.get(3),i));
+                program.setHigh_plus(programDAO.defaultLevel(y.get(4),i));
+            }
             programDAO.updateDefault(program);
             programViewModel.Update(program);
         }
+    }
+
+
+    public AlertDialog getLatestDialog(){
+        return dialog;
+    }
+
+    public int getNumOfLevels() {
+        return NUM_OF_LEVELS;
     }
 }

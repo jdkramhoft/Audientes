@@ -28,6 +28,7 @@ public class OnboardingSliderAdapter extends PagerAdapter {
             R.drawable.boarding_image_liftoff,
             R.drawable.usynlig,
             R.drawable.usynlig,
+            R.drawable.boarding_image_db,
     };
 
     private String[] slide_headings = {
@@ -36,6 +37,7 @@ public class OnboardingSliderAdapter extends PagerAdapter {
             "Let's get started",
             "How to delete programs",
             "How to edit a program",
+            "How to start a Hearing Test",
     };
 
     private String[] slide_descs = {
@@ -44,6 +46,7 @@ public class OnboardingSliderAdapter extends PagerAdapter {
             "You will be asked to wear the hearable and sit in a quiet area free for disturbing sounds and other factors. A series of sounds will be broadcast through the earphones. It will measure your ability to hear sounds at various pitches and volumes. ",
             "When deleting a program, you will need to click on the 'x' button in order to delete it. If a program does not have a 'x' in the upper right corner, it means that it is a default program and cannot be deleted.",
             "In order to edit a program, a default or custom program, you will need to click and hold the button - otherwise you will only select the program.",
+            "In order to be able to start the hearing test, you'll need to allow this application to use the mic, because the upper right corner display the sound level and only if it is green you can take the hearing test.",
     };
 
     public OnboardingSliderAdapter(Context context){
