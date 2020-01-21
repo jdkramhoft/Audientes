@@ -75,7 +75,7 @@ public final class SplashScreen extends AppCompatActivity {
         }
         return false;
     }
-
+    //TODO: Hello?
     public static boolean isConnected(BluetoothDevice device) {
         try {
             Method m = device.getClass().getMethod("isConnected", (Class[]) null);
