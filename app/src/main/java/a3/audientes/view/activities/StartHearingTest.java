@@ -102,6 +102,9 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
+
+        stop();
+        finish();
     }
 
     @Override
