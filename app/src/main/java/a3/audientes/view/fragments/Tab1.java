@@ -82,7 +82,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     public void onResume() {
         super.onResume();
         programList = programDAO.getProgramList();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentProgram", "1"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(Objects.requireNonNull(getContext()), "currentProgram", "1"));
         changeEqualizer(currentProgramId);
         selectProgram(currentProgramId);
     }
@@ -190,12 +190,12 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     }
 
     private void updateLayout(View v) {
-        // Change Equalizer
         currentProgramId = getID(v);
-        SharedPrefUtil.saveSetting(getContext(),"currentProgram", Integer.toString(currentProgramId));
+        SharedPrefUtil.saveSetting(Objects.requireNonNull(getContext()),"currentProgram", Integer.toString(currentProgramId));
         changeEqualizer(currentProgramId);
         selectProgram(currentProgramId);
     }
+
 
     private boolean programIsDefault(View v) {
         TextView view = v.findViewById(R.id.hiddenId);

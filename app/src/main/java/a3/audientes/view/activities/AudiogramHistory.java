@@ -25,19 +25,17 @@ import a3.audientes.viewmodel.ProgramViewModel;
 
 public class AudiogramHistory extends AppCompatActivity implements a3.audientes.view.fragments.Audiogram.OnFragmentInteractionListener{
     private AudiogramDAO audiogramDAO = AudiogramDAO.getInstance();
-    LottieAnimationView action_btn;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.audiogram_history);
-        action_btn = findViewById(R.id.action_button_1);
 
         RecyclerView recyclerView = findViewById(R.id.audiogram_history_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Audiogram> audiogramList = new ArrayList<>(audiogramDAO.getAudiograms());
 
         Collections.sort(audiogramList);
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
         ProgramDAO programDAO = ProgramDAO.getInstance();
         ProgramViewModel programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
@@ -45,11 +43,8 @@ public class AudiogramHistory extends AppCompatActivity implements a3.audientes.
         recyclerView.setAdapter(new AudiogramAdapter(audiogramList, audiogramDAO, programViewModel, programDAO, getBaseContext()));
     }
 
-
     @Override
     public void onTab2ChildInteraction(Uri uri) {
-
     }
-
 
 }

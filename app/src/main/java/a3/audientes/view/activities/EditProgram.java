@@ -53,9 +53,10 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
         save_btn_config = findViewById(R.id.save_btn_config);
         save_btn_config.setOnClickListener(this);
 
+        // Removes keyboard on enter pressed
         name = findViewById(R.id.editText);
         name.setOnEditorActionListener((v, actionId, event) -> {
-            if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+            if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 in.hideSoftInputFromWindow(name.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
             }
@@ -101,13 +102,13 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                 button2.setOnClickListener(v1 -> {
                     dialog.cancel();
                     musicTrack.stop();
-                    EditProgram.this.finish();
+                    finish();
                 });
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }else{
                 musicTrack.stop();
-                EditProgram.this.finish();
+                finish();
             }
         }
     }

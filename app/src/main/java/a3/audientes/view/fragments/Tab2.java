@@ -51,7 +51,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
         audiogram_history_btn.setOnClickListener(this);
 
         // retrieve active audiogram and set date
-        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentAudiogram", "0")));
+        audiogramDAO.setCurrentAudiogramByID(Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentAudiogram", "0")));
         date = audiogramDAO.getCurrentAudiogram().getDateString();
         desc = root.findViewById(R.id.audiogram_desc_id);
         desc.setText(String.format("%s\n%s", getString(R.string.selected_audiogram), date));
@@ -61,7 +61,7 @@ public class Tab2 extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentAudiogram", "0")));
+        audiogramDAO.setCurrentAudiogramByID(Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentAudiogram", "0")));
         date = audiogramDAO.getCurrentAudiogram().getDateString();
         desc.setText(String.format("%s\n%s", getString(R.string.selected_audiogram), date));
     }

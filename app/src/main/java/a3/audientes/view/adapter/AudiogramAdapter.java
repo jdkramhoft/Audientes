@@ -126,7 +126,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             program.setMiddle(programDAO.defaultLevel(y.get(2),i));
             program.setHigh(programDAO.defaultLevel(y.get(3),i));
             program.setHigh_plus(programDAO.defaultLevel(y.get(4),i));
-            programDAO.updateDefault(program);
+            programDAO.update(program);
             programViewModel.Update(program);
         }
     }

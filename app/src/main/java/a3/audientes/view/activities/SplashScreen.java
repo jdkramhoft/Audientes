@@ -43,16 +43,15 @@ public final class SplashScreen extends AppCompatActivity {
 
         ProgramViewModel programviewmodel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programviewmodel.getAllPrograms().observe(this, programs -> {
-            System.out.println(programs.size());
             setDefaultNames(programs);
             programDAO.setProgramList(programs);
         });
         AudiogramViewModel audiogramViewModel = ViewModelProviders.of(this).get(AudiogramViewModel.class);
         audiogramViewModel.getAllAudiogram().observe(this, audiograms -> {
             audiogramDAO.setAudiograms(audiograms);
-
-            System.out.println("Audiograms in db: "+audiograms.size());
         });
+
+
 
 
 
@@ -92,9 +91,6 @@ public final class SplashScreen extends AppCompatActivity {
 
         boolean newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
         int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
-        System.out.println("Current: "+ currentAudiogramId);
-        System.out.println(newVisitor);
-
         Intent nextActivity;
         if (newVisitor || currentAudiogramId == 0){
             nextActivity = new Intent(this, Onboarding.class);

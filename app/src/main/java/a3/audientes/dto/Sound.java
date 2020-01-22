@@ -38,8 +38,6 @@ public class Sound {
         }
     }
 
-    // Getters and setters
-
     public int getSampleRate() {
         return sampleRate;
     }

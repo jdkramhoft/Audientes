@@ -31,18 +31,19 @@ import a3.audientes.R;
 import a3.audientes.view.adapter.BluetoothDeviceListAdapter;
 import a3.audientes.utils.SharedPrefUtil;
 
-
 public class BluetoothPairing extends AppCompatActivity implements OnClickListener {
 
+    public static final int DISCOVER_TIME = 10000;
     private BluetoothAdapter bluetoothAdapter;
     private ArrayList<BluetoothDevice> bluetoothDevices = new ArrayList<>();
     private Button searchConnectButton;
     private ImageView loadingbar;
     private TextView textView2;
-    private boolean newVisitor;
     private boolean hasSearched = false;
-    OnClickListener clicker = this;
-    BluetoothDeviceListAdapter adapter;
+    private BluetoothDeviceListAdapter adapter;
+    private ProgressDialog dialog;
+
+    private final Handler handler = new Handler();
 
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
@@ -70,10 +71,10 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             if(action.equals(BluetoothDevice.ACTION_FOUND)){
                 final BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
-                if(device == null || device.getName() == null)
+                if(device == null || device.getName() == null){
                     return;
+                }
 
-                //Consider checking if device name is missing - we might not want those
                 bluetoothDevices.add(device);
                 Log.i("New device found", device.getName() + " " + device.getAddress());
                 adapter.notifyItemInserted(bluetoothDevices.size()-1);
@@ -90,31 +91,19 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         }
     };
 
-    private ProgressDialog dialog;
-
-    private void startDialog(){
-        dialog = new ProgressDialog(this);
-        dialog.setTitle(getString(R.string.searchdevice));
-        dialog.setCancelable(false);
-        dialog.show();
-    }
-
-    private void stopDialog(){
-        dialog.dismiss();
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(broadcastReceiver);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_pairing);
 
+        loadingbar = findViewById(R.id.loadingbar);
+        textView2 = findViewById(R.id.textView2);
         RecyclerView lvNewDevices = findViewById(R.id.lvNewDevices);
         bluetoothDevices = new ArrayList<>();
 
@@ -127,14 +116,10 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         searchConnectButton = findViewById(R.id.connectToDevice);
         searchConnectButton.setOnClickListener(this);
 
-        loadingbar = findViewById(R.id.loadingbar);
-        textView2 = findViewById(R.id.textView2);
-
-        ImageView anim = (ImageView) this.findViewById(R.id.loadingbar);
-        anim.setBackgroundResource(R.drawable.hearable_animation);
+        ImageView anim = this.findViewById(R.id.loadingbar);
+        loadingbar.setBackgroundResource(R.drawable.hearable_animation);
         AnimationDrawable animAnimation = (AnimationDrawable) anim.getBackground();
         animAnimation.start();
-
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -145,38 +130,19 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         registerReceiver(broadcastReceiver, filter);
 
-        newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        if (bluetoothAdapter == null) {
-            //noBluetoothSupport();
-            enableBluetooth();
-        }
-        else if (!bluetoothAdapter.isEnabled())
-            enableBluetooth();
+        enableBluetooth();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void discover() {
         if(bluetoothAdapter.isDiscovering()){
             bluetoothAdapter.cancelDiscovery();
+            handler.removeCallbacks(bluetoothAdapter::cancelDiscovery);
         }
-
-        /* TODO: why do we ask for location??
-        int permission = PackageManager.PERMISSION_GRANTED;
-        permission += checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
-        permission += checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
-        if(permission != PackageManager.PERMISSION_GRANTED){
-            String[] permissions = new String[2];
-            permissions[0] = Manifest.permission.ACCESS_FINE_LOCATION;
-            permissions[1] = Manifest.permission.ACCESS_COARSE_LOCATION;
-            requestPermissions(permissions, 0);
-        }
-
-         */
 
         bluetoothAdapter.startDiscovery();
-        handler.postDelayed(bluetoothAdapter::cancelDiscovery, 10000);
+        handler.postDelayed(bluetoothAdapter::cancelDiscovery, DISCOVER_TIME);
     }
 
     private void enableBluetooth() {
@@ -188,16 +154,11 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         }
     }
 
-
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
-
-            loadingbar = findViewById(R.id.loadingbar);
             loadingbar.setVisibility(View.INVISIBLE);
-            textView2 = findViewById(R.id.textView2);
             textView2.setVisibility(View.INVISIBLE);
-
 
             if(!hasSearched){
                 search();
@@ -207,16 +168,9 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
             else{
                 navigate();
             }
-
-
         }
         else{
             bluetoothDevices.get(adapter.getPosition(v)).createBond();
-
-            ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle(getBaseContext().getString(R.string.pair));
-            progressDialog.show();
-            handler.postDelayed(progressDialog::dismiss, 3000);
 
             //StackOverflow code snippet
             final Intent intent = new Intent(Intent.ACTION_MAIN, null);
@@ -230,74 +184,33 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
         }
     }
 
-    private final Handler handler = new Handler();
-
     private void search() {
         if(bluetoothAdapter == null)
             return;
         discover();
     }
 
+    private void startDialog(){
+        dialog = new ProgressDialog(this);
+        dialog.setTitle(getString(R.string.searchdevice));
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    private void stopDialog(){
+        dialog.dismiss();
+    }
 
 
     private void navigate() {
-        SharedPrefUtil.saveSetting(this, getString(R.string.new_visitor_pref), "false");
-        String activeSetting = SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram");
-        if (newVisitor || activeSetting == null){
-            Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
-            startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);
+        String currentSetting = SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram");
+        if (currentSetting == null){
+            startActivity(new Intent(this, StartHearingTest.class));
         } else {
             startActivity(new Intent(this, HearingProfile.class));
-            finish();
         }
+        finish();
 
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == HearingTest.HEARING_TEST) {
-            if (resultCode == HearingTest.TEST_OKAY) {
-                startActivity(new Intent(this, HearingProfile.class));
-                finish();
-            }
-            if (resultCode == HearingTest.TEST_NOT_COMPLETE) {
-                Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
-                startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);
-            }
-        }
-    }
-
-    /*
-    private void connectToHearable() {
-        AlertDialog.Builder builderHearable = new AlertDialog.Builder(this);
-        View hearableView = getLayoutInflater().inflate(R.layout.custom_popup_connect_hearable, null);
-        Button buttonHearable = hearableView.findViewById(R.id.button1);
-        builderHearable.setView(hearableView);
-        AlertDialog hearableDialog = builderHearable.create();
-
-        buttonHearable.setOnClickListener(v1 -> {
-            // TODO: if not possible to connect device via our app
-            //   then redirect to pairing settings on phone
-            Intent intent = new Intent(this, BluetoothPairing.class);
-            startActivity(intent);
-        });
-        hearableDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        hearableDialog.show();
-
-
-        if(!popupManager.isHearable()){
-            popupManager.setHearable(true);
-            new Handler().postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    hearableDialog.show();
-                }
-            }, 1000 );
-
-        }
-    }
-     */
 
 }
