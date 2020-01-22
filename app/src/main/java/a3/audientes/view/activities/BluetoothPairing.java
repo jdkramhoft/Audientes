@@ -242,9 +242,8 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
 
     private void navigate() {
         SharedPrefUtil.saveSetting(this, getString(R.string.new_visitor_pref), "false");
-        // TODO: newVisitor && check DB for audiogram
-        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
-        if (newVisitor || currentAudiogramId == 0){
+        String activeSetting = SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram");
+        if (newVisitor || activeSetting == null){
             Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
             startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);
         } else {
