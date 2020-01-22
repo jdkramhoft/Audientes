@@ -12,7 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
+import java.util.Objects;
+
 import a3.audientes.R;
+
+import static a3.audientes.R.string.*;
 
 /**
  * https://www.iconfinder.com/
@@ -31,26 +35,28 @@ public class OnboardingSliderAdapter extends PagerAdapter {
             R.drawable.boarding_image_db,
     };
 
-    private String[] slide_headings = {
-            context.getString(R.string.slidehead1),
-            context.getString(R.string.slidehead2),
-            context.getString(R.string.slidehead3),
-            context.getString(R.string.slidehead4),
-            context.getString(R.string.slidehead5),
-            context.getString(R.string.slidehead6)
-    };
+    private String[] slide_headings;
 
-    private String[] slide_descs = {
-            context.getString(R.string.slidedesc1),
-            context.getString(R.string.slidedesc2),
-            context.getString(R.string.slidedesc3),
-            context.getString(R.string.slidedesc4),
-            context.getString(R.string.slidedesc5),
-            context.getString(R.string.slidedesc6)
-    };
+    private String[] slide_descs;
 
     public OnboardingSliderAdapter(Context context){
         this.context = context;
+        slide_headings = new String[]{
+                context.getString(slidehead1),
+                context.getString(slidehead2),
+                context.getString(slidehead3),
+                context.getString(slidehead4),
+                context.getString(slidehead5),
+                context.getString(slidehead6)
+        };
+        slide_descs = new String[]{
+                context.getString(slidedesc1),
+                context.getString(slidedesc2),
+                context.getString(slidedesc3),
+                context.getString(slidedesc4),
+                context.getString(slidedesc5),
+                context.getString(slidedesc6)
+        };
     }
 
     @Override

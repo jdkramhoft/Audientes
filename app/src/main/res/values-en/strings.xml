@@ -4,8 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="audioGram_left">The air conduction results for the left ear are marked with a blue... "X"</string>
-    <string name="audioGram_right">The air conduction results for the right ear are marked with a red...     "O"</string>
+    <string name="audioGram_left">The air conduction results for the left ear are marked with a blue… "X"</string>
+    <string name="audioGram_right">The air conduction results for the right ear are marked with a red…     "O"</string>
     <string name="enabel_bluetooth">This app requires that bluetooth is enabled, to connect your device to the Audientes hearing aid</string>
     <string name="audientes">Audientes</string>
     <string name="bottom_sheet_peek">peek</string>
@@ -27,7 +27,7 @@
     <string name="cntnue">Continue</string>
     <string name="select_lan">Select your language</string>
     <string name="programs">Programs</string>
-    <string name="pair">Pairing device...</string>
+    <string name="pair">Pairing device…</string>
     <string name="lowplus">low+</string>
     <string name="low">low</string>
     <string name="medium">medium</string>
