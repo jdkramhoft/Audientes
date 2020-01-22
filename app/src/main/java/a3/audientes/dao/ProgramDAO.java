@@ -44,27 +44,13 @@ public class ProgramDAO {
                 programList.get(i).setMiddle(program.getMiddle());
                 programList.get(i).setHigh(program.getHigh());
                 programList.get(i).setHigh_plus(program.getHigh_plus());
-                if(programadapter != null)
+                if(programadapter != null){
                     programadapter.notifyItemChanged(i);
+                }
+                break;
             }
         }
     }
-
-    public void updateDefault(Program program){
-        System.out.println(program.getName());
-        System.out.println(program.getId());
-        for(int i = 0; i < programList.size(); i++){
-            if(program.getId() == programList.get(i).getId()){
-                programList.get(i).setName(program.getName());
-                programList.get(i).setLow(program.getLow());
-                programList.get(i).setLow_plus(program.getLow_plus());
-                programList.get(i).setMiddle(program.getMiddle());
-                programList.get(i).setHigh(program.getHigh());
-                programList.get(i).setHigh_plus(program.getHigh_plus());
-            }
-        }
-    }
-
 
     public int defaultLevel(int level, int program) {
         int max = 3000;

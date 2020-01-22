@@ -199,7 +199,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
                 program.setHigh(programDAO.defaultLevel(y.get(3),i));
                 program.setHigh_plus(programDAO.defaultLevel(y.get(4),i));
             }
-            programDAO.updateDefault(program);
+            programDAO.update(program);
             programViewModel.Update(program);
         }
     }
