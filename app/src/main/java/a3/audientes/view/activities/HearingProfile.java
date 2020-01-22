@@ -6,14 +6,12 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,28 +31,20 @@ import a3.audientes.view.fragments.Tab2;
 public class HearingProfile extends AppCompatActivity implements Tab1.OnFragmentInteractionListener, Tab2.OnFragmentInteractionListener, Audiogram.OnFragmentInteractionListener, View.OnClickListener {
     private int newRange, oldRange, max, min;
     private int state;
-    private AudioManager audioManager;
-    private String TAB_1_TITLE;
-    private String TAB_2_TITLE;
     private BottomSheetBehavior bottomSheetBehavior;
-    private View speaker, v;
-    private ImageView layoutShader;
-    private AppCompatActivity act = this;
-    private boolean flag = true;
-    private VolumeSlider middleMan;
+    private View speaker;
+    private VolumeSlider middleSlider;
     private final Handler handler = new Handler();
-    private Runnable r;
+    private Runnable volumeChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        TAB_1_TITLE = getString(R.string.programs);
-        TAB_2_TITLE = getString(R.string.hearing_test);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         setStatusBarTrans();
         TabLayout tabLayout = findViewById(R.id.tablayout);
-        tabLayout.addTab(tabLayout.newTab().setText(TAB_1_TITLE));
-        tabLayout.addTab(tabLayout.newTab().setText(TAB_2_TITLE));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.programs)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.hearing_test)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         ViewPager viewPager = findViewById(R.id.pager);
@@ -63,27 +53,25 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         int page = getIntent().getIntExtra("ARG_PAGE", 0);
         viewPager.setCurrentItem(page);
 
-        v = findViewById(R.id.sheet_volume);
-        v.setOnClickListener(this);
-        middleMan = findViewById(R.id.boxedM);
+        View view = findViewById(R.id.sheet_volume);
+        view.setOnClickListener(this);
+        middleSlider = findViewById(R.id.boxedM);
 
-        max = middleMan.getMax();
-        min = middleMan.getMin();
+        max = middleSlider.getMax();
+        min = middleSlider.getMin();
         newRange = max - min;
-        oldRange = middleMan.getSoundMax() - middleMan.getMin();
+        oldRange = middleSlider.getSoundMax() - middleSlider.getMin();
 
-        r = this::setOnVolumeChangeListener;
+        volumeChangeListener = this::setOnVolumeChangeListener;
 
-        layoutShader = findViewById(R.id.hearingProfileShader);
-
-        bottomSheetBehavior = BottomSheetBehavior.from(v);
+        bottomSheetBehavior = BottomSheetBehavior.from(view);
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 // Called every time when the bottom sheet changes its state.
                 state = newState;
                 if (BottomSheetBehavior.STATE_SETTLING == newState){
-                    handler.post(r);
+                    handler.post(volumeChangeListener);
                 }
             }
 
@@ -117,14 +105,14 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         if (BottomSheetBehavior.STATE_COLLAPSED == state) {
             handler.removeCallbacksAndMessages(null);
         }
-        else if (!middleMan.isBeingTouched()){
-            audioManager = (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+        else if (!middleSlider.isBeingTouched()){
+            AudioManager audioManager = (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
             int streamVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
             int soundValue = (((streamVolume - min) * newRange) / oldRange);
             int xx = soundValue > max ? max/2 : soundValue;
-            middleMan.setValue(xx);
+            middleSlider.setValue(xx);
         }
-        handler.postDelayed(r, 100);
+        handler.postDelayed(volumeChangeListener, 100);
     }
 
     @Override
@@ -150,45 +138,6 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
     }
 
 
-
-    public void setBorder(View v) {
-        int val = Integer.valueOf(v.getTag().toString());
-        //bv.setCornerRadius(val);
-        Toast.makeText(HearingProfile.this, "New corner radius is " + val, Toast.LENGTH_SHORT).show();
-    }
-    public void setMax(View v) {
-        int val = Integer.valueOf(v.getTag().toString());
-        //bv.setMax(val);
-        Toast.makeText(HearingProfile.this, "New max value is " + val, Toast.LENGTH_SHORT).show();
-    }
-    //TODO HALP IT WONT BE TRANSPARTEN
-
-    public void setStatusBarTrans(){
-        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
-        }
-        if (Build.VERSION.SDK_INT >= 19) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-        //make fully Android Transparent Status bar
-        if (Build.VERSION.SDK_INT >= 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
-    }
-
-
-    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
-        Window win = activity.getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
-
     @Override
     public void onClick(View v) {
         // if collapsed
@@ -202,6 +151,27 @@ public class HearingProfile extends AppCompatActivity implements Tab1.OnFragment
         }
 
 
+    }
+
+    /**
+     * Inspired by StackOverflow:
+     * https://stackoverflow.com/questions/53250987/flag-layout-no-limits-for-customizing-status-bar-makes-navigation-bar-overlappin
+     */
+    public void setStatusBarTrans(){
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 }
 
