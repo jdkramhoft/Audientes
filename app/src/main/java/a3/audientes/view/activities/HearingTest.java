@@ -165,18 +165,23 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     }
 
 
+    private AudioTrack audioTrack;
 
     private void playSound(Sound sound, int volume){
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         assert audioManager != null;
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
 
-        final AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
+        if(audioTrack != null)
+            audioTrack.stop();
+
+        audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
                 sound.getSampleRate(), AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, sound.getGeneratedSnd().length,
                 AudioTrack.MODE_STATIC);
         audioTrack.write(sound.getGeneratedSnd(), 0, sound.getGeneratedSnd().length);
         audioTrack.play();
+
     }
 
     private void updateDefualtPrograms(Audiogram audiogram){
