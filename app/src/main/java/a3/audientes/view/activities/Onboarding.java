@@ -134,9 +134,7 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
     private boolean isHearableConnected() {
         BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
-
         BluetoothAdapter a = manager.getAdapter();
-
         if (a != null){
             for (BluetoothDevice e: a.getBondedDevices()) {
                 if(isConnected(e)){
@@ -144,7 +142,6 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
                 }
             }
         }
-
         return false;
     }
 

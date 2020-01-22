@@ -4,8 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="audioGram_left">The air conduction results for the left ear are marked with a blue... "X"</string>
-    <string name="audioGram_right">The air conduction results for the right ear are marked with a red...     "O"</string>
+    <string name="audioGram_left">The air conduction results for the left ear are marked with a blue… "X"</string>
+    <string name="audioGram_right">The air conduction results for the right ear are marked with a red…     "O"</string>
     <string name="enabel_bluetooth">This app requires that bluetooth is enabled, to connect your device to the Audientes hearing aid</string>
     <string name="audientes">Audientes</string>
     <string name="bottom_sheet_peek">peek</string>
@@ -27,7 +27,7 @@
     <string name="cntnue">Continue</string>
     <string name="select_lan">Select your language</string>
     <string name="programs">Programs</string>
-    <string name="pair">Pairing device...</string>
+    <string name="pair">Pairing device…</string>
     <string name="lowplus">low+</string>
     <string name="low">low</string>
     <string name="medium">medium</string>
@@ -80,5 +80,19 @@
     <string name="confirm_language">confirm language</string>
     <string name="background_image">background image</string>
     <string name="speaker_icon">speaker icon</string>
+
+    <string name="slidehead1">Welcome to Audientes</string>
+    <string name="slidehead2">Your surroundings</string>
+    <string name="slidehead3">Let\'s get started</string>
+    <string name="slidehead4">How to delete programs</string>
+    <string name="slidehead5">How to edit a program</string>
+    <string name="slidehead6">How to start a Hearing Test</string>
+    <string name="slidedesc1">Your hearable will work optimally when you perform a hearing test using the built-in Pure Tone Audiometry, just like when visiting a hearing specialist.</string>
+    <string name="slidedesc2">Before starting the hearing test, we check the surrounding noise level, if it is greater than expected value, we would suggest that the user find another quiet place.</string>
+    <string name="slidedesc3">You will be asked to wear the hearable and sit in a quiet area free for disturbing sounds and other factors. A series of sounds will be broadcast through the earphones. It will measure your ability to hear sounds at various pitches and volumes.</string>
+    <string name="slidedesc4">When deleting a program, you will need to click on the \'x\' button in order to delete it. If a program does not have a \'x\' in the upper right corner, it means that it is a default program and cannot be deleted.</string>
+    <string name="slidedesc5">In order to edit a program, a default or custom program, you will need to click and hold the button - otherwise you will only select the program.</string>
+    <string name="slidedesc6">In order to be able to start the hearing test, you\'ll need to allow this application to use the mic, because the upper right corner display the sound level and only if it is green you can take the hearing test.</string>
+
 
 </resources>

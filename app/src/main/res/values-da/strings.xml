@@ -82,4 +82,18 @@
     <string name="confirm_language">godkend sprog</string>
     <string name="background_image">bagground billede</string>
     <string name="speaker_icon">højtaler ikon</string>
+
+    <string name="slidehead1">Velkommen til Audientes</string>
+    <string name="slidehead2">Dine omgivelser</string>
+    <string name="slidehead3">Lad os komme igang</string>
+    <string name="slidehead4">Sådan slettes et program</string>
+    <string name="slidehead5">Sådan redigeres et program</string>
+    <string name="slidehead6">Sådan startes en høretest</string>
+    <string name="slidedesc1">Dit høreapperat vil virke optimalt når du gennemfører en høretest via den indbygggede Rene Tone Audiometry, helt ligsom et besøg hos en ørelæge.</string>
+    <string name="slidedesc2">Før du starter en høre test skal støjniveauet omkring dig testes. Hvis det er højerer end de forventede værdier forslås det at du finder et mindre larmende sted at være.</string>
+    <string name="slidedesc3">Du skal have høreapperatet på og sidde i et stille område . En serie af lyde wil blive afspillet igennem høreapperatet som er med til at måle din evne til at høre lyde i forskellige frekvenser og niveauer.</string>
+    <string name="slidedesc4">Når du vil slette et program skal du trykke og holde nede på \'x\' symbolet for at slettet det. hvis et program ikke har et \'x\' betyder det at det er et standard program lavet af appen  man ikke kan slette.</string>
+    <string name="slidedesc5">For at redigere et program, selvlavet eller standard, skal du klikke og holde nede på programmet. hvis du kun klikker vælges det som det aktive program.</string>
+    <string name="slidedesc6">For at starte høretesten skal du tillade appen at anvende din telefons mikrofon. Dette er påkrævet af, og kun anvendt til, at måle støj før og efter høretesten for at finjustere resultatet.</string>
+
 </resources>
