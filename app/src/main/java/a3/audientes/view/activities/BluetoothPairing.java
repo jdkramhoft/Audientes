@@ -82,10 +82,12 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
 
             if(action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)){
                 startDialog();
+                searchConnectButton.setClickable(false);
             }
 
             if(action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)){
                 stopDialog();
+                searchConnectButton.setClickable(true);
             }
 
         }
