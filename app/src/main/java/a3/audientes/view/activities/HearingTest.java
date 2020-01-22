@@ -40,6 +40,7 @@ import a3.audientes.utils.animation.AnimBtnUtil;
 
 public class HearingTest extends AppCompatActivity implements View.OnClickListener {
 
+    private static final int SOUND_AMOUNT = 10;
     private int testIndex = 0;
     private int currentIndex = 1;
     private int currentHz = 0;
@@ -51,10 +52,12 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     private StepView stepView;
     private final int ONE_SECOND = 1000;
     private AlertDialog dialog;
+    private AudioTrack audioTrack;
     private boolean isRunning = true;
     private static final int NUM_OF_LEVELS = 5;
     private SoundDAO soundDAO = SoundDAO.getInstance();
     private final Handler handler = new Handler();
+
 
     @Override
     public void onResume() {
@@ -78,6 +81,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         testButton = findViewById(R.id.hearing_button);
         testButton.setOnClickListener(this);
         startTest(testIndex);
+        autoChangeSound();
         stepView = findViewById(R.id.step_view);
         stepView.getState()
                 .animationType(StepView.ANIMATION_LINE)
@@ -95,6 +99,13 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        goToNextSound.run();
+        if(testIndex != soundDAO.getSounds().size()){
+            AnimBtnUtil.bounce(v, this);
+        }
+    }
+
+    private final Runnable goToNextSound = () -> {
         if(!isRunning) {
             return;
         }
@@ -113,12 +124,11 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             alertDialog();
         }
         else{
-            AnimBtnUtil.bounce(v, this);
             audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
             startTest(testIndex);
+            autoChangeSound();
         }
-
-    }
+    };
 
     private void alertDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Dialog);
@@ -142,7 +152,6 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
             finish();
         });
     }
-
     private void updateDAO() {
         audiogramDAO.addIndexToCurrentAudiogram(new int[]{currentHz, currentIndex});
         audiogramDAO.getCurrentAudiogram().setId(audiogramDAO.getNextId());
@@ -153,8 +162,13 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
         updateDefualtPrograms(audiogramDAO.getCurrentAudiogram());
     }
 
+
+    private void autoChangeSound(){
+        handler.postDelayed(goToNextSound, ONE_SECOND * (SOUND_AMOUNT + 1));
+    }
+
     private void startTest(int testIndex){
-        for (int i = 1; i <=10 ;i++) {
+        for (int i = 1; i <= SOUND_AMOUNT ;i++) {
             int volume = i;
             handler.postDelayed(() -> {
                 currentIndex = volume;
@@ -165,20 +179,20 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    private AudioTrack audioTrack;
-
     private void playSound(Sound sound, int volume){
         AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
         assert audioManager != null;
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
 
-        if(audioTrack != null)
+        if(audioTrack == null){
+            audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
+                    sound.getSampleRate(), AudioFormat.CHANNEL_OUT_MONO,
+                    AudioFormat.ENCODING_PCM_16BIT, sound.getGeneratedSnd().length,
+                    AudioTrack.MODE_STATIC);
+        } else {
             audioTrack.stop();
+        }
 
-        audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
-                sound.getSampleRate(), AudioFormat.CHANNEL_OUT_MONO,
-                AudioFormat.ENCODING_PCM_16BIT, sound.getGeneratedSnd().length,
-                AudioTrack.MODE_STATIC);
         audioTrack.write(sound.getGeneratedSnd(), 0, sound.getGeneratedSnd().length);
         audioTrack.play();
 
