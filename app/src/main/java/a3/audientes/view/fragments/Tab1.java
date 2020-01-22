@@ -66,7 +66,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programList = programDAO.getProgramList();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(getContext(), ProgramDAO.CURRENT_PROGRAM, "1"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(getContext(), SharedPrefUtil.CURRENT_PROGRAM, "1"));
 
         MediaPlayer musicTrack = MediaPlayer.create(getContext(), R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
@@ -82,7 +82,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     public void onResume() {
         super.onResume();
         programList = programDAO.getProgramList();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(Objects.requireNonNull(getContext()), ProgramDAO.CURRENT_PROGRAM, "1"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(Objects.requireNonNull(getContext()), SharedPrefUtil.CURRENT_PROGRAM, "1"));
         changeEqualizer(currentProgramId);
         selectProgram(currentProgramId);
     }
@@ -190,7 +190,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     private void updateLayout(View v) {
         currentProgramId = getID(v);
-        SharedPrefUtil.saveSetting(Objects.requireNonNull(getContext()),ProgramDAO.CURRENT_PROGRAM, Integer.toString(currentProgramId));
+        SharedPrefUtil.saveSetting(Objects.requireNonNull(getContext()),SharedPrefUtil.CURRENT_PROGRAM, Integer.toString(currentProgramId));
         changeEqualizer(currentProgramId);
         selectProgram(currentProgramId);
     }
@@ -229,7 +229,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
             if(currentProgramId == programid){
                 currentProgramId = 1;
-                SharedPrefUtil.saveSetting(getContext(),ProgramDAO.CURRENT_PROGRAM, Integer.toString(currentProgramId));
+                SharedPrefUtil.saveSetting(getContext(),SharedPrefUtil.CURRENT_PROGRAM, Integer.toString(currentProgramId));
                 selectProgram(currentProgramId);
                 changeEqualizer(currentProgramId);
             }

@@ -7,8 +7,6 @@ import a3.audientes.view.adapter.ProgramAdapter;
 
 public class ProgramDAO {
 
-    public static final String CURRENT_PROGRAM = "currentProgram";
-
     private static ProgramDAO single_instance = null;
     private List<Program> programList = new ArrayList<>();
     public ProgramAdapter programadapter;

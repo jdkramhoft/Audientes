@@ -4,6 +4,10 @@ import android.content.Context;
 
 public class SharedPrefUtil {
 
+
+    public static final String CURRENT_PROGRAM = "currentProgram";
+    public static final String CURRENT_AUDIOGRAM = "currentAudiogram";
+
     private static final String PREFERENCES_FILE = "prefs";
 
     public static String readSetting(Context ctx, String settingName) {

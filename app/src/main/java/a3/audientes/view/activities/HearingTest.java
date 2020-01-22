@@ -201,7 +201,6 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
     private void updateDefualtPrograms(Audiogram audiogram){
         for(int i = 1; i <= 4; i++){
             Program program = programDAO.getProgram(i);
-            System.out.println(program.getId());
             ArrayList<Integer> y = audiogram.getY();
             if (y.size() < 5){
                 program.setLow(5);

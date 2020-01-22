@@ -31,7 +31,6 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
     private Button mNextBtn, mSkipBtn;
     private int mCurrentPage;
     private static final int NUM_OF_DOTS = 6;
-    private boolean newVisitor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,6 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         addDotsIndicator(0);
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
-        newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
 
     }
 
@@ -94,10 +92,10 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
 
     private void launchActivity(){
         Intent intent;
-        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
+        String currentSetting = SharedPrefUtil.readSetting(getBaseContext(), SharedPrefUtil.CURRENT_AUDIOGRAM);
         if (!isHearableConnected())
             intent = new Intent(getBaseContext(), BluetoothPairing.class);
-        else if (newVisitor || currentAudiogramId == 0){
+        else if (currentSetting == null){
             SharedPrefUtil.saveSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
             intent = new Intent(this, HearingTest.class);
         }
@@ -106,25 +104,23 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
             intent = new Intent(this, HearingProfile.class);
         }
         startActivity(intent);
-        Objects.requireNonNull(this).finish();
+        finish();
     }
 
-    ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
+    private ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageSelected(int i) {
             boolean firstPage = i == 0, lastPage = i == mDots.length-1;
             addDotsIndicator(i);
             mCurrentPage = i;
+            mNextBtn.setEnabled(true);
             if (firstPage){
-                mNextBtn.setEnabled(true);
                 mNextBtn.setText(R.string.next);
             }
             else if (lastPage){
-                mNextBtn.setEnabled(true);
                 mNextBtn.setText(R.string.start);
             }
             else {
-                mNextBtn.setEnabled(true);
                 mNextBtn.setText(R.string.next);
             }
         }
