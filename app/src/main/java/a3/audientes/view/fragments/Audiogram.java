@@ -27,7 +27,6 @@ import com.github.mikephil.charting.utils.EntryXComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
@@ -72,7 +71,7 @@ public class Audiogram extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentAudiogram", "0")));
         left = audiogramDAO.getCurrentAudiogram().getGraph();
         right = audiogramDAO.getCurrentAudiogram().getGraph();
         return inflater.inflate(R.layout.audiogram, container, false);
@@ -81,7 +80,7 @@ public class Audiogram extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSharedSetting(getContext(), "currentAudiogram", "0")));
+        audiogramDAO.setCurrent(Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentAudiogram", "0")));
         left = audiogramDAO.getCurrentAudiogram().getGraph();
         right = audiogramDAO.getCurrentAudiogram().getGraph();
         drawAudiogram(left, right, v);

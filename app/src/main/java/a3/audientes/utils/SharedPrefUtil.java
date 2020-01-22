@@ -1,21 +1,24 @@
 package a3.audientes.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 public class SharedPrefUtil {
 
-    private static final String PREFERENCES_FILE = "myPref";
+    private static final String PREFERENCES_FILE = "prefs";
 
-    public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return sharedPref.getString(settingName, defaultValue);
+    public static String readSetting(Context ctx, String settingName) {
+        return readSetting(ctx, settingName, null);
     }
 
-    public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(settingName, settingValue);
-        editor.apply();
+    public static String readSetting(Context ctx, String settingName, String defaultValue) {
+        return ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE)
+                .getString(settingName, defaultValue);
+    }
+
+    public static void saveSetting(Context ctx, String settingName, String settingValue) {
+        ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE)
+                .edit()
+                .putString(settingName, settingValue)
+                .apply();
     }
 }

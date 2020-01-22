@@ -150,7 +150,7 @@ public class EditProgram extends AppCompatActivity implements View.OnClickListen
                     programDAO.addProgram(newProgram);
                     programViewModel.Insert(newProgram);
                     programDAO.programadapter.notifyItemInserted(nextindex);
-                    SharedPrefUtil.saveSharedSetting(this,"currentProgram", Integer.toString(nextindex));
+                    SharedPrefUtil.saveSetting(this,"currentProgram", Integer.toString(nextindex));
                 }
             }
 

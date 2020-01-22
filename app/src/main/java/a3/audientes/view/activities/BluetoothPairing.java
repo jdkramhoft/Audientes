@@ -1,7 +1,5 @@
 package a3.audientes.view.activities;
 
-import android.Manifest;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -10,10 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,9 +26,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
-import android.view.View;
 
 import a3.audientes.R;
 import a3.audientes.view.adapter.BluetoothDeviceListAdapter;
@@ -87,8 +79,29 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
                 adapter.notifyItemInserted(bluetoothDevices.size()-1);
             }
 
+            if(action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)){
+                startDialog();
+            }
+
+            if(action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)){
+                stopDialog();
+            }
+
         }
     };
+
+    private ProgressDialog dialog;
+
+    private void startDialog(){
+        dialog = new ProgressDialog(this);
+        dialog.setTitle(getString(R.string.searchdevice));
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    private void stopDialog(){
+        dialog.dismiss();
+    }
 
     @Override
     protected void onDestroy() {
@@ -125,10 +138,14 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        registerReceiver(broadcastReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
-        registerReceiver(broadcastReceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_FOUND);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        registerReceiver(broadcastReceiver, filter);
 
-        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
+        newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if (bluetoothAdapter == null) {
@@ -159,6 +176,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
          */
 
         bluetoothAdapter.startDiscovery();
+        handler.postDelayed(bluetoothAdapter::cancelDiscovery, 10000);
     }
 
     private void enableBluetooth() {
@@ -217,19 +235,15 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     private void search() {
         if(bluetoothAdapter == null)
             return;
-        ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setTitle(getString(R.string.searchdevice));
-        dialog.show();
         discover();
-        handler.postDelayed(dialog::dismiss, 5000);
     }
 
 
 
     private void navigate() {
-        SharedPrefUtil.saveSharedSetting(this, getString(R.string.new_visitor_pref), "false");
+        SharedPrefUtil.saveSetting(this, getString(R.string.new_visitor_pref), "false");
         // TODO: newVisitor && check DB for audiogram
-        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
         if (newVisitor || currentAudiogramId == 0){
             Intent hearingTestIntent = new Intent(this, StartHearingTest.class);
             startActivityForResult(hearingTestIntent, HearingTest.HEARING_TEST);

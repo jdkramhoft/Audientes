@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -73,7 +72,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
             holder.anim.setVisibility(View.VISIBLE);
             holder.anim.playAnimation();
             audiogramDAO.setCurrentAudiogram(audiogramList.get(position));
-            SharedPrefUtil.saveSharedSetting(holder.itemView.getContext(),"currentAudiogram", Integer.toString(audiogramList.get(position).getId()));
+            SharedPrefUtil.saveSetting(holder.itemView.getContext(),"currentAudiogram", Integer.toString(audiogramList.get(position).getId()));
             updateDefaultPrograms(audiogram);
         });
 

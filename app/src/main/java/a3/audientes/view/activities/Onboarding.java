@@ -1,7 +1,6 @@
 package a3.audientes.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.bluetooth.BluetoothAdapter;
@@ -10,18 +9,13 @@ import android.bluetooth.BluetoothManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import a3.audientes.R;
 import a3.audientes.view.adapter.OnboardingSliderAdapter;
@@ -59,7 +53,7 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         addDotsIndicator(0);
 
         mSlideViewPager.addOnPageChangeListener(viewListener);
-        newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
+        newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
 
     }
 
@@ -87,28 +81,28 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         boolean lastPage = mCurrentPage == mDots.length-1;
         if (v == mNextBtn){
             if (lastPage){
-                launchAcitivity();
+                launchActivity();
             }
             else {
                 mSlideViewPager.setCurrentItem(mCurrentPage + 1);
             }
         }
         else if (v == mSkipBtn){
-            launchAcitivity();
+            launchActivity();
         }
     }
 
-    private void launchAcitivity(){
+    private void launchActivity(){
         Intent intent;
-        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
         if (!isHearableConnected())
             intent = new Intent(getBaseContext(), BluetoothPairing.class);
         else if (newVisitor || currentAudiogramId == 0){
-            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
+            SharedPrefUtil.saveSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
             intent = new Intent(this, HearingTest.class);
         }
         else{
-            SharedPrefUtil.saveSharedSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
+            SharedPrefUtil.saveSetting(Objects.requireNonNull(this), getString(R.string.new_visitor_pref), "false");
             intent = new Intent(this, HearingProfile.class);
         }
         startActivity(intent);

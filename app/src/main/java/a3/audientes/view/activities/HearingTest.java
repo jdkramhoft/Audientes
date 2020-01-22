@@ -134,7 +134,7 @@ public class HearingTest extends AppCompatActivity implements View.OnClickListen
                     audiogramDAO.getCurrentAudiogram().setDate(new Date());
                     audiogramViewModel.Insert(audiogramDAO.getCurrentAudiogram());
                     audiogramDAO.saveCurrentAudiogram();
-                    SharedPrefUtil.saveSharedSetting(getBaseContext(),"currentAudiogram", Integer.toString(audiogramDAO.getCurrentAudiogram().getId()));
+                    SharedPrefUtil.saveSetting(getBaseContext(),"currentAudiogram", Integer.toString(audiogramDAO.getCurrentAudiogram().getId()));
                     updateDefualtPrograms(audiogramDAO.getCurrentAudiogram());
                     Activity activity = Objects.requireNonNull(this);
                     activity.setResult(TEST_OKAY, null);
