@@ -8,6 +8,7 @@ import android.view.animation.AnimationUtils;
 import a3.audientes.R;
 
 public class AnimBtnUtil {
+
     public static void bounce(View btn, Activity activity) {
         final Animation myAnim = AnimationUtils.loadAnimation(activity, R.anim.bounce);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.1, 10);

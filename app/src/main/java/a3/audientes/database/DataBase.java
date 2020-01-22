@@ -17,6 +17,7 @@ public abstract class DataBase extends RoomDatabase {
 
     private static DataBase instance;
     private static final String EMPTY = "";
+
     public abstract DAO dao();
 
     public static synchronized DataBase getInstance(Context context){
@@ -30,6 +31,9 @@ public abstract class DataBase extends RoomDatabase {
         return instance;
     }
 
+    /**
+     * Creating the database with Room
+     */
     private static RoomDatabase.Callback roomCallBack = new RoomDatabase.Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -38,6 +42,9 @@ public abstract class DataBase extends RoomDatabase {
         }
     };
 
+    /**
+     * This method is called only once - when the database is created
+     */
     private static class CreateDefaultProgramsAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private DAO DAO;

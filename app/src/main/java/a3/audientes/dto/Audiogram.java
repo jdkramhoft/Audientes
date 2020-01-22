@@ -30,14 +30,14 @@ public class Audiogram implements Comparable<Audiogram> {
     public Audiogram() {}
 
     @Override
-    public boolean equals(@Nullable Object o) {
-        if (this == o) {
+    public boolean equals(@Nullable Object other) {
+        if (this == other) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (other == null || getClass() != other.getClass()) {
             return false;
         }
-        Audiogram audiogram = (Audiogram) o;
+        Audiogram audiogram = (Audiogram) other;
         return id == audiogram.id &&
                 x == audiogram.x &&
                 y == audiogram.y &&
@@ -57,8 +57,8 @@ public class Audiogram implements Comparable<Audiogram> {
     }
 
     @Override
-    public int compareTo(Audiogram o) {
-        return this.date.compareTo(o.date) > 0 ? -1 : 1 ;
+    public int compareTo(Audiogram other) {
+        return this.date.compareTo(other.date) > 0 ? -1 : 1 ;
     }
 
     // Getters and setters
