@@ -33,10 +33,10 @@ import a3.audientes.R;
 public class StartHearingTest extends AppCompatActivity implements View.OnClickListener {
     private final int MY_PERMISSIONS_RECORD_AUDIO = 1;
     private ImageButton hearing_button;
-    private MediaRecorder mediaRecorder;
+    private MediaRecorder recorder;
     private double audioVolume;
     private TextView dbDisplay;
-    private Thread runner;
+    private Thread graphUpdater;
     private TelephonyManager tm;
     private String networkOperator;
     private LineChart chart;
@@ -116,21 +116,21 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
             stop();
             Intent intent = new Intent(this, HearingTest.class);
             startActivity(intent);
-            StartHearingTest.this.finish();
+            finish();
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }
 
     public void stop() {
-        if(runner != null) {
+        if(graphUpdater != null) {
             runThread = false;
-            runner = null;
+            graphUpdater = null;
         }
-        if (mediaRecorder != null) {
-            mediaRecorder.stop();
-            mediaRecorder.reset();
-            mediaRecorder.release();
-            mediaRecorder = null;
+        if (recorder != null) {
+            recorder.stop();
+            recorder.reset();
+            recorder.release();
+            recorder = null;
         }
     }
 
@@ -143,13 +143,9 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     public void updateDbDisplay(){
         if(runThread){
             if ("Android".equals(networkOperator)) {
-                System.out.println("Emulator");
                 audioVolume = getNoiseLevel(3000);
-                System.out.println(audioVolume);
             }else{
-                System.out.println("Mobil");
-                audioVolume = getNoiseLevel(mediaRecorder.getMaxAmplitude());
-                System.out.println(audioVolume);
+                audioVolume = getNoiseLevel(recorder.getMaxAmplitude());
             }
 
             if(((int)audioVolume) <= 80){
@@ -201,12 +197,10 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
     }
 
     private void recordAudio() {
-        mediaRecorder = new MediaRecorder();
+        recorder = new MediaRecorder();
         start();
 
-        System.out.println("MediaRecorder current volume: "+ mediaRecorder.getMaxAmplitude());
-        audioVolume = getNoiseLevel(mediaRecorder.getMaxAmplitude());
-        System.out.println(audioVolume);
+        audioVolume = getNoiseLevel(recorder.getMaxAmplitude());
 
         // Display on init.
         chart.setVisibility(View.VISIBLE);
@@ -218,12 +212,12 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         chart.setData(lineData);
         chart.invalidate();
 
-        // Tread
-        if (runner == null) {
+        // Thread
+        if (graphUpdater == null) {
             runThread = true;
-            runner = new Thread(){
+            graphUpdater = new Thread(){
                 public void run() {
-                    while (runner != null) {
+                    while (graphUpdater != null) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) { }
@@ -234,32 +228,28 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
                     }
                 }
             };
-            runner.start();
+            graphUpdater.start();
         }
     }
 
-    // MediaRecorder
     public void start(){
-        mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mediaRecorder.setOutputFile("/dev/null");
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile("/dev/null");
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         try {
-            mediaRecorder.prepare();
-            mediaRecorder.start();
+            recorder.prepare();
+            recorder.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if (requestCode == MY_PERMISSIONS_RECORD_AUDIO &&
-                grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+        if (requestCode == MY_PERMISSIONS_RECORD_AUDIO && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
             networkOperator = tm.getNetworkOperatorName();
             recordAudio();

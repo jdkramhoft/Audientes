@@ -158,7 +158,9 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
-            searchConnectButton.setClickable(false);
+            if(bluetoothAdapter != null){
+                searchConnectButton.setClickable(false);
+            }
             loadingbar.setVisibility(View.INVISIBLE);
             textView2.setVisibility(View.INVISIBLE);
 

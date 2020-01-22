@@ -59,9 +59,9 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rod = inflater.inflate(R.layout.tab1, container, false);
+        View root = inflater.inflate(R.layout.tab1, container, false);
 
-        floatingActionButton = rod.findViewById(R.id.fab);
+        floatingActionButton = root.findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(this);
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
@@ -73,9 +73,9 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         trackEq.setEnabled(true);
         changeEqualizer(currentProgramId);
 
-        setupRecyclerView(rod);
+        setupRecyclerView(root);
 
-        return rod;
+        return root;
     }
 
     @Override
@@ -99,7 +99,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
             TextView currentId = view.findViewById(R.id.hiddenId);
-            deletePopup(v, Integer.parseInt(currentId.getText().toString()));
+            popupForDelete(v, Integer.parseInt(currentId.getText().toString()));
         }else {
             updateLayout(v);
         }
@@ -118,7 +118,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         else if (v.getId() == R.id.canceltext){
             ConstraintLayout view =  (ConstraintLayout)v.getParent();
             TextView currentId = view.findViewById(R.id.hiddenId);
-            deletePopup(v, Integer.parseInt(currentId.getText().toString()));
+            popupForDelete(v, Integer.parseInt(currentId.getText().toString()));
         }
         else {
             // program is long clicked
@@ -171,7 +171,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             LinearLayout temp = (LinearLayout)v.getChildAt(i);
             ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.white,null));
             ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program, null));
-            ((ImageView)temp.findViewById(R.id.canceltext)).setImageDrawable(getResources().getDrawable(R.drawable.tab1_program_delete_icon));
+            ((ImageView)temp.findViewById(R.id.canceltext)).setImageDrawable(getResources().getDrawable(R.drawable.tab1_program_delete_icon, null));
         }
 
         // find selected program
@@ -211,7 +211,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
         void onTab1Interaction(Uri uri);
     }
 
-    public void deletePopup(View v, int programid){
+    public void popupForDelete(View v, int programid){
         AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext(), R.style.Theme_Dialog);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_popup_delete_program, null);

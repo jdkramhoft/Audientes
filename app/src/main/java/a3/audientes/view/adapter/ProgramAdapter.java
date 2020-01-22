@@ -27,7 +27,6 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
     private final View.OnLongClickListener onLongClick;
     private Context mcontext;
     private Activity mactivity;
-    int counter = 0;
     private int currentProgramId;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -83,7 +82,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
         holder.title.setText(program.getName());
         holder.hiddenId.setText(String.valueOf(program.getId()));
         holder.id = program.getId();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(mactivity, "currentProgram", "1"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(mactivity, SharedPrefUtil.CURRENT_PROGRAM, "1"));
 
         if(currentProgramId == holder.id ){
             View itemView = holder.itemView;
@@ -98,17 +97,5 @@ public class ProgramAdapter extends RecyclerView.Adapter<a3.audientes.view.adapt
         return programList.size();
     }
 
-    View setLayout(ViewGroup parent){
-        View itemView;
-        itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab1_program_layout, parent, false) ;
-        itemView.findViewById(R.id.canceltext).setOnClickListener(onClick);
-        itemView.findViewById(R.id.canceltext).setOnLongClickListener(onLongClick);
-        itemView.setOnClickListener(onClick);
-        itemView.setOnLongClickListener(onLongClick);
-        return itemView;
-    }
-    public ProgramAdapter get(){
-        return this;
-    }
 }
 

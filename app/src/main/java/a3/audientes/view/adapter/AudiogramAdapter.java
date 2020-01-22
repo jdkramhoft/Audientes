@@ -7,15 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.airbnb.lottie.LottieAnimationView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import a3.audientes.R;
 import a3.audientes.dto.Audiogram;
 import a3.audientes.dao.AudiogramDAO;
@@ -59,8 +55,7 @@ public class AudiogramAdapter extends RecyclerView.Adapter<a3.audientes.view.ada
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.audiogram_card, parent, false);
-
-        return new a3.audientes.view.adapter.AudiogramAdapter.MyViewHolder(itemView);
+        return new AudiogramAdapter.MyViewHolder(itemView);
     }
 
     @Override
