@@ -82,7 +82,6 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
 
             if(action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)){
                 startDialog();
-                searchConnectButton.setClickable(false);
             }
 
             if(action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)){
@@ -159,6 +158,7 @@ public class BluetoothPairing extends AppCompatActivity implements OnClickListen
     @Override
     public void onClick(View v) {
         if (v == searchConnectButton){
+            searchConnectButton.setClickable(false);
             loadingbar.setVisibility(View.INVISIBLE);
             textView2.setVisibility(View.INVISIBLE);
 
