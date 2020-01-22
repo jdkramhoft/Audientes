@@ -24,7 +24,7 @@ import a3.audientes.viewmodel.AudiogramViewModel;
 import a3.audientes.viewmodel.ProgramViewModel;
 import a3.audientes.utils.SharedPrefUtil;
 
-public final class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends AppCompatActivity {
 
     public static final int SPLASH_TIME = 2500;
     private final Handler handler = new Handler();
