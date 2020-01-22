@@ -27,6 +27,10 @@ import a3.audientes.utils.SharedPrefUtil;
 
 public class EditProgram extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
+    public static final String EDIT = "edit";
+    public static final String NEW = "new";
+    public static final String ID = "id";
+
     private TextView name;
     private SeekBar low_plus, low, medium, high, high_plus;
     private Button save_btn_config;

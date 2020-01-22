@@ -66,7 +66,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programList = programDAO.getProgramList();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentProgram", "1"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(getContext(), ProgramDAO.CURRENT_PROGRAM, "1"));
 
         MediaPlayer musicTrack = MediaPlayer.create(getContext(), R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
@@ -82,18 +82,17 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     public void onResume() {
         super.onResume();
         programList = programDAO.getProgramList();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(Objects.requireNonNull(getContext()), "currentProgram", "1"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(Objects.requireNonNull(getContext()), ProgramDAO.CURRENT_PROGRAM, "1"));
         changeEqualizer(currentProgramId);
         selectProgram(currentProgramId);
     }
 
     @Override
     public void onClick(View v) {
-        List<Program> list = programDAO.getProgramList();
         if (v == floatingActionButton){
             Intent intent = new Intent(getActivity(), EditProgram.class);
-            intent.putExtra("new", true);
-            intent.putExtra("edit", true);
+            intent.putExtra(EditProgram.NEW, true);
+            intent.putExtra(EditProgram.EDIT, true);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
@@ -111,8 +110,8 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
     public boolean onLongClick(View v) {
         if (v == floatingActionButton){
             Intent intent = new Intent(getActivity(), EditProgram.class);
-            intent.putExtra("new", true);
-            intent.putExtra("edit", true);
+            intent.putExtra(EditProgram.NEW, true);
+            intent.putExtra(EditProgram.EDIT, true);
             startActivity(intent);
             Objects.requireNonNull(getActivity()).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
@@ -126,17 +125,17 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             AnimBtnUtil.bounceSlow(v, getActivity());
 
             Intent intent = new Intent(getActivity(), EditProgram.class);
-            intent.putExtra("new", false);
+            intent.putExtra(EditProgram.NEW, false);
 
             // Check if default program is selected
             TextView currentId = v.findViewById(R.id.hiddenId);
             if(programIsDefault(currentId)){
-                intent.putExtra("id", currentId.getText().toString());
-                intent.putExtra("edit", false);
+                intent.putExtra(EditProgram.ID, currentId.getText().toString());
+                intent.putExtra(EditProgram.EDIT, false);
             }
             else {
-                intent.putExtra("id", currentId.getText().toString());
-                intent.putExtra("edit", true);
+                intent.putExtra(EditProgram.ID, currentId.getText().toString());
+                intent.putExtra(EditProgram.EDIT, true);
             }
 
             startActivity(intent);
@@ -191,7 +190,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
     private void updateLayout(View v) {
         currentProgramId = getID(v);
-        SharedPrefUtil.saveSetting(Objects.requireNonNull(getContext()),"currentProgram", Integer.toString(currentProgramId));
+        SharedPrefUtil.saveSetting(Objects.requireNonNull(getContext()),ProgramDAO.CURRENT_PROGRAM, Integer.toString(currentProgramId));
         changeEqualizer(currentProgramId);
         selectProgram(currentProgramId);
     }
@@ -230,7 +229,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
             if(currentProgramId == programid){
                 currentProgramId = 1;
-                SharedPrefUtil.saveSetting(getContext(),"currentProgram", Integer.toString(currentProgramId));
+                SharedPrefUtil.saveSetting(getContext(),ProgramDAO.CURRENT_PROGRAM, Integer.toString(currentProgramId));
                 selectProgram(currentProgramId);
                 changeEqualizer(currentProgramId);
             }
