@@ -43,22 +43,19 @@ public class Audiogram extends Fragment {
     private int[] frequencies = {};
     private View v;
 
-    private String LEFT_EAR_LABEL = "", RIGHT_EAR_LABEL = "";
-
     private final int[] colors = new int[] {
             Color.rgb(30, 176, 97),     // green
             Color.rgb(202, 0, 86),      // red
             Color.rgb(190, 195, 233)    // purple
 
     };
-    static Context context1;
-    public Audiogram() {
-
+    private Context context1;
+    public Audiogram(Context context) {
+        context1 = context;
     }
 
     public static Audiogram newInstance(Context context) {
-        context1 = context;
-        return new Audiogram();
+        return new Audiogram(context);
     }
 
     @Override
@@ -109,15 +106,15 @@ public class Audiogram extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onTab2ChildInteraction(Uri uri);
     }
 
     public void drawAudiogram(List<int[]> left, List<int[]> right, View v){
-        RIGHT_EAR_LABEL = context1.getString(R.string.randlear);
+        String RIGHT_EAR_LABEL = context1.getString(R.string.randlear);
         LineChart chart = v.findViewById(R.id.chart);
         chart.getDescription().setEnabled(false);
         chart.setTouchEnabled(false);
+        String LEFT_EAR_LABEL = "";
         LineDataSet left_ear = new LineDataSet(makeEntries(left), LEFT_EAR_LABEL);
         left_ear.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 

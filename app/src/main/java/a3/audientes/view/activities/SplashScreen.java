@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProviders;
 import java.util.List;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 import a3.audientes.R;
 import a3.audientes.dao.AudiogramDAO;
@@ -59,12 +58,8 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private boolean isHearableConnected() {
-        // TODO: somehow check if the correct device is already connected
         BluetoothManager manager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
-
-        List<BluetoothDevice> connected = new ArrayList<>();
         BluetoothAdapter adapter = manager.getAdapter();
-
         if (adapter != null){
             for (BluetoothDevice e: adapter.getBondedDevices()) {
                 if(isConnected(e)){
@@ -74,12 +69,15 @@ public class SplashScreen extends AppCompatActivity {
         }
         return false;
     }
-    //TODO: Hello?
+
+    /**
+     *  StackOverflow
+     *  https://stackoverflow.com/a/58882930
+     */
     public static boolean isConnected(BluetoothDevice device) {
         try {
             Method m = device.getClass().getMethod("isConnected", (Class[]) null);
-            boolean connected = (boolean) m.invoke(device, (Object[]) null);
-            return connected;
+            return (boolean) m.invoke(device, (Object[]) null);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -87,12 +85,9 @@ public class SplashScreen extends AppCompatActivity {
 
 
     private final Runnable splash = () -> {
-        assert getFragmentManager() != null;
-
-        boolean newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
-        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
+        String currentSetting = SharedPrefUtil.readSetting(getBaseContext(), SharedPrefUtil.CURRENT_AUDIOGRAM);
         Intent nextActivity;
-        if (newVisitor || currentAudiogramId == 0){
+        if (currentSetting == null){
             nextActivity = new Intent(this, Onboarding.class);
         } else if (isHearableConnected()){
             nextActivity = new Intent(this, HearingProfile.class);

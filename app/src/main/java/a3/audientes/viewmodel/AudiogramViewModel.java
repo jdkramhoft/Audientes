@@ -31,7 +31,7 @@ public class AudiogramViewModel extends AndroidViewModel {
         repository.DeleteAudiogram(audiogram);
     }
 
-    public LiveData<List<Audiogram >> getAllAudiogram(){
+    public LiveData<List<Audiogram>> getAllAudiogram(){
         return audiogramList;
     }
 }

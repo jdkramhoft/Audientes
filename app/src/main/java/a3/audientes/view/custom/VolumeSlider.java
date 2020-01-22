@@ -1,6 +1,7 @@
 package a3.audientes.view.custom;
 
 /**
+ * Source: https://github.com/alpbak/BoxedVerticalSeekBar/blob/master/BoxedVerticalSeekBarLib/src/main/java/abak/tr/com/boxedverticalseekbar/BoxedVertical.java
  * Created by alpaslanbak on 29/09/2017.
  * Modified by Nick Panagopoulos @npanagop on 12/05/2018.
  * Modified by Michael Lund Jarberg @jarberg on 01/11/2019

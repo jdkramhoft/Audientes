@@ -148,6 +148,10 @@ public class Onboarding extends AppCompatActivity implements View.OnClickListene
         return false;
     }
 
+    /**
+     *  StackOverflow
+     *  https://stackoverflow.com/a/58882930
+     */
     public static boolean isConnected(BluetoothDevice device) {
         try {
             Method m = device.getClass().getMethod("isConnected", (Class[]) null);

@@ -51,9 +51,8 @@ public class BluetoothDeviceListAdapter extends RecyclerView.Adapter<BluetoothDe
     public void onBindViewHolder(@NonNull BluetoothDeviceListAdapter.MyViewHolder holder, int position) {
 
         BluetoothDevice program = devicelist.get(position);
-        if(!(program.getName().equals("Mi Phone"))){
+        if(!(program.getName().equals("Audientes"))){
             ((ImageView)holder.itemView.findViewById(R.id.imagee1)).setImageResource(R.drawable.bluetooth_icon_not_connectable);
-            //((TextView)holder.itemView.findViewById(R.id.Title)).setTextColor(-12303292);
         }
         holder.title.setText(program.getName());
     }

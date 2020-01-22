@@ -15,7 +15,7 @@ import a3.audientes.view.fragments.Tab2;
 public class HearingProfileAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs;
-    Context context;
+    private Context context;
 
     public HearingProfileAdapter(FragmentManager fm, int NumberOfTabs, Context context) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
@@ -32,7 +32,7 @@ public class HearingProfileAdapter extends FragmentStatePagerAdapter {
                 Audiogram audiogram = Audiogram.newInstance(context);
                 return Tab2.newInstance(audiogram);
             default:
-                return null;
+                return new Fragment();
         }
     }
 

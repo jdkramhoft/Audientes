@@ -14,10 +14,6 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import a3.audientes.R;
 
-/**
- * https://www.iconfinder.com/
- */
-
 public class OnboardingSliderAdapter extends PagerAdapter {
 
     private Context context;
@@ -83,8 +79,9 @@ public class OnboardingSliderAdapter extends PagerAdapter {
             AnimationDrawable animAnimation = (AnimationDrawable) slideImageView.getBackground();
             animAnimation.start();
         }
-        else
+        else{
             slideImageView.setImageResource(slide_images[position]);
+        }
 
         slideHeading.setText(slide_headings[position]);
         slideDescription.setText(slide_descs[position]);

@@ -9,6 +9,10 @@ import android.view.animation.GridLayoutAnimationController;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *  Taken from
+ *  https://github.com/antoniolg/MaterializeYourApp/blob/master/app/src/main/java/com/antonioleiva/materializeyourapp/widgets/GridRecyclerView.java
+ */
 public class GridRecyclerView extends RecyclerView {
 
     /** @see View#View(Context) */
