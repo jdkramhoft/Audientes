@@ -55,12 +55,12 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
         entries = new ArrayList<>();
         circleColors = new ArrayList<>();
         colors = new int[]{
-                getResources().getColor(R.color.green),
-                getResources().getColor(R.color.yellow),
-                getResources().getColor(R.color.red),
-                getResources().getColor(R.color.line),
-                getResources().getColor(R.color.border),
-                getResources().getColor(R.color.hole)
+                getResources().getColor(R.color.green, null),
+                getResources().getColor(R.color.yellow, null),
+                getResources().getColor(R.color.red, null),
+                getResources().getColor(R.color.line, null),
+                getResources().getColor(R.color.border, null),
+                getResources().getColor(R.color.hole, null)
         };
 
         hearing_button = findViewById(R.id.hearing_button);
@@ -102,7 +102,6 @@ public class StartHearingTest extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        return;
     }
 
     @Override
