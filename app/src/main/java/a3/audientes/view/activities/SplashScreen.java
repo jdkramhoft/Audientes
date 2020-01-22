@@ -89,8 +89,8 @@ public final class SplashScreen extends AppCompatActivity {
     private final Runnable splash = () -> {
         assert getFragmentManager() != null;
 
-        boolean newVisitor = Boolean.valueOf(SharedPrefUtil.readSharedSetting(this, getString(R.string.new_visitor_pref), "true"));
-        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSharedSetting(getBaseContext(), "currentAudiogram", "0"));
+        boolean newVisitor = Boolean.valueOf(SharedPrefUtil.readSetting(this, getString(R.string.new_visitor_pref), "true"));
+        int currentAudiogramId = Integer.parseInt(SharedPrefUtil.readSetting(getBaseContext(), "currentAudiogram", "0"));
         Intent nextActivity;
         if (newVisitor || currentAudiogramId == 0){
             nextActivity = new Intent(this, Onboarding.class);
