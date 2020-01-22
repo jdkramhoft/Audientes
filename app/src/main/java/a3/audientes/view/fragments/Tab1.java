@@ -66,7 +66,7 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
 
         programViewModel = ViewModelProviders.of(this).get(ProgramViewModel.class);
         programList = programDAO.getProgramList();
-        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentProgram"));
+        currentProgramId = Integer.parseInt(SharedPrefUtil.readSetting(getContext(), "currentProgram", "1"));
 
         MediaPlayer musicTrack = MediaPlayer.create(getContext(), R.raw.song);
         trackEq = new Equalizer(0, musicTrack.getAudioSessionId());
