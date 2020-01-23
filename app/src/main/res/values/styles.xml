@@ -3,10 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/TransparentBlue</item>
-        <item name="colorPrimaryDark">@color/DeepBlue</item>
-        <item name="colorAccent">@color/Orange</item>
+        <item name="colorPrimary">@color/lightPurple</item>
+        <item name="colorPrimaryDark">@color/darkBlue</item>
+        <item name="colorAccent">@color/darkerOrange</item>
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Dark" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/bgColor</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Light" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/actionBarLight</item>
     </style>
 
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
@@ -15,5 +23,14 @@
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
+
+
+
+    <style name="Theme_Dialog" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">65%</item>     <!-- landscape -->
+        <item name="android:windowMinWidthMinor">65%</item>     <!-- portrait -->
+    </style>
+
+
 
 </resources>
