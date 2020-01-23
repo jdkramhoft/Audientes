@@ -55,14 +55,14 @@
 
         <ImageView
             android:id="@+id/canceltext"
-            android:layout_width="18dp"
-            android:layout_height="19dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/tab1_program_delete_icon"
             android:clickable="true"
             android:gravity="center"
             android:password="false"
             android:phoneNumber="false"
+            android:src="@drawable/tab1_program_delete_icon"
             android:textIsSelectable="false"
             android:textSize="10sp"
             app:layout_constraintDimensionRatio="1"
@@ -89,6 +89,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/left"
             app:layout_constraintTop_toTopOf="@+id/bot" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

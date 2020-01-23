@@ -182,7 +182,6 @@ public class Tab1 extends Fragment implements View.OnClickListener, View.OnLongC
             if(tempId == id){
                 ((TextView)temp.findViewById(R.id.programName)).setTextColor(getResources().getColor(R.color.darkBlue, null));
                 ((ImageView)temp.findViewById(R.id.program_bg_id)).setImageDrawable(getResources().getDrawable(R.drawable.xml_program_selected, null));
-                ((ImageView)temp.findViewById(R.id.canceltext)).setImageDrawable(null);
                 ((ImageView)temp.findViewById(R.id.canceltext)).setImageDrawable(getResources().getDrawable(R.drawable.tab1_program_delete_icon_pressed, null));
             }
         }
