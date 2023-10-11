@@ -11,7 +11,7 @@ buildscript {
 
         // Add the Google Services plugin (check for v3.1.2 or higher).
         classpath 'com.google.gms:google-services:4.3.14'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.3.0'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.1'
 
         // Add the Fabric Crashlytics plugin.
 
